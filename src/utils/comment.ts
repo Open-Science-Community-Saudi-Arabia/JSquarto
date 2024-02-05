@@ -195,7 +195,7 @@ export class Comment {
         const jsDocMatch = jsDocRegex.exec(code);
 
         if (jsDocMatch) {
-            const remainingCode = code.substring(jsDocMatch.index + jsDocMatch[0].length);
+            const remainingCode = code.substring(0 + code.length);
 
             // Check if the remaining code contains a function declaration
             const functionRegex = /(async\s+)?function\s+\w+|const\s+\w+\s*=\s*async\s*\(.*\)\s*=>|\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*\(|\b\w+\s*=\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*async\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*[\s\S]*?\)|\b\w+\s*=\s*\([\s\S]*?\)\s*=>/;
