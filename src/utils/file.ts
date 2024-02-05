@@ -49,7 +49,7 @@ class ConstructIdentifier {
     }
 }
 
-export default class File {
+export default class SourceFile {
     public fileContent: string;
     private constructIdentifier: ConstructIdentifier;
 
@@ -70,13 +70,11 @@ export default class File {
                 const lastLineIndex = endLine - 1;
 
                 if (lastLineIndex < lines.length - 1) {
-                    const lastLine = lines[lastLineIndex].trim();
                     const nextLines = lines.slice(lastLineIndex + 1, lastLineIndex + 6).map(line => line.trim());
-
                     const type = this.getConstructType(nextLines.join(''));
                     const name = this.getConstructName(nextLines.join(''));
 
-                    return { type, name, nextLines };
+                    return { type, name };
                 } else {
                     return { type: 'other', name: 'other' };
                 }
@@ -135,4 +133,12 @@ export default class File {
 
         return 'other';
     }
+}
+
+export class TargetWriteFile {
+    private filePath: string;
+
+    constructor (filePath: string) {
+        this.filePath = filePath;
+    }   
 }

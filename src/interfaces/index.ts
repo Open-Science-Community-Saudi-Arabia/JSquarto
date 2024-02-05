@@ -1,6 +1,6 @@
 import acorn from 'acorn'
 
-export interface ModuleInfo {
+export interface ModuleBlockInfo {
     name: string;
     description: string;
     category: {
