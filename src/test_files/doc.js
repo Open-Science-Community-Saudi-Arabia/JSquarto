@@ -151,7 +151,7 @@ const handleExistingUser = function (user) {
         if (!existing_user.status.isVerified) {
             await handleUnverifiedUser(existing_user)(req);
 
-            // Return access token
+            // ReturnedValue access token
             res.status(400).json({
                 success: true,
                 message: 'User account exists already, verification mail sent to user',
@@ -250,7 +250,7 @@ exports.signup = async (req, res, next) => {
     // Handle user verification
     await handleUnverifiedUser(new_user)(req);
 
-    // Return access token
+    // ReturnedValue access token
     return res.status(200).json({ success: true, data: { user: new_user } });
 }
 
@@ -337,7 +337,7 @@ exports.login = async (req, res, next) => {
 
     currentUser.enrolled_courses = undefined
 
-    // Return access token
+    // ReturnedValue access token
     return res.status(200).json({
         success: true,
         data: {

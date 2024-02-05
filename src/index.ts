@@ -7,18 +7,16 @@ const file = new File(filePath)
 const comments = CommentsUtil.getCommentsFromFile(file.fileContent)
 
 for (const _comment of comments) {
-    const blockType = _comment.getBlockType()
+    const blockType = _comment.blockInfo.type
     const commentIsModule = blockType === 'module'
-    if (commentIsModule) {
-        const moduleInfo = _comment.getModuleInfo()
-        // console.log(moduleInfo)
-    } else {
-        const otherBlockInfo = _comment.getOtherBlockInfo()
-        console.log(otherBlockInfo)
-    }
 
-    
+    const blockInfo = commentIsModule ? CommentsUtil.getModuleBlockInfo(_comment.text) : CommentsUtil.getOtherBlockInfo(_comment.text)
+    const constructInfo = !commentIsModule ? file.getLinkedCodeConstructInfo(_comment) : null
 
+    // console.log(_comment.startLocation, _comment.endLocation)
+    console.log({
+        constructInfo
+    })
 }
 
 // const modulesInfoContainedInComments = comments.map((comment) => new Comment(comment).getModuleInfo())
