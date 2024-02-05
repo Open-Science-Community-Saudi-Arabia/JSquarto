@@ -1,4 +1,4 @@
-import { ModuleInfo, OtherBlockInfo, Params } from "../interfaces";
+import { ModuleInfo, OtherBlockInfo, Params, ReturnedValue } from "../interfaces";
 import { Position } from 'acorn';
 import acorn from 'acorn';
 
@@ -52,7 +52,7 @@ export class Parser {
             if (!type || !name || !description) {
                 continue;
             }
-            
+
             params.push({
                 name,
                 type,
@@ -68,11 +68,63 @@ export class Parser {
         const moduleMatch = moduleRegex.exec(comment);
         return moduleMatch ? moduleMatch[1] : '';
     }
+
+    static getReturnsValues(comment: string): ReturnedValue[] {
+        // ReturnedValue values may be multiple
+        const returnsRegex = /@returns\s+{?([\w.]+)?}?\s*-\s*(.*)/g;
+
+        const returnsMatches = comment.match(returnsRegex);
+        if (!returnsMatches) {
+            return [];
+        }
+
+        const returns: ReturnedValue[] = [];
+        for (const match of returnsMatches) {
+            const [, type, description] = returnsRegex.exec(match) || [];
+
+            if (!type || !description) {
+                continue;
+            }
+
+            returns.push({
+                type,
+                description,
+            })
+        };
+
+        return returns;
+    }
+
+    static getThrownErrors(comment: string): ReturnedValue[] {
+        // ThrownError values may be multiple
+        const throwsRegex = /@throws\s+{?([\w.]+)?}?\s*-\s*(.*)/g;
+
+        const throwsMatches = comment.match(throwsRegex);
+        if (!throwsMatches) {
+            return [];
+        }
+
+        const thrownErrors: ReturnedValue[] = [];
+        for (const match of throwsMatches) {
+            const [, type, description] = throwsRegex.exec(match) || [];
+
+            if (!type || !description) {
+                continue;
+            }
+
+            thrownErrors.push({
+                type,
+                description,
+            })
+        };
+
+        return thrownErrors;
+    }
+
 }
 
 export default class CommentsUtil {
     static getModuleBlockInfo(comments: string): ModuleInfo {
-        const modules: ModuleInfo[] = [];
         const moduleName = Parser.getModuleName(comments);
         const description = Parser.getDescription(comments);
         const category = Parser.getCategory(comments);
@@ -97,6 +149,8 @@ export default class CommentsUtil {
             description: description,
             params: Parser.getParams(comments),
             link: Parser.getLink(comments),
+            returns: Parser.getReturnsValues(comments),
+            thrownErrors: Parser.getThrownErrors(comments),
         };
     }
 
@@ -106,10 +160,10 @@ export default class CommentsUtil {
             sourceType: 'module',
             ecmaVersion: 2020,
             locations: true,
-            onComment: (isBlock, text, __, _, startLoc) => {
+            onComment: (isBlock, text, __, _, startLoc, endLoc) => {
                 const textIsJSDocComment = isBlock && text.startsWith('*');
-                if (textIsJSDocComment) {
-                    comments.push(new Comment(text))
+                if (textIsJSDocComment && startLoc && endLoc) {
+                    comments.push(new Comment(text, startLoc, endLoc))
                 }
             },
         });
@@ -120,9 +174,60 @@ export default class CommentsUtil {
 
 export class Comment {
     text: string;
+    public readonly startLocation: Position;
+    public readonly endLocation: Position;
+    public readonly blockInfo: {
+        type: 'function' | 'variable' | 'class' | 'module' | 'other';
+    }
 
-    constructor(text: string) {
+    constructor(text: string, startLocation: Position, endLocation: Position) {
         this.text = Cleaner.cleanComments(text);
+        this.startLocation = startLocation;
+        this.endLocation = endLocation;
+        this.blockInfo = {
+            type: this.identifyBlockType()
+        }
+    }
+
+    private identifyBlockType() {
+        const code = this.text
+        const jsDocRegex = /\/\*\*(.|\n)*?\*\//; // Regex for JSDoc comment block
+        const jsDocMatch = jsDocRegex.exec(code);
+
+        if (jsDocMatch) {
+            const remainingCode = code.substring(jsDocMatch.index + jsDocMatch[0].length);
+
+            // Check if the remaining code contains a function declaration
+            const functionRegex = /(async\s+)?function\s+\w+|const\s+\w+\s*=\s*async\s*\(.*\)\s*=>|\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*\(|\b\w+\s*=\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*async\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*[\s\S]*?\)|\b\w+\s*=\s*\([\s\S]*?\)\s*=>/;
+            const functionMatch = functionRegex.test(remainingCode);
+            if (functionMatch) {
+                return 'function';
+            }
+
+            const moduleRegex = /@module\s+(.*)/g;
+            const moduleMatch = moduleRegex.exec(this.text);
+            if (moduleMatch) {
+                return 'module';
+            }
+
+            // Check if the remaining code contains a variable declaration
+            const variableRegex = /\bconst\b|\blet\b|\bvar\b\s+\w+/;
+            const variableMatch = variableRegex.test(remainingCode);
+
+            if (variableMatch) {
+                return 'variable';
+            }
+
+            // Check if the remaining code contains a class declaration
+            const classRegex = /\bclass\s+\w+/;
+            const classMatch = classRegex.test(remainingCode);
+
+            if (classMatch) {
+                return 'class';
+            }
+        }
+
+        return 'other'; // Unable to determine the type
     }
 
     public getModuleInfo() {
@@ -131,12 +236,5 @@ export class Comment {
 
     public getOtherBlockInfo() {
         return CommentsUtil.getOtherBlockInfo(this.text);
-    }
-
-    public getBlockType() {
-        // Check if the comment is for a module or other(function, class, etc)
-        const moduleRegex = /@module\s+(.*)/g;
-        const moduleMatch = moduleRegex.exec(this.text);
-        return moduleMatch ? 'module' : 'other';
     }
 } 
