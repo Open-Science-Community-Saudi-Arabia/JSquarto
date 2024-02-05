@@ -20,45 +20,65 @@ export default class File {
             const endColumn = endLocation.column;
 
             // Check if line and column values are numbers
-            if (typeof startLine === 'number' && typeof startColumn === 'number' &&
-                typeof endLine === 'number' && typeof endColumn === 'number') {
+            if (typeof startLine === 'number' && typeof endLine === 'number') {
+                const lines = this.fileContent.split('\n');
+                const lastLineIndex = endLine - 1;
 
-                // Extract the code block from file content using start and end locations
-                const codeBlock = this.fileContent.substring(
-                    // Assuming 1-based indexing for lines and columns
-                    // Adjust as needed if your indexing is different
-                    this.fileContent.indexOf(this.fileContent.split('\n')[startLine - 1].charAt(startColumn - 1)),
-                    this.fileContent.lastIndexOf(this.fileContent.split('\n')[endLine - 1].charAt(endColumn - 1)) + 1
-                );
+                if (lastLineIndex < lines.length - 1) {
+                    const lastLine = lines[lastLineIndex].trim();
+                    const nextLines = lines.slice(lastLineIndex + 1, lastLineIndex + 6).map(line => line.trim());
 
-                // Extract information based on the identified block type
-                const blockType = comment.blockInfo.type;
-                const constructName = this.extractConstructName(comment, codeBlock);
+                    const blockType = comment.blockInfo.type;
+                    const constructName = this.getConstructType(nextLines.join(''));
 
-                return { type: blockType, name: constructName };
+                    return { type: blockType, name: constructName, nextLines: nextLines };
+                } else {
+                    // Last line is the last line of the file, so there are no next lines
+                    const lastLine = lines[lastLineIndex].trim();
+                    const blockType = comment.blockInfo.type;
+
+                    return { type: blockType, name: 'other', nextLines: [] };
+                }
             }
         }
 
         return {
             type: null,
-            name: null
+            name: null,
         };
     }
 
-    private extractConstructName(comment: Comment, codeBlock: string): string {
-        // Implement logic to extract the name based on the block type
-        switch (comment.blockInfo.type) {
-            case 'function':
-                return this.getFunctionName(codeBlock);
-            case 'variable':
-                return this.getVariableName(codeBlock);
-            case 'class':
-                return this.getClassName(codeBlock);
-            case 'module':
-                return comment.getModuleInfo().name;
-            default:
-                return '';
+    private getConstructType(text: string) {
+        // Check if the remaining code contains a function declaration
+        const functionRegex = /(\basync\s+)?\bfunction\b|^exports\.\w+\s*=\s*async\s*\(.*\)\s*=>|\bconst\b\s*\w+\s*=\s*async\s*\(.*\)\s*=>|\b\w+\s*=\s*function\s*\(|\b\w+\s*=\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*async\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*[\s\S]*?\)|\b\w+\s*=\s*\([\s\S]*?\)\s*=>/;
+        const functionMatch = functionRegex.test(text);
+        if (functionMatch) {
+            return 'function';
         }
+
+        const moduleRegex = /@module\s+(.*)/g;
+        const moduleMatch = moduleRegex.exec(text);
+        if (moduleMatch) {
+            return 'module';
+        }
+
+        // Check if the remaining code contains a variable declaration
+        const variableRegex = /\bconst\b|\blet\b|\bvar\b\s+\w+/;
+        const variableMatch = variableRegex.test(text);
+
+        if (variableMatch) {
+            return 'variable';
+        }
+
+        // Check if the remaining code contains a class declaration
+        const classRegex = /\bclass\s+\w+/;
+        const classMatch = classRegex.test(text);
+
+        if (classMatch) {
+            return 'class';
+        }
+
+        return 'other';
     }
 
     private getFunctionName(codeBlock: string): string {
