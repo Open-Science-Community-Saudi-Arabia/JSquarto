@@ -1,4 +1,4 @@
-import { ModuleInfo, OtherBlockInfo, Params, ReturnedValue } from "../interfaces";
+import { ModuleBlockInfo, OtherBlockInfo, Params, ReturnedValue } from "../interfaces";
 import { Position } from 'acorn';
 import acorn from 'acorn';
 
@@ -124,7 +124,7 @@ export class Parser {
 }
 
 export default class CommentsUtil {
-    static getModuleBlockInfo(comments: string): ModuleInfo {
+    static getModuleBlockInfo(comments: string): ModuleBlockInfo {
         const moduleName = Parser.getModuleName(comments);
         const description = Parser.getDescription(comments);
         const category = Parser.getCategory(comments);
@@ -191,43 +191,39 @@ export class Comment {
 
     private identifyBlockType() {
         const code = this.text
-        const jsDocRegex = /\/\*\*(.|\n)*?\*\//; // Regex for JSDoc comment block
-        const jsDocMatch = jsDocRegex.exec(code);
 
-        if (jsDocMatch) {
-            const remainingCode = code.substring(0 + code.length);
+        const remainingCode = code.substring(0 + code.length);
 
-            // Check if the remaining code contains a function declaration
-            const functionRegex = /(async\s+)?function\s+\w+|const\s+\w+\s*=\s*async\s*\(.*\)\s*=>|\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*\(|\b\w+\s*=\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*async\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*[\s\S]*?\)|\b\w+\s*=\s*\([\s\S]*?\)\s*=>/;
-            const functionMatch = functionRegex.test(remainingCode);
-            if (functionMatch) {
-                return 'function';
-            }
-
-            const moduleRegex = /@module\s+(.*)/g;
-            const moduleMatch = moduleRegex.exec(this.text);
-            if (moduleMatch) {
-                return 'module';
-            }
-
-            // Check if the remaining code contains a variable declaration
-            const variableRegex = /\bconst\b|\blet\b|\bvar\b\s+\w+/;
-            const variableMatch = variableRegex.test(remainingCode);
-
-            if (variableMatch) {
-                return 'variable';
-            }
-
-            // Check if the remaining code contains a class declaration
-            const classRegex = /\bclass\s+\w+/;
-            const classMatch = classRegex.test(remainingCode);
-
-            if (classMatch) {
-                return 'class';
-            }
+        // Check if the remaining code contains a function declaration
+        const functionRegex = /(async\s+)?function\s+\w+|const\s+\w+\s*=\s*async\s*\(.*\)\s*=>|\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*\(|\b\w+\s*=\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*async\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*[\s\S]*?\)|\b\w+\s*=\s*\([\s\S]*?\)\s*=>/;
+        const functionMatch = functionRegex.test(remainingCode);
+        if (functionMatch) {
+            return 'function';
         }
 
-        return 'other'; // Unable to determine the type
+        const moduleRegex = /@module\s+(.*)/g;
+        const moduleMatch = moduleRegex.exec(this.text);
+        if (moduleMatch) {
+            return 'module';
+        }
+
+        // Check if the remaining code contains a variable declaration
+        const variableRegex = /\bconst\b|\blet\b|\bvar\b\s+\w+/;
+        const variableMatch = variableRegex.test(remainingCode);
+
+        if (variableMatch) {
+            return 'variable';
+        }
+
+        // Check if the remaining code contains a class declaration
+        const classRegex = /\bclass\s+\w+/;
+        const classMatch = classRegex.test(remainingCode);
+
+        if (classMatch) {
+            return 'class';
+        }
+
+        return 'other'
     }
 
     public getModuleInfo() {
