@@ -30,4 +30,16 @@ export interface OtherBlockInfo {
     description: string;
     params: Params[];
     link: string;
+    returns: ReturnedValue[];
+    thrownErrors: ThrownError[];
+}
+
+export interface ReturnedValue {
+    type: string;
+    description: string;
+}
+
+export interface ThrownError {
+    type: string;
+    description: string;
 }
