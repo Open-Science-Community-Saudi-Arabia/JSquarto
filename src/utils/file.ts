@@ -28,16 +28,12 @@ export default class File {
                     const lastLine = lines[lastLineIndex].trim();
                     const nextLines = lines.slice(lastLineIndex + 1, lastLineIndex + 6).map(line => line.trim());
 
-                    const blockType = comment.blockInfo.type;
-                    const constructName = this.getConstructType(nextLines.join(''));
-
-                    return { type: blockType, name: constructName, nextLines: nextLines };
+                    const type = this.getConstructType(nextLines.join(''));
+                    const name = this.getConstructName(nextLines.join(''));
+                    return { type, name: name, nextLines };
                 } else {
                     // Last line is the last line of the file, so there are no next lines
-                    const lastLine = lines[lastLineIndex].trim();
-                    const blockType = comment.blockInfo.type;
-
-                    return { type: blockType, name: 'other', nextLines: [] };
+                    return { type: 'other', name: 'other' };
                 }
             }
         }
@@ -47,6 +43,95 @@ export default class File {
             name: null,
         };
     }
+
+    private getConstructName(text: string) {
+        const type = this.getConstructType(text);
+
+        switch (type) {
+            case 'function':
+                return this.getFunctionConstructName(text);
+            case 'variable':
+                return this.getVariableConstructName(text);
+            case 'class':
+                return this.getClassConstructName(text);
+            case 'module':
+                return this.getExportsConstructName(text);
+            default:
+                return null;
+        }
+    }
+
+    private getExportsConstructName(line: string): string | null {
+        // Regex to match lines starting with exports and capturing the assigned name
+        const exportsRegex = /^exports\.(\w+)\s*=\s*function\s*\(.*\)|exports.(\w+)\s*=\s*\([\s\S]*?\)\s*=>|exports.(\w+)\s*=\s*async\s*\([\s\S]*?\)\s*=>/;
+
+        const match = line.match(exportsRegex);
+
+        if (match) {
+            // Find the first non-null captured group, which corresponds to the assigned name
+            return match.slice(1).find((group) => group !== undefined && group !== null) || null;
+        }
+
+        return null;
+    }
+
+    private getFunctionConstructName(line: string): string | null {
+        // Regex to match function declarations and capturing the function name
+        const functionRegex = /(async\s+)?function\s+(\w+)|const\s+(\w+)\s*=\s*async\s*\(.*\)\s*=>|\(([\s\S]*?)\)\s*=>|(\w+)\s*=\s*function\s*\(([\s\S]*?)\)|(\w+)\s*=\s*\(([\s\S]*?)\)\s*=>|\w+\s*=\s*async\s*\(([\s\S]*?)\)\s*=>|\w+\s*=\s*function\s*[\s\S]*?\(([\s\S]*?)\)|\w+\s*=\s*\(([\s\S]*?)\)\s*=>/;
+
+        const match = line.match(functionRegex);
+
+        if (match) {
+            // Find the first non-null captured group, which corresponds to the function name
+            const functionName = match.slice(2).find((group) => group !== undefined && group !== null) || null;
+
+            const exportRegex = /exports\.(\w+)\s*=\s*function\s*\(.*\)|exports.(\w+)\s*=\s*\([\s\S]*?\)\s*=>|exports.(\w+)\s*=\s*async\s*\([\s\S]*?\)\s*=>/;
+            const exportMatch = line.match(exportRegex);
+            if (exportMatch) {
+                return exportMatch.slice(1).find((group) => group !== undefined && group !== null) || null;
+            }
+
+            // Check if the function is an arrow function
+            const arrowFunctionRegex = /\(([\s\S]*?)\)\s*=>/;
+            const arrowFunctionMatch = line.match(arrowFunctionRegex);
+            if (arrowFunctionMatch) {
+                return arrowFunctionMatch[1] || null;
+            }
+
+            return functionName || null;
+        }
+
+        return null;
+    }
+
+    private getVariableConstructName(line: string): string | null {
+        // Regex to match variable declarations and capturing the variable name
+        const variableRegex = /\b(const|let|var)\s+(\w+)/;
+
+        const match = line.match(variableRegex);
+
+        if (match) {
+            // Return the captured variable name
+            return match[2] || null;
+        }
+
+        return null;
+    }
+
+    private getClassConstructName(line: string): string | null {
+        // Regex to match class declarations and capturing the class name
+        const classRegex = /\bclass\s+(\w+)/;
+
+        const match = line.match(classRegex);
+
+        if (match) {
+            // Return the captured class name
+            return match[1] || null;
+        }
+
+        return null;
+    }
+
 
     private getConstructType(text: string) {
         // Check if the remaining code contains a function declaration
@@ -79,26 +164,5 @@ export default class File {
         }
 
         return 'other';
-    }
-
-    private getFunctionName(codeBlock: string): string {
-        // Implement logic to extract function name from the code block
-        const functionRegex = /(async\s+)?function\s+(\w+)/;
-        const match = codeBlock.match(functionRegex);
-        return match ? match[2] : '';
-    }
-
-    private getVariableName(codeBlock: string): string {
-        // Implement logic to extract variable name from the code block
-        const variableRegex = /\b(?:const|let|var)\s+(\w+)/;
-        const match = codeBlock.match(variableRegex);
-        return match ? match[1] : '';
-    }
-
-    private getClassName(codeBlock: string): string {
-        // Implement logic to extract class name from the code block
-        const classRegex = /\bclass\s+(\w+)/;
-        const match = codeBlock.match(classRegex);
-        return match ? match[1] : '';
     }
 }
