@@ -1,7 +1,13 @@
 import fs from 'fs';
 import { Comment } from './comment';
 
+/**
+ * Class to identify the type of construct in a line of code
+ * 
+ * This is used to identify the type of code construct (function, variable, class, module) linked to a block of jSDOC comment
+ */
 class ConstructIdentifier {
+    // Get the name of the module construct
     public getExportsConstructName(line: string): string | null {
         const exportsRegex = /^exports\.(\w+)\s*=\s*function\s*\(.*\)|exports.(\w+)\s*=\s*\([\s\S]*?\)\s*=>|exports.(\w+)\s*=\s*async\s*\([\s\S]*?\)\s*=>/;
 
@@ -10,6 +16,7 @@ class ConstructIdentifier {
         return match ? match.slice(1).find(group => group !== undefined && group !== null) || null : null;
     }
 
+    // Get the name of the function construct
     public getFunctionConstructName(line: string): string | null {
         const functionRegex = /(async\s+)?function\s+(\w+)|const\s+(\w+)\s*=\s*async\s*\(.*\)\s*=>|\(([\s\S]*?)\)\s*=>|(\w+)\s*=\s*function\s*\(([\s\S]*?)\)|(\w+)\s*=\s*\(([\s\S]*?)\)\s*=>|\w+\s*=\s*async\s*\(([\s\S]*?)\)\s*=>|\w+\s*=\s*function\s*[\s\S]*?\((([\s\S]*?))\)|\w+\s*=\s*\(([\s\S]*?)\)\s*=>/;
 
@@ -32,6 +39,7 @@ class ConstructIdentifier {
         return null;
     }
 
+    // Get the name of the variable construct
     public getVariableConstructName(line: string): string | null {
         const variableRegex = /\b(const|let|var)\s+(\w+)/;
 
@@ -40,6 +48,7 @@ class ConstructIdentifier {
         return match ? match[2] || null : null;
     }
 
+    // Get the name of the class construct
     public getClassConstructName(line: string): string | null {
         const classRegex = /\bclass\s+(\w+)/;
 
@@ -58,6 +67,7 @@ export default class SourceFile {
         this.constructIdentifier = new ConstructIdentifier();
     }
 
+    // Get the type and name of the code construct linked to a comment
     public getLinkedCodeConstructInfo(comment: Comment) {
         const { startLocation, endLocation } = comment;
 
@@ -84,6 +94,7 @@ export default class SourceFile {
         return { type: null, name: null };
     }
 
+    // Get the name of the code construct linked to a comment
     private getConstructName(text: string) {
         const type = this.getConstructType(text);
 
@@ -101,6 +112,7 @@ export default class SourceFile {
         }
     }
 
+    // Get the type of the code construct linked to a comment (function, variable, class, module, other)
     private getConstructType(text: string) {
         // Check if the remaining code contains a function declaration
         const functionRegex = /(\basync\s+)?\bfunction\b|^exports\.\w+\s*=\s*async\s*\(.*\)\s*=>|\bconst\b\s*\w+\s*=\s*async\s*\(.*\)\s*=>|\b\w+\s*=\s*function\s*\(|\b\w+\s*=\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*async\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*[\s\S]*?\(|\b\w+\s*=\s*\([\s\S]*?\)\s*=>/;

@@ -9,7 +9,13 @@ export class Cleaner {
     }
 }
 
+/**
+ * Parser class to parse comments
+ * 
+ * Extracts the description, category, subcategory, link, params, returns, and thrown errors from comments
+ */
 export class Parser {
+    // Get the description from the comments block - Basically the text after @description
     static getDescription(comment: string): string {
         //  Search through the comments block to find @description then return the description
         //  The description should match all the text after @description until the next @ that is a jsdoc tag
@@ -18,6 +24,7 @@ export class Parser {
         return descriptionMatch ? descriptionMatch[1] : '';
     }
 
+    // Get the category from the comments block - Basically the text after @category
     static getCategory(comment: string): string {
         // Search through the comments block to find @category then return the category
         const categoryRegex = /@category\s+(.*)/g;
@@ -25,18 +32,21 @@ export class Parser {
         return categoryMatches ? categoryMatches[1] : '';
     }
 
+    // Get the subcategory from the comments block - Basically the text after @subcategory
     static getSubCategory(comment: string): string {
         const subCategoryRegex = /@subcategory\s+(.*)/g;
         const subCategoryMatches = subCategoryRegex.exec(comment);
         return subCategoryMatches ? subCategoryMatches[1] : '';
     }
 
+    // Get the link from the comments block - Basically the text after @see
     static getLink(comment: string): string {
         const linkRegex = /@see\s+(.*)/g;
         const linkMatches = linkRegex.exec(comment);
         return linkMatches ? linkMatches[1] : '';
     }
 
+    // Get all params from the comments block
     static getParams(comment: string): Params[] {
         const paramsRegex = /@param\s+{?([\w.]+)?}?\s*([\w.]+)\s*-\s*(.*)/g;
         const paramsMatches = comment.match(paramsRegex);
@@ -63,12 +73,14 @@ export class Parser {
         return params;
     }
 
+    // Get the module name from the comments block - Basically the text after @module
     static getModuleName(comment: string): string {
         const moduleRegex = /@module\s+(.*)/g;
         const moduleMatch = moduleRegex.exec(comment);
         return moduleMatch ? moduleMatch[1] : '';
     }
 
+    // Get the returns from the comments block - Basically the text after @returns
     static getReturnsValues(comment: string): ReturnedValue[] {
         // ReturnedValue values may be multiple
         const returnsRegex = /@returns\s+{?([\w.]+)?}?\s*-\s*(.*)/g;
@@ -95,6 +107,7 @@ export class Parser {
         return returns;
     }
 
+    // Get the thrown errors from the comments block - Basically the text after @throws
     static getThrownErrors(comment: string): ReturnedValue[] {
         // ThrownError values may be multiple
         const throwsRegex = /@throws\s+{?([\w.]+)?}?\s*-\s*(.*)/g;
@@ -124,6 +137,10 @@ export class Parser {
 }
 
 export default class CommentsUtil {
+    // There are two types of comments: module and other
+    // The module comments are used to describe the module and the other comments are used to describe the functions, variables, and classes
+
+    // Get the module block info from the comments
     static getModuleBlockInfo(comments: string): ModuleBlockInfo {
         const moduleName = Parser.getModuleName(comments);
         const description = Parser.getDescription(comments);
@@ -142,6 +159,7 @@ export default class CommentsUtil {
         };
     }
 
+    // Get the other block info from the comments
     static getOtherBlockInfo(comments: string): OtherBlockInfo {
         const description = Parser.getDescription(comments);
 
@@ -154,6 +172,7 @@ export default class CommentsUtil {
         };
     }
 
+    // Get the comments from a file
     static getCommentsFromFile(fileContent: string): Comment[] {
         const comments: Comment[] = [];
         acorn.parse(fileContent, {
@@ -189,6 +208,7 @@ export class Comment {
         }
     }
 
+    // Identify the type of the block (function, variable, class, module, other)
     private identifyBlockType() {
         const code = this.text
 
