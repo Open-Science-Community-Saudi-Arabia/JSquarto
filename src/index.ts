@@ -25,7 +25,7 @@ function getJSFilesFromDirectory(directory: string): string[] {
 
 function start() {
     // Get all folders and files in test_files directory that are js files
-    const filePaths = getJSFilesFromDirectory(__dirname + '/test_files')
+    const filePaths = getJSFilesFromDirectory(__dirname + '/../test_files')
 
     const docs: {
         module: ModuleBlockInfo,
