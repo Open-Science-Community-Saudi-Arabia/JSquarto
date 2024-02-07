@@ -18,7 +18,7 @@ export default class Writer {
 
         const relativeFolderPath = relativePathArray.join('/')
         const folderPathToWrite = __dirname + `/../../docs${relativeFolderPath}`
-        
+
         // Create folder if it doesn't exist
         if (!fs.existsSync(folderPathToWrite)) {
             fs.mkdirSync(folderPathToWrite, { recursive: true })
@@ -46,7 +46,42 @@ export default class Writer {
 
         // Add constructs to qmd file
         for (const doc of docs) {
+            // Add 2 lines
+            fileContent += '\n\n'
+            
             fileContent += `## ${doc.constructInfo.type} ${doc.constructInfo.name} \n`
+
+            // Add description to qmd file
+            fileContent += `### Description \n ${doc.blockInfo.description} \n`
+
+            // Add params to qmd file
+            if (doc.blockInfo.params.length > 0) {
+                fileContent += `### Params \n`
+                for (const param of doc.blockInfo.params) {
+                    fileContent += `**${param.name}**: ${param.description} \n`
+                }
+            }
+
+            // Add returns to qmd file
+            if (doc.blockInfo.returns.length > 0) {
+                fileContent += `### Returns \n`
+                for (const returnedValue of doc.blockInfo.returns) {
+                    fileContent += `**${returnedValue.type}**: ${returnedValue.description} \n`
+                }
+            }
+
+            // Add thrown errors to qmd file
+            if (doc.blockInfo.thrownErrors.length > 0) {
+                fileContent += `### Thrown Errors \n`
+                for (const thrownError of doc.blockInfo.thrownErrors) {
+                    fileContent += `**${thrownError.type}**: ${thrownError.description} \n`
+                }
+            }
+
+            // Add link to qmd file
+            if (doc.blockInfo.link) {
+                fileContent += `### Link \n ${doc.blockInfo.link} \n`
+            }
         }
 
         fs.writeFileSync(qmdfilePath, fileContent, 'utf8')
