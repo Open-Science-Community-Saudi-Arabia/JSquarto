@@ -45,7 +45,7 @@ export interface ThrownError {
 }
 
 export interface Doc {
-    blockInfo: ModuleBlockInfo,
+    blockInfo: OtherBlockInfo,
     constructInfo: {
         type: string | null,
         name: string | null

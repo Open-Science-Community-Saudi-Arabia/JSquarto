@@ -1,7 +1,7 @@
 import fs from 'fs'
 import CommentsUtil, { Comment } from './utils/comment'
 import SourceFile from './utils/file'
-import { Doc, ModuleBlockInfo, OtherBlockInfo } from './interfaces'
+import { Doc, ModuleBlockInfo } from './interfaces'
 import Writer from './utils/writer'
 
 
@@ -22,7 +22,7 @@ function start() {
         } else {
             const constructInfo = sourceFile.getLinkedCodeConstructInfo(_comment)
             moduleDocs.push({
-                blockInfo: module,
+                blockInfo: CommentsUtil.getOtherBlockInfo(_comment.text),
                 constructInfo
             })
         }
