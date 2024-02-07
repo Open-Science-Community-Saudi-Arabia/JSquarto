@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Comment } from './comment';
+import Comment from './comment';
 import { ConstructIdentifier } from './codeconstruct';
 
 export default class SourceFile {

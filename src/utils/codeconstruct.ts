@@ -1,8 +1,9 @@
 /**
- * Class to identify the type of construct in a line of code
- * 
- * This is used to identify the type of code construct (function, variable, class, module) linked to a block of jSDOC comment
+ * The class called ConstructIdentifier, contains methods to identify different types of code constructs 
+ * (such as functions, variables, classes, and modules) within a line of code. 
+ * These methods help in extracting and determining the names associated with each construct type.
  */
+
 export class ConstructIdentifier {
     // Get the name of the module construct
     private static getExportsConstructName(line: string): string | null {
@@ -22,6 +23,7 @@ export class ConstructIdentifier {
         if (match) {
             const functionName = match.slice(2).find(group => group !== undefined && group !== null) || null;
 
+            // Functions may be defined as exports, so we need to check for that
             const exportRegex = /exports\.(\w+)\s*=\s*function\s*\(.*\)|exports.(\w+)\s*=\s*\([\s\S]*?\)\s*=>|exports.(\w+)\s*=\s*async\s*\([\s\S]*?\)\s*=>/;
             const exportMatch = line.match(exportRegex);
             if (exportMatch) {

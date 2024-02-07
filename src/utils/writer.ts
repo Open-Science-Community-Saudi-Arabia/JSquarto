@@ -8,10 +8,9 @@ export default class Writer {
         const fileName = filePath.pop()?.split('.')[0] + '.qmd'
 
         filePath.pop()
-        const folderPath = filePath.join('/')
 
-        // Create sub folder in ./docs folder
-        // Get relative path from this `test_files` folder to original file
+        // Create sub folder in docs folder
+        // Get relative path from the `test_files` folder to original file
         const relativePath = originalFilePath.split('test_files')[1]
         const relativePathArray = relativePath.split('/')
         relativePathArray.pop()
@@ -27,7 +26,7 @@ export default class Writer {
         return folderPathToWrite + '/' + fileName
     }
 
-    public static writeModuleDocs({
+    public static writeDocsToFile({
         module,
         originalFilePath,
         docs
@@ -48,7 +47,7 @@ export default class Writer {
         for (const doc of docs) {
             // Add 2 lines
             fileContent += '\n\n'
-            
+
             fileContent += `## ${doc.constructInfo.type} ${doc.constructInfo.name} \n`
 
             // Add description to qmd file
