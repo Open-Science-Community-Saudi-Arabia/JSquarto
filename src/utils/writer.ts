@@ -1,3 +1,8 @@
+/**
+ * This file contains a Writer class that writes documentation to Markdown files (*.qmd). 
+ * The Markdown content based on this information and writes it to the specified location.
+ */
+
 import { Doc, ModuleBlockInfo } from "../interfaces";
 import fs from 'fs';
 

@@ -1,3 +1,11 @@
+/**
+ * This file provides utility classes for parsing and extracting information
+ * from comments within code files. It includes methods to identify and
+ * extract metadata from both module and non-module comments, 
+ * facilitating better documentation and understanding of code constructs 
+ * such as functions, variables, classes, and modules.
+ */
+
 import { ModuleBlockInfo, OtherBlockInfo } from "../interfaces";
 import { Position } from 'acorn';
 import acorn from 'acorn';

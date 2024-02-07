@@ -1,3 +1,10 @@
+/**
+ * This file reads and analyzes source code files. 
+ * It identifies the type and name of the code construct linked 
+ * to a given comment by examining the lines following the comment, 
+ * utilizing the ConstructIdentifier class.
+ */
+
 import fs from 'fs';
 import Comment from './comment';
 import { ConstructIdentifier } from './codeconstruct';

@@ -1,10 +1,11 @@
-import { Params, ReturnedValue } from "../interfaces";
-
 /**
- * Parser class to parse comments
- *
- * Extracts the description, category, subcategory, link, params, returns, and thrown errors from comments
+ *  This file is responsible for parsing comments in code files. 
+ * It extracts various pieces of information such as 
+ * description, category, subcategory, link, parameters, return values,
+ * and thrown errors from comments using regular expressions.
  */
+
+import { Params, ReturnedValue } from "../interfaces";
 
 export default class Parser {
     // Get the description from the comments block - Basically the text after @description
