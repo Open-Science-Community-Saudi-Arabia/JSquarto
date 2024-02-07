@@ -43,3 +43,11 @@ export interface ThrownError {
     type: string;
     description: string;
 }
+
+export interface Doc {
+    blockInfo: ModuleBlockInfo,
+    constructInfo: {
+        type: string | null,
+        name: string | null
+    }
+}
