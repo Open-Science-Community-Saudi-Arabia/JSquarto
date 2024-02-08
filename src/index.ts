@@ -1,79 +1,68 @@
 import fs from 'fs'
-import CommentsUtil, { Comment } from './utils/comment'
+import { Doc, ModuleBlockInfo } from './interfaces'
+import { CommentsUtil } from './utils/comment'
 import SourceFile from './utils/file'
-import { ModuleBlockInfo, OtherBlockInfo } from './interfaces'
+import Writer from './utils/writer'
 
+function getJSFilesFromDirectory(directory: string): string[] {
+    // Get all nested files and folders
+    const files = fs.readdirSync(directory)
+    const allFiles: string[] = []
+    for (const file of files) {
+        const filePath = directory + '/' + file
+        const isDirectory = fs.statSync(filePath).isDirectory()
+
+        if (isDirectory) {
+            const filesInDirectory = getJSFilesFromDirectory(filePath)
+            allFiles.push(...filesInDirectory)
+        } else {
+            allFiles.push(filePath)
+        }
+    }
+
+    return allFiles.filter((file) => file.includes('.js'))
+}
 
 function start() {
-    const filePath = __dirname + '/test_files/doc.js'
-    const sourceFile = new SourceFile(filePath)
-    const comments = CommentsUtil.getCommentsFromFile(sourceFile.fileContent)
+    // Get all folders and files in test_files directory that are js files
+    const filePaths = getJSFilesFromDirectory(__dirname + '/../test_files')
 
-    let module = {} as ModuleBlockInfo
-    const moduleDocs = [] as {
-        blockInfo: ModuleBlockInfo,
-        constructInfo: {
-            type: string | null,
-            name: string | null
-        }
-    }[]
-    for (const _comment of comments) {
-        console.log(_comment.blockInfo.type, { comment: _comment.text })
-        const blockType = _comment.blockInfo.type
-        const commentIsModule = blockType === 'module'
+    const docs: {
+        module: ModuleBlockInfo,
+        originalFilePath: string,
+        docs: Doc[]
+    }[] = []
 
-        if (commentIsModule) {
-            module = CommentsUtil.getModuleBlockInfo(_comment.text)
-        } else {
-            const constructInfo = sourceFile.getLinkedCodeConstructInfo(_comment)
-            moduleDocs.push({
-                blockInfo: module,
-                constructInfo
-            })
+    // Get all comments from all files
+    for (const filePath of filePaths) {
+        const sourceFile = new SourceFile(filePath)
+        const comments = CommentsUtil.getCommentsFromFile(sourceFile.fileContent)
+
+        // Each file should have one module comment and multiple other comments
+        let module = {} as ModuleBlockInfo
+        const moduleDocs: Doc[] = []
+
+        for (const comment of comments) {
+            const blockType = comment.blockInfo.type
+            const commentIsModule = blockType === 'module'
+
+            commentIsModule
+                ? module = comment.getModuleInfo()
+                : moduleDocs.push({
+                    blockInfo: comment.getOtherBlockInfo(),
+                    constructInfo: sourceFile.getLinkedCodeConstructInfo(comment)
+                })
         }
+
+        docs.push({
+            module,
+            originalFilePath: filePath,
+            docs: moduleDocs
+        })
     }
 
-    // Write module docs
-    // Get file first
-    // Write title and description of module
-    // Write constructs
-    // Write construct title and description
-    // Write construct params
-    // Write construct returns
-    // Write construct throws
-    // Write construct link
-    // Write construct type
-    // Write construct name
-    // Write construct category
-    // Write construct sub category
-    // Write construct link
-
-    console.log(module)
-    const qmdfilePath = __dirname + '/test_files/test.qmd'
-    const fileToWrite = fs.readFileSync(qmdfilePath, 'utf8')
-    const lines = fileToWrite.split('\n')
-    const lastLine = lines[lines.length - 1]
-
-    console.log(lastLine)
-
-    let fileContent = ''
-    //  Add module title to qmd file
-    fileContent += `--- \n title: ${module.name} \n---\n`
-
-    // Add module description to qmd file
-    fileContent += `## Description \n ${module.description} \n`
-
-    // Add constructs to qmd file
-    for (const doc of moduleDocs) {
-        fileContent += `## ${doc.constructInfo.type} ${doc.constructInfo.name} \n`
-    }
-
-    fs.writeFileSync(qmdfilePath, fileContent, 'utf8')
-
-
-    // Module description}
+    // Write docs to qmd files
+    docs.forEach(doc => Writer.writeDocsToFile(doc))
 }
 
 start()
-// const modulesInfoContainedInComments = comments.map((comment) => new Comment(comment).getModuleInfo())
-// console.log(modulesInfoContainedInComments)
