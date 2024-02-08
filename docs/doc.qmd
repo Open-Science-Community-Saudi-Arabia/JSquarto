@@ -1,0 +1,239 @@
+--- 
+ title: Auth Controller 
+---
+## Description 
+ This module contains the controllers for handling user authentication, including login, signup, password reset, super admin activation, and deactivation routes.
+ 
+  The following routes are handled by this module and their corresponding functions: </br>
+ 
+  </br>
+  
+  <b>POST</b> /auth/login </br>
+  <b>POST</b> /auth/signup </br>
+  <b>POST</b> /auth/addadmin  </br>
+  <b>GET</b> /auth/superadmin/reqactivation/:email </br>
+  <b>POST</b> /auth/superadmin/activate  </br>
+  <b>GET</b> /auth/superadmin/reqdeactivation/:email  </br>
+  <b>POST</b> /auth/superadmin/deactivate </br>
+  <b>POST</b> /auth/user/activate/:email </br>
+  <b>POST</b> /auth/user/deactivate/:email l </br>
+  <b>POST</b> /auth/forgotpassword </br>
+  <b>POST</b> /auth/resetpassword </br>
+  <b>POST</b> /auth/googlesignin </br>
+  <b>GET</b> /auth/github </br>
+  <b>GET</b> /auth/github/callback </br>
+  <b>POST</b> /auth/google/callback </br>
+  <b>GET</b> /auth/verifyemail/:token </br>
+   
+   
+
+
+## function user, statusCode, res 
+### Description 
+ This function creates a JWT access token and a refresh token and sends them to the client.
+  The access token contains the user's data which will be required for the client to make authorized requests to the API.
+  
+   
+### Params 
+**user**: The user object. 
+**res**: The Express response object. 
+
+
+## function handleUnverifiedUser 
+### Description 
+ Ssends new verification email to user if the existing user is unverified</br>
+  
+  Inside the email, there is a link that the user can click to verify their email address,
+  this link contains a JWT token that is used to verify the user's email address, the token has an expiry date of 1 hour </br>
+  
+  The token is generated using the getAuthTokens function
+  
+   
+### Params 
+**user**: Mongoose user object 
+
+
+## function handleExistingUser 
+### Description 
+ It sends new verification email to user if the existing user is unverified
+  
+   
+### Params 
+**user**: Mongoose user object 
+### Returns 
+**function**: Express middleware function 
+### Thrown Errors 
+**BadRequestError**: If user is already verified 
+
+
+## function signup 
+### Description 
+ This function creates a new user and sends a verification email to the user.
+  
+  The user is created using the User model, and the user's password is hashed using the bcrypt library. 
+  The user is created with the status of unverified, which means that the user cannot login until their email address is verified. 
+  
+  Each user account has a status document linked to it, 
+  which holds two data fields: isVerified and isActive. By default, isVerified is set to false, which means that the user cannot login until their email address is verified.
+  isActive is set to true for EndUsers, which means that the user account is active. 
+  
+  For Superadmin accounts, it has to be activated using the superadmin activation route.
+   
+### Params 
+**role**: User role (EndUser, Admin, SuperAdmin) 
+**password**: User password 
+**firstname**: User firstname 
+### Link 
+ {@link module:controllers/auth~activateSuperAdmin} 
+
+
+## function addAdmin 
+### Description 
+  
+### Params 
+**req**: Express request object 
+**req.body.email**: User email 
+**req.body.passwordConfirm**: User password confirmation 
+**req.body.lastname**: User lastname 
+**next**: Express next middleware function 
+
+
+## function login 
+### Description 
+  
+### Params 
+**req**: The HTTP request object. 
+**next**: The next middleware function. 
+**req.body.password**: The user's password. 
+### Returns 
+**object**: The HTTP response object containing a success flag, the user object, 
+### Thrown Errors 
+**CustomAPIError**: If the email or password is missing or incorrect, or if the 
+
+
+## function verifyEmail 
+### Description 
+  
+### Params 
+**req**: The HTTP request object. 
+**next**: The next middleware function. 
+### Returns 
+**object**: The HTTP response object containing a success flag and a message. 
+### Thrown Errors 
+**CustomAPIError**: If the token is invalid or expired. 
+
+
+## function requestSuperAdminAccountActivation 
+### Description 
+ This function allows the super admin to request for account activation.
+ 
+  The super admin account is not activated by default for security reasons.
+  This function generates two activation codes - one for the super admin and one for the project hosts.
+  The new super admin uses the first activation code to activate the account, 
+  and the project hosts use the second activation code to activate the account.
+  </br>
+  
+  Once the activation codes are generated, they are sent to the super admin and the project hosts via email.
+  The activation codes will be required to complete the account activation process.
+ 
+   
+### Params 
+**email**: Super admin email. 
+
+
+## function activateSuperAdminAccount 
+### Description 
+  
+### Params 
+**req**: The request object. 
+**next**: The next middleware function. 
+**req.body.activation_code2**: The second activation code sent to the project hosts. 
+### Link 
+ {@link module:controllers/auth~requestSuperAdminAccountActivation} for generating the activation codes. 
+
+
+## function requestSuperAdminAccountDeactivation 
+### Description 
+ If a super admin account is deactivated, all project hosts will be notified. 
+  This function generates three deactivation codes and sends them to the super admin and two project hosts via email. 
+ 
+   
+### Params 
+**email**: Super admin email 
+### Link 
+ {@link module:controllers/auth~deactivateSuperAdminAccount} for deactivating the super admin account.  
+
+
+## function deactivateSuperAdminAccount 
+### Description 
+ Deactivates super admin account if all activation codes are correct <br>
+  
+   
+### Params 
+**deactivation_code1**: deactivation code 1 sent to new super admin 
+**deactivation_code3**: deactivation code 3 sent to project hosts 
+### Link 
+ {@link module:controllers/auth~requestSuperAdminAccountDeactivation} for requesting for a deactivation code. 
+
+
+## function activateUserAccount 
+### Description 
+ Activates a user account if the account exists and it's not already active.
+  
+   
+### Params 
+**req**: The HTTP request object 
+**req.params.email**: The email address of the user to activate 
+**next**: The next middleware function 
+### Returns 
+**object**: The HTTP response object 
+### Thrown Errors 
+**BadRequestError**: If the email parameter is missing or invalid 
+**BadRequestError**: If the user account is already active 
+**Error**: If an unexpected error occurs 
+
+
+## function deactivateUserAccount 
+### Description 
+ Deactivates user account if user account exists and it's active
+  
+   
+### Params 
+**email**: User email 
+
+
+## function forgetPassword 
+### Description 
+  
+### Params 
+**email**: User's email address. 
+
+
+## function resetPassword 
+### Description 
+ Resets the password of the authenticated user if the provided password reset code is valid.<br>
+  
+  Note: A request has to be made to the { 
+### Params 
+**req**: Express request object. 
+**req.body.new_password**: New password. 
+**req.user**: Authenticated user object. 
+### Link 
+ {@link module:controllers/AuthController~forgetPassword forgetPassword} for more information on how to get a password reset code. 
+
+
+## function googleSignin 
+### Description 
+  
+### Params 
+**req**: The request object. 
+
+
+## function getLoggedInUser 
+### Description 
+  
+### Params 
+**req**: The request object. 
+**req.user.id**: The ID of the currently logged in user. 
+### Returns 
+**Object**: The response object containing the user data. 
