@@ -28,9 +28,9 @@ To test the tool locally, follow these steps:
 Once the dependencies are installed, you can paste the files in the JS files or folder in the `/test_file` directory you can run the tool using the following command
     
 To generate the documentation run the following command
-    ```bash
+   ```bash
     npm run doc:generate
-    ```
+   ```
 
 This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
 
