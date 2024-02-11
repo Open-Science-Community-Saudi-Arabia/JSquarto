@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "doc:generate": "ts-node-dev --transpile-only --project tsconfig.json ./src/index.ts"
+        "doc:preview": "quarto preview ./docs",
+        "doc:generate": "ts-node-dev --transpile-only --project tsconfig.json ./src/index.ts",
+        "doc:build": "npm run doc:generate && npm run doc:preview"
     },
     "keywords": [],
     "author": "",
