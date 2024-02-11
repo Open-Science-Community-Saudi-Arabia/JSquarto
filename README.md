@@ -34,7 +34,20 @@ To generate the documentation run the following command
 
 This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
 
-The generated `.qmd` files can be found in the `/docs` folder
+The generated `.qmd` files can be found in the `/docs/chapters` folder
+
+
+To preview the generated documentation run 
+    ```bash
+    npm run doc:preview
+    ```
+The docs are previewed with quarto, so make sure to have quarto already installed
+
+
+You can choose to generate and preview in one go, to do this run the command below
+    ```bash
+    npm run build
+    ```
 
 
 
