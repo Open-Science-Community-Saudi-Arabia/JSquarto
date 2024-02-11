@@ -154,7 +154,9 @@ function start() {
         defaultCategory.addModule(defaultFileModule)
     }
 
-    new Writer().prepareDirectoryForDocs(categories)
+    new Writer()
+        .prepareDirectoryForDocs(categories)
+        .writeDocsFromCategoriesToFile(categories)
 }
 
 start()

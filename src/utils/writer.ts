@@ -5,40 +5,16 @@
 
 import { Doc, ModuleBlockInfo } from "../interfaces";
 import fs from 'fs';
-import { Category } from "./docStructureGenerator";
+import { Category, ModuleDoc } from "./docStructureGenerator";
 
 export default class Writer {
-    private static getQmdFilePathForCurrentFile(originalFilePath: string): string {
-        // Get folder path
-        const filePath = originalFilePath.split('/')
-        const fileName = filePath.pop()?.split('.')[0] + '.qmd'
-
-        filePath.pop()
-
-        // Create sub folder in docs folder
-        // Get relative path from the `test_files` folder to original file
-        const relativePath = originalFilePath.split('test_files')[1]
-        const relativePathArray = relativePath.split('/')
-        relativePathArray.pop()
-
-        const relativeFolderPath = relativePathArray.join('/')
-        const folderPathToWrite = __dirname + `/../../docs${relativeFolderPath}`
-
-        // Create folder if it doesn't exist
-        if (!fs.existsSync(folderPathToWrite)) {
-            fs.mkdirSync(folderPathToWrite, { recursive: true })
-        }
-
-        return folderPathToWrite + '/' + fileName
-    }
-
-    public static writeDocsToFile({
+    private writeDocsToFile({
         module,
-        originalFilePath,
+        destinationPath,
         docs
-    }: { module: ModuleBlockInfo, originalFilePath: string, docs: Doc[] }) {
+    }: { module: ModuleBlockInfo, destinationPath: string, docs: ModuleDoc[] }) {
         // Get file path
-        const qmdfilePath = this.getQmdFilePathForCurrentFile(originalFilePath)
+        const qmdfilePath = destinationPath + '/' + module.name + '.qmd'
         fs.writeFileSync(qmdfilePath, '', 'utf8')
 
         let fileContent = ''
@@ -50,7 +26,14 @@ export default class Writer {
         fileContent += `## Description \n ${module.description} \n`
 
         // Add constructs to qmd file
-        for (const doc of docs) {
+        for (const _doc of docs) {
+            const doc = {
+                blockInfo: _doc.data,
+                constructInfo: {
+                    type: 'Function',
+                    name: module.name
+                }
+            }
             // Add 2 lines
             fileContent += '\n\n'
 
@@ -92,6 +75,26 @@ export default class Writer {
         fs.writeFileSync(qmdfilePath, fileContent, 'utf8')
     }
 
+    public writeDocsFromCategoriesToFile(categories: Category[]) {
+        for (const category of categories) {
+            const categoryFolderPath = __dirname + `/../../docs/${category.name}`
+
+            for (const subCategory of category.subCategories) {
+                const subCategoryFolderPath = categoryFolderPath + '/' + subCategory.name
+
+                for (const module of subCategory.getModules()) {
+                    this.writeDocsToFile({
+                        module: module.info,
+                        destinationPath: subCategoryFolderPath,
+                        docs: module.getDocs()
+                    })
+                }
+            }
+        }
+
+        return this
+    }
+
     public prepareDirectoryForDocs(categories: Category[]) {
         const folderPathToWrite = __dirname + `/../../docs`
 
@@ -121,5 +124,7 @@ export default class Writer {
                 fs.writeFileSync(subCategoryFolderPath + '/index.qmd', `--- \n title: ${subCategory.name} \n---\n`, 'utf8')
             }
         }
+
+        return this
     }
 }
