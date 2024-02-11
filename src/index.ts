@@ -3,7 +3,7 @@ import { Doc, ModuleBlockInfo } from './interfaces'
 import { CommentsUtil } from './utils/comment'
 import SourceFile from './utils/file'
 import Writer from './utils/writer'
-import { Category, Document, Module, ModuleDoc, SubCategory } from './utils/docStructureGenerator'
+import { Category, Module, ModuleDoc, SubCategory } from './utils/docStructureGenerator'
 
 function getJSFilesFromDirectory(directory: string): string[] {
     // Get all nested files and folders
@@ -124,7 +124,7 @@ function start() {
 
             const categoryToAddTo = categories.find((_category) => _category.name === category)
             const subCategoryToAddTo = categoryToAddTo?.subCategories.find((_subCategory) => _subCategory.name === subCategory)
-            
+
             if (subCategoryToAddTo) {
                 subCategoryToAddTo.addModule(fileModule)
             } else if (categoryToAddTo) {
@@ -132,7 +132,7 @@ function start() {
             } else {
                 defaultSubCategory.addModule(fileModule)
             }
-            
+
             modules.push(fileModule)
         } else {
             moduleDocs.forEach((doc) => defaultFileModule.addDoc(doc))
@@ -141,11 +141,16 @@ function start() {
 
     if (defaultFileModule.getDocs().length > 0) {
         modules.push(defaultFileModule)
+        defaultCategory.addModule(defaultFileModule)
     }
 
-    modules.forEach((module) => Writer.writeDocsToFile(module))
-    // Write docs to qmd files
-    docs.forEach(doc => Writer.writeDocsToFile(doc))
+    for (const category of categories) {
+        for (const subCategory of category.subCategories) {
+            for (const module of subCategory.getModules()) {
+                console.log({ module: module.info.name, category: category.name, subCategory: subCategory.name })
+            }
+        }
+    }
 }
 
 start()
