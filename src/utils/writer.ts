@@ -4,22 +4,27 @@ import { Category, ModuleDoc } from "./docStructureGenerator";
 import logger from "./logger";
 import path from "path";
 import YAML from "yaml";
+import { DEFAULT_QUARTO_YAML_CONTENT } from "../constants";
+
+interface Chapter {
+    part: string;
+    chapters: string[] | undefined;
+}
 
 export default class Writer {
-    private generateQuartoYAML(chapters: string[]): void {
+    private generateQuartoYAML(chapters: Chapter[]): void {
         try {
             const quartoYAML = {
-                project: {
-                    type: "book",
-                    outputDir: "_book",
-                },
+                ...DEFAULT_QUARTO_YAML_CONTENT,
                 book: {
-                    title: "Open Innovation Platform Documentation",
-                    // Add other book metadata here
+                    ...DEFAULT_QUARTO_YAML_CONTENT.book,
                     chapters,
                 },
-                bibliography: "references.bib", // Update this as needed
             };
+
+            if (chapters.length === 0) {
+                logger.warn("No chapters found for Quarto YAML");
+            }
 
             const folderPathToWrite = path.join(__dirname, "..", "..", "docs");
             const quartoYAMLPath = path.join(folderPathToWrite, "quarto.yml");
@@ -41,14 +46,15 @@ export default class Writer {
             __dirname,
             "..",
             "..",
-            "docs/chapters",
+            "docs",
+            "chapters",
         );
 
         try {
             fs.mkdirSync(folderPathToWrite, { recursive: true });
             logger.info(`Documentation folder created: ${folderPathToWrite}`);
 
-            const chapters: string[] = [];
+            const chapters: Chapter[] = [];
 
             for (const category of categories) {
                 const categoryFolderPath = path.join(
@@ -57,15 +63,6 @@ export default class Writer {
                 );
                 fs.mkdirSync(categoryFolderPath, { recursive: true });
                 logger.info(`Category folder created: ${categoryFolderPath}`);
-
-                fs.writeFileSync(
-                    path.join(categoryFolderPath, "index.qmd"),
-                    `---\ntitle: ${category.name}\n---\n`,
-                    "utf8",
-                );
-                logger.info(
-                    `Index.qmd file created for category: ${category.name}`,
-                );
 
                 for (const subCategory of category.subCategories) {
                     const subCategoryFolderPath = path.join(
@@ -77,29 +74,37 @@ export default class Writer {
                         `Sub-category folder created: ${subCategoryFolderPath}`,
                     );
 
-                    fs.writeFileSync(
-                        path.join(subCategoryFolderPath, "index.qmd"),
-                        `---\ntitle: ${subCategory.name}\n---\n`,
-                        "utf8",
-                    );
-                    logger.info(
-                        `Index.qmd file created for sub-category: ${subCategory.name}`,
-                    );
+                    // Collect subchapters for Quarto YAML
+                    const subchapters = subCategory
+                        .getModules()
+                        .map(
+                            (module) =>
+                                `chapters/${category.name}/${subCategory.name}/${module.info.name}.qmd`,
+                        );
 
-                    // Collect chapters for Quarto YAML
-                    chapters.push(
-                        ...subCategory
-                            .getModules()
-                            .map(
-                                (module) =>
-                                    `chapters/${category.name}/${subCategory.name}/${module.info.name}.qmd`,
-                            ),
-                    );
+                    // Group subchapters under subcategory
+                    chapters.push({
+                        part: subCategory.name,
+                        chapters:
+                            subchapters.length > 0 ? subchapters : undefined,
+                    });
                 }
+
+                // Collect chapters for Quarto YAML
+                const categoryChapters = category.subCategories.map(
+                    (subCategory) =>
+                        `chapters/${category.name}/${subCategory.name}/index.qmd`,
+                );
+
+                // Group chapters under category
+                chapters.push({
+                    part: category.name,
+                    chapters: categoryChapters,
+                });
             }
 
             // Generate Quarto YAML
-            this.generateQuartoYAML(chapters);
+            this.generateQuartoYAML(chapters.flat());
             return this;
         } catch (error) {
             logger.error("Error preparing directory for docs");
@@ -107,6 +112,7 @@ export default class Writer {
             throw error;
         }
     }
+
     private writeDocsToFile({
         module,
         destinationPath,
@@ -207,57 +213,4 @@ export default class Writer {
 
         return this;
     }
-
-    // public prepareDirectoryForDocs(categories: Category[]) {
-    //     const folderPathToWrite = __dirname + `/../../docs`;
-    //
-    //     // Create folder if it doesn't exist
-    //     if (!fs.existsSync(folderPathToWrite)) {
-    //         fs.mkdirSync(folderPathToWrite, { recursive: true });
-    //         logger.info(`Documentation folder created: ${folderPathToWrite}`);
-    //     }
-    //
-    //     // Create sub folders for each category and add a default index.qmd file for each category
-    //     // For the sub categories, add a default index.qmd file for each sub category
-    //     // Write the category name to the index.qmd file
-    //     // Write the sub category name to the index.qmd file
-    //     for (const category of categories) {
-    //         const categoryFolderPath = folderPathToWrite + "/" + category.name;
-    //         if (!fs.existsSync(categoryFolderPath)) {
-    //             fs.mkdirSync(categoryFolderPath, { recursive: true });
-    //             logger.info(`Category folder created: ${categoryFolderPath}`);
-    //         }
-    //
-    //         fs.writeFileSync(
-    //             categoryFolderPath + "/index.qmd",
-    //             `--- \n title: ${category.name} \n---\n`,
-    //             "utf8",
-    //         );
-    //         logger.info(
-    //             `Index.qmd file created for category: ${category.name}`,
-    //         );
-    //
-    //         for (const subCategory of category.subCategories) {
-    //             const subCategoryFolderPath =
-    //                 categoryFolderPath + "/" + subCategory.name;
-    //             if (!fs.existsSync(subCategoryFolderPath)) {
-    //                 fs.mkdirSync(subCategoryFolderPath, { recursive: true });
-    //                 logger.info(
-    //                     `Sub-category folder created: ${subCategoryFolderPath}`,
-    //                 );
-    //             }
-    //
-    //             fs.writeFileSync(
-    //                 subCategoryFolderPath + "/index.qmd",
-    //                 `--- \n title: ${subCategory.name} \n---\n`,
-    //                 "utf8",
-    //             );
-    //             logger.info(
-    //                 `Index.qmd file created for sub-category: ${subCategory.name}`,
-    //             );
-    //         }
-    //     }
-    //
-    //     return this;
-    // }
 }
