@@ -1,6 +1,16 @@
+/**
+ *  This TypeScript module (Writer) contains classes and functions
+ *  for generating documentation structure and content.
+ *  It interacts with various files and directories to organize
+ *  documentation chapters, write content to Markdown files,
+ *  and generate Quarto YAML configuration for the documentation book.
+ *
+ *  **Note**: This module is not yet complete and is still under development.
+ *  */
+
 import { Doc, ModuleBlockInfo } from "../interfaces";
 import fs from "fs";
-import { Category, ModuleDoc } from "./docStructureGenerator";
+import { Category, ModuleDoc } from "./components";
 import logger from "./logger";
 import path from "path";
 import YAML from "yaml";
@@ -46,7 +56,7 @@ export default class Writer {
         } catch (error) {
             logger.error("Error generating Quarto YAML file");
             logger.error(error);
-            throw error;    
+            throw error;
         }
     }
 
@@ -216,7 +226,7 @@ export default class Writer {
         } catch (error) {
             logger.error(`Error writing documentation to file: ${qmdfilePath}`);
             logger.error(error);
-            throw error
+            throw error;
         }
     }
 
