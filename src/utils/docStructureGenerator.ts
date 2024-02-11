@@ -37,9 +37,9 @@ export class Module {
     }
 }
 
-class SubCategory {
+export class SubCategory {
     private modules: Module[] = [];
-    private name: string;
+    name: string;
     private category?: Category;
 
     constructor({
@@ -66,9 +66,10 @@ class SubCategory {
     }
 }
 
-class Category {
+export class Category {
     subCategories: SubCategory[] = [];
     name: string;
+    private directModules: Module[] = [];
 
     constructor(name: string) {
         this.name = name;
@@ -84,6 +85,10 @@ class Category {
 
     public getName() {
         return this.name;
+    }
+
+    public addModule(module: Module) {
+        this.directModules.push(module);
     }
 }
 
