@@ -126,11 +126,21 @@ function start() {
             const subCategoryToAddTo = categoryToAddTo?.subCategories.find((_subCategory) => _subCategory.name === subCategory)
 
             if (subCategoryToAddTo) {
-                subCategoryToAddTo.addModule(fileModule)
+                const existingModule = subCategoryToAddTo.getModules().find((_module) => _module.info.name === fileModule.info.name)
+                if (!existingModule) {
+                    subCategoryToAddTo.addModule(fileModule)
+                }
             } else if (categoryToAddTo) {
-                categoryToAddTo.addModule(fileModule)
+                const existingModuleInCategory = categoryToAddTo.getModules().find((_module) => _module.info.name === fileModule.info.name)
+                if (!existingModuleInCategory) {
+                    categoryToAddTo.addModule(fileModule)
+                }
             } else {
+                const existingModuleInDefaultCategory = defaultCategory.getModules().find((_module) => _module.info.name === fileModule.info.name)
+                if (!existingModuleInDefaultCategory) {
+
                 defaultSubCategory.addModule(fileModule)
+            }
             }
 
             modules.push(fileModule)
@@ -148,6 +158,12 @@ function start() {
         for (const subCategory of category.subCategories) {
             for (const module of subCategory.getModules()) {
                 console.log({ module: module.info.name, category: category.name, subCategory: subCategory.name })
+
+                console.log(`\n\n`)
+
+                for (const comment of module.getDocs()) {
+                    console.log(comment)
+                }
             }
         }
     }
