@@ -1,38 +1,38 @@
 // Generates the quarto yml file
+import { uuid } from "uuidv4";
+import { ModuleBlockInfo, OtherBlockInfo } from "../interfaces";
 
-import { ModuleBlockInfo } from "../interfaces";
-
-class Document {
-    module: Module;
+export class ModuleDoc {
+    data: OtherBlockInfo;
     originalFilePath: string;
-    comments: Comment[] = [];
 
     constructor({
         originalFilePath,
-        module,
+        data,
     }: {
         originalFilePath: string;
-        module: Module;
+        data: OtherBlockInfo;
     }) {
         this.originalFilePath = originalFilePath;
-        this.module = module;
+        this.data = data;
     }
 }
 
 
-class Module {
-    private documents: Document[] = [];
-    private info: ModuleBlockInfo = {} as ModuleBlockInfo;
+export class Module {
+    private documents: ModuleDoc[] = [];
+    private id: string = uuid()
+    readonly info: ModuleBlockInfo = {} as ModuleBlockInfo;
 
     constructor(info: ModuleBlockInfo) {
         this.info = info;
     }
 
-    public addDocument(document: Document) {
+    public addDoc(document: ModuleDoc) {
         this.documents.push(document);
     }
 
-    public getDocuments() {
+    public getDocs() {
         return this.documents;
     }
 }

@@ -3,6 +3,7 @@ import { Doc, ModuleBlockInfo } from './interfaces'
 import { CommentsUtil } from './utils/comment'
 import SourceFile from './utils/file'
 import Writer from './utils/writer'
+import { Document, Module, ModuleDoc } from './utils/docStructureGenerator'
 
 function getJSFilesFromDirectory(directory: string): string[] {
     // Get all nested files and folders
@@ -33,34 +34,64 @@ function start() {
         docs: Doc[]
     }[] = []
 
+    const modules: Module[] = []
+
+    const defaultFileModule = new Module({
+        name: 'default',
+        description: 'Default module',
+        link: 'default'
+    })
+
     // Get all comments from all files
     for (const filePath of filePaths) {
         const sourceFile = new SourceFile(filePath)
         const comments = CommentsUtil.getCommentsFromFile(sourceFile.fileContent)
 
-        // Each file should have one module comment and multiple other comments
-        let module = {} as ModuleBlockInfo
-        const moduleDocs: Doc[] = []
+        let moduleHasBeenDeclaredForFile = false
+
+        // There should be one module for each file
+        // Get all the comments for each file,
+        // While getting the comments check if the current comment is a module comment
+        // If it is the first module, check the module array if the module has been initialized before
+        // If it has not been initialized, then add it to the array of all modules
+        // Link all the comments in this file to the module
+        // If no module has been declared, then the module is the default module
+
+        let fileModule: Module | undefined = undefined
+
+        const moduleDocs: ModuleDoc[] = []
 
         for (const comment of comments) {
             const blockType = comment.blockInfo.type
             const commentIsModule = blockType === 'module'
 
-            commentIsModule
-                ? module = comment.getModuleInfo()
-                : moduleDocs.push({
-                    blockInfo: comment.getOtherBlockInfo(),
-                    constructInfo: sourceFile.getLinkedCodeConstructInfo(comment)
-                })
+            if (commentIsModule) {
+                const _module = comment.getModuleInfo()
+                const moduleExists = modules.some((module) => module.info.name === _module.name)
+
+                const newModule = new Module({ name: _module.name, description: _module.description, category: _module.category })
+                if (!moduleExists) modules.push(newModule)
+
+                if (!moduleHasBeenDeclaredForFile) {
+                    fileModule = newModule
+                    moduleHasBeenDeclaredForFile = true
+                }
+                continue
+            }
+
+            // Comment is not a module declaration
+            // Check which module the comment belongs to
+            moduleDocs.push(new ModuleDoc({ originalFilePath: filePath, data: comment.getOtherBlockInfo() }))
         }
 
-        docs.push({
-            module,
-            originalFilePath: filePath,
-            docs: moduleDocs
-        })
+        // Add all the comments to the module
+        if (fileModule) {
+            moduleDocs.forEach((doc) => fileModule.addDoc(doc))
+            modules.push(fileModule)
+        }
     }
 
+    modules.forEach((module) => Writer.writeDocsToFile(module))
     // Write docs to qmd files
     docs.forEach(doc => Writer.writeDocsToFile(doc))
 }

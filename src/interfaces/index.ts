@@ -3,11 +3,11 @@ import acorn from 'acorn'
 export interface ModuleBlockInfo {
     name: string;
     description: string;
-    category: {
+    category?: {
         name: string;
         subCategory: string;
     };
-    link: string;
+    link?: string;
 }
 
 export interface CategoryInfo {
