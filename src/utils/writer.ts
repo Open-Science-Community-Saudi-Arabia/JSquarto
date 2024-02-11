@@ -5,6 +5,7 @@
 
 import { Doc, ModuleBlockInfo } from "../interfaces";
 import fs from 'fs';
+import { Category } from "./docStructureGenerator";
 
 export default class Writer {
     private static getQmdFilePathForCurrentFile(originalFilePath: string): string {
@@ -89,5 +90,36 @@ export default class Writer {
         }
 
         fs.writeFileSync(qmdfilePath, fileContent, 'utf8')
+    }
+
+    public prepareDirectoryForDocs(categories: Category[]) {
+        const folderPathToWrite = __dirname + `/../../docs`
+
+        // Create folder if it doesn't exist
+        if (!fs.existsSync(folderPathToWrite)) {
+            fs.mkdirSync(folderPathToWrite, { recursive: true })
+        }
+
+        // Create sub folders for each category and add a default index.qmd file for each category
+        // For the sub categories, add a default index.qmd file for each sub category
+        // Write the category name to the index.qmd file 
+        // Write the sub category name to the index.qmd file
+        for (const category of categories) {
+            const categoryFolderPath = folderPathToWrite + '/' + category.name
+            if (!fs.existsSync(categoryFolderPath)) {
+                fs.mkdirSync(categoryFolderPath, { recursive: true })
+            }
+
+            fs.writeFileSync(categoryFolderPath + '/index.qmd', `--- \n title: ${category.name} \n---\n`, 'utf8')
+
+            for (const subCategory of category.subCategories) {
+                const subCategoryFolderPath = categoryFolderPath + '/' + subCategory.name
+                if (!fs.existsSync(subCategoryFolderPath)) {
+                    fs.mkdirSync(subCategoryFolderPath, { recursive: true })
+                }
+
+                fs.writeFileSync(subCategoryFolderPath + '/index.qmd', `--- \n title: ${subCategory.name} \n---\n`, 'utf8')
+            }
+        }
     }
 }

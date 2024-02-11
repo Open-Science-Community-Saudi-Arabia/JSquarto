@@ -139,8 +139,8 @@ function start() {
                 const existingModuleInDefaultCategory = defaultCategory.getModules().find((_module) => _module.info.name === fileModule.info.name)
                 if (!existingModuleInDefaultCategory) {
 
-                defaultSubCategory.addModule(fileModule)
-            }
+                    defaultSubCategory.addModule(fileModule)
+                }
             }
 
             modules.push(fileModule)
@@ -154,19 +154,7 @@ function start() {
         defaultCategory.addModule(defaultFileModule)
     }
 
-    for (const category of categories) {
-        for (const subCategory of category.subCategories) {
-            for (const module of subCategory.getModules()) {
-                console.log({ module: module.info.name, category: category.name, subCategory: subCategory.name })
-
-                console.log(`\n\n`)
-
-                for (const comment of module.getDocs()) {
-                    console.log(comment)
-                }
-            }
-        }
-    }
+    new Writer().prepareDirectoryForDocs(categories)
 }
 
 start()

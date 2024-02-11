@@ -90,5 +90,10 @@ export class Category {
     public addModule(module: Module) {
         this.directModules.push(module);
     }
+
+    public getModules() {
+        return this.directModules;
+    }
 }
+
 
