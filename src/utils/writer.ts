@@ -4,7 +4,7 @@ import { Category, ModuleDoc } from "./docStructureGenerator";
 import logger from "./logger";
 import path from "path";
 import YAML from "yaml";
-import { DEFAULT_QUARTO_YAML_CONTENT } from "../constants";
+import { DEFAULT_QUARTO_YAML_CONTENT, INDEX_QMD_CONTENT } from "../constants";
 
 interface Chapter {
     part: string;
@@ -14,11 +14,19 @@ interface Chapter {
 export default class Writer {
     private generateQuartoYAML(chapters: Chapter[]): void {
         try {
+            // Check if there is a index.md file in the root of the docs folder
+            // If not, create one
+            const rootDocsPath = __dirname + "/../../docs";
+            const indexFilePath = rootDocsPath + "/index.md";
+            if (!fs.existsSync(indexFilePath)) {
+                fs.writeFileSync(indexFilePath, INDEX_QMD_CONTENT, "utf8");
+            }
+
             const quartoYAML = {
                 ...DEFAULT_QUARTO_YAML_CONTENT,
                 book: {
                     ...DEFAULT_QUARTO_YAML_CONTENT.book,
-                    chapters,
+                    chapters: ["index.md", ...chapters],
                 },
             };
 
@@ -27,7 +35,7 @@ export default class Writer {
             }
 
             const folderPathToWrite = path.join(__dirname, "..", "..", "docs");
-            const quartoYAMLPath = path.join(folderPathToWrite, "quarto.yml");
+            const quartoYAMLPath = path.join(folderPathToWrite, "_quarto.yml");
 
             fs.writeFileSync(
                 quartoYAMLPath,
@@ -38,9 +46,11 @@ export default class Writer {
         } catch (error) {
             logger.error("Error generating Quarto YAML file");
             logger.error(error);
+            throw error;    
         }
     }
 
+    // Create directory structure for documentation
     public prepareDirectoryForDocs(categories: Category[]) {
         const folderPathToWrite = path.join(
             __dirname,
@@ -62,6 +72,13 @@ export default class Writer {
                     category.name,
                 );
                 fs.mkdirSync(categoryFolderPath, { recursive: true });
+                // Add index.qmd file to category folder
+                fs.writeFileSync(
+                    path.join(categoryFolderPath, "index.qmd"),
+                    `---\ntitle: ${category.name}\n---\n`,
+                    "utf8",
+                );
+
                 logger.info(`Category folder created: ${categoryFolderPath}`);
 
                 for (const subCategory of category.subCategories) {
@@ -69,7 +86,16 @@ export default class Writer {
                         categoryFolderPath,
                         subCategory.name,
                     );
-                    fs.mkdirSync(subCategoryFolderPath, { recursive: true });
+                    fs.mkdirSync(subCategoryFolderPath, {
+                        recursive: true,
+                    });
+
+                    // Add index.qmd file to subcategory folder
+                    fs.writeFileSync(
+                        path.join(subCategoryFolderPath, "index.qmd"),
+                        `---\ntitle: ${subCategory.name}\n---\n`,
+                        "utf8",
+                    );
                     logger.info(
                         `Sub-category folder created: ${subCategoryFolderPath}`,
                     );
@@ -113,6 +139,7 @@ export default class Writer {
         }
     }
 
+    // Write documentation to file
     private writeDocsToFile({
         module,
         destinationPath,
@@ -189,9 +216,11 @@ export default class Writer {
         } catch (error) {
             logger.error(`Error writing documentation to file: ${qmdfilePath}`);
             logger.error(error);
+            throw error
         }
     }
 
+    // Write documentation for each category to file
     public writeDocsFromCategoriesToFile(categories: Category[]) {
         for (const category of categories) {
             const categoryFolderPath =
