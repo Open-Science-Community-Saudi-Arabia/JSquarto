@@ -4,6 +4,7 @@ import { CommentsUtil } from "./utils/comment";
 import SourceFile from "./utils/file";
 import Writer from "./utils/writer";
 import { Category, Module, ModuleDoc, SubCategory } from "./utils/components";
+import logger from "./utils/logger";
 
 function getJSFilesFromDirectory(
     directory: string,
@@ -48,20 +49,21 @@ function start() {
     for (const filePath of filePaths) {
         // Parse source file and extract comments
         const sourceFile = new SourceFile(filePath);
-        const comments = CommentsUtil.getCommentsFromFile(
-            sourceFile.fileContent,
-        );
+        const comments = CommentsUtil.getCommentsFromFile(sourceFile);
         let fileModule: Module | undefined = undefined;
         const moduleDocs: ModuleDoc[] = [];
 
         // Process comments in the file
         for (const comment of comments) {
-            if (comment.blockInfo.type !== "module") {
+            if (comment.blockType !== "module") {
                 // If comment is not module-related, add it to moduleDocs
                 moduleDocs.push(
                     new ModuleDoc({
                         originalFilePath: filePath,
-                        data: comment.getOtherBlockInfo(),
+                        data: {
+                            blockInfo: comment.getOtherBlockInfo(),
+                            constructInfo: comment.constructInfo,
+                        },
                     }),
                 );
                 continue;
@@ -71,7 +73,7 @@ function start() {
             const _module = comment.getModuleInfo();
             let newModule = modules.get(_module.name);
 
-            // Create new module if it doesn't exist
+            // Create new module if t doesn't exist
             if (!newModule) {
                 newModule = new Module({
                     name: _module.name,
@@ -113,8 +115,11 @@ function start() {
         // Add module and its documentation to appropriate category or default
         if (fileModule) {
             moduleDocs.forEach((doc) => fileModule!.addDoc(doc));
-            const category = fileModule.info.category?.name || defaultCategory.name;
-            const subCategory = fileModule.info.category?.subCategory || defaultSubCategory.name;
+            const category =
+                fileModule.info.category?.name || defaultCategory.name;
+            const subCategory =
+                fileModule.info.category?.subCategory ||
+                defaultSubCategory.name;
             const categoryToAddTo = categories.get(category);
             const subCategoryToAddTo = categoryToAddTo?.subCategories.find(
                 (subCat) => subCat.name === subCategory,
@@ -164,6 +169,7 @@ function start() {
     // Add default module to default category if it has documentation
     if (defaultFileModule.getDocs().length > 0) {
         modules.set(defaultFileModule.info.name, defaultFileModule);
+
         defaultCategory.addModule(defaultFileModule);
     }
 
@@ -171,7 +177,10 @@ function start() {
     new Writer()
         .prepareDirectoryForDocs(Array.from(categories.values()))
         .writeDocsFromCategoriesToFile(Array.from(categories.values()));
-}
 
+    logger.info("Documentation generation complete");
+
+    process.exit(0);
+}
 
 start();

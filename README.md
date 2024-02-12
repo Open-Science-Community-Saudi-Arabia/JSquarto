@@ -49,5 +49,4 @@ You can choose to generate and preview in one go, to do this run the command bel
     npm run build
     ```
 
-
-
+This will generate the documentation, preview with quarto and open a link to preview the docs

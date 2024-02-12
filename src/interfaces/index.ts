@@ -1,4 +1,4 @@
-import acorn from 'acorn'
+import acorn from "acorn";
 
 export interface ModuleBlockInfo {
     name: string;
@@ -45,9 +45,17 @@ export interface ThrownError {
 }
 
 export interface Doc {
-    blockInfo: OtherBlockInfo,
+    blockInfo: OtherBlockInfo;
     constructInfo: {
-        type: string | null,
-        name: string | null
-    }
+        type: string | null;
+        name: string | null;
+    };
 }
+
+export type ConstructType =
+    | "class"
+    | "function"
+    | "variable"
+    | "other"
+    | "module";
+

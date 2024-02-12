@@ -1,9 +1,13 @@
 // Generates the quarto yml file
-import { uuid } from "uuidv4";
+import { v4 as uuid } from "uuid";
 import { ModuleBlockInfo, OtherBlockInfo } from "../interfaces";
 
 export class ModuleDoc {
     data: OtherBlockInfo;
+    constructInfo: {
+        type: string;
+        name: string;
+    };
     originalFilePath: string;
 
     constructor({
@@ -11,17 +15,23 @@ export class ModuleDoc {
         data,
     }: {
         originalFilePath: string;
-        data: OtherBlockInfo;
+        data: {
+            blockInfo: OtherBlockInfo;
+            constructInfo: {
+                type: string;
+                name: string;
+            };
+        };
     }) {
         this.originalFilePath = originalFilePath;
-        this.data = data;
+        this.data = data.blockInfo;
+        this.constructInfo = data.constructInfo;
     }
 }
 
-
 export class Module {
     private documents: ModuleDoc[] = [];
-    private id: string = uuid()
+    private id: string = uuid();
     readonly info: ModuleBlockInfo = {} as ModuleBlockInfo;
 
     constructor(info: ModuleBlockInfo) {
@@ -42,13 +52,7 @@ export class SubCategory {
     name: string;
     private category?: Category;
 
-    constructor({
-        name,
-        category,
-    }: {
-        name: string;
-        category?: Category;
-    }) {
+    constructor({ name, category }: { name: string; category?: Category }) {
         this.name = name;
         this.category = category;
     }
@@ -95,5 +99,3 @@ export class Category {
         return this.directModules;
     }
 }
-
-

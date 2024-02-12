@@ -178,11 +178,12 @@ export default class Writer {
                 const doc = {
                     blockInfo: _doc.data,
                     constructInfo: {
-                        type: "Function",
-                        name: module.name,
+                        type: _doc.constructInfo.type,
+                        name: _doc.constructInfo.name,
                     },
                 };
 
+                // console.log({ doc });
                 // Add 2 lines
                 fileContent += "\n\n";
 
@@ -235,6 +236,15 @@ export default class Writer {
         for (const category of categories) {
             const categoryFolderPath =
                 __dirname + `/../../docs/chapters/${category.name}`;
+
+            const directModules = category.getModules();
+            for (const module of directModules) {
+                this.writeDocsToFile({
+                    module: module.info,
+                    destinationPath: categoryFolderPath,
+                    docs: module.getDocs(),
+                });
+            }
 
             for (const subCategory of category.subCategories) {
                 const subCategoryFolderPath =
