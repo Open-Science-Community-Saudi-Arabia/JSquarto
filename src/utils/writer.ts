@@ -167,11 +167,11 @@ export default class Writer {
 
             let fileContent = "";
 
-            //  Add module title to qmd file
-            fileContent += `--- \n title: ${module.name} \n---\n`;
+            // Add module title to qmd file
+            fileContent += `# ${module.name}\n\n`;
 
             // Add module description to qmd file
-            fileContent += `## Description \n ${module.description} \n`;
+            fileContent += `${module.description}\n\n`;
 
             // Add constructs to qmd file
             for (const _doc of docs) {
@@ -183,48 +183,60 @@ export default class Writer {
                     },
                 };
 
-                // console.log({ doc });
                 // Add 2 lines
                 fileContent += "\n\n";
 
-                fileContent += `## ${doc.constructInfo.type} ${doc.constructInfo.name} \n`;
+                // Add construct heading
+                // fileContent += "---  \n";
+                fileContent += `## ${doc.constructInfo.name} \n`;
+                fileContent += `\`[${doc.constructInfo.type}]\`\n \n`;
 
                 // Add description to qmd file
-                fileContent += `### Description \n ${doc.blockInfo.description} \n`;
+                fileContent += `**Description:**\n${doc.blockInfo.description}\n\n`;
 
                 // Add params to qmd file
                 if (doc.blockInfo.params.length > 0) {
-                    fileContent += `### Params \n`;
+                    fileContent += `**Params:**\n\n`;
                     // Display in a table, with columns for name and description
 
-                    fileContent += `| Name | Description | \n`;
-                    fileContent += `| --- | --- | \n`;
+                    fileContent += `| Name | Description |\n`;
+                    fileContent += `| --- | --- |\n`;
 
                     for (const param of doc.blockInfo.params) {
-                        fileContent += `| ${param.name} | ${param.description} | \n`;
+                        fileContent += `|  ${param.name} | ${param.description} |\n`;
                     }
-
+                    fileContent += "\n";
                 }
 
                 // Add returns to qmd file
                 if (doc.blockInfo.returns.length > 0) {
-                    fileContent += `### Returns \n`;
+                    fileContent += `**Returns:**\n\n`;
+
+                    fileContent += `| Type | Description |\n`;
+                    fileContent += `| --- | --- |\n`;
+
                     for (const returnedValue of doc.blockInfo.returns) {
-                        fileContent += `**${returnedValue.type}**: ${returnedValue.description} \n`;
+                        fileContent += `| ${returnedValue.type} | ${returnedValue.description} |\n`;
                     }
+                    fileContent += "\n";
                 }
 
                 // Add thrown errors to qmd file
                 if (doc.blockInfo.thrownErrors.length > 0) {
-                    fileContent += `### Thrown Errors \n`;
+                    fileContent += `**Thrown Errors:**\n\n`;
+
+                    fileContent += `| Error type | Description |\n`;
+                    fileContent += `| --- | --- |\n`;
+
                     for (const thrownError of doc.blockInfo.thrownErrors) {
-                        fileContent += `**${thrownError.type}**: ${thrownError.description} \n`;
+                        fileContent += `| ${thrownError.type} | ${thrownError.description} |\n`;
                     }
+                    fileContent += "\n";
                 }
 
                 // Add link to qmd file
                 if (doc.blockInfo.link) {
-                    fileContent += `### Link \n ${doc.blockInfo.link} \n`;
+                    fileContent += `**See also:** [Reference](${doc.blockInfo.link})\n\n`;
                 }
             }
 
