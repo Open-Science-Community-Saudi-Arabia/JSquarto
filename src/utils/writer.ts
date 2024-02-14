@@ -191,9 +191,12 @@ export default class Writer {
                 fileContent += `## ${doc.constructInfo.name} \n`;
                 fileContent += `\`[${doc.constructInfo.type}]\`\n \n`;
 
-                // Add description to qmd file
-                fileContent += `**Description:**\n${doc.blockInfo.description}\n\n`;
-
+                const descriptionWasAdded =
+                    doc.blockInfo.description.length > 0;
+                if (descriptionWasAdded) {
+                    // Add description to qmd file
+                    fileContent += `**Description:**\n${doc.blockInfo.description}\n\n`;
+                }
                 // Add params to qmd file
                 if (doc.blockInfo.params.length > 0) {
                     fileContent += `**Params:**\n\n`;
