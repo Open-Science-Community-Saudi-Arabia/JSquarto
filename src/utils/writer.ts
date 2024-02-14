@@ -195,9 +195,15 @@ export default class Writer {
                 // Add params to qmd file
                 if (doc.blockInfo.params.length > 0) {
                     fileContent += `### Params \n`;
+                    // Display in a table, with columns for name and description
+
+                    fileContent += `| Name | Description | \n`;
+                    fileContent += `| --- | --- | \n`;
+
                     for (const param of doc.blockInfo.params) {
-                        fileContent += `**${param.name}**: ${param.description} \n`;
+                        fileContent += `| ${param.name} | ${param.description} | \n`;
                     }
+
                 }
 
                 // Add returns to qmd file
