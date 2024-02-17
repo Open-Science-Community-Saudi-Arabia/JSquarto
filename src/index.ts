@@ -33,11 +33,10 @@ function start() {
 
     // Create default module, category, and subcategory
     const defaultFileModule = new Module({
-        name: "default",
-        description: "Default module",
-        link: "default",
+        name: "Globals",
+        description: "Global constructs",
     });
-    const defaultCategory = new Category("default");
+    const defaultCategory = new Category("Globals");
     const defaultSubCategory = new SubCategory({
         name: "default",
         category: defaultCategory,
