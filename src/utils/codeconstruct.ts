@@ -24,10 +24,22 @@ export class ConstructIdentifier {
 
     // Get the name of the function construct
     private static getFunctionConstructName(line: string): string | null {
+        // Check for async arrow functions i.e  const variableX = async (param1, param2) => {}
+        let match = line.match(/const\s+(\w+)\s*=\s*async\s*\(.*\)\s*=>/);
+        if (match) {
+            return match[1] || null;
+        }
+
+        // Check for plain arrow function i.e const variableX = (param1, param2) => {}
+        match = line.match(/const\s+(\w+)\s*=\s*\(.*\)\s*=>/);
+        if (match) {
+            return match[1] || null;
+        }   
+
         const functionRegex =
             /(async\s+)?function\s+(\w+)|const\s+(\w+)\s*=\s*async\s*\(.*\)\s*=>|\(([\s\S]*?)\)\s*=>|(\w+)\s*=\s*function\s*\(([\s\S]*?)\)|(\w+)\s*=\s*\(([\s\S]*?)\)\s*=>|\w+\s*=\s*async\s*\(([\s\S]*?)\)\s*=>|\w+\s*=\s*function\s*[\s\S]*?\((([\s\S]*?))\)|\w+\s*=\s*\(([\s\S]*?)\)\s*=>/;
 
-        const match = line.match(functionRegex);
+        match = line.match(functionRegex);
 
         if (match) {
             const functionName =
