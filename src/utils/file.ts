@@ -43,6 +43,7 @@ export default class SourceFile {
                         nextLines.join(""),
                     );
 
+                    console.log({ nextLines, name, type });
                     return { type, name };
                 } else {
                     return { type: "other", name: "other" };
