@@ -126,31 +126,24 @@ export default class Writer {
                     });
                 }
 
-                let categoryChapters: string[] = [];
-                if (category.subCategories.length === 0) {
-                    // Collect chapters for Quarto YAML
-                    categoryChapters = category
-                        .getModules()
-                        .map(
-                            (module) =>
-                                `chapters/${category.name}/${module.info.name}.qmd`,
-                        );
-                } else {
-                    // Collect chapters for Quarto YAML
-                    categoryChapters = category.subCategories.map(
-                        (subCategory) =>
-                            `chapters/${category.name}/${subCategory.name}/index.qmd`,
+                // Collect chapters for Quarto YAML
+                const categoryChapters: string[] = category
+                    .getModules()
+                    .map(
+                        (module) =>
+                            `chapters/${category.name}/${module.info.name}.qmd`,
                     );
-                }
 
-                chapters.push({
-                    part: category.name,
-                    chapters: categoryChapters,
-                });
+                // Only add category if it has modules, this is to avoid empty categories
+                categoryChapters.length > 0 &&
+                    chapters.push({
+                        part: category.name,
+                        chapters: categoryChapters,
+                    });
             }
 
             // Generate Quarto YAML
-            this.generateQuartoYAML(chapters.flat());
+            this.generateQuartoYAML(chapters);
             return this;
         } catch (error) {
             logger.error("Error preparing directory for docs");
@@ -197,7 +190,6 @@ export default class Writer {
                 fileContent += "\n\n";
 
                 // Add construct heading
-                // fileContent += "---  \n";
                 fileContent += `## ${doc.constructInfo.name} \n`;
                 fileContent += `\`[${doc.constructInfo.type}]\`\n \n`;
 
