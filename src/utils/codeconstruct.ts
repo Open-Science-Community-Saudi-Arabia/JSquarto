@@ -34,8 +34,13 @@ export class ConstructIdentifier {
         match = line.match(/const\s+(\w+)\s*=\s*\(.*\)\s*=>/);
         if (match) {
             return match[1] || null;
-        }   
+        }
 
+        // Check for const something = function() {}
+        match = line.match(/const\s+(\w+)\s*=\s*function\s*\(/);
+        if (match) {
+            return match[1] || null;
+        }
         const functionRegex =
             /(async\s+)?function\s+(\w+)|const\s+(\w+)\s*=\s*async\s*\(.*\)\s*=>|\(([\s\S]*?)\)\s*=>|(\w+)\s*=\s*function\s*\(([\s\S]*?)\)|(\w+)\s*=\s*\(([\s\S]*?)\)\s*=>|\w+\s*=\s*async\s*\(([\s\S]*?)\)\s*=>|\w+\s*=\s*function\s*[\s\S]*?\((([\s\S]*?))\)|\w+\s*=\s*\(([\s\S]*?)\)\s*=>/;
 
