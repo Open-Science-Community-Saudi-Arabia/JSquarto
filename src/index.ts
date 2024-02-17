@@ -37,11 +37,6 @@ function start() {
         description: "Global constructs",
     });
     const defaultCategory = new Category("Globals");
-    const defaultSubCategory = new SubCategory({
-        name: "default",
-        category: defaultCategory,
-    });
-    defaultCategory.subCategories.push(defaultSubCategory);
     categories.set(defaultCategory.name, defaultCategory);
 
     // Process each file
@@ -116,9 +111,7 @@ function start() {
             moduleDocs.forEach((doc) => fileModule!.addDoc(doc));
             const category =
                 fileModule.info.category?.name || defaultCategory.name;
-            const subCategory =
-                fileModule.info.category?.subCategory ||
-                defaultSubCategory.name;
+            const subCategory = fileModule.info.category?.subCategory;
             const categoryToAddTo = categories.get(category);
             const subCategoryToAddTo = categoryToAddTo?.subCategories.find(
                 (subCat) => subCat.name === subCategory,
@@ -155,7 +148,7 @@ function start() {
                                 module.info.name === fileModule!.info.name,
                         )
                 ) {
-                    defaultSubCategory.addModule(fileModule!);
+                    defaultCategory.addModule(fileModule!);
                 }
             }
 
@@ -171,6 +164,11 @@ function start() {
 
         defaultCategory.addModule(defaultFileModule);
     }
+
+    console.log({
+        defaultDocs: defaultFileModule.getDocs(),
+        defaultCategory: defaultCategory.name,
+    });
 
     // Generate documentation directory and files
     new Writer()
