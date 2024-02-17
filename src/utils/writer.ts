@@ -126,13 +126,23 @@ export default class Writer {
                     });
                 }
 
-                // Collect chapters for Quarto YAML
-                const categoryChapters = category.subCategories.map(
-                    (subCategory) =>
-                        `chapters/${category.name}/${subCategory.name}/index.qmd`,
-                );
+                let categoryChapters: string[] = [];
+                if (category.subCategories.length === 0) {
+                    // Collect chapters for Quarto YAML
+                    categoryChapters = category
+                        .getModules()
+                        .map(
+                            (module) =>
+                                `chapters/${category.name}/${module.info.name}.qmd`,
+                        );
+                } else {
+                    // Collect chapters for Quarto YAML
+                    categoryChapters = category.subCategories.map(
+                        (subCategory) =>
+                            `chapters/${category.name}/${subCategory.name}/index.qmd`,
+                    );
+                }
 
-                // Group chapters under category
                 chapters.push({
                     part: category.name,
                     chapters: categoryChapters,
