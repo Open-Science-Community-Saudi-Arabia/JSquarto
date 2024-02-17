@@ -211,6 +211,15 @@ export default class Writer {
                     fileContent += "\n";
                 }
 
+                if (doc.blockInfo.examples) {
+                    // Add examples to qmd file
+                    fileContent += `**Examples:**\n\n`;
+
+                    for (const example of doc.blockInfo.examples) {
+                        fileContent += `\`\`\`javascript\n${example}\n\`\`\`\n\n`;
+                    }
+                }
+
                 // Add returns to qmd file
                 if (doc.blockInfo.returns.length > 0) {
                     fileContent += `**Returns:**\n\n`;

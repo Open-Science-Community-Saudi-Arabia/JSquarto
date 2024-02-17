@@ -30,6 +30,7 @@ export interface OtherBlockInfo {
     description: string;
     params: Params[];
     link: string;
+    examples?: string[];
     returns: ReturnedValue[];
     thrownErrors: ThrownError[];
 }
@@ -58,4 +59,3 @@ export type ConstructType =
     | "variable"
     | "other"
     | "module";
-

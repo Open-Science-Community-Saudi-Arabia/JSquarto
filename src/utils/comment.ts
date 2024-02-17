@@ -44,6 +44,7 @@ export class CommentsUtil {
             description: description,
             params: Parser.getParams(comments),
             link: Parser.getLink(comments),
+            examples: Parser.getExamples(comments),
             returns: Parser.getReturnsValues(comments),
             thrownErrors: Parser.getThrownErrors(comments),
         };

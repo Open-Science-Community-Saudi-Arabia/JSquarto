@@ -1,6 +1,6 @@
 /**
- *  This file is responsible for parsing comments in code files. 
- * It extracts various pieces of information such as 
+ *  This file is responsible for parsing comments in code files.
+ * It extracts various pieces of information such as
  * description, category, subcategory, link, parameters, return values,
  * and thrown errors from comments using regular expressions.
  */
@@ -14,7 +14,7 @@ export default class Parser {
         //  The description should match all the text after @description until the next @ that is a jsdoc tag
         const descriptionRegex = /@description\s+([\s\S]*?)(?=@\w|$)/g;
         const descriptionMatch = descriptionRegex.exec(comment);
-        return descriptionMatch ? descriptionMatch[1] : '';
+        return descriptionMatch ? descriptionMatch[1] : "";
     }
 
     // Get the category from the comments block - Basically the text after @category
@@ -22,21 +22,21 @@ export default class Parser {
         // Search through the comments block to find @category then return the category
         const categoryRegex = /@category\s+(.*)/g;
         const categoryMatches = categoryRegex.exec(comment);
-        return categoryMatches ? categoryMatches[1] : '';
+        return categoryMatches ? categoryMatches[1] : "";
     }
 
     // Get the subcategory from the comments block - Basically the text after @subcategory
     static getSubCategory(comment: string): string {
         const subCategoryRegex = /@subcategory\s+(.*)/g;
         const subCategoryMatches = subCategoryRegex.exec(comment);
-        return subCategoryMatches ? subCategoryMatches[1] : '';
+        return subCategoryMatches ? subCategoryMatches[1] : "";
     }
 
     // Get the link from the comments block - Basically the text after @see
     static getLink(comment: string): string {
         const linkRegex = /@see\s+(.*)/g;
         const linkMatches = linkRegex.exec(comment);
-        return linkMatches ? linkMatches[1] : '';
+        return linkMatches ? linkMatches[1] : "";
     }
 
     // Get all params from the comments block
@@ -61,7 +61,7 @@ export default class Parser {
                 type,
                 description,
             });
-        };
+        }
 
         return params;
     }
@@ -70,7 +70,7 @@ export default class Parser {
     static getModuleName(comment: string): string {
         const moduleRegex = /@module\s+(.*)/g;
         const moduleMatch = moduleRegex.exec(comment);
-        return moduleMatch ? moduleMatch[1] : '';
+        return moduleMatch ? moduleMatch[1] : "";
     }
 
     // Get the returns from the comments block - Basically the text after @returns
@@ -95,9 +95,22 @@ export default class Parser {
                 type,
                 description,
             });
-        };
+        }
 
         return returns;
+    }
+
+    static getExamples(comment: string): string[] {
+        const exampleRegex = /@example\s+([\s\S]*?)(?=@\w|$)/g;
+
+        const exampleMatches = [];
+        let match;
+        while ((match = exampleRegex.exec(comment)) !== null) {
+            if (match[1]) {
+                exampleMatches.push(match[1].trim());
+            }
+        }
+        return exampleMatches;
     }
 
     // Get the thrown errors from the comments block - Basically the text after @throws
@@ -122,9 +135,8 @@ export default class Parser {
                 type,
                 description,
             });
-        };
+        }
 
         return thrownErrors;
     }
-
 }
