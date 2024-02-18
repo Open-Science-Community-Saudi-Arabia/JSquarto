@@ -139,4 +139,40 @@ export default class Parser {
 
         return thrownErrors;
     }
+
+    static getReferences(comment: string): { text: string; type: string }[] {
+        const referencesRegex = /@see\s+(.*)/g;
+        const referencesMatches = [];
+        let match;
+
+        while ((match = referencesRegex.exec(comment)) !== null) {
+            if (match[1]) {
+                const referenceText = match[1].trim();
+
+                let type;
+                if (
+                    /^@see\s+module:[^/#]+\.[^/#]+\/[^/#]+~[^/#]+$/g.test(
+                        referenceText,
+                    )
+                ) {
+                    type = "externalModuleConstruct";
+                } else if (
+                    /^@see\s+module:[^/#]+\.[^/#]+\/[^/#]+$/g.test(
+                        referenceText,
+                    )
+                ) {
+                    type = "externalModule";
+                } else if (/^@see\s+[^/#]+\#[^/#]+$/g.test(referenceText)) {
+                    type = "localModuleConstruct";
+                } else if (/^@see\s+[^/#]+$/g.test(referenceText)) {
+                    type = "localModule";
+                } else {
+                    type = "unknown";
+                }
+
+                referencesMatches.push({ text: referenceText, type });
+            }
+        }
+        return referencesMatches;
+    }
 }
