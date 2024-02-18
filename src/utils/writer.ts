@@ -60,6 +60,41 @@ export default class Writer {
         }
     }
 
+    public getDirectoryForDocs(categories: Category[]) {
+        const result: {
+            [key: string]: {
+                path: string;
+                modules: { path: string; name: string }[];
+            };
+        };
+
+        for (const category of categories) {
+            const categoryFolderPath = path.join(
+                folderPathToWrite,
+                category.name,
+            );
+
+            for (const subCategory of category.subCategories) {
+                const subCategoryFolderPath = path.join(
+                    categoryFolderPath,
+                    subCategory.name,
+                );
+
+                result[subCategory.name] = {
+                    path: subCategoryFolderPath,
+                    modules: subCategory.getModules().map((module) => {
+                        return {
+                            path: subCategoryFolderPath,
+                            name: module.info.name,
+                        };
+                    }),
+                };
+            }
+        }
+
+        return result
+    }
+
     // Create directory structure for documentation
     public prepareDirectoryForDocs(categories: Category[]) {
         const folderPathToWrite = path.join(

@@ -5,6 +5,7 @@ import SourceFile from "./utils/file";
 import Writer from "./utils/writer";
 import { Category, Module, ModuleDoc, SubCategory } from "./utils/components";
 import logger from "./utils/logger";
+import Parser from "./utils/parser";
 
 function getJSFilesFromDirectory(
     directory: string,
@@ -35,6 +36,7 @@ function start() {
     const defaultFileModule = new Module({
         name: "Globals",
         description: "Global constructs",
+        references: [],
     });
     const defaultCategory = new Category("Globals");
     categories.set(defaultCategory.name, defaultCategory);
@@ -73,6 +75,7 @@ function start() {
                     name: _module.name,
                     description: _module.description,
                     category: _module.category,
+                    references: [],
                 });
                 modules.set(_module.name, newModule);
             }
@@ -87,15 +90,16 @@ function start() {
             if (moduleCategory) {
                 let category = categories.get(moduleCategory.name);
 
+                // Create a new  category if it doesn't exist
                 if (!category) {
                     category = new Category(moduleCategory.name);
                     categories.set(moduleCategory.name, category);
                 }
 
+                // Create a new subcategory if it doesn't exist
                 let subCategory = category.subCategories.find(
                     (subCat) => subCat.name === moduleCategory.subCategory,
                 );
-
                 if (!subCategory) {
                     subCategory = new SubCategory({
                         name: moduleCategory.subCategory,
@@ -117,6 +121,7 @@ function start() {
                 (subCat) => subCat.name === subCategory,
             );
 
+            // Add module to subcategory if it exists
             if (subCategoryToAddTo) {
                 if (
                     !subCategoryToAddTo
@@ -164,11 +169,6 @@ function start() {
 
         defaultCategory.addModule(defaultFileModule);
     }
-
-    console.log({
-        defaultDocs: defaultFileModule.getDocs(),
-        defaultCategory: defaultCategory.name,
-    });
 
     // Generate documentation directory and files
     new Writer()
