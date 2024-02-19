@@ -319,43 +319,43 @@ export default class Writer {
                         // If module name, get the original file path from modules
                         if (reference.type === "externalModule") {
                             const module = this.modules.get(reference.moduleName.toLowerCase());
-                            console.log({ module })
                             if (module) {
-                                fileContent += `[${reference.text}](${module.destinationFilePath})\n\n`;
+                                const relativePath = path.relative(destinationPath, module.destinationFilePath);
+                                fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')})\n\n`;
                             }
                         }
 
                         // If module name and construct name, get the original file path from modules
                         if (reference.type === "externalModuleAndConstruct") {
                             const module = this.modules.get(reference.moduleName.toLowerCase());
-                            console.log({ module })
                             if (module) {
                                 const construct = module.getDocs().find((doc) => {
                                     return doc.constructInfo.name === reference.constructName;
                                 });
                                 if (construct) {
-                                    fileContent += `[${reference.text}](${module.destinationFilePath}#${construct.constructInfo.name})\n\n`;
+                                    const relativePath = path.relative(destinationPath, module.destinationFilePath);
+                                    fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')}#${construct.constructInfo.name})\n\n`;
                                 }
                             }
                         }
 
                         if (reference.type === "externalModuleWithSubcategory") {
                             const module = this.modules.get(reference.moduleName.toLowerCase());
-                            console.log({ module })
                             if (module) {
-                                fileContent += `[${reference.text}](${module.destinationFilePath})\n\n`;
+                                const relativePath = path.relative(destinationPath, module.destinationFilePath);
+                                fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')})\n\n`;
                             }
                         }
 
                         if (reference.type === "externalModuleWithSubcategoryAndConstruct") {
                             const module = this.modules.get(reference.moduleName.toLowerCase());
-                            console.log({ module })
                             if (module) {
                                 const construct = module.getDocs().find((doc) => {
                                     return doc.constructInfo.name === reference.constructName;
                                 });
                                 if (construct) {
-                                    fileContent += `[${reference.text}](${module.destinationFilePath}#${construct.constructInfo.name})\n\n`;
+                                    const relativePath = path.relative(destinationPath, module.destinationFilePath);
+                                    fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')}#${construct.constructInfo.name})\n\n`;
                                 }
                             }
                         }
