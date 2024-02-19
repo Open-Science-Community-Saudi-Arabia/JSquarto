@@ -271,7 +271,7 @@ export default class Writer {
                     fileContent += "\n";
                 }
 
-                if (doc.blockInfo.examples) {
+                if (doc.blockInfo.examples && doc.blockInfo.examples.length > 0) {
                     // Add examples to qmd file
                     fileContent += `**Examples:**\n\n`;
 
@@ -329,13 +329,8 @@ export default class Writer {
                         if (reference.type === "externalModuleAndConstruct") {
                             const module = this.modules.get(reference.moduleName.toLowerCase());
                             if (module) {
-                                const construct = module.getDocs().find((doc) => {
-                                    return doc.constructInfo.name === reference.constructName;
-                                });
-                                if (construct) {
-                                    const relativePath = path.relative(destinationPath, module.destinationFilePath);
-                                    fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')}#${construct.constructInfo.name})\n\n`;
-                                }
+                                const relativePath = path.relative(destinationPath, module.destinationFilePath);
+                                fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')}#${reference.constructName.toLowerCase()})\n\n`;
                             }
                         }
 
@@ -350,13 +345,8 @@ export default class Writer {
                         if (reference.type === "externalModuleWithSubcategoryAndConstruct") {
                             const module = this.modules.get(reference.moduleName.toLowerCase());
                             if (module) {
-                                const construct = module.getDocs().find((doc) => {
-                                    return doc.constructInfo.name === reference.constructName;
-                                });
-                                if (construct) {
-                                    const relativePath = path.relative(destinationPath, module.destinationFilePath);
-                                    fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')}#${construct.constructInfo.name})\n\n`;
-                                }
+                                const relativePath = path.relative(destinationPath, module.destinationFilePath);
+                                fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')}#${reference.constructName.toLowerCase()})\n\n`;
                             }
                         }
 
@@ -383,6 +373,8 @@ export default class Writer {
     // Write documentation for each category to file
     public writeDocsFromCategoriesToFile() {
         const categories = Array.from(this.categories.values());
+
+        console.log({ moduleNames: Array.from(this.modules.keys()) })
 
         for (const category of categories) {
             const categoryFolderPath =
