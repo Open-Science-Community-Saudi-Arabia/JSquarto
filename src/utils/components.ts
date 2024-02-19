@@ -29,13 +29,32 @@ export class ModuleDoc {
     }
 }
 
+export function recursivelyConvertAllStringValuesInObjectToLowerCase(
+    obj: Record<string, any>,
+) {
+    const newObj = { ...obj };
+    for (const key in newObj) {
+        if (typeof newObj[key] === "object") {
+            newObj[key] = recursivelyConvertAllStringValuesInObjectToLowerCase(
+                newObj[key],
+            );
+        } else if (typeof newObj[key] === "string") {
+            newObj[key] = newObj[key].toLowerCase();
+        }
+    }
+
+    return newObj;
+}
+
 export class Module {
     private documents: ModuleDoc[] = [];
     private id: string = uuid();
     readonly info: ModuleBlockInfo = {} as ModuleBlockInfo;
+    destinationFilePath: string = "";
 
     constructor(info: ModuleBlockInfo) {
-        this.info = info;
+        // Convert the module name to lowercase
+        this.info = recursivelyConvertAllStringValuesInObjectToLowerCase(info) as typeof info
     }
 
     public addDoc(document: ModuleDoc) {
@@ -45,6 +64,10 @@ export class Module {
     public getDocs() {
         return this.documents;
     }
+
+    public setDestinationFilePath(destinationFilePath: string) {
+        this.destinationFilePath = destinationFilePath;
+    }
 }
 
 export class SubCategory {
@@ -53,7 +76,7 @@ export class SubCategory {
     private category?: Category;
 
     constructor({ name, category }: { name: string; category?: Category }) {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.category = category;
     }
 
@@ -76,7 +99,7 @@ export class Category {
     private directModules: Module[] = [];
 
     constructor(name: string) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public addSubCategory(subCategory: SubCategory) {

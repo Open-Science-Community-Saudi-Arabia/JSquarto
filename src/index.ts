@@ -3,8 +3,9 @@ import { Doc, ModuleBlockInfo } from "./interfaces";
 import { CommentsUtil } from "./utils/comment";
 import SourceFile from "./utils/file";
 import Writer from "./utils/writer";
-import { Category, Module, ModuleDoc, SubCategory } from "./utils/components";
+import { Category, Module, ModuleDoc, SubCategory, recursivelyConvertAllStringValuesInObjectToLowerCase } from "./utils/components";
 import logger from "./utils/logger";
+import Parser from "./utils/parser";
 
 function getJSFilesFromDirectory(
     directory: string,
@@ -33,16 +34,11 @@ function start() {
 
     // Create default module, category, and subcategory
     const defaultFileModule = new Module({
-        name: "default",
-        description: "Default module",
-        link: "default",
+        name: "Globals",
+        description: "Global constructs",
+        references: [],
     });
-    const defaultCategory = new Category("default");
-    const defaultSubCategory = new SubCategory({
-        name: "default",
-        category: defaultCategory,
-    });
-    defaultCategory.subCategories.push(defaultSubCategory);
+    const defaultCategory = new Category("Globals");
     categories.set(defaultCategory.name, defaultCategory);
 
     // Process each file
@@ -79,8 +75,9 @@ function start() {
                     name: _module.name,
                     description: _module.description,
                     category: _module.category,
+                    references: [],
                 });
-                modules.set(_module.name, newModule);
+                modules.set(newModule.info.name, newModule);
             }
 
             // Track the first module encountered in the file
@@ -89,19 +86,20 @@ function start() {
             }
 
             // Create category and subcategory if they exist in the module information
-            const moduleCategory = _module.category;
+            const moduleCategory = _module.category ? recursivelyConvertAllStringValuesInObjectToLowerCase(_module.category) as typeof _module.category : undefined;
             if (moduleCategory) {
                 let category = categories.get(moduleCategory.name);
 
+                // Create a new  category if it doesn't exist
                 if (!category) {
                     category = new Category(moduleCategory.name);
-                    categories.set(moduleCategory.name, category);
+                    categories.set(category.name, category);
                 }
 
+                // Create a new subcategory if it doesn't exist
                 let subCategory = category.subCategories.find(
                     (subCat) => subCat.name === moduleCategory.subCategory,
                 );
-
                 if (!subCategory) {
                     subCategory = new SubCategory({
                         name: moduleCategory.subCategory,
@@ -117,14 +115,13 @@ function start() {
             moduleDocs.forEach((doc) => fileModule!.addDoc(doc));
             const category =
                 fileModule.info.category?.name || defaultCategory.name;
-            const subCategory =
-                fileModule.info.category?.subCategory ||
-                defaultSubCategory.name;
+            const subCategory = fileModule.info.category?.subCategory;
             const categoryToAddTo = categories.get(category);
             const subCategoryToAddTo = categoryToAddTo?.subCategories.find(
                 (subCat) => subCat.name === subCategory,
             );
 
+            // Add module to subcategory if it exists
             if (subCategoryToAddTo) {
                 if (
                     !subCategoryToAddTo
@@ -156,7 +153,7 @@ function start() {
                                 module.info.name === fileModule!.info.name,
                         )
                 ) {
-                    defaultSubCategory.addModule(fileModule!);
+                    defaultCategory.addModule(fileModule!);
                 }
             }
 
@@ -174,9 +171,9 @@ function start() {
     }
 
     // Generate documentation directory and files
-    new Writer()
-        .prepareDirectoryForDocs(Array.from(categories.values()))
-        .writeDocsFromCategoriesToFile(Array.from(categories.values()));
+    new Writer(modules, categories)
+        .prepareDirectoryForDocs()
+        .writeDocsFromCategoriesToFile()
 
     logger.info("Documentation generation complete");
 
