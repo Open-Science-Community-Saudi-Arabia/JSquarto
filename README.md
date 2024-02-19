@@ -1,16 +1,13 @@
 # JSquarto
-Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc
+Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc. It is inspired by [Quartodoc](https://github.com/machow/quartodoc).
 
-
-
-### Testing Your Tool Locally
+### Installation
 
 #### Prerequisites
 Before testing the tool locally, ensure you have the following prerequisites installed on your system:
 - Node.js and npm (Node Package Manager)
 - Git (optional, if cloning the repository)
 
-#### Installation
 To test the tool locally, follow these steps:
 
 1. Clone the repository:
