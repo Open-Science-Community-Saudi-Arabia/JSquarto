@@ -291,6 +291,35 @@ export default class Writer {
                     fileContent += "\n";
                 }
 
+                if (doc.blockInfo.references.length > 0) {
+                    // Add hyperlinks to qmd file
+                    fileContent += `**References:**\n\n`;
+
+                    // console.log({ references: doc.blockInfo.references })
+                    for (const reference of doc.blockInfo.references) {
+                        if (reference.type === "link") {
+                            fileContent += `[${reference.text}](${reference.url})\n\n`;
+                        }
+
+                        if (reference.type === "localModule") {
+                            fileContent += `[${reference.text}](../../${reference.moduleName}.qmd)\n\n`;
+                        }
+
+                        if (reference.type === "externalModule") {
+                            fileContent += `[${reference.text}](${reference.moduleName}.qmd})\n\n`;
+                        }
+
+                        if (reference.type === "externalModuleConstruct") {
+                            fileContent += `[${reference.text}](${reference.moduleName}.qmd#${reference.constructName})\n\n`;
+                        }
+
+                        if (reference.type === "localModuleConstruct") {
+                            fileContent += `[${reference.text}](../../${reference.moduleName}.qmd#${reference.constructName})\n\n`;
+                        }
+
+                        fileContent += "\n";
+                    }
+                }
                 // Add link to qmd file
                 if (doc.blockInfo.link) {
                     fileContent += `**See also:** [Reference](${doc.blockInfo.link})\n\n`;

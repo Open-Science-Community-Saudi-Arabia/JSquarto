@@ -148,9 +148,11 @@ export default class Parser {
         const localModuleRegex = /{?([\w.]+)}?/; // @see {@link module:subcategory}
         const externalModuleRegex = /{?module:([\w.]+)}?/; // @see {@link module:subcategory/module_name}
         const externalModuleConstructRegex = /module:([\w.]+)~([\w.]+)/; // @see {@link module:module_name~construct_name}
+        const externaModuleWithSubcategoryRegex = /{?module:([\w.]+)\/([\w.]+)}?/; // @see {@link module:sub_category/module_name   }
+        const externalModuleWithSubcategoryConstructRegex = /{?module:([\w.]+)\/([\w.]+)~([\w.]+)}?/; // @see {@link module:sub_category/module_name~construct_name}
         const httpLinkRegex = /https?:\/\/\S+/; // @see https://example.com
         const localModuleConstructRegex = /{?([\w.]+)\/([\w.]+)#([\w.]+)}?/; // @see {@link subcategory/module_name#construct_name}
-        
+
         while ((match = referencesRegex.exec(comment)) !== null) {
             if (match[2]) {
                 let referenceText = match[2].trim();
@@ -166,8 +168,34 @@ export default class Parser {
                     referencesMatches.push({
                         text: httpLinkMatch[0] as ReferenceTextType['link'],
                         url: httpLinkMatch[0],
+                        type: "link",
                     });
                     continue
+                }
+
+                const externalModuleWithSubcategoryConstructMatch = externalModuleWithSubcategoryConstructRegex.exec(referenceText);
+                if (externalModuleWithSubcategoryConstructMatch) {
+                    referencesMatches.push({
+                        text: externalModuleWithSubcategoryConstructMatch[0] as ReferenceTextType['externalModuleConstruct'],
+                        subCategoryName: externalModuleWithSubcategoryConstructMatch[1],
+                        moduleName: externalModuleWithSubcategoryConstructMatch[2],
+                        constructName: externalModuleWithSubcategoryConstructMatch[3],
+                        type: "externalModuleWithSubcategoryConstruct",
+                        categoryName: externalModuleWithSubcategoryConstructMatch[2],
+                    });
+                    continue;
+                }
+
+                const externaModuleWithSubcategoryMatch = externaModuleWithSubcategoryRegex.exec(referenceText);
+                if (externaModuleWithSubcategoryMatch) {
+                    referencesMatches.push({
+                        text: externaModuleWithSubcategoryMatch[0] as ReferenceTextType['externalModule'],
+                        subCategoryName: externaModuleWithSubcategoryMatch[1],
+                        moduleName: externaModuleWithSubcategoryMatch[2],
+                        type: "externalModuleWithSubcategory",
+                        categoryName: externaModuleWithSubcategoryMatch[2],
+                    });
+                    continue;
                 }
 
                 const externamModuleContructMatch = externalModuleConstructRegex.exec(referenceText);
@@ -176,9 +204,13 @@ export default class Parser {
                         text: externamModuleContructMatch[0] as ReferenceTextType['externalModuleConstruct'],
                         moduleName: externamModuleContructMatch[1],
                         constructName: externamModuleContructMatch[2],
+                        type: "externalModuleConstruct",
+                        categoryName: externamModuleContructMatch[1],
+                        subCategoryName: externamModuleContructMatch[2],
                     });
                     continue;
                 }
+
 
                 const localModuleConstructMatch = localModuleConstructRegex.exec(referenceText);
                 if (localModuleConstructMatch) {
@@ -186,6 +218,9 @@ export default class Parser {
                         text: localModuleConstructMatch[0] as ReferenceTextType['localModuleConstruct'],
                         moduleName: localModuleConstructMatch[1],
                         constructName: localModuleConstructMatch[2],
+                        type: "localModuleConstruct",
+                        categoryName: localModuleConstructMatch[2],
+                        subCategoryName: localModuleConstructMatch[3],
                     });
                 }
 
@@ -194,6 +229,9 @@ export default class Parser {
                     referencesMatches.push({
                         text: externalModuleMatch[0] as ReferenceTextType['externalModule'],
                         moduleName: externalModuleMatch[1],
+                        type: "externalModule",
+                        categoryName: externalModuleMatch[1],
+                        subCategoryName: externalModuleMatch[2],
                     });
                     continue;
                 }
@@ -204,11 +242,16 @@ export default class Parser {
                     referencesMatches.push({
                         text: localModuleMatch[0] as ReferenceTextType["localModule"],
                         moduleName: localModuleMatch[1],
+                        type: "localModule",
+                        categoryName: localModuleMatch[1],
+                        subCategoryName: localModuleMatch[2],
                     });
                     continue;
                 }
             }
         }
+
+        console.log({ referencesMatches })
 
         return referencesMatches;
     }
