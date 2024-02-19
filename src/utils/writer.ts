@@ -66,7 +66,15 @@ export default class Writer {
                 path: string;
                 modules: { path: string; name: string }[];
             };
-        };
+        } = {}
+
+        const folderPathToWrite = path.join(
+            __dirname,
+            "..",
+            "..",
+            "docs",
+            "chapters",
+        );
 
         for (const category of categories) {
             const categoryFolderPath = path.join(

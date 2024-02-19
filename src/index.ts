@@ -51,6 +51,9 @@ function start() {
 
         // Process comments in the file
         for (const comment of comments) {
+            console.log({ 
+                references: comment.getOtherBlockInfo().references,
+            })
             if (comment.blockType !== "module") {
                 // If comment is not module-related, add it to moduleDocs
                 moduleDocs.push(

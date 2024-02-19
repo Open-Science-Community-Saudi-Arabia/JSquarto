@@ -37,24 +37,40 @@ export type ReferenceText =
     | ReferenceTextToLocalModuleConstruct
     | ReferenceTextToExternalModule;
 
+
+export interface ReferenceTextType {
+    localModule: ReferenceTextToLocalModule;
+    externalModule: ReferenceTextToExternalModule;
+    externalModuleConstruct: ReferenceTextToExternalModuleConstruct;
+    localModuleConstruct: ReferenceTextToLocalModuleConstruct;
+    link: string
+}
 export interface Reference {
     localModule: {
-        text: ReferenceTextToLocalModule;
-        type: "localModule";
+        text: ReferenceTextType["localModule"];
+        moduleName: string;
     };
     externalModule: {
-        text: ReferenceTextToExternalModule;
-        type: "externalModule";
+        text: ReferenceTextType["externalModule"];
+        moduleName: string;
     };
     externalModuleConstruct: {
-        text: ReferenceTextToExternalModuleConstruct;
-        type: "externalModuleConstruct";
+        text: ReferenceTextType["externalModuleConstruct"];
+        moduleName: string;
+        constructName: string;
     };
     localModuleConstruct: {
-        text: ReferenceTextToLocalModuleConstruct;
-        type: "localModuleConstruct";
+        text: ReferenceTextType["localModuleConstruct"];
+        moduleName: string;
+        constructName: string;
     };
+    link: {
+        text: string;
+        url: string;
+    }
 }
+
+export type ReferenceType = keyof Reference;
 
 export type ValueOf<T> = T[keyof T];
 

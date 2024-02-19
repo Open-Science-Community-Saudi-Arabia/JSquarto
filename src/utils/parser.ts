@@ -5,7 +5,7 @@
  * and thrown errors from comments using regular expressions.
  */
 
-import { Params, ReturnedValue } from "../interfaces";
+import { Params, Reference, ReferenceText, ReferenceTextType, ReferenceType, ReturnedValue } from "../interfaces";
 
 export default class Parser {
     // Get the description from the comments block - Basically the text after @description
@@ -140,39 +140,78 @@ export default class Parser {
         return thrownErrors;
     }
 
-    static getReferences(comment: string): { text: string; type: string }[] {
-        const referencesRegex = /@see\s+(.*)/g;
-        const referencesMatches = [];
+    static getReferences(comment: string): Reference[ReferenceType][] {
+        const referencesRegex = /@see\s+((?:{@link\s+)?((?:[^{}]|{(?!\/?@link))+(?:})?))/g;
+        const referencesMatches: Reference[ReferenceType][] = [];
         let match;
 
+        const localModuleRegex = /{?([\w.]+)}?/; // @see {@link module:subcategory}
+        const externalModuleRegex = /{?module:([\w.]+)}?/; // @see {@link module:subcategory/module_name}
+        const externalModuleConstructRegex = /module:([\w.]+)~([\w.]+)/; // @see {@link module:module_name~construct_name}
+        const httpLinkRegex = /https?:\/\/\S+/; // @see https://example.com
+        const localModuleConstructRegex = /{?([\w.]+)\/([\w.]+)#([\w.]+)}?/; // @see {@link subcategory/module_name#construct_name}
+        
         while ((match = referencesRegex.exec(comment)) !== null) {
-            if (match[1]) {
-                const referenceText = match[1].trim();
+            if (match[2]) {
+                let referenceText = match[2].trim();
 
-                let type;
-                if (
-                    /^@see\s+module:[^/#]+\.[^/#]+\/[^/#]+~[^/#]+$/g.test(
-                        referenceText,
-                    )
-                ) {
-                    type = "externalModuleConstruct";
-                } else if (
-                    /^@see\s+module:[^/#]+\.[^/#]+\/[^/#]+$/g.test(
-                        referenceText,
-                    )
-                ) {
-                    type = "externalModule";
-                } else if (/^@see\s+[^/#]+\#[^/#]+$/g.test(referenceText)) {
-                    type = "localModuleConstruct";
-                } else if (/^@see\s+[^/#]+$/g.test(referenceText)) {
-                    type = "localModule";
-                } else {
-                    type = "unknown";
+                // Remove everything after the last space in the reference text. This may be cases where JSDoc tags are refering to the variable to apply the custom type
+                const lastSpaceIndex = referenceText.lastIndexOf(' ');
+                if (lastSpaceIndex !== -1) {
+                    referenceText = referenceText.substring(0, lastSpaceIndex);
                 }
 
-                referencesMatches.push({ text: referenceText, type });
+                const httpLinkMatch = httpLinkRegex.exec(referenceText);
+                if (httpLinkMatch) {
+                    referencesMatches.push({
+                        text: httpLinkMatch[0] as ReferenceTextType['link'],
+                        url: httpLinkMatch[0],
+                    });
+                    continue
+                }
+
+                const externamModuleContructMatch = externalModuleConstructRegex.exec(referenceText);
+                if (externamModuleContructMatch) {
+                    referencesMatches.push({
+                        text: externamModuleContructMatch[0] as ReferenceTextType['externalModuleConstruct'],
+                        moduleName: externamModuleContructMatch[1],
+                        constructName: externamModuleContructMatch[2],
+                    });
+                    continue;
+                }
+
+                const localModuleConstructMatch = localModuleConstructRegex.exec(referenceText);
+                if (localModuleConstructMatch) {
+                    referencesMatches.push({
+                        text: localModuleConstructMatch[0] as ReferenceTextType['localModuleConstruct'],
+                        moduleName: localModuleConstructMatch[1],
+                        constructName: localModuleConstructMatch[2],
+                    });
+                }
+
+                const externalModuleMatch = externalModuleRegex.exec(referenceText);
+                if (externalModuleMatch) {
+                    referencesMatches.push({
+                        text: externalModuleMatch[0] as ReferenceTextType['externalModule'],
+                        moduleName: externalModuleMatch[1],
+                    });
+                    continue;
+                }
+
+
+                const localModuleMatch = localModuleRegex.exec(referenceText);
+                if (localModuleMatch) {
+                    referencesMatches.push({
+                        text: localModuleMatch[0] as ReferenceTextType["localModule"],
+                        moduleName: localModuleMatch[1],
+                    });
+                    continue;
+                }
             }
         }
+
         return referencesMatches;
     }
+
+
 }

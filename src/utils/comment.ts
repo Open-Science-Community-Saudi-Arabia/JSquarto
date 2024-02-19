@@ -33,6 +33,7 @@ export class CommentsUtil {
                 subCategory: subCategory,
             },
             link: link,
+            references: Parser.getReferences(comments),
         };
     }
 
@@ -47,6 +48,7 @@ export class CommentsUtil {
             examples: Parser.getExamples(comments),
             returns: Parser.getReturnsValues(comments),
             thrownErrors: Parser.getThrownErrors(comments),
+            references: Parser.getReferences(comments),
         };
     }
 
