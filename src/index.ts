@@ -3,7 +3,7 @@ import { Doc, ModuleBlockInfo } from "./interfaces";
 import { CommentsUtil } from "./utils/comment";
 import SourceFile from "./utils/file";
 import Writer from "./utils/writer";
-import { Category, Module, ModuleDoc, SubCategory } from "./utils/components";
+import { Category, Module, ModuleDoc, SubCategory, recursivelyConvertAllStringValuesInObjectToLowerCase } from "./utils/components";
 import logger from "./utils/logger";
 import Parser from "./utils/parser";
 
@@ -51,9 +51,6 @@ function start() {
 
         // Process comments in the file
         for (const comment of comments) {
-            // console.log({ 
-            //     references: comment.getOtherBlockInfo().references,
-            // })
             if (comment.blockType !== "module") {
                 // If comment is not module-related, add it to moduleDocs
                 moduleDocs.push(
@@ -80,7 +77,7 @@ function start() {
                     category: _module.category,
                     references: [],
                 });
-                modules.set(_module.name, newModule);
+                modules.set(newModule.info.name, newModule);
             }
 
             // Track the first module encountered in the file
@@ -89,14 +86,14 @@ function start() {
             }
 
             // Create category and subcategory if they exist in the module information
-            const moduleCategory = _module.category;
+            const moduleCategory = _module.category ? recursivelyConvertAllStringValuesInObjectToLowerCase(_module.category) as typeof _module.category : undefined;
             if (moduleCategory) {
                 let category = categories.get(moduleCategory.name);
 
                 // Create a new  category if it doesn't exist
                 if (!category) {
                     category = new Category(moduleCategory.name);
-                    categories.set(moduleCategory.name, category);
+                    categories.set(category.name, category);
                 }
 
                 // Create a new subcategory if it doesn't exist
@@ -174,9 +171,9 @@ function start() {
     }
 
     // Generate documentation directory and files
-    new Writer()
-        .prepareDirectoryForDocs(Array.from(categories.values()))
-        .writeDocsFromCategoriesToFile(Array.from(categories.values()));
+    new Writer(modules, categories)
+        .prepareDirectoryForDocs()
+        .writeDocsFromCategoriesToFile()
 
     logger.info("Documentation generation complete");
 

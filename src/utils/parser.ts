@@ -251,7 +251,6 @@ export default class Parser {
             }
         }
 
-        console.log({ referencesMatches })
 
         return referencesMatches;
     }
