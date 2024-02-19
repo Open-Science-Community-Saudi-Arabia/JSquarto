@@ -176,11 +176,11 @@ export default class Parser {
                 const externalModuleWithSubcategoryConstructMatch = externalModuleWithSubcategoryConstructRegex.exec(referenceText);
                 if (externalModuleWithSubcategoryConstructMatch) {
                     referencesMatches.push({
-                        text: externalModuleWithSubcategoryConstructMatch[0] as ReferenceTextType['externalModuleConstruct'],
+                        text: externalModuleWithSubcategoryConstructMatch[0] as ReferenceTextType['externalModuleAndConstruct'],
                         subCategoryName: externalModuleWithSubcategoryConstructMatch[1],
                         moduleName: externalModuleWithSubcategoryConstructMatch[2],
                         constructName: externalModuleWithSubcategoryConstructMatch[3],
-                        type: "externalModuleWithSubcategoryConstruct",
+                        type: "externalModuleWithSubcategoryAndConstruct",
                         categoryName: externalModuleWithSubcategoryConstructMatch[2],
                     });
                     continue;
@@ -201,10 +201,10 @@ export default class Parser {
                 const externamModuleContructMatch = externalModuleConstructRegex.exec(referenceText);
                 if (externamModuleContructMatch) {
                     referencesMatches.push({
-                        text: externamModuleContructMatch[0] as ReferenceTextType['externalModuleConstruct'],
+                        text: externamModuleContructMatch[0] as ReferenceTextType['externalModuleAndConstruct'],
                         moduleName: externamModuleContructMatch[1],
                         constructName: externamModuleContructMatch[2],
-                        type: "externalModuleConstruct",
+                        type: "externalModuleAndConstruct",
                         categoryName: externamModuleContructMatch[1],
                         subCategoryName: externamModuleContructMatch[2],
                     });
@@ -215,10 +215,10 @@ export default class Parser {
                 const localModuleConstructMatch = localModuleConstructRegex.exec(referenceText);
                 if (localModuleConstructMatch) {
                     referencesMatches.push({
-                        text: localModuleConstructMatch[0] as ReferenceTextType['localModuleConstruct'],
+                        text: localModuleConstructMatch[0] as ReferenceTextType['localModuleAndConstruct'],
                         moduleName: localModuleConstructMatch[1],
                         constructName: localModuleConstructMatch[2],
-                        type: "localModuleConstruct",
+                        type: "localModuleAndConstruct",
                         categoryName: localModuleConstructMatch[2],
                         subCategoryName: localModuleConstructMatch[3],
                     });

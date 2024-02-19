@@ -309,11 +309,11 @@ export default class Writer {
                             fileContent += `[${reference.text}](${reference.moduleName}.qmd})\n\n`;
                         }
 
-                        if (reference.type === "externalModuleConstruct") {
+                        if (reference.type === "externalModuleAndConstruct") {
                             fileContent += `[${reference.text}](${reference.moduleName}.qmd#${reference.constructName})\n\n`;
                         }
 
-                        if (reference.type === "localModuleConstruct") {
+                        if (reference.type === "localModuleAndConstruct") {
                             fileContent += `[${reference.text}](../../${reference.moduleName}.qmd#${reference.constructName})\n\n`;
                         }
 

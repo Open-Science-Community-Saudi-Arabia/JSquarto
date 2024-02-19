@@ -35,6 +35,8 @@ export class Module {
     readonly info: ModuleBlockInfo = {} as ModuleBlockInfo;
 
     constructor(info: ModuleBlockInfo) {
+        // Convert the module name to lowercase
+        info.name = info.name.toLowerCase();
         this.info = info;
     }
 
@@ -53,7 +55,7 @@ export class SubCategory {
     private category?: Category;
 
     constructor({ name, category }: { name: string; category?: Category }) {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.category = category;
     }
 
@@ -76,7 +78,7 @@ export class Category {
     private directModules: Module[] = [];
 
     constructor(name: string) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public addSubCategory(subCategory: SubCategory) {

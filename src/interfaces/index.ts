@@ -41,9 +41,9 @@ export type ReferenceText =
 export interface ReferenceTextType {
     localModule: ReferenceTextToLocalModule;
     externalModule: ReferenceTextToExternalModule;
-    externalModuleConstruct: ReferenceTextToExternalModuleConstruct;
-    localModuleConstruct: ReferenceTextToLocalModuleConstruct;
-    externalModuleWithSubcategoryConstruct: ReferenceTextToExternalModuleConstruct;
+    externalModuleAndConstruct: ReferenceTextToExternalModuleConstruct;
+    localModuleAndConstruct: ReferenceTextToLocalModuleConstruct;
+    externalModuleWithSubcategoryAndConstruct: ReferenceTextToExternalModuleConstruct;
     externalModuleWithSubcategory: ReferenceTextToExternalModule;
     link: string
 }
@@ -62,25 +62,25 @@ export interface Reference {
         categoryName: string;
         subCategoryName: string;
     };
-    externalModuleConstruct: {
-        text: ReferenceTextType["externalModuleConstruct"];
-        type: "externalModuleConstruct"
+    externalModuleAndConstruct: {
+        text: ReferenceTextType["externalModuleAndConstruct"];
+        type: "externalModuleAndConstruct"
         moduleName: string;
         constructName: string;
         categoryName: string;
         subCategoryName: string;
     };
-    localModuleConstruct: {
-        text: ReferenceTextType["localModuleConstruct"];
-        type: "localModuleConstruct"
+    localModuleAndConstruct: {
+        text: ReferenceTextType["localModuleAndConstruct"];
+        type: "localModuleAndConstruct"
         moduleName: string;
         constructName: string;
         categoryName: string;
         subCategoryName: string;
     };
-    externalModuleWithSubcategoryConstruct: {
-        text: ReferenceTextType["externalModuleConstruct"];
-        type: "externalModuleWithSubcategoryConstruct"
+    externalModuleWithSubcategoryAndConstruct: {
+        text: ReferenceTextType["externalModuleAndConstruct"];
+        type: "externalModuleWithSubcategoryAndConstruct"
         moduleName: string;
         constructName: string;
         categoryName: string;
