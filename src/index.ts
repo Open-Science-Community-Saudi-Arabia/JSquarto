@@ -13,6 +13,18 @@ import {
 import logger from "./utils/logger";
 import Parser from "./utils/parser";
 
+/**
+ * Recursively searches for JavaScript files in a directory and its subdirectories.
+ *
+ * @description This function recursively traverses the specified directory and its subdirectories to find JavaScript files (.js).
+ * It starts by checking each item in the directory. If the item is a directory, it recursively calls itself
+ * to search for JavaScript files within that directory. If the item is a JavaScript file, it adds the file path
+ * to an array of found JavaScript files.
+ *
+ * @param directory The directory to search for JavaScript files.
+ * @param files An optional array to store the found JavaScript file paths (default is an empty array).
+ * @returns An array containing the paths of all found JavaScript files.
+ */
 function getJSFilesFromDirectory(
     directory: string,
     files: string[] = [],
@@ -20,9 +32,11 @@ function getJSFilesFromDirectory(
     const items = fs.readdirSync(directory);
     for (const item of items) {
         const itemPath = `${directory}/${item}`;
+        const allowedFileTypes = [".js", ".ts"];
+        const fileExtension = itemPath.substring(itemPath.lastIndexOf("."));
         if (fs.statSync(itemPath).isDirectory()) {
             getJSFilesFromDirectory(itemPath, files);
-        } else if (itemPath.endsWith(".js")) {
+        } else if (allowedFileTypes.includes(fileExtension)) {
             files.push(itemPath);
         }
     }
@@ -30,6 +44,22 @@ function getJSFilesFromDirectory(
 }
 
 // TODO: Refactor this function
+/**
+ * @description Starts the documentation generation process.
+ *
+ * This function initiates the documentation generation process by performing the following steps:
+ *
+ * 1. It searches for JavaScript files in the specified directory and its subdirectories.
+ * 2. It parses the comments from each JavaScript file using `CommentsUtil.getCommentsFromFile()`.
+ * 3. It processes the comments to extract module information and updates the module and category data structures accordingly.
+ * 4. If a default module is defined, it adds the module and its documentation to the appropriate category or the default category.
+ * 5. It generates the documentation directory and files using the `Writer` utility.
+ * 6. Finally, it logs a message indicating that the documentation generation process is complete.
+ *
+ * This function serves as the entry point for generating documentation for JavaScript files.
+ *
+ * @returns void
+ */
 function start() {
     // Get JavaScript files from directory
     const filePaths = getJSFilesFromDirectory(__dirname + "/../test_files");
