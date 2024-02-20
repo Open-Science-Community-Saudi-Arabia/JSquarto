@@ -1,4 +1,8 @@
 /**
+ * @module Writer
+ * @subcategory Utilities
+ *
+ * @description
  *  This TypeScript module (Writer) contains classes and functions
  *  for generating documentation structure and content.
  *  It interacts with various files and directories to organize

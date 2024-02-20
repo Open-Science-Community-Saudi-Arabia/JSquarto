@@ -1,5 +1,9 @@
 /**
- *  This file is responsible for parsing comments in code files.
+ * @module Parser
+ * @subcategory Utilities
+ *
+ * @description
+ * This file is responsible for parsing comments in code files.
  * It extracts various pieces of information such as
  * description, category, subcategory, link, parameters, return values,
  * and thrown errors from comments using regular expressions.

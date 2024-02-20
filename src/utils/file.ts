@@ -1,4 +1,8 @@
 /**
+ * @module File
+ * @subcategory Utilities
+ * @description  This module is used to read and write files
+ *
  * This file reads and analyzes source code files.
  * It identifies the type and name of the code construct linked
  * to a given comment by examining the lines following the comment,
@@ -18,6 +22,22 @@ export default class SourceFile {
     }
 
     // Get the type and name of the code construct linked to a comment
+    /**
+     * @param comment
+     * @returns {type: ConstructType | null, name: string | null}
+     * @description  This method returns the type and name of the code construct linked to a comment
+     *
+     * @example
+     * const file = new SourceFile('file.ts');
+     *
+     * const comment = new Comment({
+     *    startLocation: { line: 1, column: 1 },
+     *    endLocation: { line: 1, column: 1 },
+     *    content: 'This is a comment'
+     *    });
+     *    file.getLinkedCodeConstructInfo(comment);
+     *    // => { type: 'class', name: 'StringUtil' }
+     *    */
     public getLinkedCodeConstructInfo(comment: Comment): {
         type: ConstructType | null;
         name: string | null;
