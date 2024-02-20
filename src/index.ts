@@ -3,7 +3,13 @@ import { Doc, ModuleBlockInfo } from "./interfaces";
 import { CommentsUtil } from "./utils/comment";
 import SourceFile from "./utils/file";
 import Writer from "./utils/writer";
-import { Category, Module, ModuleDoc, SubCategory, recursivelyConvertAllStringValuesInObjectToLowerCase } from "./utils/components";
+import {
+    Category,
+    Module,
+    ModuleDoc,
+    SubCategory,
+    recursivelyConvertAllStringValuesInObjectToLowerCase,
+} from "./utils/components";
 import logger from "./utils/logger";
 import Parser from "./utils/parser";
 
@@ -86,7 +92,11 @@ function start() {
             }
 
             // Create category and subcategory if they exist in the module information
-            const moduleCategory = _module.category ? recursivelyConvertAllStringValuesInObjectToLowerCase(_module.category) as typeof _module.category : undefined;
+            const moduleCategory = _module.category
+                ? (recursivelyConvertAllStringValuesInObjectToLowerCase(
+                      _module.category,
+                  ) as typeof _module.category)
+                : undefined;
             if (moduleCategory) {
                 let category = categories.get(moduleCategory.name);
 
@@ -122,38 +132,39 @@ function start() {
             );
 
             // Add module to subcategory if it exists
-            if (subCategoryToAddTo) {
-                if (
-                    !subCategoryToAddTo
-                        .getModules()
-                        .some(
-                            (module) =>
-                                module.info.name === fileModule!.info.name,
-                        )
-                ) {
-                    subCategoryToAddTo.addModule(fileModule!);
-                }
-            } else if (categoryToAddTo) {
-                if (
-                    !categoryToAddTo
-                        .getModules()
-                        .some(
-                            (module) =>
-                                module.info.name === fileModule!.info.name,
-                        )
-                ) {
-                    categoryToAddTo.addModule(fileModule!);
-                }
-            } else {
-                if (
-                    !defaultCategory
-                        .getModules()
-                        .some(
-                            (module) =>
-                                module.info.name === fileModule!.info.name,
-                        )
-                ) {
-                    defaultCategory.addModule(fileModule!);
+            const subCategoryAlreadyHasModule =
+                subCategoryToAddTo &&
+                subCategoryToAddTo
+                    .getModules()
+                    .some(
+                        (module) => module.info.name === fileModule!.info.name,
+                    );
+
+            const categoryAlreadyHasModule =
+                categoryToAddTo &&
+                categoryToAddTo
+                    .getModules()
+                    .some(
+                        (module) => module.info.name === fileModule!.info.name,
+                    );
+
+            const defaultCategoryAlreadyHasModule = defaultCategory
+                .getModules()
+                .some((module) => module.info.name === fileModule!.info.name);
+
+            for (const category of [
+                subCategoryToAddTo,
+                categoryToAddTo,
+                defaultCategory,
+            ]) {
+                const categoryAlreadyHasModule = category
+                    ?.getModules()
+                    .some(
+                        (module) => module.info.name === fileModule!.info.name,
+                    );
+                if (!categoryAlreadyHasModule) {
+                    category?.addModule(fileModule);
+                    break;
                 }
             }
 
@@ -173,7 +184,7 @@ function start() {
     // Generate documentation directory and files
     new Writer(modules, categories)
         .prepareDirectoryForDocs()
-        .writeDocsFromCategoriesToFile()
+        .writeDocsFromCategoriesToFile();
 
     logger.info("Documentation generation complete");
 
