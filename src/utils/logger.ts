@@ -1,6 +1,8 @@
 /**
  * @module Logger
  * @subcategory Utilities
+ *@category Functional Doc
+
  *
  * @description  This module is used to log messages to the console
  * @example

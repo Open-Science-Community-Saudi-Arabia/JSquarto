@@ -12,6 +12,7 @@ import {
 } from "./utils/components";
 import logger from "./utils/logger";
 import Parser from "./utils/parser";
+import path from "path";
 
 /**
  * Recursively searches for JavaScript files in a directory and its subdirectories.
@@ -82,6 +83,7 @@ function start(sourceFolderPath: string) {
         // Parse source file and extract comments
         const sourceFile = new SourceFile(filePath);
         const comments = CommentsUtil.getCommentsFromFile(sourceFile);
+        console.log(comments);
         let fileModule: Module | undefined = undefined;
         const moduleDocs: ModuleDoc[] = [];
 
@@ -221,6 +223,15 @@ function start(sourceFolderPath: string) {
     process.exit(0);
 }
 
-const path = __dirname + `/../${process.argv[2] ?? "test_files"}`;
+console.log(process.argv);
 
-start(path);
+// Access the path argument provided via command line
+const providedPath = process.argv[2];
+
+// Use providedPath if available, otherwise fallback to a default path
+const path_ = providedPath
+    ? __dirname + `/../${providedPath}`
+    : __dirname + `/../test_files`;
+
+console.log(path_);
+start(path_);

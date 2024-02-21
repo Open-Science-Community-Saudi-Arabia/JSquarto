@@ -1,6 +1,8 @@
 /**
  * @module CommentsUtil
  *
+ * @category Functional Doc
+
  * @subcategory Utilities
  *
  * @description  This file provides utility classes for parsing and extracting information
@@ -16,6 +18,8 @@ import acorn from "acorn";
 import Parser from "./parser";
 import { ConstructIdentifier } from "./codeconstruct";
 import SourceFile from "./file";
+import * as ts from "typescript";
+import logger from "./logger";
 
 export class CommentsUtil {
     // There are two types of comments: module and other
@@ -79,6 +83,7 @@ export class CommentsUtil {
      * @description This method retrieves comments from a source file using Acorn parser.
      */
     static getCommentsFromFile(sourceFile: SourceFile): Comment[] {
+        logger.info("Extracting comments from file");
         const fileContent = sourceFile.fileContent;
         const comments: Comment[] = [];
         acorn.parse(fileContent, {

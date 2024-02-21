@@ -1,6 +1,8 @@
 /**
  * @module Parser
  * @subcategory Utilities
+ *@category Functional Doc
+
  *
  * @description
  * This file is responsible for parsing comments in code files.

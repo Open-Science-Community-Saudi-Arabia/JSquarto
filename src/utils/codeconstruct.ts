@@ -1,6 +1,7 @@
 /**
  * @module ConstructIdentifier
  * @subcategory Utilities
+ * @category Functional Doc
  *
  * @description
  * The class called ConstructIdentifier, contains methods to identify different types of code constructs

@@ -1,4 +1,6 @@
 /**
+ *@category Functional Doc
+
  * @module Writer
  * @subcategory Utilities
  *

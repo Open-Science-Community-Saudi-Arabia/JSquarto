@@ -1,7 +1,10 @@
 /**
  * @module File
+ * @category Functional Doc
+
  * @subcategory Utilities
  * @description  This module is used to read and write files
+ *
  *
  * This file reads and analyzes source code files.
  * It identifies the type and name of the code construct linked

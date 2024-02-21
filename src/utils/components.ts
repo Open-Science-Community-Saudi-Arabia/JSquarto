@@ -2,6 +2,8 @@
  * This file contains the classes that are used to generate the quarto yml file
  * @module components
  * @subcategory Utilities
+ *@category Functional Doc
+
  * @description  This module is used to generate the quarto yml file
  * @example
  *
