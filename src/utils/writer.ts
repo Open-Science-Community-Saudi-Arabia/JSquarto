@@ -479,8 +479,6 @@ export default class Writer {
     public writeDocsFromCategoriesToFile() {
         const categories = Array.from(this.categories.values());
 
-        console.log({ moduleNames: Array.from(this.modules.keys()) });
-
         for (const category of categories) {
             const categoryFolderPath =
                 __dirname + `/../../docs/chapters/${category.name}`;

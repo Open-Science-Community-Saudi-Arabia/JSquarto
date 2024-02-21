@@ -60,9 +60,9 @@ function getJSFilesFromDirectory(
  *
  * @returns void
  */
-function start() {
+function start(sourceFolderPath: string) {
     // Get JavaScript files from directory
-    const filePaths = getJSFilesFromDirectory(__dirname + "/../test_files");
+    const filePaths = getJSFilesFromDirectory(sourceFolderPath);
 
     // Initialize maps for modules and categories
     const modules: Map<string, Module> = new Map();
@@ -221,4 +221,6 @@ function start() {
     process.exit(0);
 }
 
-start();
+const path = __dirname + `/../${process.argv[2] ?? "test_files"}`;
+
+start(path);
