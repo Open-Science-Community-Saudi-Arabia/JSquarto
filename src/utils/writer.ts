@@ -527,7 +527,7 @@ export default class Writer {
         // Initialize modules map, tutorial category, and subcategories map
         const modules = new Map<string, Module>();
         const tutorialCategory = new Category("Tutorials");
-        const subCategories = new Map<string, Category>();
+        const subCategories = new Map<string, SubCategory>();
 
         // Iterate over each tutorial in the configuration
         for (const tutorial of Object.keys(tutorialsConfig)) {
@@ -537,7 +537,10 @@ export default class Writer {
             // Check if the tutorial is a subcategory
             if (tutorialIsASubCategory) {
                 // Create a new subcategory
-                const subCategory = new Category(tutorial);
+                const subCategory = new SubCategory({
+                    name: tutorial,
+                    category: tutorialCategory,
+                });
                 const subCategoryModules = new Map<string, Module>();
 
                 // Iterate over each sub-tutorial in the subcategory
@@ -562,6 +565,15 @@ export default class Writer {
                         },
                         references: [],
                     });
+                    // Get sourceFilePath from where the tutorial is located
+                    const sourceFilePath = path.join(
+                        __dirname,
+                        "..",
+                        "..",
+                        "tutorials",
+                        tutorial + "/" + subTutorial + ".md",
+                    );
+                    module.setSourceFilePath(sourceFilePath);
 
                     // Add the module to the subcategory and modules map
                     subCategoryModules.set(module.info.name, module);
@@ -579,6 +591,7 @@ export default class Writer {
 
                 // Add the subcategory to the subcategories map
                 subCategories.set(subCategory.name, subCategory);
+                tutorialCategory.addSubCategory(subCategory);
             } else {
                 // Create a module for the tutorial
                 const module = new Module({
@@ -596,15 +609,6 @@ export default class Writer {
             }
         }
 
-        // Add subcategories to the tutorial category
-        const subCategoryNames = Array.from(subCategories.keys());
-        for (const subCategoryName of subCategoryNames) {
-            const subCategory = subCategories.get(subCategoryName);
-            if (subCategory) {
-                tutorialCategory.addSubCategory(new SubCategory(subCategory));
-            }
-        }
-
         // Return the modules and tutorial category
         return {
             modules,
@@ -612,13 +616,104 @@ export default class Writer {
         };
     }
 
-    public writeTutorialsToFile() {
+    public async writeTutorialsToQuatoYml() {
         const { tutorialCategory, modules } =
             this.createModulesAndCategoriesFromTutorialsConfig();
 
-        console.log({ tutorialCategory, modules });
-        // this.prepareDirectoryForDocs();
-        // this.writeDocsFromCategoriesToFile();
+        // Create tutorials directory in docs
+        const tutorialsDirPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "docs",
+            "chapters",
+            "Tutorials",
+        );
+        fs.mkdirSync(tutorialsDirPath, { recursive: true });
+
+        // Check if quarto.yml file exists
+        const quartoYAMLPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "docs",
+            "_quarto.yml",
+        );
+
+        if (!fs.existsSync(quartoYAMLPath)) {
+            logger.error("Quarto YAML file does not exist");
+            return;
+        }
+
+        // Read quarto.yml file
+        const quartoYAML = YAML.parse(fs.readFileSync(quartoYAMLPath, "utf8"));
+
+        const chapters: Chapter[] = [];
+
+        const subCategories = tutorialCategory.getSubCategories();
+
+        // Create chapters for tutorials
+        for (const subCategory of subCategories) {
+            console.log({ subCategory: subCategory.name });
+            const subCategoryFolderPath = path.join(
+                tutorialsDirPath,
+                subCategory.name,
+            );
+            fs.mkdirSync(subCategoryFolderPath, { recursive: true });
+
+            // Copy tutorials to their respective folders in the docs
+            const subCategoryModules = subCategory.getModules();
+            const categoryModules = tutorialCategory.getModules();
+            for (const module of subCategoryModules) {
+                const sourceFilePath = module.sourceFilePath;
+                const destinationFilePath = path.join(
+                    subCategoryFolderPath,
+                    `${module.info.name}.md`,
+                );
+
+                console.log({ sourceFilePath });
+                // Copy the file contents
+                const fileContent = fs.readFileSync(sourceFilePath, "utf8");
+
+                // Create the file and copy the contents intto in
+                await fs.writeFileSync(destinationFilePath, "", "utf8");
+
+                await fs.writeFileSync(
+                    destinationFilePath,
+                    fileContent,
+                    "utf8",
+                );
+                // Set destination file path
+                module.setDestinationFilePath(destinationFilePath);
+            }
+
+            console.log({ subCategoryModules, categoryModules });
+
+            // Collect subchapters for Quarto yaml
+            const subchapters = subCategoryModules.map(
+                (module) =>
+                    `chapters/Tutorials/${subCategory.name}/${module.info.name}.md`,
+            );
+
+            // Add chapters to the quarto.yml file
+            chapters.push({
+                part: subCategory.name,
+                chapters: subchapters,
+            });
+        }
+        console.log("complete");
+        console.log({ chapters });
+        // add tutorials to quarto.yml file
+        quartoYAML.book.chapters.push({
+            part: "Tutorials",
+            chapters: chapters.map((chapter) => ({
+                ...chapter,
+                part: StringUtil.capitalizeFirstLetter(chapter.part),
+            })),
+        });
+
+        // Write updated quarto.yml file
+        fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
     }
 }
 

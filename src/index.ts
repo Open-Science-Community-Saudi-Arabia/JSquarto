@@ -83,7 +83,6 @@ function start(sourceFolderPath: string) {
         // Parse source file and extract comments
         const sourceFile = new SourceFile(filePath);
         const comments = CommentsUtil.getCommentsFromFile(sourceFile);
-        console.log(comments);
         let fileModule: Module | undefined = undefined;
         const moduleDocs: ModuleDoc[] = [];
 
@@ -217,14 +216,12 @@ function start(sourceFolderPath: string) {
     new Writer(modules, categories)
         .prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile()
-        .writeTutorialsToFile()
+        .writeTutorialsToQuatoYml()
 
     logger.info("Documentation generation complete");
 
-    process.exit(0);
+    // process.exit(0);
 }
-
-console.log(process.argv);
 
 // Access the path argument provided via command line
 const providedPath = process.argv[2];
@@ -234,5 +231,4 @@ const path_ = providedPath
     ? __dirname + `/../${providedPath}`
     : __dirname + `/../source_files`;
 
-console.log(path_);
 start(path_);
