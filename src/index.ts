@@ -33,7 +33,7 @@ function getJSFilesFromDirectory(
     const items = fs.readdirSync(directory);
     for (const item of items) {
         const itemPath = `${directory}/${item}`;
-        const allowedFileTypes = [".js", ".ts"];
+        const allowedFileTypes = [".js"];
         const fileExtension = itemPath.substring(itemPath.lastIndexOf("."));
         if (fs.statSync(itemPath).isDirectory()) {
             getJSFilesFromDirectory(itemPath, files);
@@ -83,7 +83,6 @@ function start(sourceFolderPath: string) {
         // Parse source file and extract comments
         const sourceFile = new SourceFile(filePath);
         const comments = CommentsUtil.getCommentsFromFile(sourceFile);
-        console.log(comments);
         let fileModule: Module | undefined = undefined;
         const moduleDocs: ModuleDoc[] = [];
 
@@ -216,14 +215,13 @@ function start(sourceFolderPath: string) {
     // Generate documentation directory and files
     new Writer(modules, categories)
         .prepareDirectoryForDocs()
-        .writeDocsFromCategoriesToFile();
+        .writeDocsFromCategoriesToFile()
+        .writeTutorialsToQuatoYml();
 
     logger.info("Documentation generation complete");
 
-    process.exit(0);
+    // process.exit(0);
 }
-
-console.log(process.argv);
 
 // Access the path argument provided via command line
 const providedPath = process.argv[2];
@@ -231,7 +229,6 @@ const providedPath = process.argv[2];
 // Use providedPath if available, otherwise fallback to a default path
 const path_ = providedPath
     ? __dirname + `/../${providedPath}`
-    : __dirname + `/../test_files`;
+    : __dirname + `/../source_files`;
 
-console.log(path_);
 start(path_);

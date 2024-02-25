@@ -16,7 +16,7 @@
 
 import { Doc, ModuleBlockInfo } from "../interfaces";
 import fs from "fs";
-import { Category, Module, ModuleDoc } from "./components";
+import { Category, Module, ModuleDoc, SubCategory } from "./components";
 import logger from "./logger";
 import path from "path";
 import YAML from "yaml";
@@ -25,7 +25,13 @@ import { StringUtil } from "./string";
 
 interface Chapter {
     part: string;
-    chapters: string[] | undefined;
+    chapters:
+        | string[]
+        | {
+              title: string;
+              path: string;
+          }[]
+        | undefined;
 }
 
 export default class Writer {
@@ -508,4 +514,238 @@ export default class Writer {
 
         return this;
     }
+
+    private createModulesAndCategoriesFromTutorialsConfig() {
+        // Get the path to the tutorials configuration file
+        const tutorialsConfigPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "tutorials",
+            "config.json",
+        );
+
+        // Read tutorials configuration from the JSON file
+        const tutorialsConfig: Tutorial = JSON.parse(
+            fs.readFileSync(tutorialsConfigPath, "utf8"),
+        );
+
+        // Initialize modules map, tutorial category, and subcategories map
+        const modules = new Map<string, Module>();
+        const tutorialCategory = new Category("Tutorials");
+        const subCategories = new Map<string, SubCategory>();
+
+        // Iterate over each tutorial in the configuration
+        for (const tutorial of Object.keys(tutorialsConfig)) {
+            const tutorialData = tutorialsConfig[tutorial];
+            const tutorialIsASubCategory = tutorialData.children;
+
+            // Check if the tutorial is a subcategory
+            if (tutorialIsASubCategory) {
+                // Create a new subcategory
+                const subCategory = new SubCategory({
+                    name: tutorial,
+                    category: tutorialCategory,
+                });
+                const subCategoryModules = new Map<string, Module>();
+
+                // Iterate over each sub-tutorial in the subcategory
+                const childrenTutorial =
+                    tutorialData.children ??
+                    ({} as unknown as NonNullable<
+                        typeof tutorialData.children
+                    >);
+                for (const subTutorial of Object.keys(childrenTutorial)) {
+                    const subTutorialData =
+                        childrenTutorial[
+                            subTutorial as keyof Tutorial["children"]
+                        ];
+
+                    // Create a module for the sub-tutorial
+                    const module = new Module({
+                        name: subTutorial,
+                        description: subTutorialData.title,
+                        category: {
+                            name: tutorial,
+                            subCategory: subTutorial,
+                        },
+                        references: [],
+                    });
+                    // Get sourceFilePath from where the tutorial is located
+                    const sourceFilePath = path.join(
+                        __dirname,
+                        "..",
+                        "..",
+                        "tutorials",
+                        tutorial + "/" + subTutorial + ".qmd",
+                    );
+                    module.setSourceFilePath(sourceFilePath);
+
+                    // Add the module to the subcategory and modules map
+                    subCategoryModules.set(module.info.name, module);
+                    modules.set(module.info.name, module);
+                }
+
+                // Add modules to the subcategory
+                const moduleNames = Array.from(subCategoryModules.keys());
+                for (const moduleName of moduleNames) {
+                    const module = subCategoryModules.get(moduleName);
+                    if (module) {
+                        subCategory.addModule(module);
+                    }
+                }
+
+                // Add the subcategory to the subcategories map
+                subCategories.set(subCategory.name, subCategory);
+                tutorialCategory.addSubCategory(subCategory);
+            } else {
+                // Create a module for the tutorial
+                const module = new Module({
+                    name: tutorial,
+                    description: tutorialData.title,
+                    category: {
+                        name: "Tutorials",
+                        subCategory: undefined,
+                    },
+                    references: [],
+                });
+
+                // Add the module to the modules map
+                modules.set(module.info.name, module);
+            }
+        }
+
+        // Return the modules and tutorial category
+        return {
+            modules,
+            tutorialCategory,
+        };
+    }
+
+    public async writeTutorialsToQuatoYml() {
+        const { tutorialCategory, modules } =
+            this.createModulesAndCategoriesFromTutorialsConfig();
+
+        logger.info("Writing tutorials to Quarto YAML");
+
+        // Create tutorials directory in docs
+        const tutorialsDirPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "docs",
+            "chapters",
+            "Tutorials",
+        );
+        fs.mkdirSync(tutorialsDirPath, { recursive: true });
+
+        // Check if quarto.yml file exists
+        const quartoYAMLPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "docs",
+            "_quarto.yml",
+        );
+
+        if (!fs.existsSync(quartoYAMLPath)) {
+            logger.error("Quarto YAML file does not exist");
+            return;
+        }
+
+        // Read quarto.yml file
+        const quartoYAML = YAML.parse(fs.readFileSync(quartoYAMLPath, "utf8"));
+
+        const chapters: Chapter[] = [];
+
+        const subCategories = tutorialCategory.getSubCategories();
+
+        // Create chapters for tutorials
+        for (const subCategory of subCategories) {
+            const subCategoryFolderPath = path.join(
+                tutorialsDirPath,
+                subCategory.name,
+            );
+            fs.mkdirSync(subCategoryFolderPath, { recursive: true });
+
+            // Copy tutorials to their respective folders in the docs
+            logger.info(`Copying tutorials to ${subCategoryFolderPath}`);
+
+            const subCategoryModules = subCategory.getModules();
+            const categoryModules = tutorialCategory.getModules();
+            for (const module of subCategoryModules) {
+                const sourceFilePath = module.sourceFilePath;
+                let destinationFilePath = path.join(
+                    subCategoryFolderPath,
+                    `${module.info.name}.qmd`,
+                );
+                destinationFilePath = path.relative(
+                    __dirname + "/../../docs",
+                    destinationFilePath,
+                );
+
+                const directoryPath = path.dirname(destinationFilePath);
+                if (!fs.existsSync(directoryPath)) {
+                    await fs.mkdirSync(directoryPath, { recursive: true });
+                }
+                await fs.writeFileSync(destinationFilePath, "", "utf8");
+
+                const fileTitleBlock = `### ${this.formatFileName(
+                    subCategory.name,
+                )} / ${this.formatFileName(module.info.name)}\n\n`;
+
+                // Copy the file contents
+                const fileContent = await fs.readFileSync(
+                    sourceFilePath,
+                    "utf8",
+                );
+
+                await fs.writeFileSync(
+                    destinationFilePath,
+                    fileTitleBlock + fileContent,
+                    "utf8",
+                );
+
+                // Set destination file path
+                module.setDestinationFilePath(destinationFilePath);
+            }
+
+            // Collect subchapters for Quarto yaml
+            const subchapters =
+                // Add chapters to the quarto.yml file
+                chapters.push({
+                    part: subCategory.name,
+                    chapters: subCategoryModules.map(
+                        (module) => module.destinationFilePath,
+                    ),
+                });
+        }
+
+        // add tutorials to quarto.yml file
+        quartoYAML.book.chapters.push({
+            part: "Tutorials",
+            chapters: chapters.map((chapter) => chapter.chapters).flat(),
+        });
+
+        // Write updated quarto.yml file
+        fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
+    }
+
+    private formatFileName(name: string) {
+        // Replace all _ with -
+        // Capitalize first capitalizeFirstLetter
+
+        return StringUtil.capitalizeFirstLetter(name.replace(/_/g, "-"));
+    }
+}
+
+interface Tutorial {
+    [key: string]: {
+        title: string;
+        children?: {
+            [key: string]: {
+                title: string;
+            };
+        };
+    };
 }

@@ -106,6 +106,7 @@ export class Module {
     private id: string = uuid();
     readonly info: ModuleBlockInfo = {} as ModuleBlockInfo;
     destinationFilePath: string = "";
+    sourceFilePath: string = ""; // Useful for tutorials
 
     constructor(info: ModuleBlockInfo) {
         // Convert the module name to lowercase
@@ -173,6 +174,15 @@ export class Module {
      * */
     public setDestinationFilePath(destinationFilePath: string) {
         this.destinationFilePath = destinationFilePath;
+    }
+
+    /**
+     * @description  sets the source file path
+     * @param sourceFilePath
+     * @returns void
+     * */
+    public setSourceFilePath(sourceFilePath: string) {
+        this.sourceFilePath = sourceFilePath;
     }
 }
 

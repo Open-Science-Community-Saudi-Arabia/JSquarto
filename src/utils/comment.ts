@@ -83,7 +83,6 @@ export class CommentsUtil {
      * @description This method retrieves comments from a source file using Acorn parser.
      */
     static getCommentsFromFile(sourceFile: SourceFile): Comment[] {
-        logger.info("Extracting comments from file");
         const fileContent = sourceFile.fileContent;
         const comments: Comment[] = [];
         acorn.parse(fileContent, {

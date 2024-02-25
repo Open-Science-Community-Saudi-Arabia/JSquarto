@@ -25,7 +25,7 @@ To test the tool locally, follow these steps:
     ```
 
 ### Running the Tool
-Once the dependencies are installed, you can paste the files in the JS files or folder in the `/test_file` directory you can run the tool using the following command
+Once the dependencies are installed, you can paste the files in the JS files or folder in the `/source_files` directory you can run the tool using the following command
     
 To generate the documentation run the following command
    ```bash
@@ -33,6 +33,13 @@ To generate the documentation run the following command
    ```
 
 This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
+
+~
+    You can choose to specify the directory where the `source_files` are, to do this run `npm run doc:generate <path to source files>` currently it only supports relative file paths.
+
+    
+    It also supports addition of custom tutorials, to do this add the .qmd files for the tutorials in the `/tutorials` directory
+~
 
 The generated `.qmd` files can be found in the `/docs/chapters` folder
 
