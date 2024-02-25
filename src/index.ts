@@ -231,7 +231,7 @@ const providedPath = process.argv[2];
 // Use providedPath if available, otherwise fallback to a default path
 const path_ = providedPath
     ? __dirname + `/../${providedPath}`
-    : __dirname + `/../test_files`;
+    : __dirname + `/../source_files`;
 
 console.log(path_);
 start(path_);

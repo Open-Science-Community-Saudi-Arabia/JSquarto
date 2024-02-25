@@ -25,7 +25,7 @@ To test the tool locally, follow these steps:
     ```
 
 ### Running the Tool
-Once the dependencies are installed, you can paste the files in the JS files or folder in the `/test_file` directory you can run the tool using the following command
+Once the dependencies are installed, you can paste the files in the JS files or folder in the `/source_files` directory you can run the tool using the following command
     
 To generate the documentation run the following command
    ```bash
