@@ -33,7 +33,7 @@ function getJSFilesFromDirectory(
     const items = fs.readdirSync(directory);
     for (const item of items) {
         const itemPath = `${directory}/${item}`;
-        const allowedFileTypes = [".js", ".ts"];
+        const allowedFileTypes = [".js"];
         const fileExtension = itemPath.substring(itemPath.lastIndexOf("."));
         if (fs.statSync(itemPath).isDirectory()) {
             getJSFilesFromDirectory(itemPath, files);
@@ -216,7 +216,7 @@ function start(sourceFolderPath: string) {
     new Writer(modules, categories)
         .prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile()
-        .writeTutorialsToQuatoYml()
+        .writeTutorialsToQuatoYml();
 
     logger.info("Documentation generation complete");
 
