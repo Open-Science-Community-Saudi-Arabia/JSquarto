@@ -34,7 +34,12 @@ To generate the documentation run the following command
 
 This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
 
-You can choose to specify the directory where the `source_files` are, to do this run `npm run doc:generate <path to source files>` currently it only supports relative file paths.
+~
+    You can choose to specify the directory where the `source_files` are, to do this run `npm run doc:generate <path to source files>` currently it only supports relative file paths.
+
+    
+    It also supports addition of custom tutorials, to do this add the .qmd files for the tutorials in the `/tutorials` directory
+~
 
 The generated `.qmd` files can be found in the `/docs/chapters` folder
 
