@@ -510,6 +510,7 @@ export default class Writer {
     }
 
     private createModulesAndCategoriesFromTutorialsConfig() {
+        // Get the path to the tutorials configuration file
         const tutorialsConfigPath = path.join(
             __dirname,
             "..",
@@ -517,21 +518,29 @@ export default class Writer {
             "tutorials",
             "config.json",
         );
+
+        // Read tutorials configuration from the JSON file
         const tutorialsConfig: Tutorial = JSON.parse(
             fs.readFileSync(tutorialsConfigPath, "utf8"),
         );
 
+        // Initialize modules map, tutorial category, and subcategories map
         const modules = new Map<string, Module>();
         const tutorialCategory = new Category("Tutorials");
         const subCategories = new Map<string, Category>();
 
+        // Iterate over each tutorial in the configuration
         for (const tutorial of Object.keys(tutorialsConfig)) {
             const tutorialData = tutorialsConfig[tutorial];
             const tutorialIsASubCategory = tutorialData.children;
+
+            // Check if the tutorial is a subcategory
             if (tutorialIsASubCategory) {
+                // Create a new subcategory
                 const subCategory = new Category(tutorial);
                 const subCategoryModules = new Map<string, Module>();
-                console.log({ subCategory });
+
+                // Iterate over each sub-tutorial in the subcategory
                 const childrenTutorial =
                     tutorialData.children ??
                     ({} as unknown as NonNullable<
@@ -542,6 +551,8 @@ export default class Writer {
                         childrenTutorial[
                             subTutorial as keyof Tutorial["children"]
                         ];
+
+                    // Create a module for the sub-tutorial
                     const module = new Module({
                         name: subTutorial,
                         description: subTutorialData.title,
@@ -551,10 +562,13 @@ export default class Writer {
                         },
                         references: [],
                     });
+
+                    // Add the module to the subcategory and modules map
                     subCategoryModules.set(module.info.name, module);
                     modules.set(module.info.name, module);
                 }
 
+                // Add modules to the subcategory
                 const moduleNames = Array.from(subCategoryModules.keys());
                 for (const moduleName of moduleNames) {
                     const module = subCategoryModules.get(moduleName);
@@ -562,8 +576,11 @@ export default class Writer {
                         subCategory.addModule(module);
                     }
                 }
+
+                // Add the subcategory to the subcategories map
                 subCategories.set(subCategory.name, subCategory);
             } else {
+                // Create a module for the tutorial
                 const module = new Module({
                     name: tutorial,
                     description: tutorialData.title,
@@ -573,20 +590,22 @@ export default class Writer {
                     },
                     references: [],
                 });
+
+                // Add the module to the modules map
                 modules.set(module.info.name, module);
             }
         }
 
+        // Add subcategories to the tutorial category
         const subCategoryNames = Array.from(subCategories.keys());
         for (const subCategoryName of subCategoryNames) {
             const subCategory = subCategories.get(subCategoryName);
             if (subCategory) {
-                tutorialCategory.addSubCategory(
-                    new SubCategory(subCategory),
-                );
+                tutorialCategory.addSubCategory(new SubCategory(subCategory));
             }
         }
 
+        // Return the modules and tutorial category
         return {
             modules,
             tutorialCategory,
