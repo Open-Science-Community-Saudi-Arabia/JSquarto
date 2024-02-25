@@ -735,7 +735,7 @@ export default class Writer {
         // Replace all _ with -
         // Capitalize first capitalizeFirstLetter
 
-        return name.replace(/_/g, "-");
+        return StringUtil.capitalizeFirstLetter(name.replace(/_/g, "-"));
     }
 }
 
