@@ -1,0 +1,73 @@
+{
+    "maintainers": {
+        "title": "Technical guide for Maintainers",
+        "children": {
+            "reviewing_pr": {
+                "title": "Reviewing pull requests"
+            },
+            "ci_workflow": {
+                "title": "CI Workflow"
+            },
+            "secrets_and_security": {
+                "title": "Secret Access/Management"
+            },
+            "deployment_guide": {
+                "title": "Deployment Guide"
+            }
+        }
+    },
+    "api_guide": {
+        "title": "Technical guide for API developers",
+        "children": {
+            "api_structure": {
+                "title": "API structure"
+            },
+            "api_authentication_flow": {
+                "title": "API authentication flow"
+            },
+            "jwt_token_management": {
+                "title": "JWT token management"
+            },
+            "rbac_handler_flow": {
+                "title": "Role based access control flow"
+            }
+        }
+    },
+    "contributing": {
+        "title": "Contributing to the project",
+        "children": {
+            "adding_a_course": {
+                "title": "Adding a course"
+            },
+            "api_project_structure": {
+                "title": "API project structure"
+            },
+            "improving_documentation": {
+                "title": "Improving documentation"
+            },
+            "project_structure": {
+                "title": "Project structure"
+            },
+            "raising_issues": {
+                "title": "Raising issues"
+            },
+            "raising_pr": {
+                "title": "Raising pull requests"
+            }
+        }
+    },
+    "localization": {
+        "title": "Localization",
+        "children": {
+            "localization": {
+                "title": "Localization"
+            },
+            "backend": {
+                "title": "Localization in backend"
+            },
+            "client": {
+                "title": "Localization in frontend"
+            }
+        }
+    }
+}
