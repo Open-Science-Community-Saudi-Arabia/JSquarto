@@ -1,4 +1,10 @@
 /**
+ *@category Functional Doc
+
+ * @module Writer
+ * @subcategory Utilities
+ *
+ * @description
  *  This TypeScript module (Writer) contains classes and functions
  *  for generating documentation structure and content.
  *  It interacts with various files and directories to organize
@@ -26,11 +32,26 @@ export default class Writer {
     private modules: Map<string, Module> = new Map();
     private categories: Map<string, Category> = new Map();
 
-    constructor(modules: Map<string, Module>, categories: Map<string, Category>) {
+    /**
+     * Initializes a new instance of the Writer class.
+     *
+     * @param {Map<string, Module>} modules - A map of modules.
+     * @param {Map<string, Category>} categories - A map of categories.
+     */
+    constructor(
+        modules: Map<string, Module>,
+        categories: Map<string, Category>,
+    ) {
         this.modules = modules;
         this.categories = categories;
     }
 
+    /**
+     * Generates the Quarto YAML configuration file.
+     *
+     * @param {Chapter[]} chapters - An array of chapters to include in the YAML file.
+     * @description This method generates the Quarto YAML configuration file based on the provided chapters.
+     */
     private generateQuartoYAML(chapters: Chapter[]): void {
         try {
             // Check if there is a index.md file in the root of the docs folder
@@ -45,7 +66,15 @@ export default class Writer {
                 ...DEFAULT_QUARTO_YAML_CONTENT,
                 book: {
                     ...DEFAULT_QUARTO_YAML_CONTENT.book,
-                    chapters: ["index.md", ...chapters.map(chapter => ({ ...chapter, part: StringUtil.capitalizeFirstLetter(chapter.part) }))],
+                    chapters: [
+                        "index.md",
+                        ...chapters.map((chapter) => ({
+                            ...chapter,
+                            part: StringUtil.capitalizeFirstLetter(
+                                chapter.part,
+                            ),
+                        })),
+                    ],
                 },
             };
 
@@ -69,6 +98,12 @@ export default class Writer {
         }
     }
 
+    /**
+     * Retrieves the directory structure for documentation.
+     *
+     * @returns {Object} An object representing the directory structure.
+     * @description This method retrieves the directory structure for documentation and returns an object representing it.
+     */
     public getDirectoryForDocs() {
         const categories = Array.from(this.categories.values());
         const result: {
@@ -76,7 +111,7 @@ export default class Writer {
                 path: string;
                 modules: { path: string; name: string }[];
             };
-        } = {}
+        } = {};
 
         const folderPathToWrite = path.join(
             __dirname,
@@ -110,10 +145,16 @@ export default class Writer {
             }
         }
 
-        return result
+        return result;
     }
 
     // Create directory structure for documentation
+    /**
+     * Prepares the directory structure for documentation.
+     *
+     * @returns {Writer} The current Writer instance.
+     * @description This method prepares the directory structure for documentation by creating necessary folders and files.
+     */
     public prepareDirectoryForDocs() {
         const categories = Array.from(this.categories.values());
 
@@ -140,7 +181,9 @@ export default class Writer {
                 // Add index.qmd file to category folder
                 fs.writeFileSync(
                     path.join(categoryFolderPath, "index.qmd"),
-                    `---\ntitle: ${StringUtil.capitalizeFirstLetter(category.name)}\n---\n`,
+                    `---\ntitle: ${StringUtil.capitalizeFirstLetter(
+                        category.name,
+                    )}\n---\n`,
                     "utf8",
                 );
 
@@ -208,6 +251,14 @@ export default class Writer {
     }
 
     // Write documentation to file
+    /**
+     * Writes documentation content to a file.
+     *
+     * @param {Object} options - An object containing the module and destination path.
+     * @param {Module} options.module - The module for which documentation is being written.
+     * @param {string} options.destinationPath - The destination path where the documentation will be written.
+     * @description This method writes the documentation content for a module to a specified file path.
+     */
     private writeDocsToFile({
         module: _module,
         destinationPath,
@@ -229,7 +280,9 @@ export default class Writer {
             let fileContent = "";
 
             // Add module title to qmd file
-            fileContent += `# ${StringUtil.capitalizeFirstLetter(module.name)}\n\n`;
+            fileContent += `# ${StringUtil.capitalizeFirstLetter(
+                module.name,
+            )}\n\n`;
 
             // Add module description to qmd file
             fileContent += `${module.description}\n\n`;
@@ -271,7 +324,10 @@ export default class Writer {
                     fileContent += "\n";
                 }
 
-                if (doc.blockInfo.examples && doc.blockInfo.examples.length > 0) {
+                if (
+                    doc.blockInfo.examples &&
+                    doc.blockInfo.examples.length > 0
+                ) {
                     // Add examples to qmd file
                     fileContent += `**Examples:**\n\n`;
 
@@ -318,35 +374,80 @@ export default class Writer {
 
                         // If module name, get the original file path from modules
                         if (reference.type === "externalModule") {
-                            const module = this.modules.get(reference.moduleName.toLowerCase());
+                            const module = this.modules.get(
+                                reference.moduleName.toLowerCase(),
+                            );
                             if (module) {
-                                const relativePath = path.relative(destinationPath, module.destinationFilePath);
-                                fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')})\n\n`;
+                                const relativePath = path.relative(
+                                    destinationPath,
+                                    module.destinationFilePath,
+                                );
+                                fileContent += `[${
+                                    reference.text
+                                }](${relativePath.replace(
+                                    ".qmd",
+                                    ".html",
+                                )})\n\n`;
                             }
                         }
 
                         // If module name and construct name, get the original file path from modules
                         if (reference.type === "externalModuleAndConstruct") {
-                            const module = this.modules.get(reference.moduleName.toLowerCase());
+                            const module = this.modules.get(
+                                reference.moduleName.toLowerCase(),
+                            );
                             if (module) {
-                                const relativePath = path.relative(destinationPath, module.destinationFilePath);
-                                fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')}#${reference.constructName.toLowerCase()})\n\n`;
+                                const relativePath = path.relative(
+                                    destinationPath,
+                                    module.destinationFilePath,
+                                );
+                                fileContent += `[${
+                                    reference.text
+                                }](${relativePath.replace(
+                                    ".qmd",
+                                    ".html",
+                                )}#${reference.constructName.toLowerCase()})\n\n`;
                             }
                         }
 
-                        if (reference.type === "externalModuleWithSubcategory") {
-                            const module = this.modules.get(reference.moduleName.toLowerCase());
+                        if (
+                            reference.type === "externalModuleWithSubcategory"
+                        ) {
+                            const module = this.modules.get(
+                                reference.moduleName.toLowerCase(),
+                            );
                             if (module) {
-                                const relativePath = path.relative(destinationPath, module.destinationFilePath);
-                                fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')})\n\n`;
+                                const relativePath = path.relative(
+                                    destinationPath,
+                                    module.destinationFilePath,
+                                );
+                                fileContent += `[${
+                                    reference.text
+                                }](${relativePath.replace(
+                                    ".qmd",
+                                    ".html",
+                                )})\n\n`;
                             }
                         }
 
-                        if (reference.type === "externalModuleWithSubcategoryAndConstruct") {
-                            const module = this.modules.get(reference.moduleName.toLowerCase());
+                        if (
+                            reference.type ===
+                            "externalModuleWithSubcategoryAndConstruct"
+                        ) {
+                            const module = this.modules.get(
+                                reference.moduleName.toLowerCase(),
+                            );
                             if (module) {
-                                const relativePath = path.relative(destinationPath, module.destinationFilePath);
-                                fileContent += `[${reference.text}](${relativePath.replace('.qmd', '.html')}#${reference.constructName.toLowerCase()})\n\n`;
+                                const relativePath = path.relative(
+                                    destinationPath,
+                                    module.destinationFilePath,
+                                );
+                                fileContent += `[${
+                                    reference.text
+                                }](${relativePath.replace(
+                                    ".qmd",
+                                    ".html",
+                                )}#${reference.constructName.toLowerCase()})\n\n`;
                             }
                         }
 
@@ -371,10 +472,14 @@ export default class Writer {
     }
 
     // Write documentation for each category to file
+    /**
+     * Writes documentation for each category to file.
+     *
+     * @returns {Writer} The current Writer instance.
+     * @description This method writes documentation for each category to a corresponding file within the documentation directory.
+     */
     public writeDocsFromCategoriesToFile() {
         const categories = Array.from(this.categories.values());
-
-        console.log({ moduleNames: Array.from(this.modules.keys()) })
 
         for (const category of categories) {
             const categoryFolderPath =
