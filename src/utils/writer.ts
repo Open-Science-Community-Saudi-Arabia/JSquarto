@@ -16,7 +16,7 @@
 
 import { Doc, ModuleBlockInfo } from "../interfaces";
 import fs from "fs";
-import { Category, Module, ModuleDoc } from "./components";
+import { Category, Module, ModuleDoc, SubCategory } from "./components";
 import logger from "./logger";
 import path from "path";
 import YAML from "yaml";
@@ -508,4 +508,108 @@ export default class Writer {
 
         return this;
     }
+
+    private createModulesAndCategoriesFromTutorialsConfig() {
+        const tutorialsConfigPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "tutorials",
+            "config.json",
+        );
+        const tutorialsConfig: Tutorial = JSON.parse(
+            fs.readFileSync(tutorialsConfigPath, "utf8"),
+        );
+
+        const modules = new Map<string, Module>();
+        const tutorialCategory = new Category("Tutorials");
+        const subCategories = new Map<string, Category>();
+
+        for (const tutorial of Object.keys(tutorialsConfig)) {
+            const tutorialData = tutorialsConfig[tutorial];
+            const tutorialIsASubCategory = tutorialData.children;
+            if (tutorialIsASubCategory) {
+                const subCategory = new Category(tutorial);
+                const subCategoryModules = new Map<string, Module>();
+                console.log({ subCategory });
+                const childrenTutorial =
+                    tutorialData.children ??
+                    ({} as unknown as NonNullable<
+                        typeof tutorialData.children
+                    >);
+                for (const subTutorial of Object.keys(childrenTutorial)) {
+                    const subTutorialData =
+                        childrenTutorial[
+                            subTutorial as keyof Tutorial["children"]
+                        ];
+                    const module = new Module({
+                        name: subTutorial,
+                        description: subTutorialData.title,
+                        category: {
+                            name: tutorial,
+                            subCategory: subTutorial,
+                        },
+                        references: [],
+                    });
+                    subCategoryModules.set(module.info.name, module);
+                    modules.set(module.info.name, module);
+                }
+
+                const moduleNames = Array.from(subCategoryModules.keys());
+                for (const moduleName of moduleNames) {
+                    const module = subCategoryModules.get(moduleName);
+                    if (module) {
+                        subCategory.addModule(module);
+                    }
+                }
+                subCategories.set(subCategory.name, subCategory);
+            } else {
+                const module = new Module({
+                    name: tutorial,
+                    description: tutorialData.title,
+                    category: {
+                        name: "Tutorials",
+                        subCategory: undefined,
+                    },
+                    references: [],
+                });
+                modules.set(module.info.name, module);
+            }
+        }
+
+        const subCategoryNames = Array.from(subCategories.keys());
+        for (const subCategoryName of subCategoryNames) {
+            const subCategory = subCategories.get(subCategoryName);
+            if (subCategory) {
+                tutorialCategory.addSubCategory(
+                    new SubCategory(subCategory),
+                );
+            }
+        }
+
+        return {
+            modules,
+            tutorialCategory,
+        };
+    }
+
+    public writeTutorialsToFile() {
+        const { tutorialCategory, modules } =
+            this.createModulesAndCategoriesFromTutorialsConfig();
+
+        console.log({ tutorialCategory, modules });
+        // this.prepareDirectoryForDocs();
+        // this.writeDocsFromCategoriesToFile();
+    }
+}
+
+interface Tutorial {
+    [key: string]: {
+        title: string;
+        children?: {
+            [key: string]: {
+                title: string;
+            };
+        };
+    };
 }

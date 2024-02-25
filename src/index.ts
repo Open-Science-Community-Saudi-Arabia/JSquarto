@@ -216,7 +216,8 @@ function start(sourceFolderPath: string) {
     // Generate documentation directory and files
     new Writer(modules, categories)
         .prepareDirectoryForDocs()
-        .writeDocsFromCategoriesToFile();
+        .writeDocsFromCategoriesToFile()
+        .writeTutorialsToFile()
 
     logger.info("Documentation generation complete");
 
