@@ -690,9 +690,9 @@ export default class Writer {
                 }
                 await fs.writeFileSync(destinationFilePath, "", "utf8");
 
-                const fileTitleBlock = `### ${StringUtil.capitalizeFirstLetter(
+                const fileTitleBlock = `### ${this.formatFileName(
                     subCategory.name,
-                )} / ${StringUtil.capitalizeFirstLetter(module.info.name)}\n\n`;
+                )} / ${this.formatFileName(module.info.name)}\n\n`;
 
                 // Copy the file contents
                 const fileContent = await fs.readFileSync(
