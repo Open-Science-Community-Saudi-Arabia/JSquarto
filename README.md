@@ -2,7 +2,6 @@
 Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc
 
 
-
 ### Testing Your Tool Locally
 
 #### Prerequisites
@@ -14,14 +13,14 @@ Before testing the tool locally, ensure you have the following prerequisites ins
 To test the tool locally, follow these steps:
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto
-   ```
+    ```bash
+        git clone https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto
+    ```
 2. Navigate to the projecte directory
 
 3. Install dependencies 
     ```bash
-    npm install
+        npm install
     ```
 
 ### Running the Tool
@@ -29,7 +28,7 @@ Once the dependencies are installed, you can paste the files in the JS files or 
     
 To generate the documentation run the following command
    ```bash
-    npm run doc:generate
+        npm run doc:generate
    ```
 
 This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
@@ -46,14 +45,14 @@ The generated `.qmd` files can be found in the `/docs/chapters` folder
 
 To preview the generated documentation run 
     ```bash
-    npm run doc:preview
+        npm run doc:preview
     ```
 The docs are previewed with quarto, so make sure to have quarto already installed
 
 
 You can choose to generate and preview in one go, to do this run the command below
     ```bash
-    npm run build
+        npm run build
     ```
 
 This will generate the documentation, preview with quarto and open a link to preview the docs
