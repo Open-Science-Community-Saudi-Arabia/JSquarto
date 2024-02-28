@@ -38,7 +38,7 @@ To use JSDoc for writing documentation, consider the following approaches:
 
 4. Integration with Markdown: JSDoc supports Markdown within comments, allowing you to incorporate formatted text, headings, lists, and other Markdown features into your documentation. This enables you to create more visually appealing and structured content within your JSDoc comments.
 
-### Improving the MOOCs documentation with JSDoc
+### Improving JSQuarto documentation with JSDoc
 
 
 The JSQuarto documentation is not yet complete. There are several areas that could be improved, including:
