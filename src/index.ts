@@ -196,9 +196,11 @@ function start(sourceFolderPath: string) {
         .prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile()
         .addTutorialsToGeneratedDoc()
-        .then(r => r.addTutorialChaptersToQuartoYml())
+        .then(r => {
+            r.addTutorialChaptersToQuartoYml()
+            logger.info("Documentation generation complete");
+        })
 
-    logger.info("Documentation generation complete");
 
     // process.exit(0);
 }
