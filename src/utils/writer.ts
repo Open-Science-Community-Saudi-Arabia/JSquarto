@@ -532,7 +532,7 @@ export default class Writer {
 
         // Initialize modules map, tutorial category, and subcategories map
         const modules = new Map<string, Module>();
-        const tutorialCategory = new Category("Tutorials");
+        const tutorialCategory = new Category("tutorials");
         const subCategories = new Map<string, SubCategory>();
 
         // Iterate over each tutorial in the configuration
@@ -599,19 +599,29 @@ export default class Writer {
                 subCategories.set(subCategory.name, subCategory);
                 tutorialCategory.addSubCategory(subCategory);
             } else {
-                // Create a module for the tutorial
+                               // Create a module for the tutorial
                 const module = new Module({
                     name: tutorial,
                     description: tutorialData.title,
                     category: {
-                        name: "Tutorials",
+                        name: tutorialCategory.name,
                         subCategory: undefined,
                     },
                     references: [],
                 });
+ const sourceFilePath = path.join(
+                        __dirname,
+                        "..",
+                        "..",
+                        "tutorials",
+                        module.info.name  + ".qmd",
+                    );
+                    module.setSourceFilePath(sourceFilePath);
 
                 // Add the module to the modules map
                 modules.set(module.info.name, module);
+                tutorialCategory.addModule(module)
+                console.log({ sourceFilePath, check: module.sourceFilePath})
             }
         }
 
@@ -635,7 +645,7 @@ export default class Writer {
             "..",
             "docs",
             "chapters",
-            "Tutorials",
+            "tutorials",
         );
         fs.mkdirSync(tutorialsDirPath, { recursive: true });
 
@@ -709,17 +719,62 @@ export default class Writer {
                 module.setDestinationFilePath(destinationFilePath);
             }
 
-            // Collect subchapters for Quarto yaml
-            const subchapters =
+           
                 // Add chapters to the quarto.yml file
-                chapters.push({
-                    part: subCategory.name,
-                    chapters: subCategoryModules.map(
-                        (module) => module.destinationFilePath,
-                    ),
-                });
+            const chapter = {
+                part: subCategory.name,
+                chapters: subCategoryModules.map(module => module.destinationFilePath)
+            }
+            console.log({ mainChapter: chapter})
+                chapters.push(chapter);
+        }
+        
+        for (const  module of tutorialCategory.getModules()) {
+            console.log({ modules: module.info, sourceFilePath: module.sourceFilePath})
+             const sourceFilePath = module.sourceFilePath;
+            const categoryFilePath = path.resolve(__dirname + "../../../docs/chapters/" + tutorialCategory.name)
+            console.log({ categoryFilePath})
+                let destinationFilePath = path.join(
+                    categoryFilePath,
+                    `${module.info.name}.qmd`,
+                );
+                destinationFilePath = path.relative(
+                    __dirname + "/../../docs/",
+                    destinationFilePath,
+                );
+
+                const filePathToWrite = path.join(__dirname + "../../../docs/", destinationFilePath)  
+                const directoryPath = path.dirname(filePathToWrite);
+                if (!await  fs.existsSync(directoryPath)) {
+                    await   fs.mkdirSync(directoryPath, { recursive: true });
+                }
+                await fs.writeFileSync(filePathToWrite, "", "utf8");
+
+                const fileTitleBlock = `### ${StringUtil.capitalizeFirstLetter(module.info.name)}\n\n`;
+
+                console.log({ sourceFilePath})
+                // Copy the file contents
+                const fileContent = fs.readFileSync(sourceFilePath, "utf8");
+
+                console.log({ filePathToWrite})
+                await fs.writeFileSync(
+                   filePathToWrite,
+                    fileTitleBlock + fileContent,
+                    "utf8",
+                );
+            
+                module.setDestinationFilePath(destinationFilePath)
+                const chapterInfo = {
+                    part: module.info.name,
+                    chapters: [
+                        module.destinationFilePath
+                    ]
+                }             
+                console.log({ moduleChapter: chapterInfo})
+                chapters.push(chapterInfo);
         }
 
+        console.log({ chapters: chapters.map(ch => ch.chapters)})
         // add tutorials to quarto.yml file
         quartoYAML.book.chapters.push({
             part: "Tutorials",
