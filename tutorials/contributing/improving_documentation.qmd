@@ -166,6 +166,7 @@ To structure tutorials and create nested tutorials within your documentation, yo
     "review": {
         "title": "Reviewing the project"
     }
+}
  ```
 
 In this example, the `.json` file represents a documentation structure with two main sections: "Technical guide for Maintainers" and "Technical guide for API developers". Each section has its own set of tutorials represented as nested objects.
@@ -174,7 +175,7 @@ In this example, the `.json` file represents a documentation structure with two 
 
 2. Within each main section, provide a `"title"` key to specify the title or heading for that section. For example, "Technical guide for Maintainers" and "Technical guide for API developers".
 
-3. Add a `"children"` key within each main section to define the nested tutorials. Each tutorial is represented as a child object within the `"children"` object.
+3. Add a `"children"` key within each main section to define the nested tutorials. Each tutorial is represented as a child object within the `"children"` object. Not all tutorials may have children tutorials, an example of this is the `review` tutorial. Since it has no children the program will only look for a `review.qmd` file and not a `review` folder 
 
 4. For each tutorial, provide a unique key as the object's key, such as "reviewing_pr" and "ci_workflow".
 
@@ -200,7 +201,7 @@ For this example here is what the folder structure would look like assuming the 
             
             - review.qmd
               
-            - tutorials.json
+            - config.json
 ```
 
 In this structure:
