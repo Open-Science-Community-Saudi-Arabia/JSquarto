@@ -680,28 +680,27 @@ export default class Writer {
                     `${module.info.name}.qmd`,
                 );
                 destinationFilePath = path.relative(
-                    __dirname + "/../../docs",
+                    __dirname + "/../../docs/",
                     destinationFilePath,
                 );
 
-                const directoryPath = path.dirname(destinationFilePath);
-                if (!fs.existsSync(directoryPath)) {
-                    await fs.mkdirSync(directoryPath, { recursive: true });
+                const filePathToWrite = path.join(__dirname + "../../../docs/", destinationFilePath)  
+                const directoryPath = path.dirname(filePathToWrite);
+                if (!await  fs.existsSync(directoryPath)) {
+                    await   fs.mkdirSync(directoryPath, { recursive: true });
                 }
-                await fs.writeFileSync(destinationFilePath, "", "utf8");
+                await fs.writeFileSync(filePathToWrite, "", "utf8");
 
-                const fileTitleBlock = `### ${this.formatFileName(
+                const fileTitleBlock = `### ${StringUtil.capitalizeFirstLetter(
                     subCategory.name,
-                )} / ${this.formatFileName(module.info.name)}\n\n`;
+                )} / ${StringUtil.capitalizeFirstLetter(module.info.name)}\n\n`;
 
                 // Copy the file contents
-                const fileContent = await fs.readFileSync(
-                    sourceFilePath,
-                    "utf8",
-                );
+                const fileContent = fs.readFileSync(sourceFilePath, "utf8");
 
+                console.log({ filePathToWrite})
                 await fs.writeFileSync(
-                    destinationFilePath,
+                   filePathToWrite,
                     fileTitleBlock + fileContent,
                     "utf8",
                 );
@@ -735,7 +734,7 @@ export default class Writer {
         // Replace all _ with -
         // Capitalize first capitalizeFirstLetter
 
-        return StringUtil.capitalizeFirstLetter(name.replace(/_/g, "-"));
+        return name.replace(/_/g, "-");
     }
 }
 
