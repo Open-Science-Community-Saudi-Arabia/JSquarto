@@ -1,7 +1,3 @@
----
-title: Raising pull requests
----
-
 ## Introduction
 A pull request is a way for contributors to submit changes to a project maintained by others. The changes are proposed and then reviewed and potentially merged by the project maintainers. In this guide, we will walk you through the steps of making a pull request to the Open-Science-Community-Saudi-Arabia/MOOCs repository on GitHub.
 
