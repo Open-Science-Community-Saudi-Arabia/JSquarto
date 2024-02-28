@@ -10,12 +10,12 @@ A pull request is a way for contributors to submit changes to a project maintain
 2. Fork the Open-Science-Community-Saudi-Arabia/MOOCs repository to your GitHub account.
 3. Clone the forked repository on your local machine.
 ```bash
-git clone https://github.com/<your-github-username>/Open-Science-Community-Saudi-Arabia/MOOCs/
+git clone https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto
 ```
 
 4. Sync the fork, to avoid merge conflicts.
 ```bash
-    git remote add upstream https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/ 
+    git remote add upstream https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto 
     git fetch upstream
     git pull upstream main
     git push
@@ -39,8 +39,8 @@ git commit -m "Clear and concise commit message"
 git push origin <your-github-username>
 ```
 
-9. Go to the [Open-Science-Community-Saudi-Arabia/MOOCs](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs) repository on GitHub, and you should see a message suggesting to create a new pull request. Click on it.
-10. To raise the PR choose the PR template and fill it with the required information. The PR template is a set of questions that you need to answer to make it easier for the maintainers to review your pull request. you can find the PR template [here](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
+9. Go to the [Open-Science-Community-Saudi-Arabia/MOOCs](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto) repository on GitHub, and you should see a message suggesting to create a new pull request. Click on it.
+10. To raise the PR choose the PR template and fill it with the required information. The PR template is a set of questions that you need to answer to make it easier for the maintainers to review your pull request. you can find the PR template [here](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
 
 11. Add a clear and concise title and description for your pull request, explaining the changes you made.
 
