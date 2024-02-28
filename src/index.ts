@@ -125,8 +125,8 @@ function start(sourceFolderPath: string) {
             // Create category and subcategory if they exist in the module information
             const moduleCategory = _module.category
                 ? (recursivelyConvertAllStringValuesInObjectToLowerCase(
-                      _module.category,
-                  ) as typeof _module.category)
+                    _module.category,
+                ) as typeof _module.category)
                 : undefined;
             if (moduleCategory) {
                 let category = categories.get(moduleCategory.name);
@@ -143,7 +143,7 @@ function start(sourceFolderPath: string) {
                 );
                 if (!subCategory) {
                     subCategory = new SubCategory({
-                        name: moduleCategory.subCategory,
+                        name: moduleCategory.subCategory!,
                         category,
                     });
                     category.subCategories.push(subCategory);
@@ -163,26 +163,6 @@ function start(sourceFolderPath: string) {
             );
 
             // Add module to subcategory if it exists
-            const subCategoryAlreadyHasModule =
-                subCategoryToAddTo &&
-                subCategoryToAddTo
-                    .getModules()
-                    .some(
-                        (module) => module.info.name === fileModule!.info.name,
-                    );
-
-            const categoryAlreadyHasModule =
-                categoryToAddTo &&
-                categoryToAddTo
-                    .getModules()
-                    .some(
-                        (module) => module.info.name === fileModule!.info.name,
-                    );
-
-            const defaultCategoryAlreadyHasModule = defaultCategory
-                .getModules()
-                .some((module) => module.info.name === fileModule!.info.name);
-
             for (const category of [
                 subCategoryToAddTo,
                 categoryToAddTo,
@@ -208,7 +188,6 @@ function start(sourceFolderPath: string) {
     // Add default module to default category if it has documentation
     if (defaultFileModule.getDocs().length > 0) {
         modules.set(defaultFileModule.info.name, defaultFileModule);
-
         defaultCategory.addModule(defaultFileModule);
     }
 
@@ -216,7 +195,8 @@ function start(sourceFolderPath: string) {
     new Writer(modules, categories)
         .prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile()
-        .writeTutorialsToQuatoYml();
+        .addTutorialsToGeneratedDoc()
+        .then(r => r.addTutorialChaptersToQuartoYml())
 
     logger.info("Documentation generation complete");
 

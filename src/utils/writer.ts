@@ -26,17 +26,25 @@ import { StringUtil } from "./string";
 interface Chapter {
     part: string;
     chapters:
-        | string[]
-        | {
-              title: string;
-              path: string;
-          }[]
-        | undefined;
+    | string[]
+    | {
+        title: string;
+        path: string;
+    }[]
+    | undefined;
 }
 
 export default class Writer {
     private modules: Map<string, Module> = new Map();
     private categories: Map<string, Category> = new Map();
+    private tutorialsDirPath = path.join(
+        __dirname,
+        "..",
+        "..",
+        "docs",
+        "chapters",
+        "tutorials",
+    );
 
     /**
      * Initializes a new instance of the Writer class.
@@ -388,12 +396,11 @@ export default class Writer {
                                     destinationPath,
                                     module.destinationFilePath,
                                 );
-                                fileContent += `[${
-                                    reference.text
-                                }](${relativePath.replace(
-                                    ".qmd",
-                                    ".html",
-                                )})\n\n`;
+                                fileContent += `[${reference.text
+                                    }](${relativePath.replace(
+                                        ".qmd",
+                                        ".html",
+                                    )})\n\n`;
                             }
                         }
 
@@ -407,12 +414,11 @@ export default class Writer {
                                     destinationPath,
                                     module.destinationFilePath,
                                 );
-                                fileContent += `[${
-                                    reference.text
-                                }](${relativePath.replace(
-                                    ".qmd",
-                                    ".html",
-                                )}#${reference.constructName.toLowerCase()})\n\n`;
+                                fileContent += `[${reference.text
+                                    }](${relativePath.replace(
+                                        ".qmd",
+                                        ".html",
+                                    )}#${reference.constructName.toLowerCase()})\n\n`;
                             }
                         }
 
@@ -427,12 +433,11 @@ export default class Writer {
                                     destinationPath,
                                     module.destinationFilePath,
                                 );
-                                fileContent += `[${
-                                    reference.text
-                                }](${relativePath.replace(
-                                    ".qmd",
-                                    ".html",
-                                )})\n\n`;
+                                fileContent += `[${reference.text
+                                    }](${relativePath.replace(
+                                        ".qmd",
+                                        ".html",
+                                    )})\n\n`;
                             }
                         }
 
@@ -448,12 +453,11 @@ export default class Writer {
                                     destinationPath,
                                     module.destinationFilePath,
                                 );
-                                fileContent += `[${
-                                    reference.text
-                                }](${relativePath.replace(
-                                    ".qmd",
-                                    ".html",
-                                )}#${reference.constructName.toLowerCase()})\n\n`;
+                                fileContent += `[${reference.text
+                                    }](${relativePath.replace(
+                                        ".qmd",
+                                        ".html",
+                                    )}#${reference.constructName.toLowerCase()})\n\n`;
                             }
                         }
 
@@ -558,7 +562,7 @@ export default class Writer {
                 for (const subTutorial of Object.keys(childrenTutorial)) {
                     const subTutorialData =
                         childrenTutorial[
-                            subTutorial as keyof Tutorial["children"]
+                        subTutorial as keyof Tutorial["children"]
                         ];
 
                     // Create a module for the sub-tutorial
@@ -599,7 +603,7 @@ export default class Writer {
                 subCategories.set(subCategory.name, subCategory);
                 tutorialCategory.addSubCategory(subCategory);
             } else {
-                               // Create a module for the tutorial
+                // Create a module for the tutorial
                 const module = new Module({
                     name: tutorial,
                     description: tutorialData.title,
@@ -609,19 +613,18 @@ export default class Writer {
                     },
                     references: [],
                 });
- const sourceFilePath = path.join(
-                        __dirname,
-                        "..",
-                        "..",
-                        "tutorials",
-                        module.info.name  + ".qmd",
-                    );
-                    module.setSourceFilePath(sourceFilePath);
+                const sourceFilePath = path.join(
+                    __dirname,
+                    "..",
+                    "..",
+                    "tutorials",
+                    module.info.name + ".qmd",
+                );
+                module.setSourceFilePath(sourceFilePath);
 
                 // Add the module to the modules map
                 modules.set(module.info.name, module);
                 tutorialCategory.addModule(module)
-                console.log({ sourceFilePath, check: module.sourceFilePath})
             }
         }
 
@@ -632,23 +635,103 @@ export default class Writer {
         };
     }
 
-    public async writeTutorialsToQuatoYml() {
-        const { tutorialCategory, modules } =
-            this.createModulesAndCategoriesFromTutorialsConfig();
+    private async writeTutorialToFile({ module, subCategory, tutorialCategory }: { tutorialCategory: Category, module: Module, subCategory?: SubCategory }) {
+        const sourceFilePath = module.sourceFilePath;
+
+        const subCategoryFolderPath = subCategory ? path.join(
+            this.tutorialsDirPath,
+            subCategory.name,
+        ) : undefined
+
+        if (subCategoryFolderPath) fs.mkdirSync(subCategoryFolderPath, { recursive: true });
+
+        const folderPathForTutorialsWithoutParentCategory = path.resolve(__dirname + "../../../docs/chapters/" + tutorialCategory.name)
+        const destinationFilePath = path.relative(
+            __dirname + "/../../docs/",
+            path.join(
+                subCategoryFolderPath ?? folderPathForTutorialsWithoutParentCategory,
+                `${module.info.name}.qmd`
+            )
+        );
+
+        const filePathToWrite = path.join(__dirname + "../../../docs/", destinationFilePath);
+        const directoryPath = path.dirname(filePathToWrite);
+        if (!fs.existsSync(directoryPath)) fs.mkdirSync(directoryPath, { recursive: true });
+
+        fs.writeFileSync(filePathToWrite, "", "utf8");
+
+        const subCategoryTitle = subCategory ? StringUtil.capitalizeFirstLetter(subCategory.name) : undefined
+        const moduleTitle = StringUtil.capitalizeFirstLetter(this.formatFileName(module.info.name));
+        const fileTitleBlock = subCategoryTitle ? `### ${subCategoryTitle} / ${moduleTitle}\n\n` : `### ${StringUtil.capitalizeFirstLetter(module.info.name)}\n\n`;;
+
+        // Copy the file contents
+        const fileContent = fs.readFileSync(sourceFilePath, "utf8");
+
+        logger.info('Writing tutorial to ' + filePathToWrite)
+        fs.writeFileSync(
+            filePathToWrite,
+            fileTitleBlock + fileContent,
+            "utf8"
+        );
+
+        module.setDestinationFilePath(destinationFilePath)
+
+        return module.destinationFilePath
+    }
+
+    private formatFileName(name: string) {
+        // Replace all _ with -
+        // Capitalize first capitalizeFirstLetter
+
+        return name.replace(/_/g, "-");
+    }
+
+    public async addTutorialsToGeneratedDoc() {
+        const { tutorialCategory } = this.createModulesAndCategoriesFromTutorialsConfig();
 
         logger.info("Writing tutorials to Quarto YAML");
 
-        // Create tutorials directory in docs
-        const tutorialsDirPath = path.join(
-            __dirname,
-            "..",
-            "..",
-            "docs",
-            "chapters",
-            "tutorials",
-        );
-        fs.mkdirSync(tutorialsDirPath, { recursive: true });
 
+        fs.mkdirSync(this.tutorialsDirPath, { recursive: true });
+
+
+        const chapters: Chapter[] = [];
+        const subCategories = tutorialCategory.getSubCategories();
+
+        // Create chapters for tutorials
+        for (const subCategory of subCategories) {
+            // Copy tutorials to their respective folders in the docs
+            logger.info(`Copying tutorials for ${subCategory.name}`);
+
+            const subCategoryModules = subCategory.getModules();
+            const modulesDestinationPaths: string[] = []
+            for (const module of subCategoryModules) {
+                const destinationFilePath = await this.writeTutorialToFile({ module, subCategory, tutorialCategory });
+                modulesDestinationPaths.push(destinationFilePath)
+            }
+
+            // Add chapters to the quarto.yml file
+            chapters.push({
+                part: subCategory.name,
+                chapters: modulesDestinationPaths
+            });
+        }
+
+        for (const module of tutorialCategory.getModules()) {
+            const destinationFilePath = await this.writeTutorialToFile({
+                module, tutorialCategory
+            })
+
+            chapters.push({
+                part: module.info.name,
+                chapters: [destinationFilePath]
+            });
+        }
+
+        return { addTutorialChaptersToQuartoYml: () => this.addTutorialChaptersToQuartoYml(chapters) }
+    }
+
+    public async addTutorialChaptersToQuartoYml(chapters: Chapter[]) {
         // Check if quarto.yml file exists
         const quartoYAMLPath = path.join(
             __dirname,
@@ -663,118 +746,10 @@ export default class Writer {
             return;
         }
 
+
         // Read quarto.yml file
         const quartoYAML = YAML.parse(fs.readFileSync(quartoYAMLPath, "utf8"));
 
-        const chapters: Chapter[] = [];
-
-        const subCategories = tutorialCategory.getSubCategories();
-
-        // Create chapters for tutorials
-        for (const subCategory of subCategories) {
-            const subCategoryFolderPath = path.join(
-                tutorialsDirPath,
-                subCategory.name,
-            );
-            fs.mkdirSync(subCategoryFolderPath, { recursive: true });
-
-            // Copy tutorials to their respective folders in the docs
-            logger.info(`Copying tutorials to ${subCategoryFolderPath}`);
-
-            const subCategoryModules = subCategory.getModules();
-            const categoryModules = tutorialCategory.getModules();
-            for (const module of subCategoryModules) {
-                const sourceFilePath = module.sourceFilePath;
-                let destinationFilePath = path.join(
-                    subCategoryFolderPath,
-                    `${module.info.name}.qmd`,
-                );
-                destinationFilePath = path.relative(
-                    __dirname + "/../../docs/",
-                    destinationFilePath,
-                );
-
-                const filePathToWrite = path.join(__dirname + "../../../docs/", destinationFilePath)  
-                const directoryPath = path.dirname(filePathToWrite);
-                if (!await  fs.existsSync(directoryPath)) {
-                    await   fs.mkdirSync(directoryPath, { recursive: true });
-                }
-                await fs.writeFileSync(filePathToWrite, "", "utf8");
-
-                const fileTitleBlock = `### ${StringUtil.capitalizeFirstLetter(
-                    subCategory.name,
-                )} / ${StringUtil.capitalizeFirstLetter(module.info.name)}\n\n`;
-
-                // Copy the file contents
-                const fileContent = fs.readFileSync(sourceFilePath, "utf8");
-
-                console.log({ filePathToWrite})
-                await fs.writeFileSync(
-                   filePathToWrite,
-                    fileTitleBlock + fileContent,
-                    "utf8",
-                );
-
-                // Set destination file path
-                module.setDestinationFilePath(destinationFilePath);
-            }
-
-           
-                // Add chapters to the quarto.yml file
-            const chapter = {
-                part: subCategory.name,
-                chapters: subCategoryModules.map(module => module.destinationFilePath)
-            }
-            console.log({ mainChapter: chapter})
-                chapters.push(chapter);
-        }
-        
-        for (const  module of tutorialCategory.getModules()) {
-            console.log({ modules: module.info, sourceFilePath: module.sourceFilePath})
-             const sourceFilePath = module.sourceFilePath;
-            const categoryFilePath = path.resolve(__dirname + "../../../docs/chapters/" + tutorialCategory.name)
-            console.log({ categoryFilePath})
-                let destinationFilePath = path.join(
-                    categoryFilePath,
-                    `${module.info.name}.qmd`,
-                );
-                destinationFilePath = path.relative(
-                    __dirname + "/../../docs/",
-                    destinationFilePath,
-                );
-
-                const filePathToWrite = path.join(__dirname + "../../../docs/", destinationFilePath)  
-                const directoryPath = path.dirname(filePathToWrite);
-                if (!await  fs.existsSync(directoryPath)) {
-                    await   fs.mkdirSync(directoryPath, { recursive: true });
-                }
-                await fs.writeFileSync(filePathToWrite, "", "utf8");
-
-                const fileTitleBlock = `### ${StringUtil.capitalizeFirstLetter(module.info.name)}\n\n`;
-
-                console.log({ sourceFilePath})
-                // Copy the file contents
-                const fileContent = fs.readFileSync(sourceFilePath, "utf8");
-
-                console.log({ filePathToWrite})
-                await fs.writeFileSync(
-                   filePathToWrite,
-                    fileTitleBlock + fileContent,
-                    "utf8",
-                );
-            
-                module.setDestinationFilePath(destinationFilePath)
-                const chapterInfo = {
-                    part: module.info.name,
-                    chapters: [
-                        module.destinationFilePath
-                    ]
-                }             
-                console.log({ moduleChapter: chapterInfo})
-                chapters.push(chapterInfo);
-        }
-
-        console.log({ chapters: chapters.map(ch => ch.chapters)})
         // add tutorials to quarto.yml file
         quartoYAML.book.chapters.push({
             part: "Tutorials",
@@ -783,13 +758,6 @@ export default class Writer {
 
         // Write updated quarto.yml file
         fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
-    }
-
-    private formatFileName(name: string) {
-        // Replace all _ with -
-        // Capitalize first capitalizeFirstLetter
-
-        return name.replace(/_/g, "-");
     }
 }
 
