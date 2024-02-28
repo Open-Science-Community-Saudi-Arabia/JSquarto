@@ -12,7 +12,9 @@ To use JSDoc for generating documentation, follow these steps:
 
 1. Markup Comments: Add JSDoc comments directly above the code elements you want to document. Use the /\*_ ... _/ syntax to indicate a JSDoc comment block.
 
-2. Documenting Functions: Use JSDoc tags to describe function parameters, return values, and additional information. Tags like @param, @returns, and @description are commonly used for this purpose.
+2. Documenting Functions: Use JSDoc tags to describe function parameters, return values, and additional information. Tags like @param, @returns, and @description are commonly used for this purpose. Other important custom tags are  @category and @subcategory, these tags help to structure the generated documentation into chapters. All modules under a `subcategory` will be under one chapter, the chapter name will correspond to the name assigned to the `subcategory`. 
+   The main idea around @category and @subcategory is to allow nested chapters for example one parent chapter A can have other subchapters (Chapter Aa, Chapter Ab, Chapter Ac) with each of these subchapters having their individual modules. 
+   Note that this is only two levels of nesting, with Chapter A being the @category and the @subcategory will be the  other chapters. Initially we intend to implement 2 levels of nested chapters but this as at the time of writing this quarto only allows 1 levels of nesting (i.e, you can only have 1 parent chapter with no subChapters, as a result, only the @subcategories will be displayed as chapters in the rendered document.
 
 3. Documenting Classes: For classes, use JSDoc comments to provide descriptions, document class properties, and document class methods. Tags like @class, @property, and @method are commonly used in this context.
 
@@ -38,32 +40,25 @@ To use JSDoc for writing documentation, consider the following approaches:
 
 ### Improving the MOOCs documentation with JSDoc
 
-Within the MOOCs project folder, you will find a folder named `documentation`. This folder contains the documentation for the MOOCs project, written in Markdown. The documentation is divided into several sections, including a Getting Started guide, Contribution Guide, Guide for Maintainers, Technical Guide for API developers and others. You can view the documentation in the [MOOCs documentation](https://moocs-documentation.netlify.app/) website.
 
-The MOOCs documentation is not yet complete. There are several areas that could be improved, including:
+The JSQuarto documentation is not yet complete. There are several areas that could be improved, including:
 
-- More detailed explanations of the MOOCs project structure and codebase
+- More detailed explanations of the JSQuarto project structure and codebase
 - Additional information on how to contribute to the project
-- More detailed explanations of the MOOCs API and how to use it
-- Additional information on how to maintain the MOOCs project
-- Additional information on how to deploy the MOOCs project
-- Project roadmap and future plans.
+- Implementing JSQuarto as a CLI tool 
+- Additional information on how to maintain the JSQuarto project
+- Additional information on how to deploy the JSQuarto project
+- Project roadmap and future plans
 
-To improve the MOOCs documentation, you can use JSDoc to add additional documentation directly within the codebase. This will allow you to provide more detailed explanations of the code and project structure, as well as additional information on how to contribute to the project, how to use the MOOCs API, and how to maintain and deploy the project. As at the time of writing this, the documentation was built with other packages to improve the User interface, one of which is [Better-docs](https://github.com/SoftwareBrothers/better-docs).
+To improve the JSQuarto documentation, you can use JSDoc to add additional documentation directly within the codebase. This will allow you to provide more detailed explanations of the code and project structure, as well as additional information on how to contribute to the project, how to use the JSQuarto API, and how to maintain and deploy the project. As at the time of writing this, the documentation was built with other packages to improve the User interface, one of which is [Better-docs](https://github.com/SoftwareBrothers/better-docs).
 
 ### Tutorials guide
 
-This section provides an overview of the `.json` files used in the MOOCs documentation, specifically focusing on the `tutorials` folder. The `.json` files serve as configuration files that help structure and organize the documentation, while the `tutorials` folder contains the Markdown files for various tutorials.
-
-#### Overview of `.json` Files
-
-The `.json` files in the MOOCs documentation play a crucial role in organizing and categorizing the content. These files define the structure of the documentation and provide metadata for each section, tutorial, or topic. They allow maintainers and contributors to easily navigate and manage the documentation by specifying titles, creating nested structures, and linking related topics.
-
-By using `.json` files, the documentation can be dynamically generated and updated based on the defined structure. This makes it easier to maintain consistency, track changes, and add new content.
+This section provides an overview of the `config.json` files used in the JSQuarto documentation, specifically focusing on the `tutorials` folder. The `config.json` file serve as configuration files that help structure and organize the documentation, while the `tutorials` folder contains the Markdown files for various tutorials.
 
 #### The `tutorials` Folder
 
-The `tutorials` folder within the documentation directory is dedicated to hosting tutorials on various topics related to the MOOCs platform. This folder contains a collection of Markdown files, each representing an individual tutorial.
+The `tutorials` folder within the documentation directory is dedicated to hosting tutorials on various topics related to the JSQuarto platform. This folder contains a collection of Markdown files, each representing an individual tutorial.
 
 Markdown is a lightweight markup language that allows for easy formatting and structuring of text, making it ideal for creating tutorials. Markdown files provide a simple yet powerful way to document step-by-step instructions, code examples, explanations, and other relevant information.
 
@@ -71,13 +66,17 @@ The `tutorials` folder can be organized into subfolders to further categorize an
 
 By structuring tutorials within the `tutorials` folder using Markdown, contributors can contribute new tutorials, update existing ones, and ensure that the documentation remains comprehensive and user-friendly.
 
-Overall, the combination of `.json` files and the `tutorials` folder enables a well-organized and accessible documentation structure, allowing users to navigate and explore the MOOCs platform documentation with ease.
+Overall, the combination of `.json` files and the `tutorials` folder enables a well-organized and accessible documentation structure, allowing users to navigate and explore the JSQuarto platform documentation with ease.
+
+#### Overview of `config.json` Files
+
+The `config.json` file in the JSQuarto documentation play a crucial role in organizing and categorizing the content. This file define the structure of the documentation and provide metadata for each section, tutorial, or topic. They allow maintainers and contributors to easily navigate and manage the documentation by specifying titles, creating nested structures, and linking related topics.
+
+By using `config.json` file, the documentation can be dynamically generated and updated based on the defined structure. This makes it easier to maintain consistency, track changes, and add new content.
+
 
 #### The `.json` configuration
-
-The `.json` configuration files are used to define the structure of the documentation and provide metadata for each section, tutorial, or topic. They allow maintainers and contributors to easily navigate and manage the documentation by specifying titles, creating nested structures, and linking related topics.
-
-Let's explain how this structure works by looking at the `tutorials.json` file in the `documentation / docs / tutorials /` folder. This file defines the structure of the tutorials section of the documentation, including the titles, descriptions links for each tutorial.
+Let's explain how this structure works by looking at the `config.json` file in the `tutorials /` folder. This file defines the structure of the tutorials section of the documentation, including the titles, descriptions links for each tutorial.
 
 ```json
 {
@@ -94,8 +93,6 @@ Let's explain how this structure works by looking at the `tutorials.json` file i
 ```
 
 In this example, the `.json` file defines the titles and relationships of the main sections within your documentation. The sections are represented as objects, with each object having a unique key and a `"title"` key-value pair.
-Here's how to understand this structure:
-
 1. "changelog" represents the "Changelog" section. The `"title"` key-value pair specifies the title of this section as "Changelog."
 
 2. "environment_setup" represents the "Environment Setup" section. The `"title"` key-value pair specifies the title of this section as "Environment Setup."
@@ -143,29 +140,37 @@ To structure tutorials and create nested tutorials within your documentation, yo
             }
         }
     },
-    "api": {
-        "title": "Technical guide for API developers",
+    "contributing": {
+        "title": "Contributing to the project",
         "children": {
-            "api_structure": {
-                "title": "API structure"
+            "adding_a_course": {
+                "title": "Adding a course"
             },
-            "api_authentication_flow": {
-                "title": "API authentication flow"
+            "api_project_structure": {
+                "title": "API project structure"
             },
-            "jwt_token_management": {
-                "title": "JWT token management"
+            "improving_documentation": {
+                "title": "Improving documentation"
             },
-            "rbac_handler_flow": {
-                "title": "Role based access control flow"
+            "project_structure": {
+                "title": "Project structure"
+            },
+            "raising_issues": {
+                "title": "Raising issues"
+            },
+            "raising_pr": {
+                "title": "Raising pull requests"
             }
         }
+    },
+    "review": {
+        "title": "Reviewing the project"
     }
-}
-```
+ ```
 
 In this example, the `.json` file represents a documentation structure with two main sections: "Technical guide for Maintainers" and "Technical guide for API developers". Each section has its own set of tutorials represented as nested objects.
 
-1. Define the main sections or categories as top-level objects within the `.json` file, such as "maintainers" and "api".
+1. Define the main sections or categories as top-level objects within the `.json` file, such as "maintainers" and "contributing".
 
 2. Within each main section, provide a `"title"` key to specify the title or heading for that section. For example, "Technical guide for Maintainers" and "Technical guide for API developers".
 
@@ -175,38 +180,38 @@ In this example, the `.json` file represents a documentation structure with two 
 
 5. Within each tutorial object, include a `"title"` key to specify the title or heading for that specific tutorial.
 
-For this example here is what the folder structure would look like assuming the root folder is `documentation / docs / tutorials /`:
+For this example here is what the folder structure would look like assuming the root folder is `tutorials /`:
 
 ```yaml
-- documentation/
-    - docs/
         - tutorials/
             - maintainers/
-                - maintainers.md
-                - reviewing_pr.md
-                - ci_workflow.md
-                - secrets_and_security.md
-                - deployment_guide.md
+                - maintainers.qmd
+                - reviewing_pr.qmd
+                - ci_workflow.qmd
+                - secrets_and_security.qmd
+                - deployment_guide.qmd
 
-            - api/
+            - contributing/
                 - api.md
                 - api_structure.md
-                - api_authentication_flow.md
-                - jwt_token_management.md
-                - rbac_handler_flow.md
-
+                - api_authentication_flow.qmd
+                - jwt_token_management.qmd
+                - rbac_handler_flow.qmd
+            
+            - review.qmd
+              
             - tutorials.json
 ```
 
 In this structure:
 
-- The `.json` configuration file is located in the `tutorials.json`
+- The `.json` configuration file is located in the `tutorials/` folder
 - The `tutorials` folder contains subfolders representing different sections or categories of tutorials.
-- Each section or category folder, such as `maintainers` and `api`, contains the `.md` files for individual tutorials.
-- Additionally, for each section or category folder, there should be an accompanying `*.md` file that serves as the entry overview, providing an overview of the tutorials within that section. For example, `maintainers.md` provides an overview of the tutorials in the "Technical guide for Maintainers" section.
+- Each section or category folder, such as `maintainers` and `contributing`, contains the `.qmd` files for individual tutorials.
+<!-- - Additionally, for each section or category folder, there should be an accompanying `*.md` file that serves as the entry overview, providing an overview of the tutorials within that section. For example, `maintainers.md` provides an overview of the tutorials in the "Technical guide for Maintainers" section. -->
 
 The nested structure allows you to organize tutorials hierarchically, making it easier to navigate and find specific tutorials based on their topic or category.
 
 It's important to note that the tutorial structure allows only one level of nesting. This means you can have main sections and their respective tutorials, but you cannot create further nested folders within the tutorials.
 
-By following this folder structure and accompanying `.md` overview files, you can easily define the hierarchy and relationships between tutorials, allowing you to create nested tutorials and organize your documentation in a logical and structured manner.
+By following this folder structure and accompanying `.qmd` overview files, you can easily define the hierarchy and relationships between tutorials, allowing you to create nested tutorials and organize your documentation in a logical and structured manner.
