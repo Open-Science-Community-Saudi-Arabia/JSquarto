@@ -191,8 +191,9 @@ function start(sourceFolderPath: string) {
         defaultCategory.addModule(defaultFileModule);
     }
 
+    const tutorial = process.env.npm_config_tutorial ? path.join(__dirname, '..', process.env.npm_config_tutorial) : undefined
     // Generate documentation directory and files
-    new Writer(modules, categories)
+    new Writer(modules, categories, { tutorial })
         .prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile()
         .addTutorialsToGeneratedDoc()
