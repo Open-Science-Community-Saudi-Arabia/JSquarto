@@ -206,7 +206,7 @@ function start(sourceFolderPath: string) {
 }
 
 // Access the path argument provided via command line
-const providedPath = process.argv[2];
+const providedPath = process.env.npm_config_source
 
 // Use providedPath if available, otherwise fallback to a default path
 const path_ = providedPath
