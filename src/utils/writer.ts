@@ -37,14 +37,8 @@ interface Chapter {
 export default class Writer {
     private modules: Map<string, Module> = new Map();
     private categories: Map<string, Category> = new Map();
-    private tutorialsDirPath = path.join(
-        __dirname,
-        "..",
-        "..",
-        "docs",
-        "chapters",
-        "tutorials",
-    );
+    private tutorialsSourcePath: string;
+    private tutorialsDirPath: string;
 
     /**
      * Initializes a new instance of the Writer class.
@@ -55,9 +49,27 @@ export default class Writer {
     constructor(
         modules: Map<string, Module>,
         categories: Map<string, Category>,
+        pathConfig: Partial<{
+            tutorial: string,
+            sourceFiles: string,
+        }> = {}
     ) {
         this.modules = modules;
         this.categories = categories;
+        this.tutorialsDirPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "docs",
+            "chapters",
+            "tutorials"
+        );
+        this.tutorialsSourcePath = pathConfig.tutorial ?? path.join(
+            __dirname,
+            "..",
+            "..",
+            "tutorials",
+        );
     }
 
     /**
@@ -172,10 +184,7 @@ export default class Writer {
     private createModulesAndCategoriesFromTutorialsConfig(): { modules: Map<string, Module>; tutorialCategory: Category; } {
         // Get the path to the tutorials configuration file
         const tutorialsConfigPath = path.join(
-            __dirname,
-            "..",
-            "..",
-            "tutorials",
+            this.tutorialsSourcePath,
             "config.json",
         );
 
@@ -227,10 +236,7 @@ export default class Writer {
                     });
                     // Get sourceFilePath from where the tutorial is located
                     const sourceFilePath = path.join(
-                        __dirname,
-                        "..",
-                        "..",
-                        "tutorials",
+                        this.tutorialsSourcePath,
                         tutorial + "/" + subTutorial + ".qmd",
                     );
                     module.setSourceFilePath(sourceFilePath);
@@ -264,10 +270,7 @@ export default class Writer {
                     references: [],
                 });
                 const sourceFilePath = path.join(
-                    __dirname,
-                    "..",
-                    "..",
-                    "tutorials",
+                    this.tutorialsSourcePath,
                     module.info.name + ".qmd",
                 );
                 module.setSourceFilePath(sourceFilePath);

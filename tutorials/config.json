@@ -24,5 +24,19 @@
     },
     "localization": {
         "title": "Localization"
+    },
+    "how_to": {
+        "title": "How to",
+        "children": {
+            "adding_tutorials": {
+                "title": "Adding tutorials"
+            },
+            "optimizing_workflow": {
+                "title": "Optimize your workflow"
+            },
+            "starting_the_project": {
+                "title": "Starting a new build"
+            }
+        }
     }
 }

@@ -191,8 +191,9 @@ function start(sourceFolderPath: string) {
         defaultCategory.addModule(defaultFileModule);
     }
 
+    const tutorial = process.env.npm_config_tutorial ? path.join(__dirname, '..', process.env.npm_config_tutorial) : undefined
     // Generate documentation directory and files
-    new Writer(modules, categories)
+    new Writer(modules, categories, { tutorial })
         .prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile()
         .addTutorialsToGeneratedDoc()
@@ -206,7 +207,7 @@ function start(sourceFolderPath: string) {
 }
 
 // Access the path argument provided via command line
-const providedPath = process.argv[2];
+const providedPath = process.env.npm_config_source
 
 // Use providedPath if available, otherwise fallback to a default path
 const path_ = providedPath
