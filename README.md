@@ -6,15 +6,14 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://moocs-documentation.netlify.app/"><strong>Explore the docs »</strong></a>
-    <a href="https://documenter.getpostman.com/view/20633788/2s93JwMgmb"><strong>API Docs</strong></a>
+    <a href="https://jsquarto.netlify.app/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://moocs-client.netlify.app/">View Demo</a>
+    <a href="https://jsquarto.netlify.app/">View Demo</a>
     ·
-    <a href="https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/issues">Report Bug</a>
+    <a href="https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/issues">Request Feature</a>
+    <a href="https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues">Request Feature</a>
   </p>
 </div>
 <br/>
