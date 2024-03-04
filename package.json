@@ -10,7 +10,6 @@
         "doc:clean": "rm -rf ./docs",
         "setup-quarto": "git clone https://github.com/quarto-dev/quarto-cli && cd quarto-cli && ./configure.sh",
         "update-quarto": "cd quarto-cli && git pull",
-        "prebuild": "npm run setup-quarto",
         "build": "npm run doc:generate && npm run doc:preview"
     },
     "keywords": [],

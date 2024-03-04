@@ -1,6 +1,23 @@
-# JSquarto
+<h1 align="center">JSQuarto</h1>
 
-Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc
+<div align="center">
+    Generate JS package API reference documentation using Markdown and Quarto.
+</div>
+<br />
+<div align="center">
+  <p align="center">
+    <a href="https://moocs-documentation.netlify.app/"><strong>Explore the docs »</strong></a>
+    <a href="https://documenter.getpostman.com/view/20633788/2s93JwMgmb"><strong>API Docs</strong></a>
+    <br />
+    <br />
+    <a href="https://moocs-client.netlify.app/">View Demo</a>
+    ·
+    <a href="https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/issues">Request Feature</a>
+  </p>
+</div>
+<br/>
 
 ### Testing Your Tool Locally
 
@@ -60,3 +77,5 @@ You can choose to generate and preview in one go, to do this run the command bel
     `
 
 This will generate the documentation, preview with quarto and open a link to preview the docs
+
+For more details on using JSquarto and to see an example of the generated documentation, visit the [JSQuarto documentation](https://jsquarto.netlify.app/)
