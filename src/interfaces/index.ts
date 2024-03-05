@@ -5,7 +5,7 @@ export interface ModuleBlockInfo {
     description: string;
     category?: {
         name: string;
-        subCategory: string;
+        subCategory?: string;
     };
     link?: string;
     references: ValueOf<Reference>[];
@@ -37,7 +37,6 @@ export type ReferenceText =
     | ReferenceTextToLocalModuleConstruct
     | ReferenceTextToExternalModule;
 
-
 export interface ReferenceTextType {
     localModule: ReferenceTextToLocalModule;
     externalModule: ReferenceTextToExternalModule;
@@ -45,26 +44,26 @@ export interface ReferenceTextType {
     localModuleAndConstruct: ReferenceTextToLocalModuleConstruct;
     externalModuleWithSubcategoryAndConstruct: ReferenceTextToExternalModuleConstruct;
     externalModuleWithSubcategory: ReferenceTextToExternalModule;
-    link: string
+    link: string;
 }
 export interface Reference {
     localModule: {
         text: ReferenceTextType["localModule"];
-        type: "localModule"
+        type: "localModule";
         moduleName: string;
         categoryName: string;
         subCategoryName: string;
     };
     externalModule: {
         text: ReferenceTextType["externalModule"];
-        type: "externalModule"
+        type: "externalModule";
         moduleName: string;
         categoryName: string;
         subCategoryName: string;
     };
     externalModuleAndConstruct: {
         text: ReferenceTextType["externalModuleAndConstruct"];
-        type: "externalModuleAndConstruct"
+        type: "externalModuleAndConstruct";
         moduleName: string;
         constructName: string;
         categoryName: string;
@@ -72,7 +71,7 @@ export interface Reference {
     };
     localModuleAndConstruct: {
         text: ReferenceTextType["localModuleAndConstruct"];
-        type: "localModuleAndConstruct"
+        type: "localModuleAndConstruct";
         moduleName: string;
         constructName: string;
         categoryName: string;
@@ -80,7 +79,7 @@ export interface Reference {
     };
     externalModuleWithSubcategoryAndConstruct: {
         text: ReferenceTextType["externalModuleAndConstruct"];
-        type: "externalModuleWithSubcategoryAndConstruct"
+        type: "externalModuleWithSubcategoryAndConstruct";
         moduleName: string;
         constructName: string;
         categoryName: string;
@@ -88,16 +87,16 @@ export interface Reference {
     };
     externalModuleWithSubcategory: {
         text: ReferenceTextType["externalModule"];
-        type: "externalModuleWithSubcategory"
+        type: "externalModuleWithSubcategory";
         moduleName: string;
         categoryName: string;
         subCategoryName: string;
     };
     link: {
         text: string;
-        type: "link"
+        type: "link";
         url: string;
-    }
+    };
 }
 
 export type ReferenceType = keyof Reference;

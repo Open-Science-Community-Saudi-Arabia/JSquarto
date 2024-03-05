@@ -7,6 +7,9 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "doc:generate": "ts-node-dev --transpile-only --project tsconfig.json ./src/index.ts",
         "doc:preview": "quarto preview ./docs",
+        "doc:clean": "rm -rf ./docs",
+        "setup-quarto": "git clone https://github.com/quarto-dev/quarto-cli && cd quarto-cli && ./configure.sh",
+        "update-quarto": "cd quarto-cli && git pull",
         "build": "npm run doc:generate && npm run doc:preview"
     },
     "keywords": [],
@@ -14,9 +17,14 @@
     "license": "ISC",
     "dependencies": {
         "acorn": "^8.11.3",
+        "cross-env": "^7.0.3",
         "fs": "^0.0.1-security",
         "ts-node-dev": "^2.0.0",
+        "uuid": "^9.0.1",
         "winston": "^3.11.0",
         "yaml": "^2.3.4"
+    },
+    "devDependencies": {
+        "@types/uuid": "^9.0.8"
     }
 }

@@ -1,4 +1,9 @@
 /**
+ * @module ConstructIdentifier
+ * @subcategory Utilities
+ * @category Functional Doc
+ *
+ * @description
  * The class called ConstructIdentifier, contains methods to identify different types of code constructs
  * (such as functions, variables, classes, and modules) within a line of code.
  * These methods help in extracting and determining the names associated with each construct type.
@@ -6,8 +11,17 @@
 
 import { ConstructType } from "../interfaces";
 
+/**
+ * Utility class for identifying constructs (functions, variables, classes, modules) in code.
+ */
 export class ConstructIdentifier {
     // Get the name of the module construct
+    /**
+     * @description  Retrieves the name of the module construct from a given line of code.
+     *
+     * @param {string} line - The line of code to parse.
+     * @returns {string | null} The name of the module construct if found, otherwise null.
+     */
     private static getExportsConstructName(line: string): string | null {
         const exportsRegex =
             /^exports\.(\w+)\s*=\s*function\s*\(.*\)|exports.(\w+)\s*=\s*\([\s\S]*?\)\s*=>|exports.(\w+)\s*=\s*async\s*\([\s\S]*?\)\s*=>/;
@@ -23,6 +37,12 @@ export class ConstructIdentifier {
     }
 
     // Get the name of the function construct
+    /**
+     * @description  Retrieves the name of the function construct from a given line of code.
+     *
+     * @param {string} line - The line of code to parse.
+     * @returns {string | null} The name of the function construct if found, otherwise null.
+     */
     private static getFunctionConstructName(line: string): string | null {
         // Check for async arrow functions i.e  const variableX = async (param1, param2) => {}
         let match = line.match(/const\s+(\w+)\s*=\s*async\s*\(.*\)\s*=>/);
@@ -78,6 +98,12 @@ export class ConstructIdentifier {
     }
 
     // Get the name of the variable construct
+    /**
+     * Retrieves the name of the variable construct from a given line of code.
+     *
+     * @param {string} line - The line of code to parse.
+     * @returns {string | null} The name of the variable construct if found, otherwise null.
+     */
     private static getVariableConstructName(line: string): string | null {
         const variableRegex = /\b(const|let|var)\s+(\w+)/;
 
@@ -87,6 +113,12 @@ export class ConstructIdentifier {
     }
 
     // Get the name of the class construct
+    /**
+     * @description Retrieves the name of the class construct from a given line of code.
+     *
+     * @param {string} line - The line of code to parse.
+     * @returns {string | null} The name of the class construct if found, otherwise null.
+     */
     private static getClassConstructName(line: string): string | null {
         const classRegex = /\bclass\s+(\w+)/;
 
@@ -95,7 +127,12 @@ export class ConstructIdentifier {
         return match ? match[1] || null : null;
     }
 
-    static getConstructType(text: string): ConstructType {
+    /**
+     * @description Identifies the type of construct (function, variable, class, module, other) from the given code text.
+     *
+     * @param {string} text - The code text to analyze.
+     * @returns {ConstructType} The type of construct identified.
+     */ static getConstructType(text: string): ConstructType {
         // Check if the remaining code contains a function declaration
         const functionRegex =
             /(\basync\s+)?\bfunction\b|^exports\.\w+\s*=\s*async\s*\(.*\)\s*=>|\bconst\b\s*\w+\s*=\s*async\s*\(.*\)\s*=>|\b\w+\s*=\s*function\s*\(|\b\w+\s*=\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*async\s*\([\s\S]*?\)\s*=>|\b\w+\s*=\s*function\s*[\s\S]*?\(|\b\w+\s*=\s*\([\s\S]*?\)\s*=>/;
@@ -129,6 +166,12 @@ export class ConstructIdentifier {
         return "other";
     }
 
+    /**
+     * @description  Retrieves the name of the construct from the given code text.
+     *
+     * @param {string} text - The code text to analyze.
+     * @returns {string | null} The name of the construct if found, otherwise null.
+     */
     static getConstructName(text: string) {
         const type = this.getConstructType(text);
 
