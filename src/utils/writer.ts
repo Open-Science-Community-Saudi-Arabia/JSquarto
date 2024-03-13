@@ -326,7 +326,7 @@ export default class Writer {
 
         const subCategoryTitle = subCategory ? StringUtil.capitalizeFirstLetter(subCategory.name) : undefined
         const moduleTitle = StringUtil.capitalizeFirstLetter(this.formatFileName(module.info.name));
-        const fileTitleBlock = subCategoryTitle ? `### ${subCategoryTitle} / ${moduleTitle}\n\n` : `### ${StringUtil.capitalizeFirstLetter(module.info.name)}\n\n`;;
+        const fileTitleBlock = subCategoryTitle ? `###${moduleTitle}\n\n` : `### ${StringUtil.capitalizeFirstLetter(module.info.name)}\n\n`;;
 
         // Copy the file contents
         const fileContent = fs.readFileSync(sourceFilePath, "utf8");
