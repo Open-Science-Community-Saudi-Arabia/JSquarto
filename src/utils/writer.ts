@@ -124,6 +124,61 @@ export default class Writer {
         }
     }
 
+    public addLanguageSpecsToQuartoConfig(languages: string[]) {
+        const configToAdd = {
+            babelquarto: {
+                languagecodes: languages.map(language => ({
+                    name: language,
+                    text: `Version in ${language}`
+                })),
+                mainlanguage: 'en',
+                languages
+            },
+            lang: 'en'
+        }
+
+        const landDesc = {} as Record<string, string>
+
+        languages.forEach(language => {
+            landDesc['title-' + language] = 'title in ' + language
+            landDesc['description-' + language] = 'description in ' + language
+            landDesc['author-' + language] = 'author in ' + language
+        })
+
+        const config = {
+            ...configToAdd,
+            ...landDesc
+        }
+
+        // Wirte this config to the end of the quarto file
+        const quartoYAMLPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "docs",
+            "_quarto.yml",
+        );
+
+        // Check if quarto.yml file exists
+        if (!fs.existsSync(quartoYAMLPath)) {
+            logger.error("Quarto YAML file does not exist");
+            return;
+        }
+
+        // Read quarto.yml file
+        const quartoYAML = YAML.parse(fs.readFileSync(quartoYAMLPath, "utf8"));
+
+        // add tutorials to quarto.yml file
+        quartoYAML.babelquarto = config;
+
+        // Write updated quarto.yml file
+        fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
+    }
+
+    public createCorrespondingFilesForDifferenceLanguages(languages: string[]) {
+        // Check through all the qmd files in the docs folder and create a copy for each language
+        // it should
+    }
     /**
      * Retrieves the directory structure for documentation.
      *
@@ -720,7 +775,7 @@ export default class Writer {
      * 
      * @returns { { addTutorialChaptesToQuartoYml: () => {}}}
      */
-    public async addTutorialsToGeneratedDoc(): Promise<{ addTutorialChaptersToQuartoYml: () => Promise<void>; }> {
+    public async addTutorialsToGeneratedDoc() {
         const { tutorialCategory } = this.createModulesAndCategoriesFromTutorialsConfig();
 
         logger.info("Writing tutorials to Quarto YAML");
@@ -759,7 +814,8 @@ export default class Writer {
             });
         }
 
-        return { addTutorialChaptersToQuartoYml: () => this.addTutorialChaptersToQuartoYml(chapters) }
+        // return { addTutorialChaptersToQuartoYml: () => this.addTutorialChaptersToQuartoYml(chapters) }
+        return chapters
     }
 
     /**
