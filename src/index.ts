@@ -201,6 +201,7 @@ async function start(sourceFolderPath: string, langs?: string[]) {
     await writer.addTutorialChaptersToQuartoYml(chapters)
 
     if (langs) {
+        console.log('Running with languages')
         await writer.addLanguageSpecsToQuartoConfig(langs)
     }
 
@@ -210,11 +211,12 @@ async function start(sourceFolderPath: string, langs?: string[]) {
 
 // Access the path argument provided via command line
 const providedPath = process.env.npm_config_source
-const langs = process.env.npm_lang?.split(',')
+const langs = process.env.npm_config_langs?.split(',')
+console.log({ langs })
 
 // Use providedPath if available, otherwise fallback to a default path
 const path_ = providedPath
     ? __dirname + `/../${providedPath}`
     : __dirname + `/../source_files`;
 
-start(path_);
+start(path_, langs);

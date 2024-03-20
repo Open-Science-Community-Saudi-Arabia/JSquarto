@@ -170,6 +170,7 @@ export default class Writer {
 
         // add tutorials to quarto.yml file
         quartoYAML.babelquarto = config;
+        console.log({ config})
 
         // Write updated quarto.yml file
         fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
