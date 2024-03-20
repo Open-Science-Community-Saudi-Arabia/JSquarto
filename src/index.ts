@@ -61,7 +61,7 @@ function getJSFilesFromDirectory(
  *
  * @returns void
  */
-function start(sourceFolderPath: string) {
+async function start(sourceFolderPath: string, langs?: string[]) {
     // Get JavaScript files from directory
     const filePaths = getJSFilesFromDirectory(sourceFolderPath);
 
@@ -193,21 +193,24 @@ function start(sourceFolderPath: string) {
 
     const tutorial = process.env.npm_config_tutorial ? path.join(__dirname, '..', process.env.npm_config_tutorial) : undefined
     // Generate documentation directory and files
-    new Writer(modules, categories, { tutorial })
+    const writer = new Writer(modules, categories, { tutorial })
         .prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile()
-        .addTutorialsToGeneratedDoc()
-        .then(r => {
-            r.addTutorialChaptersToQuartoYml()
-            logger.info("Documentation generation complete");
-        })
 
+    const chapters = await writer.addTutorialsToGeneratedDoc()
+    await writer.addTutorialChaptersToQuartoYml(chapters)
 
+    if (langs) {
+        await writer.addLanguageSpecsToQuartoConfig(langs)
+    }
+
+    logger.info("Documentation generation complete");
     // process.exit(0);
 }
 
 // Access the path argument provided via command line
 const providedPath = process.env.npm_config_source
+const langs = process.env.npm_lang?.split(',')
 
 // Use providedPath if available, otherwise fallback to a default path
 const path_ = providedPath
