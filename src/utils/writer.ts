@@ -166,14 +166,49 @@ export default class Writer {
         }
 
         // Read quarto.yml file
-        const quartoYAML = YAML.parse(fs.readFileSync(quartoYAMLPath, "utf8"));
+        let quartoYAML = YAML.parse(fs.readFileSync(quartoYAMLPath, "utf8"));
 
         // add tutorials to quarto.yml file
-        quartoYAML.babelquarto = config;
-        console.log({ config})
+        quartoYAML = { ...quartoYAML, ...config };
+        console.log({ config })
 
         // Write updated quarto.yml file
         fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
+
+        return this
+    }
+
+    public createLocalizedFilesForEachLanguage(languages: string[]) {
+        // Check through all the qmd files in the docs folder and create a copy for each language
+        // it should follow this format `filename-lang.language.qmd`
+        const docsFolderPath = path.join(__dirname, "..", "..", "docs");
+        const files = fs.readdirSync(docsFolderPath);
+        languages = languages.filter(language => language !== 'en')
+
+        const actOnFilesInFolderRecursively = (folderPath: string,) => {
+            const files = fs.readdirSync(folderPath);
+            for (const file of files) {
+                const filePath = path.join(folderPath, file);
+                if (fs.statSync(filePath).isDirectory()) {
+                    actOnFilesInFolderRecursively(filePath)
+                    continue
+                }
+
+                const fileExtension = path.extname(file);
+                const fileName = path.basename(file, fileExtension);
+
+                if (fileName === '_quarto') continue
+
+                for (const language of languages) {
+                    const localizedFileName = `${fileName}.${language}${fileExtension}`;
+                    const localizedFilePath = path.join(folderPath, localizedFileName);
+                    fs.copyFileSync(filePath, localizedFilePath);
+                }
+            }
+        }
+
+        // Act on files in the docs folder
+        actOnFilesInFolderRecursively(docsFolderPath)
     }
 
     public createCorrespondingFilesForDifferenceLanguages(languages: string[]) {
@@ -853,6 +888,8 @@ export default class Writer {
 
         // Write updated quarto.yml file
         fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
+
+        return this
     }
 }
 
