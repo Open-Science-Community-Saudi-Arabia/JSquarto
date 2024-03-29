@@ -26,12 +26,12 @@ import { StringUtil } from "./string";
 interface Chapter {
     part: string;
     chapters:
-        | string[]
-        | {
-              title: string;
-              path: string;
-          }[]
-        | undefined;
+    | string[]
+    | {
+        title: string;
+        path: string;
+    }[]
+    | undefined;
 }
 
 export default class Writer {
@@ -67,6 +67,18 @@ export default class Writer {
         this.tutorialsSourcePath =
             pathConfig.tutorial ??
             path.join(__dirname, "..", "..", "tutorials");
+    }
+
+    /**
+   * @description Formats file names by removing all underscores `(_)`
+   * @param name
+   * @returns
+   */
+    private formatFileName(name: string) {
+        // Replace all _ with -
+        // Capitalize first capitalizeFirstLetter
+
+        return name.replace(/_/g, "-");
     }
 
     /**
@@ -121,146 +133,6 @@ export default class Writer {
         }
     }
 
-    public addLanguageSpecsToQuartoConfig(languages: string[]) {
-        const configToAdd = {
-            babelquarto: {
-                languagecodes: languages.map((language) => ({
-                    name: language,
-                    text: `Version in ${language}`,
-                })),
-                mainlanguage: "en",
-                languages,
-            },
-            lang: "en",
-        };
-
-        const landDesc = {} as Record<string, string>;
-
-        languages.forEach((language) => {
-            landDesc["title-" + language] = "Title in " + language;
-            landDesc["description-" + language] = "Description in " + language;
-            landDesc["author-" + language] = "Author in " + language;
-        });
-
-        const config = {
-            ...configToAdd,
-            ...landDesc
-        }
-
-        // Wirte this config to the end of the quarto file
-        const quartoYAMLPath = path.join(
-            __dirname,
-            "..",
-            "..",
-            "docs",
-            "_quarto.yml",
-        );
-
-        // Check if quarto.yml file exists
-        if (!fs.existsSync(quartoYAMLPath)) {
-            logger.error("Quarto YAML file does not exist");
-            return;
-        }
-
-        // Read quarto.yml file
-        let quartoYAML = YAML.parse(fs.readFileSync(quartoYAMLPath, "utf8"));
-
-        // add tutorials to quarto.yml file
-        quartoYAML = { ...quartoYAML, ...config };
-        console.log({ config })
-
-        // Write updated quarto.yml file
-        fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
-
-        return this
-    }
-
-    public createLocalizedFilesForEachLanguage(languages: string[]) {
-        // Check through all the qmd files in the docs folder and create a copy for each language
-        // it should follow this format `filename-lang.language.qmd`
-        const docsFolderPath = path.join(__dirname, "..", "..", "docs");
-        const files = fs.readdirSync(docsFolderPath);
-        languages = languages.filter(language => language !== 'en')
-
-        const localizeFilesInFolder = (folderPath: string) => {
-            const files = fs.readdirSync(folderPath);
-            for (const file of files) {
-                const filePath = path.join(folderPath, file);
-                if (fs.statSync(filePath).isDirectory()) {
-                    localizeFilesInFolder(filePath);
-                    continue;
-                }
-
-                const fileExtension = path.extname(file);
-                const fileName = path.basename(file, fileExtension);
-
-                if (fileName === "_quarto") continue;
-
-                for (const language of languages) {
-                    const localizedFileName = `${fileName}.${language}${fileExtension}`;
-                    const localizedFilePath = path.join(
-                        folderPath,
-                        localizedFileName
-                    );
-                    fs.copyFileSync(filePath, localizedFilePath);
-                }
-            }
-        };
-
-        // Act on files in the docs folder
-        localizeFilesInFolder(docsFolderPath);
-    }
-
-    /**
-     * Retrieves the directory structure for documentation.
-     *
-     * @returns {Object} An object representing the directory structure.
-     * @description This method retrieves the directory structure for documentation and returns an object representing it.
-     */
-    public getDirectoryForDocs(): object {
-        const categories = Array.from(this.categories.values());
-        const result: {
-            [key: string]: {
-                path: string;
-                modules: { path: string; name: string }[];
-            };
-        } = {};
-
-        const folderPathToWrite = path.join(
-            __dirname,
-            "..",
-            "..",
-            "docs",
-            "chapters",
-        );
-
-        for (const category of categories) {
-            const categoryFolderPath = path.join(
-                folderPathToWrite,
-                category.name,
-            );
-
-            for (const subCategory of category.subCategories) {
-                const subCategoryFolderPath = path.join(
-                    categoryFolderPath,
-                    subCategory.name,
-                );
-
-                result[subCategory.name] = {
-                    path: subCategoryFolderPath,
-                    modules: subCategory.getModules().map((module) => {
-                        return {
-                            path: subCategoryFolderPath,
-                            name: module.info.name,
-                        };
-                    }),
-                };
-            }
-        }
-
-        return result;
-    }
-
     /**
      * Creates modules and categories based on configuration from `/tutorials/config.json`
      *
@@ -311,7 +183,7 @@ export default class Writer {
                 for (const subTutorial of Object.keys(childrenTutorial)) {
                     const subTutorialData =
                         childrenTutorial[
-                            subTutorial as keyof Tutorial["children"]
+                        subTutorial as keyof Tutorial["children"]
                         ];
 
                     // Create a module for the sub-tutorial
@@ -439,108 +311,6 @@ export default class Writer {
         module.setDestinationFilePath(destinationFilePath)
 
         return module.destinationFilePath
-    }
-
-    // Create directory structure for documentation
-    /**
-     * Prepares the directory structure for documentation.
-     *
-     * @returns {Writer} The current Writer instance.
-     * @description This method prepares the directory structure for documentation by creating necessary folders and files.
-     */
-    public prepareDirectoryForDocs(): Writer {
-        const categories = Array.from(this.categories.values());
-
-        const folderPathToWrite = path.join(
-            __dirname,
-            "..",
-            "..",
-            "docs",
-            "chapters",
-        );
-
-        try {
-            fs.mkdirSync(folderPathToWrite, { recursive: true });
-            logger.info(`Documentation folder created: ${folderPathToWrite}`);
-
-            const chapters: Chapter[] = [];
-
-            for (const category of categories) {
-                const categoryFolderPath = path.join(
-                    folderPathToWrite,
-                    category.name,
-                );
-                fs.mkdirSync(categoryFolderPath, { recursive: true });
-                // Add index.qmd file to category folder
-                fs.writeFileSync(
-                    path.join(categoryFolderPath, "index.qmd"),
-                    `---\ntitle: ${StringUtil.capitalizeFirstLetter(
-                        category.name,
-                    )}\n---\n`,
-                    "utf8",
-                );
-
-                logger.info(`Category folder created: ${categoryFolderPath}`);
-
-                for (const subCategory of category.subCategories) {
-                    const subCategoryFolderPath = path.join(
-                        categoryFolderPath,
-                        subCategory.name,
-                    );
-                    fs.mkdirSync(subCategoryFolderPath, {
-                        recursive: true,
-                    });
-
-                    // Add index.qmd file to subcategory folder
-                    fs.writeFileSync(
-                        path.join(subCategoryFolderPath, "index.qmd"),
-                        `---\ntitle: ${subCategory.name}\n---\n`,
-                        "utf8",
-                    );
-                    logger.info(
-                        `Sub-category folder created: ${subCategoryFolderPath}`,
-                    );
-
-                    // Collect subchapters for Quarto YAML
-                    const subchapters = subCategory
-                        .getModules()
-                        .map(
-                            (module) =>
-                                `chapters/${category.name}/${subCategory.name}/${module.info.name}.qmd`,
-                        );
-
-                    // Group subchapters under subcategory
-                    chapters.push({
-                        part: subCategory.name,
-                        chapters:
-                            subchapters.length > 0 ? subchapters : undefined,
-                    });
-                }
-
-                // Collect chapters for Quarto YAML
-                const categoryChapters: string[] = category
-                    .getModules()
-                    .map(
-                        (module) =>
-                            `chapters/${category.name}/${module.info.name}.qmd`,
-                    );
-
-                // Only add category if it has modules, this is to avoid empty categories
-                categoryChapters.length > 0 &&
-                    chapters.push({
-                        part: category.name,
-                        chapters: categoryChapters,
-                    });
-            }
-
-            // Generate Quarto YAML
-            this.generateQuartoYAML(chapters);
-            return this;
-        } catch (error) {
-            logger.error("Error preparing directory for docs");
-            logger.error(error);
-            throw error;
-        }
     }
 
     // Write documentation to file
@@ -676,10 +446,10 @@ export default class Writer {
                                     module.destinationFilePath,
                                 );
                                 fileContent += `[${reference.text
-                                }](${relativePath.replace(
-                                    ".qmd",
-                                    ".html",
-                                )})\n\n`;
+                                    }](${relativePath.replace(
+                                        ".qmd",
+                                        ".html",
+                                    )})\n\n`;
                             }
                         }
 
@@ -694,10 +464,10 @@ export default class Writer {
                                     module.destinationFilePath,
                                 );
                                 fileContent += `[${reference.text
-                                }](${relativePath.replace(
-                                    ".qmd",
-                                    ".html",
-                                )}#${reference.constructName.toLowerCase()})\n\n`;
+                                    }](${relativePath.replace(
+                                        ".qmd",
+                                        ".html",
+                                    )}#${reference.constructName.toLowerCase()})\n\n`;
                             }
                         }
 
@@ -713,10 +483,10 @@ export default class Writer {
                                     module.destinationFilePath,
                                 );
                                 fileContent += `[${reference.text
-                                }](${relativePath.replace(
-                                    ".qmd",
-                                    ".html",
-                                )})\n\n`;
+                                    }](${relativePath.replace(
+                                        ".qmd",
+                                        ".html",
+                                    )})\n\n`;
                             }
                         }
 
@@ -733,10 +503,10 @@ export default class Writer {
                                     module.destinationFilePath,
                                 );
                                 fileContent += `[${reference.text
-                                }](${relativePath.replace(
-                                    ".qmd",
-                                    ".html",
-                                )}#${reference.constructName.toLowerCase()})\n\n`;
+                                    }](${relativePath.replace(
+                                        ".qmd",
+                                        ".html",
+                                    )}#${reference.constructName.toLowerCase()})\n\n`;
                             }
                         }
 
@@ -755,6 +525,108 @@ export default class Writer {
             logger.info(`Documentation written to file: ${qmdfilePath}`);
         } catch (error) {
             logger.error(`Error writing documentation to file: ${qmdfilePath}`);
+            logger.error(error);
+            throw error;
+        }
+    }
+
+    // Create directory structure for documentation
+    /**
+     * Prepares the directory structure for documentation.
+     *
+     * @returns {Writer} The current Writer instance.
+     * @description This method prepares the directory structure for documentation by creating necessary folders and files.
+     */
+    public prepareDirectoryForDocs(): Writer {
+        const categories = Array.from(this.categories.values());
+
+        const folderPathToWrite = path.join(
+            __dirname,
+            "..",
+            "..",
+            "docs",
+            "chapters",
+        );
+
+        try {
+            fs.mkdirSync(folderPathToWrite, { recursive: true });
+            logger.info(`Documentation folder created: ${folderPathToWrite}`);
+
+            const chapters: Chapter[] = [];
+
+            for (const category of categories) {
+                const categoryFolderPath = path.join(
+                    folderPathToWrite,
+                    category.name,
+                );
+                fs.mkdirSync(categoryFolderPath, { recursive: true });
+                // Add index.qmd file to category folder
+                fs.writeFileSync(
+                    path.join(categoryFolderPath, "index.qmd"),
+                    `---\ntitle: ${StringUtil.capitalizeFirstLetter(
+                        category.name,
+                    )}\n---\n`,
+                    "utf8",
+                );
+
+                logger.info(`Category folder created: ${categoryFolderPath}`);
+
+                for (const subCategory of category.subCategories) {
+                    const subCategoryFolderPath = path.join(
+                        categoryFolderPath,
+                        subCategory.name,
+                    );
+                    fs.mkdirSync(subCategoryFolderPath, {
+                        recursive: true,
+                    });
+
+                    // Add index.qmd file to subcategory folder
+                    fs.writeFileSync(
+                        path.join(subCategoryFolderPath, "index.qmd"),
+                        `---\ntitle: ${subCategory.name}\n---\n`,
+                        "utf8",
+                    );
+                    logger.info(
+                        `Sub-category folder created: ${subCategoryFolderPath}`,
+                    );
+
+                    // Collect subchapters for Quarto YAML
+                    const subchapters = subCategory
+                        .getModules()
+                        .map(
+                            (module) =>
+                                `chapters/${category.name}/${subCategory.name}/${module.info.name}.qmd`,
+                        );
+
+                    // Group subchapters under subcategory
+                    chapters.push({
+                        part: subCategory.name,
+                        chapters:
+                            subchapters.length > 0 ? subchapters : undefined,
+                    });
+                }
+
+                // Collect chapters for Quarto YAML
+                const categoryChapters: string[] = category
+                    .getModules()
+                    .map(
+                        (module) =>
+                            `chapters/${category.name}/${module.info.name}.qmd`,
+                    );
+
+                // Only add category if it has modules, this is to avoid empty categories
+                categoryChapters.length > 0 &&
+                    chapters.push({
+                        part: category.name,
+                        chapters: categoryChapters,
+                    });
+            }
+
+            // Generate Quarto YAML
+            this.generateQuartoYAML(chapters);
+            return this;
+        } catch (error) {
+            logger.error("Error preparing directory for docs");
             logger.error(error);
             throw error;
         }
@@ -796,18 +668,6 @@ export default class Writer {
         }
 
         return this;
-    }
-
-    /**
-     * @description Formats file names by removing all underscores `(_)`
-     * @param name
-     * @returns
-     */
-    private formatFileName(name: string) {
-        // Replace all _ with -
-        // Capitalize first capitalizeFirstLetter
-
-        return name.replace(/_/g, "-");
     }
 
     /**
@@ -897,6 +757,111 @@ export default class Writer {
         fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
 
         return this
+    }
+
+    /**
+     * Add language specs to _quarto.yml
+     * 
+     * @description This method adds the language specs to the _quarto.yml file
+     * 
+     * @param languages 
+     * @returns void
+     */
+    public addLanguageSpecsToQuartoConfig(languages: string[]) {
+        const configToAdd = {
+            babelquarto: {
+                languagecodes: languages.map((language) => ({
+                    name: language,
+                    text: `Version in ${language}`,
+                })),
+                mainlanguage: "en",
+                languages,
+            },
+            lang: "en",
+        };
+
+        const landDesc = {} as Record<string, string>;
+
+        languages.forEach((language) => {
+            landDesc["title-" + language] = "Title in " + language;
+            landDesc["description-" + language] = "Description in " + language;
+            landDesc["author-" + language] = "Author in " + language;
+        });
+
+        const config = {
+            ...configToAdd,
+            ...landDesc
+        }
+
+        // Wirte this config to the end of the quarto file
+        const quartoYAMLPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "docs",
+            "_quarto.yml",
+        );
+
+        // Check if quarto.yml file exists
+        if (!fs.existsSync(quartoYAMLPath)) {
+            logger.error("Quarto YAML file does not exist");
+            return;
+        }
+
+        // Read quarto.yml file
+        let quartoYAML = YAML.parse(fs.readFileSync(quartoYAMLPath, "utf8"));
+
+        // add tutorials to quarto.yml file
+        quartoYAML = { ...quartoYAML, ...config };
+        console.log({ config })
+
+        // Write updated quarto.yml file
+        fs.writeFileSync(quartoYAMLPath, YAML.stringify(quartoYAML), "utf8");
+
+        return this
+    }
+
+    /**
+     * Create localized files for each language
+     * 
+     * @param languages
+     * @returns
+     * @description This method creates a copy of each qmd file in the docs folder for each language
+     * 
+     */
+    public createLocalizedFilesForEachLanguage(languages: string[]) {
+        // Check through all the qmd files in the docs folder and create a copy for each language
+        // it should follow this format `filename-lang.language.qmd`
+        const docsFolderPath = path.join(__dirname, "..", "..", "docs");
+        languages = languages.filter(language => language !== 'en')
+
+        const localizeFilesInFolder = (folderPath: string) => {
+            const files = fs.readdirSync(folderPath);
+            for (const file of files) {
+                const filePath = path.join(folderPath, file);
+                if (fs.statSync(filePath).isDirectory()) {
+                    localizeFilesInFolder(filePath);
+                    continue;
+                }
+
+                const fileExtension = path.extname(file);
+                const fileName = path.basename(file, fileExtension);
+
+                if (fileName === "_quarto") continue;
+
+                for (const language of languages) {
+                    const localizedFileName = `${fileName}.${language}${fileExtension}`;
+                    const localizedFilePath = path.join(
+                        folderPath,
+                        localizedFileName
+                    );
+                    fs.copyFileSync(filePath, localizedFilePath);
+                }
+            }
+        };
+
+        // Act on files in the docs folder
+        localizeFilesInFolder(docsFolderPath);
     }
 }
 
