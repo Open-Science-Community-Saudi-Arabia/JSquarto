@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.549">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Open Innovation Platform Documentation</title>
+
+<meta name="description" content="Description in en">
+
+<title>Title in en - Project_structure</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,13 +21,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
-<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
-<link href="./chapters/tutorials/contributing/improving_documentation.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/tutorials/environment_setup.en.html" rel="next">
+<link href="../../chapters/tutorials/how_to/starting_the_project.en.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -52,34 +103,37 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+
+
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-title">Welcome to JSQuarto Documentation</span></a></li></ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/tutorials/contributing/improving_documentation.en.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../../chapters/tutorials/project_structure.en.html"><span class="chapter-title">Project structure</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Open Innovation Platform Documentation</a> 
+      <a href="../../">Title in en</a> 
     </div>
       </div>
-<div class="dropdown" id="languages-links-parent">
-<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links">
-<a class="dropdown-item" href="/index.html" id="language-link-en">Version in en</a><a class="dropdown-item" href="/ar/index.ar.html" id="language-link-ar">Version in ar</a>
-<a class="dropdown-item" href="/es/index.es.html" id="language-link-es">Version in es</a>
-<a class="dropdown-item" href="/fr/index.fr.html" id="language-link-fr">Version in fr</a>
-</ul>
-</div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -87,9 +141,9 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Welcome to JSQuarto Documentation</span></a>
+  <a href="../../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome to JSQuarto Documentation</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -100,84 +154,73 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/contributing/improving_documentation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Improving Documentation with JSDoc</span></a>
+  <a href="../../chapters/tutorials/contributing/improving_documentation.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Improving Documentation with JSDoc</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/contributing/raising_issues.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Issue templates</span></a>
+  <a href="../../chapters/tutorials/contributing/raising_issues.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Issue templates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/contributing/raising_pr.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  <a href="../../chapters/tutorials/contributing/raising_pr.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/how_to/adding_tutorials.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tutorials</span></a>
+  <a href="../../chapters/tutorials/how_to/adding_tutorials.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tutorials</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/how_to/optimizing_workflow.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Understanding Source Files</span></a>
+  <a href="../../chapters/tutorials/how_to/optimizing_workflow.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Understanding Source Files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/how_to/starting_the_project.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Starting the project environment</span></a>
+  <a href="../../chapters/tutorials/how_to/starting_the_project.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Starting the project environment</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/project_structure.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project structure</span></a>
+  <a href="../../chapters/tutorials/project_structure.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Project structure</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/environment_setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Environment Setup</span></a>
+  <a href="../../chapters/tutorials/environment_setup.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Environment Setup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/changelog.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Change log</span></a>
+  <a href="../../chapters/tutorials/changelog.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Change log</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/tutorials/localization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Localization</span></a>
+  <a href="../../chapters/tutorials/localization.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Localization</span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-<li>
-<a href="#welcome-to-jsquarto-documentation" id="toc-welcome-to-jsquarto-documentation" class="nav-link active" data-scroll-target="#welcome-to-jsquarto-documentation">Welcome to JSQuarto Documentation</a>
-  <ul class="collapse">
-<li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a></li>
-  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">Purpose</a></li>
-  <li><a href="#inspiration" id="toc-inspiration" class="nav-link" data-scroll-target="#inspiration">Inspiration</a></li>
-  <li><a href="#localization-and-translation" id="toc-localization-and-translation" class="nav-link" data-scroll-target="#localization-and-translation">Localization and Translation</a></li>
-  <li><a href="#contributing-organization" id="toc-contributing-organization" class="nav-link" data-scroll-target="#contributing-organization">Contributing Organization</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
-  <li><a href="#feedback-and-support" id="toc-feedback-and-support" class="nav-link" data-scroll-target="#feedback-and-support">Feedback and Support</a></li>
-  </ul>
-</li>
-  </ul></nav>
-</div>
+        
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">Open Innovation Platform Documentation</h1>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/tutorials/contributing/improving_documentation.en.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../../chapters/tutorials/project_structure.en.html"><span class="chapter-title">Project structure</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Project_structure</span></h1>
 </div>
 
 
@@ -191,34 +234,51 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header><section id="welcome-to-jsquarto-documentation" class="level1"><h1>Welcome to JSQuarto Documentation</h1>
-<section id="about" class="level2"><h2 class="anchored" data-anchor-id="about">About</h2>
-<p>JSQuarto is a tool designed to generate JavaScript package API reference documentation using Markdown and Quarto. It serves as an alternative to JSDoc, providing a simpler and more flexible approach for documenting JavaScript code.</p>
-</section><section id="purpose" class="level2"><h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>The purpose of JSQuarto is to streamline the process of generating API reference documentation for JavaScript packages. By leveraging Markdown and Quarto, developers can easily create and maintain comprehensive documentation for their JavaScript projects.</p>
-</section><section id="inspiration" class="level2"><h2 class="anchored" data-anchor-id="inspiration">Inspiration</h2>
-<p>JSQuarto draws inspiration from various documentation tools and methodologies, including: <br></p>
+</header>
+
+
+<section id="project-file-structure" class="level4">
+<h4 class="anchored" data-anchor-id="project-file-structure">Project file structure</h4>
+<p>JSQuarto is structured as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> src</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── intefaces</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── index.ts</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── utils</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── codeconstruct.ts</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── component.ts</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── file.ts</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── logger.ts</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── parser.ts</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── string.ts</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── writer.ts</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── tutorials</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── contributing/</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── how_to/</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── environment_setup.qmd</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── localization.qmd</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── project_structure.qmd</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── config.json</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── index.ts</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── package.json</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── package-lock.json</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── .prettierrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>API</code> directory contains the source code for JSQuarto. The <code>API</code> directory is structured as follows:</p>
 <ul>
-<li>
-<a href="https://jsdoc.app/">JSDoc</a>: JSDoc is a popular tool for generating API documentation from JavaScript source code. <br>
-</li>
-<li>
-<a href="https://quarto.org/">Quarto</a>: Quarto is a versatile document authoring and publishing tool that supports Markdown, LaTeX, and R Markdown formats. <br>
-</li>
-<li>
-<a href="https://www.sphinx-doc.org/">Sphinx</a>: Sphinx is a documentation generation tool widely used in the Python community. <br>
-</li>
-</ul></section><section id="localization-and-translation" class="level2"><h2 class="anchored" data-anchor-id="localization-and-translation">Localization and Translation</h2>
-<p>JSQuarto is committed to supporting localization and translation of generated documentation. We are planning to integrate Crowdin, a localization management platform, to facilitate translation efforts. This will enable users to present the generated QMD files in multiple languages, making documentation accessible to a wider audience.</p>
-</section><section id="contributing-organization" class="level2"><h2 class="anchored" data-anchor-id="contributing-organization">Contributing Organization</h2>
-<p>JSQuarto is developed and maintained by the <a href="https://github.com/Open-Science-Community-Saudi-Arabia">Open Science Community Saudi Arabia</a>. Our mission is to promote open science practices and foster collaboration among researchers and developers in Saudi Arabia.</p>
-</section><section id="getting-started" class="level2"><h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<p>To start using JSQuarto, visit the <a href="https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto">GitHub repository</a> for installation instructions and usage documentation.</p>
-</section><section id="feedback-and-support" class="level2"><h2 class="anchored" data-anchor-id="feedback-and-support">Feedback and Support</h2>
-<p>If you have any questions, feedback, or need support, please <a href="https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues">open an issue</a> on GitHub or <a href="https://github.com/Open-Science-Community-Saudi-Arabia">join our community</a> for assistance.</p>
+<li><code>src/interfaces</code> - Contains the all type/intefaces definitions for the project.</li>
+<li><code>src/utils</code> - Contains the all utility functions for the project. These utility functions are used to perform various tasks such as parsing, writing, and logging.</li>
+<li><code>src/tutorials</code> - Contains the all tutorials for the project. These tutorials are written in Quarto Markdown format. Note that the <code>config.json</code> file is used to define how the tutorials are structured.</li>
+<li><code>src/index.ts</code> - The main entry point for the project.</li>
+<li><code>src/package.json</code> - The project’s package.json file.</li>
+<li><code>src/.prettierrc</code> - The project’s prettier configuration file.</li>
+</ul>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -604,11 +664,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../chapters/tutorials/how_to/starting_the_project.en.html" class="pagination-link  aria-label=" &lt;span="" the="" project="" environment&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Starting the project environment</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapters/tutorials/contributing/improving_documentation.html" class="pagination-link" aria-label="&lt;span class='chapter-number'&gt;2&lt;/span&gt;  &lt;span class='chapter-title'&gt;Improving Documentation with JSDoc&lt;/span&gt;">
-        <span class="nav-page-text"><span class="chapter-title">Improving Documentation with JSDoc</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/tutorials/environment_setup.en.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Environment Setup</span>">
+        <span class="nav-page-text"><span class="chapter-title">Environment Setup</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -617,5 +682,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body>
-</html>
+</body></html>
