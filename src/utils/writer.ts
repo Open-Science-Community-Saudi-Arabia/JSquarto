@@ -863,6 +863,38 @@ export default class Writer {
         // Act on files in the docs folder
         localizeFilesInFolder(docsFolderPath);
     }
+
+    static fixMissingLocalizedIndexFiles(langs: string[]) {
+        // In some cases babel quarto will not create localized index files for the languages in this format /ar/index.ar.html instead
+        // it will create /ar/index.html, this method will fix that by creating the localized index files for each language
+
+        const docsFolderPath = path.join(__dirname, "..", "..", "docs/_book");
+
+        // Check all the folders in the _book folder
+        const folders = fs.readdirSync(docsFolderPath);
+        for (const folder of folders) {
+            const folderPath = path.join(docsFolderPath, folder);
+            if (fs.statSync(folderPath as fs.PathLike).isDirectory()) {
+                const files = fs.readdirSync(folderPath);
+                for (const file of files) {
+                    const filePath = path.join(folderPath, file);
+                    const fileExtension = path.extname(file);
+                    const fileName = path.basename(file, fileExtension);
+
+                    if (fileName === "index") {
+                        // Get current folder name
+                        const folderName = path.basename(folderPath);
+                        const localizedFileName = `index.${folderName}.html`;
+                        const localizedFilePath = path.join(
+                            folderPath,
+                            localizedFileName
+                        );
+                        fs.copyFileSync(filePath, localizedFilePath);
+                    }
+                }
+            }
+        }
+    }
 }
 
 interface Tutorial {

@@ -227,9 +227,18 @@ console.log({
     args: process.argv,
 });
 
+if (process.env.npm_create_localized_docs && !langs) {
+    console.log(
+        "Please provide languages to create localized docs for using the languages flag",
+    );
+    process.exit(1);
+}
+
 // Use providedPath if available, otherwise fallback to a default path
 const path_ = providedPath
     ? __dirname + `/../${providedPath}`
     : __dirname + `/../source_files`;
 
 start(path_, langs);
+
+// Writer.fixMissingLocalizedIndexFiles(langs ?? [])
