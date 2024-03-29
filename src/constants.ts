@@ -3,6 +3,10 @@ export const DEFAULT_QUARTO_YAML_CONTENT = {
         type: "book",
         ["output-dir"]: "_book",
     },
+    website: {
+        title: 'JSQuarto Documentation',
+        description: 'Documentation for JSQuarto, a tool for generating JavaScript package API reference documentation using Markdown and Quarto.',
+    },
     book: {
         title: "Open Innovation Platform Documentation",
     },
