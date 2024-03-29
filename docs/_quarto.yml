@@ -9,18 +9,6 @@ book:
   title: Open Innovation Platform Documentation
   chapters:
     - index.md
-    # - part: Globals
-    #   chapters:
-    #     - chapters/globals/globals.qmd
-    # - part: Utilities
-    #   chapters:
-    #     - chapters/functional doc/utilities/constructidentifier.qmd
-    #     - chapters/functional doc/utilities/commentsutil.qmd
-    #     - chapters/functional doc/utilities/components.qmd
-    #     - chapters/functional doc/utilities/file.qmd
-    #     - chapters/functional doc/utilities/logger.qmd
-    #     - chapters/functional doc/utilities/parser.qmd
-    #     - chapters/functional doc/utilities/writer.qmd
     - part: Tutorials
       chapters:
         - chapters/tutorials/contributing/improving_documentation.qmd

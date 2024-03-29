@@ -1,0 +1,47 @@
+### Project_structure
+
+---
+title: Project structure
+---
+
+
+#### Project file structure
+JSQuarto is structured as follows:
+
+```bash
+├── src
+│   ├── intefaces
+│   │   ├── index.ts
+│   ├── utils
+│   │   ├── codeconstruct.ts
+│   │   ├── component.ts
+│   │   ├── file.ts
+│   │   ├── logger.ts
+│   │   ├── parser.ts
+│   │   ├── string.ts
+│   │   ├── writer.ts
+│   ├── tutorials
+│   │   ├── contributing/
+│   │   ├── how_to/
+│   │   ├── environment_setup.qmd
+│   │   ├── localization.qmd
+│   │   ├── project_structure.qmd
+│   │   ├── config.json
+│   │
+│   ├── index.ts
+│   │
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── .prettierrc
+
+``` 
+
+
+The `API` directory contains the source code for JSQuarto. The `API` directory is structured as follows:
+
+- `src/interfaces` - Contains the all type/intefaces definitions for the project.
+- `src/utils` - Contains the all utility functions for the project. These utility functions are used to perform various tasks such as parsing, writing, and logging.
+- `src/tutorials` - Contains the all tutorials for the project. These tutorials are written in Quarto Markdown format. Note that the `config.json` file is used to define how the tutorials are structured.
+- `src/index.ts` - The main entry point for the project.
+- `src/package.json` - The project's package.json file.
+- `src/.prettierrc` - The project's prettier configuration file.
