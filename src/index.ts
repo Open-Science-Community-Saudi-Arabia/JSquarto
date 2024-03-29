@@ -125,8 +125,8 @@ async function start(sourceFolderPath: string, langs?: string[]) {
             // Create category and subcategory if they exist in the module information
             const moduleCategory = _module.category
                 ? (recursivelyConvertAllStringValuesInObjectToLowerCase(
-                    _module.category,
-                ) as typeof _module.category)
+                      _module.category,
+                  ) as typeof _module.category)
                 : undefined;
             if (moduleCategory) {
                 let category = categories.get(moduleCategory.name);
@@ -191,21 +191,23 @@ async function start(sourceFolderPath: string, langs?: string[]) {
         defaultCategory.addModule(defaultFileModule);
     }
 
-    const tutorial = process.env.npm_config_tutorial ? path.join(__dirname, '..', process.env.npm_config_tutorial) : undefined
+    const tutorial = process.env.npm_config_tutorial
+        ? path.join(__dirname, "..", process.env.npm_config_tutorial)
+        : undefined;
     // Generate documentation directory and files
     const writer = new Writer(modules, categories, { tutorial })
         .prepareDirectoryForDocs()
-        .writeDocsFromCategoriesToFile()
+        .writeDocsFromCategoriesToFile();
 
-    const chapters = await writer.addTutorialsToGeneratedDoc()
-    await writer.addTutorialChaptersToQuartoYml(chapters)
-    
+    const chapters = await writer.addTutorialsToGeneratedDoc();
+    await writer.addTutorialChaptersToQuartoYml(chapters);
+
     if (langs) {
-        console.log('Running with languages')
-        await writer.addLanguageSpecsToQuartoConfig(langs)
+        console.log("Running with languages");
+        await writer.addLanguageSpecsToQuartoConfig(langs);
 
-        if (process.argv.find(arg => arg === 'include_file_versions')) {
-            await writer.createLocalizedFilesForEachLanguage(langs)
+        if (process.argv.find((arg) => arg === "include_file_versions")) {
+            await writer.createLocalizedFilesForEachLanguage(langs);
         }
     }
 
@@ -214,13 +216,20 @@ async function start(sourceFolderPath: string, langs?: string[]) {
 }
 
 // Access the path argument provided via command line
-const providedPath = process.env.npm_config_source
-const langs = process.argv.find(arg => arg.startsWith('languages'))?.split('=')[1]?.split(',')
-console.log({ langs: langs, include: process.env.npm_include_file_versions, args: process.argv })
+const providedPath = process.env.npm_config_source;
+const langs = process.argv
+    .find((arg) => arg.startsWith("languages"))
+    ?.split("=")[1]
+    ?.split(",");
+console.log({
+    langs: langs,
+    include: process.env.npm_create_localized_docs,
+    args: process.argv,
+});
 
 // Use providedPath if available, otherwise fallback to a default path
 const path_ = providedPath
     ? __dirname + `/../${providedPath}`
     : __dirname + `/../source_files`;
 
-start(path_, ['ar', 'en', 'pe']);
+start(path_, langs);
