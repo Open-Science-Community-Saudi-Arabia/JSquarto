@@ -1,0 +1,58 @@
+project:
+  type: book
+  output-dir: _book
+website:
+  title: JSQuarto Documentation
+  description: Documentation for JSQuarto, a tool for generating JavaScript
+    package API reference documentation using Markdown and Quarto.
+book:
+  title: Open Innovation Platform Documentation
+  chapters:
+    - index.md
+    - part: Tutorials
+      chapters:
+        - chapters/tutorials/contributing/improving_documentation.qmd
+        - chapters/tutorials/contributing/raising_issues.qmd
+        - chapters/tutorials/contributing/raising_pr.qmd
+        - chapters/tutorials/how_to/adding_tutorials.qmd
+        - chapters/tutorials/how_to/optimizing_workflow.qmd
+        - chapters/tutorials/how_to/starting_the_project.qmd
+        - chapters/tutorials/project_structure.qmd
+        - chapters/tutorials/environment_setup.qmd
+        - chapters/tutorials/changelog.qmd
+        - chapters/tutorials/localization.qmd
+format:
+  html:
+    theme: cosmo
+    highlight: github
+    toc: true
+    number-sections: false
+babelquarto:
+  languagecodes:
+    - name: en
+      text: Version in en
+    - name: ar
+      text: Version in ar
+    - name: es
+      text: Version in es
+    - name: fr
+      text: Version in fr
+  mainlanguage: en
+  languages:
+    - en
+    - ar
+    - es
+    - fr
+lang: en
+title-en: Title in en
+description-en: Description in en
+author-en: Author in en
+title-ar: Title in ar
+description-ar: Description in ar
+author-ar: Author in ar
+title-es: Title in es
+description-es: Description in es
+author-es: Author in es
+title-fr: Title in fr
+description-fr: Description in fr
+author-fr: Author in fr
