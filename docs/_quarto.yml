@@ -51,7 +51,6 @@ babelquarto:
       text: Version in fr
   mainlanguage: en
   languages:
-    - en
     - ar
     - es
     - fr
