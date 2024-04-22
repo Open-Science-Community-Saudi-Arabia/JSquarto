@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
+        "fix:localized_files": "ts-node-dev --transpile-only --project tsconfig.json ./src/fix_localized_index_file.ts",
         "doc:generate": "ts-node-dev --transpile-only --project tsconfig.json ./src/index.ts",
         "doc:preview": "quarto preview ./docs",
         "doc:clean": "rm -rf ./docs",
