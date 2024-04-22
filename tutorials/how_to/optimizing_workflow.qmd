@@ -16,22 +16,22 @@ To utilize these custom CLI arguments, simply append them to the JSquarto comman
 
 To specify the source files directory:
 ```bash
-npm run dev --source=/path/to/your/source/files 
+npm run doc:generate --source=/path/to/your/source/files 
 ```
 
 To specify the tutorial files directory:
 ```bash
-npm run dev --tutorial=/path/to/your/tutorial/files
+npm run doc:generate --tutorial=/path/to/your/tutorial/files
 ```
 
 To specify the supported languages:
 ```bash
-npm run dev languages=en,fr,es
+npm run doc:generate languages=en,fr,es
 ```
 
 To include localized versions of the generated documentation:
 ```bash
-npm run dev include_localized_versions languages=en,fr,es
+npm run doc:generate include_localized_versions languages=en,fr,es
 ```
 
 Note: If you intend to `include_localized_versions`, you must also specify the `languages` argument to indicate the supported languages for the documentation.
