@@ -8,7 +8,37 @@ To specify a custom directory containing your source files, employ the `--source
     npm run build --source /path/to/your/source/files
     ```
 
-In this example, the `--source` option is utilized to specify the `/path/to/your/source/files` directory as the location of the source files. Consequently, JSquarto will scrutinize this directory to locate the source files and generate the documentation.
+3. `languages`: Specifies the languages to be supported in the documentation. This argument enables you to generate documentation in multiple languages, catering to a diverse user base. For example, `languages=en,fr,es` specifies English, French, and Spanish as the supported languages.
+
+4. `include_localized_versions`: Specifies whether to include localized versions of the generated documentation. For example, if specified, JSquarto will generate seperate files for each specified language. 
+
+
+### Usage
+To utilize these custom CLI arguments, simply append them to the JSquarto command when executing the tool. For example:
+
+To specify the source files directory:
+```bash
+npm run doc:generate --source=/path/to/your/source/files 
+```
+
+To specify the tutorial files directory:
+```bash
+npm run doc:generate --tutorial=/path/to/your/tutorial/files
+```
+
+To specify the supported languages:
+```bash
+npm run doc:generate languages=en,fr,es
+```
+
+To include localized versions of the generated documentation:
+```bash
+npm run doc:generate include_localized_versions languages=en,fr,es
+```
+
+Note: If you intend to `include_localized_versions`, you must also specify the `languages` argument to indicate the supported languages for the documentation.
+
+By leveraging these custom CLI arguments, you can tailor the documentation generation process to meet your specific needs and preferences, thereby enhancing the quality and usability of your documentation output.
 
 
 ### Leveraging TypeScript in Source Files
