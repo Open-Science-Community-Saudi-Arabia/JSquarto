@@ -1,0 +1,236 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Title in es",
+    "section": "",
+    "text": "Welcome to JSQuarto Documentation",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome to JSQuarto Documentation</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Title in es",
+    "section": "About",
+    "text": "About\nJSQuarto is a tool designed to generate JavaScript package API reference documentation using Markdown and Quarto. It serves as an alternative to JSDoc, providing a simpler and more flexible approach for documenting JavaScript code.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome to JSQuarto Documentation</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#purpose",
+    "href": "index.html#purpose",
+    "title": "Title in es",
+    "section": "Purpose",
+    "text": "Purpose\nThe purpose of JSQuarto is to streamline the process of generating API reference documentation for JavaScript packages. By leveraging Markdown and Quarto, developers can easily create and maintain comprehensive documentation for their JavaScript projects.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome to JSQuarto Documentation</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#inspiration",
+    "href": "index.html#inspiration",
+    "title": "Title in es",
+    "section": "Inspiration",
+    "text": "Inspiration\nJSQuarto draws inspiration from various documentation tools and methodologies, including: \n\nJSDoc: JSDoc is a popular tool for generating API documentation from JavaScript source code. \nQuarto: Quarto is a versatile document authoring and publishing tool that supports Markdown, LaTeX, and R Markdown formats. \nSphinx: Sphinx is a documentation generation tool widely used in the Python community.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome to JSQuarto Documentation</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#localization-and-translation",
+    "href": "index.html#localization-and-translation",
+    "title": "Title in es",
+    "section": "Localization and Translation",
+    "text": "Localization and Translation\nJSQuarto is committed to supporting localization and translation of generated documentation. We are planning to integrate Crowdin, a localization management platform, to facilitate translation efforts. This will enable users to present the generated QMD files in multiple languages, making documentation accessible to a wider audience.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome to JSQuarto Documentation</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#contributing-organization",
+    "href": "index.html#contributing-organization",
+    "title": "Title in es",
+    "section": "Contributing Organization",
+    "text": "Contributing Organization\nJSQuarto is developed and maintained by the Open Science Community Saudi Arabia. Our mission is to promote open science practices and foster collaboration among researchers and developers in Saudi Arabia.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome to JSQuarto Documentation</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#getting-started",
+    "href": "index.html#getting-started",
+    "title": "Title in es",
+    "section": "Getting Started",
+    "text": "Getting Started\nTo start using JSQuarto, visit the GitHub repository for installation instructions and usage documentation.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome to JSQuarto Documentation</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#feedback-and-support",
+    "href": "index.html#feedback-and-support",
+    "title": "Title in es",
+    "section": "Feedback and Support",
+    "text": "Feedback and Support\nIf you have any questions, feedback, or need support, please open an issue on GitHub or join our community for assistance.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome to JSQuarto Documentation</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/contributing/improving_documentation.es.html",
+    "href": "chapters/tutorials/contributing/improving_documentation.es.html",
+    "title": "Improving Documentation with JSDoc",
+    "section": "",
+    "text": "###Improving-documentation\n\nIntroduction\nEffective documentation is crucial for maintaining a clear and understandable codebase. One powerful tool for enhancing documentation within your code is JSDoc. JSDoc is a markup language that allows you to annotate your code with structured comments, enabling automatic generation of documentation. In this guide, we will explore the uses of JSDoc and how it can improve your project’s documentation.\n\n\nUsing JSDoc for Genereated Documentation\nOne of the primary uses of JSDoc is to generate documentation directly from your codebase. By adding JSDoc comments to your functions, classes, and variables, you can provide essential information that is automatically extracted and transformed into comprehensive documentation.\nTo use JSDoc for generating documentation, follow these steps:\n\nMarkup Comments: Add JSDoc comments directly above the code elements you want to document. Use the /*_ … _/ syntax to indicate a JSDoc comment block.\nDocumenting Functions: Use JSDoc tags to describe function parameters, return values, and additional information. Tags like @param, @returns, and @description are commonly used for this purpose. Other important custom tags are @category and @subcategory, these tags help to structure the generated documentation into chapters. All modules under a subcategory will be under one chapter, the chapter name will correspond to the name assigned to the subcategory. The main idea around @category and @subcategory is to allow nested chapters for example one parent chapter A can have other subchapters (Chapter Aa, Chapter Ab, Chapter Ac) with each of these subchapters having their individual modules. Note that this is only two levels of nesting, with Chapter A being the @category and the @subcategory will be the other chapters. Initially we intend to implement 2 levels of nested chapters but this as at the time of writing this quarto only allows 1 levels of nesting (i.e, you can only have 1 parent chapter with no subChapters, as a result, only the @subcategories will be displayed as chapters in the rendered document.\nDocumenting Classes: For classes, use JSDoc comments to provide descriptions, document class properties, and document class methods. Tags like @class, @property, and @method are commonly used in this context.\nRunning JSDoc Generation: Use a JSDoc generator tool, such as JSDoc itself or other popular tools like TypeDoc or JSDoc3, to parse your codebase and generate the documentation output. Configure the generator to target the desired output format, such as HTML or Markdown.\nReview and Update: Review the generated documentation and ensure it accurately represents your code. Update the JSDoc comments as needed to provide clearer explanations or additional information.\n\nFor more information on using JSDoc for generating documentation, see the JSDoc documentation or Getting started with JSDoc.\n\n\nUsing JSDoc for Writing Documentation\nJSDoc can also be used beyond generating code documentation. Its flexible syntax and tagging system make it a valuable tool for writing other aspects of your project’s documentation, such as tutorials, guides, and reference materials.\nTo use JSDoc for writing documentation, consider the following approaches:\n\nTutorials and Guides: Utilize JSDoc comments to write step-by-step tutorials and guides within your codebase. By embedding tutorial content in JSDoc comments, you can keep the documentation closely tied to the relevant code, making it easier for developers to follow along and understand the concepts.\nInline Examples: Use JSDoc comments to include inline code examples that demonstrate the usage of functions, classes, or modules. These examples can serve as both instructional material and a quick reference for developers.\nReference Materials: JSDoc comments can be used to provide additional information in reference materials, such as explaining design patterns, outlining best practices, or clarifying complex concepts. Leverage JSDoc tags like @example or @see to link to relevant resources or code examples.\nIntegration with Markdown: JSDoc supports Markdown within comments, allowing you to incorporate formatted text, headings, lists, and other Markdown features into your documentation. This enables you to create more visually appealing and structured content within your JSDoc comments.\n\n\n\nImproving JSQuarto documentation with JSDoc\nThe JSQuarto documentation is not yet complete. There are several areas that could be improved, including:\n\nMore detailed explanations of the JSQuarto project structure and codebase\nAdditional information on how to contribute to the project\nImplementing JSQuarto as a CLI tool\nAdditional information on how to maintain the JSQuarto project\nAdditional information on how to deploy the JSQuarto project\nProject roadmap and future plans\n\nTo improve the JSQuarto documentation, you can use JSDoc to add additional documentation directly within the codebase. This will allow you to provide more detailed explanations of the code and project structure, as well as additional information on how to contribute to the project, how to use the JSQuarto API, and how to maintain and deploy the project. As at the time of writing this, the documentation was built with other packages to improve the User interface, one of which is Better-docs.\n\n\nTutorials guide\nThis section provides an overview of the config.json files used in the JSQuarto documentation, specifically focusing on the tutorials folder. The config.json file serve as configuration files that help structure and organize the documentation, while the tutorials folder contains the Markdown files for various tutorials.\n\nThe tutorials Folder\nThe tutorials folder within the documentation directory is dedicated to hosting tutorials on various topics related to the JSQuarto platform. This folder contains a collection of Markdown files, each representing an individual tutorial.\nMarkdown is a lightweight markup language that allows for easy formatting and structuring of text, making it ideal for creating tutorials. Markdown files provide a simple yet powerful way to document step-by-step instructions, code examples, explanations, and other relevant information.\nThe tutorials folder can be organized into subfolders to further categorize and group related tutorials. This helps users easily locate and access the tutorials they need based on their specific interests or requirements.\nBy structuring tutorials within the tutorials folder using Markdown, contributors can contribute new tutorials, update existing ones, and ensure that the documentation remains comprehensive and user-friendly.\nOverall, the combination of .json files and the tutorials folder enables a well-organized and accessible documentation structure, allowing users to navigate and explore the JSQuarto platform documentation with ease.\n\n\nOverview of config.json Files\nThe config.json file in the JSQuarto documentation play a crucial role in organizing and categorizing the content. This file define the structure of the documentation and provide metadata for each section, tutorial, or topic. They allow maintainers and contributors to easily navigate and manage the documentation by specifying titles, creating nested structures, and linking related topics.\nBy using config.json file, the documentation can be dynamically generated and updated based on the defined structure. This makes it easier to maintain consistency, track changes, and add new content.\n\n\nThe .json configuration\nLet’s explain how this structure works by looking at the config.json file in the tutorials / folder. This file defines the structure of the tutorials section of the documentation, including the titles, descriptions links for each tutorial.\n{\n  \"changelog\": {\n    \"title\": \"Changelog\"\n  },\n  \"environment_setup\": {\n    \"title\": \"Environment Setup\"\n  },\n  \"contributing\": {\n    \"title\": \"Contributing\"\n  }\n}\nIn this example, the .json file defines the titles and relationships of the main sections within your documentation. The sections are represented as objects, with each object having a unique key and a \"title\" key-value pair. 1. “changelog” represents the “Changelog” section. The \"title\" key-value pair specifies the title of this section as “Changelog.”\n\n“environment_setup” represents the “Environment Setup” section. The \"title\" key-value pair specifies the title of this section as “Environment Setup.”\n“contributing” represents the “Contributing” section. The \"title\" key-value pair specifies the title of this section as “Contributing.”\n\nWith this structure, your documentation folder will contain separate Markdown files for each section, named according to the keys in the .json file. For example:\n- `documentation /`\n    - `docs /`\n        - `changelog.md`\n        - `environment_setup.md`\n        - `contributing.md`\n        - `tutorials.json`\nEach Markdown file will correspond to a section in your documentation and should contain the relevant content for that section.\nThis simplified structure allows you to organize your documentation into distinct sections, making it easier for readers to locate and access the specific topics they need. It provides a clear and concise way to represent the main sections of your documentation without the need for nested tutorials or complex hierarchies.\nRemember to update the .json file whenever you add or modify sections to ensure that the documentation structure accurately reflects the content of your documentation.\nBy following this structure, you can maintain a well-organized and easily navigable documentation repository.\n\n\nNested .json configuration for tutorials\nTo structure tutorials and create nested tutorials within your documentation, you can use the .json file to define the hierarchy and relationships between tutorials. Here’s an example of how you can structure tutorials using a .json file:\n{\n    \"maintainers\": {\n        \"title\": \"Technical guide for Maintainers\",\n        \"children\": {\n            \"reviewing_pr\": {\n                \"title\": \"Reviewing pull requests\"\n            },\n            \"ci_workflow\": {\n                \"title\": \"CI Workflow\"\n            },\n            \"secrets_and_security\": {\n                \"title\": \"Secret Access/Management\"\n            },\n            \"deployment_guide\": {\n                \"title\": \"Deployment Guide\"\n            }\n        }\n    },\n    \"contributing\": {\n        \"title\": \"Contributing to the project\",\n        \"children\": {\n            \"adding_a_course\": {\n                \"title\": \"Adding a course\"\n            },\n            \"api_project_structure\": {\n                \"title\": \"API project structure\"\n            },\n            \"improving_documentation\": {\n                \"title\": \"Improving documentation\"\n            },\n            \"project_structure\": {\n                \"title\": \"Project structure\"\n            },\n            \"raising_issues\": {\n                \"title\": \"Raising issues\"\n            },\n            \"raising_pr\": {\n                \"title\": \"Raising pull requests\"\n            }\n        }\n    },\n    \"review\": {\n        \"title\": \"Reviewing the project\"\n    }\n}\nIn this example, the .json file represents a documentation structure with two main sections: “Technical guide for Maintainers” and “Technical guide for API developers”. Each section has its own set of tutorials represented as nested objects.\n\nDefine the main sections or categories as top-level objects within the .json file, such as “maintainers” and “contributing”.\nWithin each main section, provide a \"title\" key to specify the title or heading for that section. For example, “Technical guide for Maintainers” and “Technical guide for API developers”.\nAdd a \"children\" key within each main section to define the nested tutorials. Each tutorial is represented as a child object within the \"children\" object. Not all tutorials may have children tutorials, an example of this is the review tutorial. Since it has no children the program will only look for a review.qmd file and not a review folder\nFor each tutorial, provide a unique key as the object’s key, such as “reviewing_pr” and “ci_workflow”.\nWithin each tutorial object, include a \"title\" key to specify the title or heading for that specific tutorial.\n\nFor this example here is what the folder structure would look like assuming the root folder is tutorials /:\n        - tutorials/\n            - maintainers/\n                - maintainers.qmd\n                - reviewing_pr.qmd\n                - ci_workflow.qmd\n                - secrets_and_security.qmd\n                - deployment_guide.qmd\n\n            - contributing/\n                - api.md\n                - api_structure.md\n                - api_authentication_flow.qmd\n                - jwt_token_management.qmd\n                - rbac_handler_flow.qmd\n            \n            - review.qmd\n              \n            - config.json\nIn this structure:\n\nThe .json configuration file is located in the tutorials/ folder\nThe tutorials folder contains subfolders representing different sections or categories of tutorials.\nEach section or category folder, such as maintainers and contributing, contains the .qmd files for individual tutorials. \n\nThe nested structure allows you to organize tutorials hierarchically, making it easier to navigate and find specific tutorials based on their topic or category.\nIt’s important to note that the tutorial structure allows only one level of nesting. This means you can have main sections and their respective tutorials, but you cannot create further nested folders within the tutorials.\nBy following this folder structure and accompanying .qmd overview files, you can easily define the hierarchy and relationships between tutorials, allowing you to create nested tutorials and organize your documentation in a logical and structured manner.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Improving Documentation with JSDoc</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/contributing/raising_issues.es.html",
+    "href": "chapters/tutorials/contributing/raising_issues.es.html",
+    "title": "Issue templates",
+    "section": "",
+    "text": "###Raising-issues\nRaising issues is an essential part of contributing to an open source project. Before you start, it’s recommended that you have a basic understanding of Markdown and GitHub, which are commonly used in this workflow. Markdown is a lightweight markup language that is used to format and style text on the web. You can find a comprehensive guide to Markdown on the GitHub website\nIf you’re not familiar with GitHub, it’s a web-based platform that provides tools for version control, code management, and collaboration. GitHub provides a step-by-step guide to getting started with their platform on their website\nIt’s important to check whether your idea or issue has already been raised by someone else. You can do this by searching through the project’s existing issues on GitHub. If you find an issue that is similar to yours, please comment on it to let others know that you’re also interested in working on it.\nIf the issue has already been closed, or if it only partially solves your problem, it’s recommended that you open a new issue with a reference to the old one. This can help to keep the discussion organized and ensure that all relevant information is easily accessible.\nRemember, raising an issue is an opportunity to improve the project and contribute to the open source community. With a little bit of effort and attention to detail, you can help make a real difference\nWe have issue templates for different types of issues. Please use the appropriate template for your issue. If you’re not sure which template to use, please use the General template.\n\nGeneral template (preview) : This is the default template for raising an issue. Use this template if you’re not sure which template to use.\nBug report template (preview) : Use this template to report a bug or problem with the project.\nNew feature Request template (preview) : Use this template to request permission to add a new course to the list.\n\n\nWriting a clear title and description\nWhen opening an issue, it’s important to write a clear and concise title that accurately reflects the problem or suggestion you want to raise. The title should be descriptive enough so that others can quickly understand the issue, but not too long or complicated.\nIn the issue description, provide as much detail as possible about the issue or suggestion. Include steps to reproduce the problem if applicable, and any relevant information or context that can help others understand the issue better.\n\n\nUsing Issue labels\nIssue labels are used to categorize and organize issues in an open source project. They can help contributors quickly identify the type and status of an issue, and can also help maintainers prioritize and manage the project’s backlog of issues.\nWhen raising an issue, make sure to choose the appropriate label(s) that best describes the issue. For example, if you’re reporting a bug, you might use the “bug” label. If you’re suggesting a new feature or improvement, you might use the “enhancement” label.\nSome common issue labels you might see in a GitHub project include:\n\nBug: Used to report an error or problem with the code or functionality of the project.\nEnhancement: Used to suggest a new feature or improvement to the project.\nDocumentation: Used to suggest changes or improvements to the project’s documentation.\nHelp wanted: Used to indicate that the project maintainers are actively seeking contributions to help resolve the issue.\nGood first issue: Used to indicate that the issue is suitable for new contributors who are just getting started with the project.\n\n\n\nContributing to issue discussions\nIf you’re interested in working on an issue, please leave a comment to let others know. This will help to avoid duplicate work and ensure that the issue is assigned to the right person. Once you’ve opened an issue or commented on an existing one, it’s important to actively participate in the discussion. This means responding to comments and questions from others, providing additional information or clarification if needed, and being open to feedback and suggestions.\n\n\nConclusion\nRaising issues is an important part of contributing to open source projects. By following these guidelines, you can help ensure that your issue is clear, well-documented, and easy for others to understand. Remember to actively participate in discussions, follow up on issues, and contribute code if you’re able to. With a little effort and collaboration, we can all help make open source projects better for everyone.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Issue templates</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/contributing/raising_pr.es.html",
+    "href": "chapters/tutorials/contributing/raising_pr.es.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Steps\nCongratulations! You’ve just made a pull request to the Open-Science-Community-Saudi-Arabia/JSquarto repository.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/contributing/raising_pr.es.html#steps",
+    "href": "chapters/tutorials/contributing/raising_pr.es.html#steps",
+    "title": "Introduction",
+    "section": "",
+    "text": "Find a feature or bug that you want to work on.\nFork the Open-Science-Community-Saudi-Arabia/JSquarto repository to your GitHub account.\nClone the forked repository on your local machine.\ngit clone https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto\nSync the fork, to avoid merge conflicts.\ngit remote add upstream https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto \ngit fetch upstream\ngit pull upstream main\ngit push\nCreate a new branch with your GitHub username as its name.\ngit checkout -b &lt;your-github-username&gt;\nIt is not mandatory to name the new branch with your GitHub username, but it is a good practice to do so, as long as the name of the branch is clear and concise, you can name it whatever you want.\nMake your changes on this new branch.\nCommit your changes with a clear commit message.\ngit add .\ngit commit -m \"Clear and concise commit message\"\nPush your changes to your forked repository.\ngit push origin &lt;your-github-username&gt;\nGo to the Open-Science-Community-Saudi-Arabia/JSquarto repository on GitHub, and you should see a message suggesting to create a new pull request. Click on it.\nTo raise the PR choose the PR template and fill it with the required information. The PR template is a set of questions that you need to answer to make it easier for the maintainers to review your pull request. you can find the PR template here\nAdd a clear and concise title and description for your pull request, explaining the changes you made.\nSubmit your pull request, and wait for the maintainers to review your changes.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/how_to/adding_tutorials.es.html",
+    "href": "chapters/tutorials/how_to/adding_tutorials.es.html",
+    "title": "Tutorials",
+    "section": "",
+    "text": "###Adding-tutorials\nTutorials are a great way to teach people how to use your project. They are a step-by-step guide that walks the user through a specific task or concept. Tutorials are a great way to get people up and running with your project, and to help them understand how to use it.\n\nHow tutorials are written\nTutorials are written in Quarto markdown. Quarto is a markdown language that is designed to be easy to write and read, and to be easy to convert to other formats. Quarto is a superset of markdown, so any markdown file is a valid quarto file. Quarto adds a few features to markdown to make it easier to write tutorials. Some of the features include:\n\nThe ability to include code and output in the same file\nThe ability to include code from other files\nAdding metadata / images and other content to the file\n\n\n\nFolder to write the tutorial\nBy default, tutorials are written in the /tutorials folder. This is the folder where all the tutorials are stored. Each tutorial is stored in a separate folder, and the folder name is the name of the tutorial. Inside the folder, there are serveral .qmd files that contains the tutorial contents.\n\n\nConfiguring the tutorial\nThere is also a config.json file that contains the configuration for the tutorial. The config.json file is used to structure how the tutorial is displayed in terms of the order of the tutorial, the title, the description, and the grouping of the tutorial.\nBelow is an example of a config.json file:\n{\n    \"contributing\": {\n        \"title\": \"Contributing to the project\",\n        \"children\": {\n            \"improving_documentation\": {\n                \"title\": \"Improving documentation\"\n            },\n            \"raising_issues\": {\n                \"title\": \"Raising issues\"\n            },\n            \"raising_pr\": {\n                \"title\": \"Raising pull requests\"\n            }\n        }\n    },\n    \"project_structure\": {\n        \"title\": \"Project structure\"\n    },\n    \"environment_setup\": {\n        \"title\": \"Environment Setup\"\n    },\n    \"changelog\": {\n        \"title\": \"Change log\"\n    },\n    \"localization\": {\n        \"title\": \"Localization\"\n    },\n    \"how_to\": {\n        \"title\": \"How to's\",\n        \"children\": {\n            \"setting_default_readme\": {\n                \"title\": \"Setting default README\"\n            },\n            \"adding_tutorials\": {\n                \"title\": \"Adding tutorials\"\n            },\n            \"specifying_source_files\": {\n                \"title\": \"Specifying source files\"\n            },\n            \"starting_a_new_build\": {\n                \"title\": \"Starting a new build\"\n            }\n        }\n    }\n}\nIn the example above, the config.json file contains a list of tutorials and the order in which they should be displayed. The config.json file also contains the title of the tutorial and the description of the tutorial.\nThe config.json file also contains a list of children for each tutorial. This is used to group tutorials together. For example, in the example above, the contributing tutorial has three children: improving_documentation, raising_issues, and raising_pr. This groups the three tutorials together under the contributing tutorial.\n\n\nGrouping tutorials\nTutorials can be grouped together using the config.json file. This is useful for organizing tutorials into categories. For example, you might want to group all the tutorials related to contributing to the project together, or all the tutorials related to setting up the environment together. This makes it easier for users to find the tutorials they are interested in.\nIn the example above, the config.json file groups the tutorials into categories such as contributing, project_structure, environment_setup, changelog, localization, and how_to. Each of these categories contains a list of tutorials, and each tutorial contains a list of children. This allows you to organize the tutorials in a way that makes sense for your project.\nIn this tutorial, we learned how to write tutorials in Quarto markdown, and how to configure the config.json file to structure how the tutorial is displayed. We also learned how to group tutorials together using the config.json file. This allows you to organize the tutorials in a way that makes sense for your project, and makes it easier for users to find the tutorials they are interested in.\nSummary - How tutorials are written - Format for writing tutorials - How to write a tutorial - Folder to write the tutorial",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tutorials</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/how_to/optimizing_workflow.es.html",
+    "href": "chapters/tutorials/how_to/optimizing_workflow.es.html",
+    "title": "Understanding Source Files",
+    "section": "",
+    "text": "###Optimizing-workflow\nIn the context of JSquarto, source files are pivotal components containing the comments that JSquarto utilizes to generate comprehensive documentation. These files can be authored in various languages supported by JSquarto, such as JavaScript, TypeScript, and JSX. By default, JSquarto scrutinizes the /source_files directory within your project structure to locate these crucial files. However, you possess the flexibility to designate an alternative directory through the --source option.\nSpecifying Source Files Location To specify a custom directory containing your source files, employ the --source option when executing JSquarto commands. Here’s an example demonstrating its usage:\n```bash\nnpm run build --source /path/to/your/source/files\n```\nIn this example, the --source option is utilized to specify the /path/to/your/source/files directory as the location of the source files. Consequently, JSquarto will scrutinize this directory to locate the source files and generate the documentation.\n\nLeveraging TypeScript in Source Files\nWhen utilizing TypeScript within your project, it’s advisable to transpile your TypeScript source files into JavaScript before initiating the JSquarto process. This recommendation stems from the fact that JSquarto lacks intrinsic support for TypeScript syntax. Once you’ve transpiled your TypeScript files into JavaScript, you can seamlessly execute JSquarto on the resultant JavaScript files to generate comprehensive documentation.\nIntegrating TypeScript Transpilation Prior to executing JSquarto, ensure to transpile your TypeScript source files into JavaScript using your preferred transpiler, such as TypeScript Compiler (tsc). This step ensures compatibility with JSquarto’s documentation generation process, thereby facilitating a smooth and efficient",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Understanding Source Files</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/how_to/starting_the_project.es.html",
+    "href": "chapters/tutorials/how_to/starting_the_project.es.html",
+    "title": "Starting the project environment",
+    "section": "",
+    "text": "###Starting-the-project\nBefore you start, make sure you have the following installed on your machine: - Quarto - Node.js - Yarn or NPM - Typescript (optional - Only required if the files you’re working with are in typescript)\n\nSteps\n\nEnvironment Setup Refer to environment setup guide for more details See here\nFor cases where you are working with a project that uses typescript, you will need to compile the typescript files to javascript. To do this, run the following command in the terminal: bash     tsc -b\nMake sure to direct the transpiled files to the correct directory. You can do this by updating the tsconfig.json file to include the outDir property. For example: json  {      \"compilerOptions\": {          \"outDir\": \"./dist\"      }  }\nStart the project bash     yarn run build\nOR\nnpm run build\nThis command will command will generate the documentation and also start a local quarto server. You can access the documentation by visiting the http link shown on your terminal.\nMake changes to the documentation and see the changes reflect on the browser.\nOnce you are done, you can stop the server by pressing Ctrl + C on your terminal.\nTo generate the documentation without starting the server, run the following command: bash     npm run doc:generate\nOR\nyarn run doc:generate\n9: To preview the documentation without starting the server, run the following command: bash  npm run doc:preview\nOR\nyarn run doc:preview\nThis command will startup a quarto server to preview the already generated documentation and open it in your default browser.\nTo clean the generated documentation, run the following command: bash     npm run doc:clean\nOR\nyarn run doc:clean\nThis command will delete the generated documentation files. Note that this command will not delete the /tutorials or `/source_files directory or wherever the tutorials and source_files are stored. Only the generated documentation files will be deleted.\n\nYou can specify the source files path by including the --source flag in the command. For example:\nnpm run build -- --source ./path/to/source_files\nOR\nyarn run build --source ./path/to/source_files\nYou can also specify the tutorials path by including the --tutorial flag in the command. For example:\nnpm run build -- --tutorials ./path/to/tutorials\nSummary of commands: - npm run build - Generate the documentation and start a local quarto server - yarn run build - Generate the documentation and start a local quarto server - npm run doc:generate - Generate the documentation without starting the server - yarn run doc:generate - Generate the documentation without starting the server - npm run doc:preview - Preview the generated documentation without starting the server - yarn run doc:preview - Preview the generated documentation without starting the server - npm run doc:clean - Delete the generated documentation files - yarn run doc:clean - Delete the generated documentation files\nTags - --source - Specify the source files path - --tutorial - Specify the tutorials path",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Starting the project environment</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/project_structure.es.html",
+    "href": "chapters/tutorials/project_structure.es.html",
+    "title": "Project_structure",
+    "section": "",
+    "text": "Project file structure\nJSQuarto is structured as follows:\n├── src\n│   ├── intefaces\n│   │   ├── index.ts\n│   ├── utils\n│   │   ├── codeconstruct.ts\n│   │   ├── component.ts\n│   │   ├── file.ts\n│   │   ├── logger.ts\n│   │   ├── parser.ts\n│   │   ├── string.ts\n│   │   ├── writer.ts\n│   ├── tutorials\n│   │   ├── contributing/\n│   │   ├── how_to/\n│   │   ├── environment_setup.qmd\n│   │   ├── localization.qmd\n│   │   ├── project_structure.qmd\n│   │   ├── config.json\n│   │\n│   ├── index.ts\n│   │\n│   ├── package.json\n│   ├── package-lock.json\n│   ├── .prettierrc\nThe API directory contains the source code for JSQuarto. The API directory is structured as follows:\n\nsrc/interfaces - Contains the all type/intefaces definitions for the project.\nsrc/utils - Contains the all utility functions for the project. These utility functions are used to perform various tasks such as parsing, writing, and logging.\nsrc/tutorials - Contains the all tutorials for the project. These tutorials are written in Quarto Markdown format. Note that the config.json file is used to define how the tutorials are structured.\nsrc/index.ts - The main entry point for the project.\nsrc/package.json - The project’s package.json file.\nsrc/.prettierrc - The project’s prettier configuration file.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project structure</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/environment_setup.es.html",
+    "href": "chapters/tutorials/environment_setup.es.html",
+    "title": "Environment_setup",
+    "section": "",
+    "text": "Prerequisites (#environment-setup)\nBefore testing the tool locally, ensure you have the following prerequisites installed on your system: - Node.js and npm (Node Package Manager) - Git (optional, if cloning the repository)\n\n\nInstallation\nTo test the tool locally, follow these steps:\n\nClone the repository:\ngit clone https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto\nNavigate to the projecte directory\nInstall dependencies\nnpm install\n\n\n\nRunning the Tool\nOnce the dependencies are installed, you can paste the files in the JS files or folder in the /source_files directory you can run the tool using the following command\n\nTo generate the documentation run the following command\n npm run doc:generate\nThis will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.\nYou can choose to specify the directory where the source_files are, to do this run npm run doc:generate &lt;path to source files&gt; currently it only supports relative file paths.\nIt also supports addition of custom tutorials, to do this add the .qmd files for the tutorials in the /tutorials directory\nThe generated .qmd files can be found in the /docs/chapters folder\nTo preview the generated documentation run\nnpm run doc:preview\nThe docs are previewed with quarto, so make sure to have quarto already installed\nYou can choose to generate and preview in one go, to do this run the command below\nnpm run build\nThis will generate the documentation, preview with quarto and open a link to preview the docs",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/changelog.es.html",
+    "href": "chapters/tutorials/changelog.es.html",
+    "title": "Changelog",
+    "section": "",
+    "text": "All notable changes to this project will be documented in here. The content will be sourced from the CHANGELOG file. The format is based on Keep a Changelog and this project adheres to Semantic Versioning.\n\n\n \n\n\nAdded\n\n10/01/2023 Added code documentation using JsDocs #155\n12/01/2023 Added feature for sign-in with Google and Github #153\n13/01/2023 Added JsDoc pages for deployment, deployment link #157\n16/01/2023 Add MongoURI for all working environments #161\n18/01/2023 Improved code documentation for API #165\n21/01/2023 Improved login, signup auth flow, access token management #166\n24/01/2023 Add superAdmin authentication, activateAccount, deactivateAccount feature for superadmin and user #170\n29/01/2023 Combined client and API documentation #182\n03/02/2023 Add github action to schedule PR from sub branches to main #180\n\n\n \n\n\n\nFixed\n\n21/01/2023 Fixed API deployment from returning cb.apply not a function error #168\n28/01/2023 Review and fixed bugs in auth API #181\n\n\n \n\n\n\nDependencies\n\n \n\n\n\nDeprecated\n\n \n\n\n\nSecurity\n\n \n\n\n\nContributors ✨\nThanks goes to these wonderful people (emoji key):\n\n\n\n\n\n\n\nRichie🚇 🤔 👀\n\n\n\n\n\n\n\nThis project follows the all-contributors specification. Contributions of any kind welcome!",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Change log</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/localization.es.html",
+    "href": "chapters/tutorials/localization.es.html",
+    "title": "Localization",
+    "section": "",
+    "text": "What is Localization?\nLocalization is the process of adapting a product or service to meet the language, cultural, and other requirements of a specific country or region. This involves translating the content of the product, such as text, images, and audio, into the local language and adapting it to meet the cultural requirements of the target market.\nLocalization is important in software development because it helps to make the product more accessible to a global audience and improve user experience. By translating the content into the local language, developers can reach a wider audience and make it easier for users to understand and use the product.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Localization</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/localization.es.html#what-is-translation",
+    "href": "chapters/tutorials/localization.es.html#what-is-translation",
+    "title": "Localization",
+    "section": "What is Translation?",
+    "text": "What is Translation?\nTranslation is the process of converting written or spoken content from one language to another. This process involves understanding the original content and reproducing it in the target language, while taking into account any cultural or linguistic differences.\nTranslation is important in software development because it allows developers to make their products accessible to a global audience. By translating the content into the local language, developers can reach a wider audience and make it easier for users to understand and use the product.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Localization</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/localization.es.html#crowdin-as-a-localization-platform",
+    "href": "chapters/tutorials/localization.es.html#crowdin-as-a-localization-platform",
+    "title": "Localization",
+    "section": "Crowdin as a Localization Platform",
+    "text": "Crowdin as a Localization Platform\nCrowdin is a localization platform that helps developers to manage the localization process for their products. It provides a range of features that make it easier for developers to translate their products and collaborate with translators.\nCrowdin features include:\n\nTranslation management\nCollaboration tools\nQuality assurance\nIntegration with development tools\nCrowdsourcing\nIn-context translations\nMachine translation\n\nUsing Crowdin for localization has several advantages, including:\n\nEasier management of translation projects\nFaster turnaround times for translations\nImproved translation quality\nCollaboration with translators from around the world\nIntegration with development tools, such as GitHub and Bitbucket\nAbility to use machine translation for faster translations",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Localization</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/localization.es.html#conclusion",
+    "href": "chapters/tutorials/localization.es.html#conclusion",
+    "title": "Localization",
+    "section": "Conclusion",
+    "text": "Conclusion\nLocalization is an important aspect of software development, and using a platform like Crowdin can help make the process easier and more efficient. With Crowdin, developers can manage translation projects, collaborate with translators, and improve the quality of translations. By using a combination of localization and translation, developers can make their products more accessible to a global audience and improve user experience.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Localization</span>"
+    ]
+  }
+]

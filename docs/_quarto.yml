@@ -47,13 +47,10 @@ babelquarto:
       text: Version in ar
     - name: es
       text: Version in es
-    - name: fr
-      text: Version in fr
   mainlanguage: en
   languages:
     - ar
     - es
-    - fr
 lang: en
 title-en: Title in en
 description-en: Description in en
@@ -64,6 +61,3 @@ author-ar: Author in ar
 title-es: Title in es
 description-es: Description in es
 author-es: Author in es
-title-fr: Title in fr
-description-fr: Description in fr
-author-fr: Author in fr
