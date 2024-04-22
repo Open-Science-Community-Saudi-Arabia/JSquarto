@@ -775,7 +775,8 @@ export default class Writer {
                     text: `Version in ${language}`,
                 })),
                 mainlanguage: "en",
-                languages,
+                // Remove the first language which is the default language
+                languages: languages.slice(1), 
             },
             lang: "en",
         };
@@ -833,7 +834,9 @@ export default class Writer {
         // Check through all the qmd files in the docs folder and create a copy for each language
         // it should follow this format `filename-lang.language.qmd`
         const docsFolderPath = path.join(__dirname, "..", "..", "docs");
-        languages = languages.filter(language => language !== 'en')
+        
+        // Remove the first language which is the default language
+        languages = languages.slice(1);
 
         const localizeFilesInFolder = (folderPath: string) => {
             const files = fs.readdirSync(folderPath);
