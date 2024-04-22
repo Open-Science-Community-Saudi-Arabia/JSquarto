@@ -836,7 +836,7 @@ export default class Writer {
         const docsFolderPath = path.join(__dirname, "..", "..", "docs");
         
         // Remove the first language which is the default language
-        languages = languages.splice(1);
+        languages = languages.slice(1);
 
         const localizeFilesInFolder = (folderPath: string) => {
             const files = fs.readdirSync(folderPath);
