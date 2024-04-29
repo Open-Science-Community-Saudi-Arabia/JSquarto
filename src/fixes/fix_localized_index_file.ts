@@ -1,7 +1,7 @@
 import Writer from "../utils/writer";
 
-export function fixLocalizedIndexFiles(langs: string[]) {
-    Writer.fixMissingLocalizedIndexFiles(langs)
+export async function fixLocalizedIndexFiles(langs: string[]) {
+    await Writer.fixMissingLocalizedIndexFiles(langs)
 }
 
 if (require.main === module) {

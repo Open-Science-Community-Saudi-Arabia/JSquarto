@@ -20,4 +20,4 @@ async function start() {
     await fixWrongLanguageReferences(langs)
 }
 
-start()
+start() 
