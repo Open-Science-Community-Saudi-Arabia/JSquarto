@@ -196,10 +196,10 @@ async function start(sourceFolderPath: string, localizationConfig?: { languages:
         : undefined;
     // Generate documentation directory and files
     const writer = new Writer(modules, categories, { tutorial })
-        .prepareDirectoryForDocs()
+    const chapters = await writer.addTutorialsToGeneratedDoc();
+    writer.prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile();
 
-    const chapters = await writer.addTutorialsToGeneratedDoc();
     await writer.addTutorialChaptersToQuartoYml(chapters);
 
     if (langs) {
@@ -221,11 +221,6 @@ const langs = process.argv
     .find((arg) => arg.startsWith("languages"))
     ?.split("=")[1]
     ?.split(",");
-console.log({
-    langs: langs,
-    include: process.env.npm_create_localized_docs,
-    args: process.argv,
-});
 
 const includeLocalizedVersions = process.argv.find(arg => arg === 'include_localized_versions')
 if (includeLocalizedVersions && !langs) {

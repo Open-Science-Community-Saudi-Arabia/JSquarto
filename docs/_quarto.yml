@@ -49,7 +49,6 @@ babelquarto:
       text: Version in es
   mainlanguage: en
   languages:
-    - en
     - ar
     - es
 lang: en

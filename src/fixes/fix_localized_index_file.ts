@@ -1,4 +1,4 @@
-import Writer from "./utils/writer";
+import Writer from "../utils/writer";
 
 const langs = process.argv
     .find((arg) => arg.startsWith("languages"))
