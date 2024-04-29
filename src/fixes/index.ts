@@ -1,5 +1,6 @@
 import { fixDuplicateLanguageReferences } from "./fix_duplicate_language_refs";
 import { fixLocalizedIndexFiles } from "./fix_localized_index_file";
+import { fixWrongLanguageReferences } from "./fix_wrong_language_refs";
 
 async function start() {
     const langs = process.argv
@@ -14,9 +15,9 @@ async function start() {
         process.exit(1);
     }
 
+    await fixLocalizedIndexFiles(langs)
     await fixDuplicateLanguageReferences(langs)
-    await fixLocalizedIndexFiles(langs)
-    await fixLocalizedIndexFiles(langs)
+    await fixWrongLanguageReferences(langs)
 }
 
 start()
