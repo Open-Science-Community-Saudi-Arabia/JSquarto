@@ -35,16 +35,18 @@ export async function fixWrongLanguageReferences(languages: string[]) {
     }
 }
 
+if (require.main === module) {
+    const langs = process.argv
+        .find((arg) => arg.startsWith("languages"))
+        ?.split("=")[1]
+        ?.split(",");
 
-const langs = process.argv
-    .find((arg) => arg.startsWith("languages"))
-    ?.split("=")[1]
-    ?.split(",");
+    if (!langs) {
+        console.log(
+            "Please provide languages to create localized docs for using the languages flag",
+        );
+        process.exit(1);
+    }
 
-if (!langs) {
-    console.log(
-        "Please provide languages to create localized docs for using the languages flag",
-    );
-    process.exit(1);
+    fixWrongLanguageReferences(langs)
 }
-fixWrongLanguageReferences(langs)
