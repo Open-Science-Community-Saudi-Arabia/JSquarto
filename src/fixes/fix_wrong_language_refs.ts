@@ -3,9 +3,7 @@ import fs from 'fs'
 import logger from "../utils/logger";
 import path from "path";
 
-
-
-export async function fixDuplicateLanguageReferences(languages: string[]) {
+export async function fixWrongLanguageReferences(languages: string[]) {
     // Get the index files for each language
     for (const lang of languages) {
         const directoryForHtmlFiles = path.join(__dirname, `../../docs/_book/${lang}/`);
@@ -16,24 +14,26 @@ export async function fixDuplicateLanguageReferences(languages: string[]) {
 
         // Get the html elements (anchor elements) with classname 'dropdown-item' from each index file
         const $ = Cheerio.load(indexFile);
-        const dropdownItems = $('.dropdown-item');
-        const uniqueItems = new Set();
 
-        // Remove duplicate elements from index file (use the href as the unique idendifier)
-        dropdownItems.each((index, element) => {
-            logger.info('Removing duplicate items from index file for language: ' + lang)
-            const href = $(element).attr('href');
-            if (uniqueItems.has(href)) {
-                $(element).remove();
-            }
-            uniqueItems.add(href);
-        });
+        // Get the html element referencing the main language
+        const mainLang = $(`#language-link-${languages[0]}`)
+
+        // Correct the href attribute of the main language element
+        mainLang.attr('href', `../index.html`);
+
+        // Get the html elements referencing the other languages
+        const otherLangs = languages.slice(1)
+            .map((code) => ({ code: code, htmlRef: $(`#language-link-${code}`) }))
+
+        // Correct the href attribute of the other language elements
+        logger.info('Correcting href attribute of other language elements')
+        otherLangs.forEach((language) => language.htmlRef.attr('href', `../${language.code}/index.${language.code}.html`))
+        logger.info('Finished correcting href attribute of other language elements')
 
         await fs.promises.writeFile(directoryForHtmlFiles + `index.${lang}.html`, $.html());
-        logger.info('Finished removing duplicate items from index file for language: ' + lang)
+        logger.info('Updated index file for language: ' + lang)
     }
 }
-
 
 if (require.main === module) {
     const langs = process.argv
@@ -48,5 +48,5 @@ if (require.main === module) {
         process.exit(1);
     }
 
-    fixDuplicateLanguageReferences(langs)
+    fixWrongLanguageReferences(langs)
 }
