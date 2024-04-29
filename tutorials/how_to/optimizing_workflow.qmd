@@ -70,7 +70,7 @@ For manual translation of the documentation, you can generate the documentation 
 STEPS
 1. Generate the documentation in multiple languages using JSquarto with the `languages` argument to specify the supported languages. For example:
     ```bash
-        npm run doc:generate languages=en,fr,es include_localized_versions
+        npm run doc:generate languages=en,fr,es include_localized_versions --source=/path/to/your/source/files
     ```
 Note: Ensure to include the `include_localized_versions` argument to generate copies of the documentation in the specified languages. If they are not included, only the default language documentation will be generated. But the languages config will only be added to the config (_quarto.yml) file.
 
@@ -98,4 +98,19 @@ Note: Ensure to include the `include_localized_versions` argument to generate co
     Note: The `fix:all` script is a custom script that fixes the navigation issues in the previewed documentation. This script is used to update the navigation links in the previewed documentation to enable seamless navigation between the different languages. And the languages specified in the script should match the languages specified in the `languages` argument during the documentation generation process.
 
 7. You can navigate to the `/docs/_book` directory to view the previewed documentation in multiple languages. The previewed documentation provides a comprehensive overview of the content in each language, enabling you to verify the translations and ensure the accuracy and quality of the documentation.
+
+
+
+#### Doc generation with crowdin translation
+For automated translation of the documentation, you can leverage the Crowdin platform to facilitate the translation process. Crowdin is a cloud-based translation management platform that enables you to automate the translation of content into multiple languages. By integrating Crowdin with JSquarto, you can streamline the translation process and generate comprehensive documentation in various languages efficiently.
+
+STEPS
+1. Generate the documentation in multiple languages using JSquarto with the `languages` argument to specify the supported languages. For example:
+    ```bash
+        npm run doc:generate languages=en,fr,es include_localized_versions --source=/path/to/your/source/files
+    ```
+
+2. Integrate Crowdin with JSquarto to automate the translation process. Crowdin provides a REST API that allows you to interact with the platform programmatically. You can leverage this API to automate the translation of the documentation content into multiple languages seamlessly.
+
+
 
