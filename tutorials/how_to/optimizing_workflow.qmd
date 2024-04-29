@@ -1,4 +1,6 @@
-### Custom CLI arguments
+## Optimizing Workflow with Custom CLI Arguments (#sec:workflows)
+
+### Custom CLI arguments 
 The CLI arguments are used to customize the behavior of the JSquarto tool. These bespoke arguments enable you to tailor the documentation generation process to suit your specific requirements. By leveraging these arguments, you can enhance the efficiency and effectiveness of the documentation generation process, thereby streamlining your workflow and optimizing your documentation output.
 
 Some of the custom CLI arguments supported by JSquarto include:
@@ -44,3 +46,56 @@ When utilizing TypeScript within your project, it's advisable to transpile your 
 
 Integrating TypeScript Transpilation
 Prior to executing JSquarto, ensure to transpile your TypeScript source files into JavaScript using your preferred transpiler, such as TypeScript Compiler (tsc). This step ensures compatibility with JSquarto's documentation generation process, thereby facilitating a smooth and efficient 
+
+
+### Workflows
+There are different workflows that can be adopted to optimize the documentation generation process using JSquarto.
+
+1. Doc generation
+2. Doc generation with manual transalation
+3. Doc generation with crowdin translation
+
+#### Doc generation
+This workflow involves generating documentation in a single language. The process is straightforward and involves executing JSquarto on the source files to generate comprehensive documentation in the specified language. This workflow is ideal for projects targeting a specific language audience and seeking to streamline the documentation generation process.
+
+STEPS
+1. To do this, simply execute the JSquarto command with the desired custom CLI arguments, such as `--source` and `languages`, to specify the source files directory and supported languages, respectively. For example:
+    ```bash
+        npm run doc:generate --source=/path/to/your/source/files 
+    ```
+
+#### Doc generation with manual translation
+For manual translation of the documentation, you can generate the documentation in multiple languages and then manually translate the content into the desired languages. For this workflow, we use [babelquarto](https://docs.ropensci.org/babelquarto/) which helps to preview the documentation in multiple languages. Although this doesn't translate the content, it provides a preview of the documentation in the specified languages, enabling you to manually translate the content.
+
+STEPS
+1. Generate the documentation in multiple languages using JSquarto with the `languages` argument to specify the supported languages. For example:
+    ```bash
+        npm run doc:generate languages=en,fr,es include_localized_versions
+    ```
+Note: Ensure to include the `include_localized_versions` argument to generate copies of the documentation in the specified languages. If they are not included, only the default language documentation will be generated. But the languages config will only be added to the config (_quarto.yml) file.
+
+2. Manually translate the content in the generated documentation files for each language. You can leverage tools such as Google Translate or professional translation services to facilitate the translation process.
+
+3. Download RStudio and install the `babelquarto` package from CRAN. This package is used to preview the documentation in multiple languages. You can install the package using the following command:
+    ```R
+        install.packages('babelquarto', repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))
+    ```
+
+4. Open the generated doc folder in RStudio, navigate to the console and set the working directory to the doc folder.
+    ```R
+        project_dir <- "/home/richie/Desktop/repos/oscsa/JSquarto/docs"
+    ```
+
+5. Preview the documentation in multiple languages using the `babelquarto` package. For example, to preview the documentation in English, French, and Spanish, execute the following command:
+    ```R
+       babelquarto::render_book(file.path(parent_dir, project_dir))
+    ```
+6. As at the time of writing this, there are minor issues with navigating the previewed documentation in different languages. To fix this temporarily, run 
+    ```bash
+        npm run fix:all languages=en,fr,es
+    ```
+
+    Note: The `fix:all` script is a custom script that fixes the navigation issues in the previewed documentation. This script is used to update the navigation links in the previewed documentation to enable seamless navigation between the different languages. And the languages specified in the script should match the languages specified in the `languages` argument during the documentation generation process.
+
+7. You can navigate to the `/docs/_book` directory to view the previewed documentation in multiple languages. The previewed documentation provides a comprehensive overview of the content in each language, enabling you to verify the translations and ensure the accuracy and quality of the documentation.
+

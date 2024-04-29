@@ -41,6 +41,16 @@ Once the dependencies are installed, you can paste the files in the JS files or 
 
     The generated `.qmd` files can be found in the `/docs/chapters` folder
 
+    This command may vary depending on the workflow you choose, you may want to create the docs files in other languages too. To do this you can run the command below
+
+    ```bash
+    npm run doc:generate languages=en,ar,es include_localized_versions
+    ```
+
+    This will generate the documentation in English, Arabic and Spanish. You can add more languages by separating them with a comma. (This doesn't actually translate the documentation, it just creates a copy of the documentation and renames it to the specified language). To integrate with a translation service, you can use the [Crowdin](https://crowdin.com/) service.
+
+    For more information on the available workflows see the guide [here](#sec:#workflows)
+
 
 2. To preview the generated documentation run 
     
