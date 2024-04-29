@@ -1,12 +1,10 @@
-### Understanding Source Files
-In the context of JSquarto, source files are pivotal components containing the comments that JSquarto utilizes to generate comprehensive documentation. These files can be authored in various languages supported by JSquarto, such as JavaScript, TypeScript, and JSX. By default, JSquarto scrutinizes the `/source_files` directory within your project structure to locate these crucial files. However, you possess the flexibility to designate an alternative directory through the `--source` option.
+### Custom CLI arguments
+The CLI arguments are used to customize the behavior of the JSquarto tool. These bespoke arguments enable you to tailor the documentation generation process to suit your specific requirements. By leveraging these arguments, you can enhance the efficiency and effectiveness of the documentation generation process, thereby streamlining your workflow and optimizing your documentation output.
 
-Specifying Source Files Location
-To specify a custom directory containing your source files, employ the `--source` option when executing JSquarto commands. Here's an example demonstrating its usage:
+Some of the custom CLI arguments supported by JSquarto include:
+1. `--source`:  Source files are pivotal components containing the comments that JSquarto utilizes to generate comprehensive documentation. Specifies the directory containing the source files to be documented. These files can be can be written in various languages supported by JSquarto, such as JavaScript, TypeScript, and JSX. By default, JSquarto will check for the `/source_files` directory within your project structure to locate these the source file. However, you possess the flexibility to designate an alternative directory through the `--source` option.
 
-    ```bash
-    npm run build --source /path/to/your/source/files
-    ```
+2. `--tutorial`: Specifies the directory containing the tutorial files to be included in the documentation. This argument allows you to incorporate tutorial content into your documentation, providing additional context and guidance for users. 
 
 3. `languages`: Specifies the languages to be supported in the documentation. This argument enables you to generate documentation in multiple languages, catering to a diverse user base. For example, `languages=en,fr,es` specifies English, French, and Spanish as the supported languages.
 
