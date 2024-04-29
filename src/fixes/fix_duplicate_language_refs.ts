@@ -5,7 +5,7 @@ import path from "path";
 
 
 
-async function start(languages: string[]) {
+export async function fixDuplicateLanguageReferences(languages: string[]) {
     // Get the index files for each language
     for (const lang of languages) {
         const directoryForHtmlFiles = path.join(__dirname, `../../docs/_book/${lang}/`);
@@ -34,7 +34,6 @@ async function start(languages: string[]) {
     }
 }
 
-
 const langs = process.argv
     .find((arg) => arg.startsWith("languages"))
     ?.split("=")[1]
@@ -46,4 +45,5 @@ if (!langs) {
     );
     process.exit(1);
 }
-start(langs)
+
+fixDuplicateLanguageReferences(langs)

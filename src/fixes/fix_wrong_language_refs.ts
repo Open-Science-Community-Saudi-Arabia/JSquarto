@@ -3,7 +3,7 @@ import fs from 'fs'
 import logger from "../utils/logger";
 import path from "path";
 
-async function start(languages: string[]) {
+export async function fixWrongLanguageReferences(languages: string[]) {
     // Get the index files for each language
     for (const lang of languages) {
         const directoryForHtmlFiles = path.join(__dirname, `../../docs/_book/${lang}/`);
@@ -47,4 +47,4 @@ if (!langs) {
     );
     process.exit(1);
 }
-start(langs)
+fixWrongLanguageReferences(langs)
