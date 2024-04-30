@@ -49,30 +49,26 @@ Once the dependencies are installed, you can paste the files in the JS files or 
 
 To generate the documentation run the following command
 
-```bash
-     npm run doc:generate
-```
-
+    ```bash
+        npm run doc:generate --source=<path to source files> --tutorial=<path to tutorials>
+    ```
 This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
 
-
-You can choose to specify the directory where the `source_files` are, to do this run `npm run doc:generate <path to source files>` currently it only supports relative file paths.
-
-It also supports addition of custom tutorials, to do this add the .qmd files for the tutorials in the `/tutorials` directory
-
+If the `--source` and `--tutorial` flags are not provided, the tool will use the default source files and tutorials in the `/source_files` and `/tutorials` directories respectively.
 
 The generated `.qmd` files can be found in the `/docs/chapters` folder
 
 To preview the generated documentation run
-```bash
+    
+    ```bash
         npm run doc:preview
-```
+    ```
 The docs are previewed with quarto, so make sure to have quarto already installed
 
 You can choose to generate and preview in one go, to do this run the command below
-```bash
+    ```bash
         npm run build
-```
+    ```
 
 This will generate the documentation, preview with quarto and open a link to preview the docs
 
