@@ -75,4 +75,8 @@ Once the dependencies are installed, you can paste the files in the JS files or 
 
     This will generate the documentation, preview with quarto and open a link to preview the docs
 
+
+For more information on how to integrate translation tools like Crowdin with JSquarto, refer to the [Documentation](https://jsquarto.netlify.app/chapters/tutorials/how_to/optimizing_workflow#workflows).
+
 For more details on using JSquarto and to see an example of the generated documentation, visit the [JSQuarto documentation](https://jsquarto.netlify.app/)
+
