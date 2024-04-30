@@ -82,18 +82,18 @@ Before you start, make sure you have the following installed on your machine:
 
 You can specify the source files path by including the `--source` flag in the command. For example:
 ```bash
-npm run build -- --source ./path/to/source_files
+npm run build --source=./path/to/source_files
 ```
 
 OR
 
 ```bash
-yarn run build --source ./path/to/source_files
+yarn run build --source=./path/to/source_files
 ```
 
 You can also specify the tutorials path by including the `--tutorial` flag in the command. For example:
 ```bash
-npm run build -- --tutorials ./path/to/tutorials
+npm run build --tutorials=./path/to/tutorials
 ```
 
 

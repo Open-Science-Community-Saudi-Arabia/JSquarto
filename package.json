@@ -12,6 +12,7 @@
         "fix:duplicate_languages_ref": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_duplicate_language_refs.ts",
         "fix:fix_wrong_language_refs": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_wrong_language_refs.ts",
         "doc:clean": "rm -rf ./docs",
+        "doc:serve": "serve ./docs/_book",
         "setup-quarto": "git clone https://github.com/quarto-dev/quarto-cli && cd quarto-cli && ./configure.sh",
         "update-quarto": "cd quarto-cli && git pull",
         "build": "npm run doc:generate && npm run doc:preview"
@@ -24,6 +25,7 @@
         "cheerio": "^1.0.0-rc.12",
         "cross-env": "^7.0.3",
         "fs": "^0.0.1-security",
+        "serve": "^14.2.3",
         "ts-node-dev": "^2.0.0",
         "uuid": "^9.0.1",
         "winston": "^3.11.0",
