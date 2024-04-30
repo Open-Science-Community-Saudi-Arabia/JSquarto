@@ -874,8 +874,7 @@ export default class Writer {
         const docsFolderPath = path.join(__dirname, "..", "..", "docs/_book");
 
         // Check all the folders in the _book folder
-        const folders = fs.readdirSync(docsFolderPath);
-        for (const folder of folders) {
+        for (const folder of langs.slice(1)) {
             const folderPath = path.join(docsFolderPath, folder);
             if (fs.statSync(folderPath as fs.PathLike).isDirectory()) {
                 const files = fs.readdirSync(folderPath);
