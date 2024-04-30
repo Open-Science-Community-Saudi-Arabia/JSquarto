@@ -197,10 +197,10 @@ async function start(sourceFolderPath: string, localizationConfig?: { languages:
     // Generate documentation directory and files
     const writer = new Writer(modules, categories, { tutorial })
     const chapters = await writer.addTutorialsToGeneratedDoc();
+    await writer.addTutorialChaptersToQuartoYml(chapters);
     writer.prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile();
 
-    await writer.addTutorialChaptersToQuartoYml(chapters);
 
     if (langs) {
         console.log("Running with languages");
