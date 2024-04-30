@@ -5,43 +5,31 @@ title: Change log
 ---
 
 <!-- PROJECT LOGO -->
-All notable changes to this project will be documented in here. The content will be sourced from the [CHANGELOG](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/blob/main/CHANGELOG.md) file.
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-<!-- Add wider spacing between paragraph -->
-<p>&nbsp;</p>
+## Unreleased (2024-03-05)
 
-#### Added
-- `10/01/2023` Added code documentation using JsDocs [#155](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/155)
-- `12/01/2023` Added feature for sign-in with Google and Github [#153](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/153)
-- `13/01/2023` Added JsDoc pages for deployment, deployment [link](https://moocs-jsdocs.netlify.app/) [#157](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/157)
-- `16/01/2023` Add MongoURI for all working environments [#161](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/161)
-- `18/01/2023` Improved code documentation for API [#165](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/165)
-- `21/01/2023` Improved login, signup auth flow, access token management [#166](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/166)
-- `24/01/2023` Add superAdmin authentication, activateAccount, deactivateAccount feature for superadmin and user [#170](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/170)
-- `29/01/2023` Combined `client` and `API` documentation [#182](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/182)
-- `03/02/2023` Add github action to schedule PR from sub branches to main [#180](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/180)
-  
-<p>&nbsp;</p>
+### Features:
 
-#### Fixed
-- `21/01/2023` Fixed API deployment from returning `cb.apply not a function` error [#168](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/168)
-- `28/01/2023` Review and fixed bugs in auth API [#181](https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pull/181)
+- Extract docstrings from javascript files ([`#13`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/3)) 
+- Generate documentation structure in `quarto.yml` file ([`#9`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/7))
+- Link unmatched documents to `Globals` category ([`#21`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/21))
+- References for doc snippets and external resources ([`#22`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/22))
+- Add documentation for JSQuarto ([`#25`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/25))
+- Add tutorials for JSQuarto ([`#26`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/26))
+- Add `How to guides` and custom command line args ([`#30`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/30))
 
-<p>&nbsp;</p>
 
-#### Dependencies
+### Bugs fixed:
+- Improve formatting for `params`, `thrown errors` and `returns` ([`#14`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/14))
+- Remove code constructs from function documentation ([`#15`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/15))
+- Fix inconsistent header titles from extracted documents ([`#17`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/17))
 
-<p>&nbsp;</p>
-
-#### Deprecated
-
-<p>&nbsp;</p>
-
-#### Security
-
-<p>&nbsp;</p>
 
 #### Contributors ✨
 

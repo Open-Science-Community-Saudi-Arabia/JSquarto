@@ -43,21 +43,21 @@ babelquarto:
   languagecodes:
     - name: en
       text: Version in en
-    - name: ar
-      text: Version in ar
     - name: es
       text: Version in es
+    - name: ar
+      text: Version in ar
   mainlanguage: en
   languages:
-    - ar
     - es
+    - ar
 lang: en
 title-en: Title in en
 description-en: Description in en
 author-en: Author in en
-title-ar: Title in ar
-description-ar: Description in ar
-author-ar: Author in ar
 title-es: Title in es
 description-es: Description in es
 author-es: Author in es
+title-ar: Title in ar
+description-ar: Description in ar
+author-ar: Author in ar
