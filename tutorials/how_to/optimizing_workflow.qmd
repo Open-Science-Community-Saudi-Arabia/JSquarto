@@ -1,4 +1,4 @@
-## Optimizing Workflow with Custom CLI Arguments (#sec:workflows)
+## Optimizing Workflow with Custom CLI Arguments {#sec-workflows}
 
 ### Custom CLI arguments 
 The CLI arguments are used to customize the behavior of the JSquarto tool. These bespoke arguments enable you to tailor the documentation generation process to suit your specific requirements. By leveraging these arguments, you can enhance the efficiency and effectiveness of the documentation generation process, thereby streamlining your workflow and optimizing your documentation output.
