@@ -47,29 +47,32 @@ To test the tool locally, follow these steps:
 
 Once the dependencies are installed, you can paste the files in the JS files or folder in the `/source_files` directory you can run the tool using the following command
 
-To generate the documentation run the following command
+1. To generate the documentation run the following command
 
     ```bash
-        npm run doc:generate --source=<path to source files> --tutorial=<path to tutorials>
+    npm run doc:generate --source=<path to source files> --tutorial=<path to tutorials>
     ```
-This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
 
-If the `--source` and `--tutorial` flags are not provided, the tool will use the default source files and tutorials in the `/source_files` and `/tutorials` directories respectively.
+    This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
 
-The generated `.qmd` files can be found in the `/docs/chapters` folder
+    If the `--source` and `--tutorial` flags are not provided, the tool will use the default source files and tutorials in the `/source_files` and `/tutorials` directories respectively.
 
-To preview the generated documentation run
-    
+    The generated `.qmd` files can be found in the `/docs/chapters` folder
+
+2. To preview the generated documentation run
+
     ```bash
-        npm run doc:preview
+    npm run doc:preview
     ```
-The docs are previewed with quarto, so make sure to have quarto already installed
 
-You can choose to generate and preview in one go, to do this run the command below
+    The docs are previewed with quarto, so make sure to have quarto already installed
+
+3. You can choose to generate and preview in one go, to do this run the command below
+
     ```bash
-        npm run build
+    npm run build
     ```
 
-This will generate the documentation, preview with quarto and open a link to preview the docs
+    This will generate the documentation, preview with quarto and open a link to preview the docs
 
 For more details on using JSquarto and to see an example of the generated documentation, visit the [JSQuarto documentation](https://jsquarto.netlify.app/)
