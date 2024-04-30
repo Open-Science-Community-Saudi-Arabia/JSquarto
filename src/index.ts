@@ -61,7 +61,7 @@ function getJSFilesFromDirectory(
  *
  * @returns void
  */
-async function start(sourceFolderPath: string, langs?: string[]) {
+async function start(sourceFolderPath: string, localizationConfig?: { languages: string[], includeLocalizedVersions?: boolean }) {
     // Get JavaScript files from directory
     const filePaths = getJSFilesFromDirectory(sourceFolderPath);
 
@@ -125,8 +125,8 @@ async function start(sourceFolderPath: string, langs?: string[]) {
             // Create category and subcategory if they exist in the module information
             const moduleCategory = _module.category
                 ? (recursivelyConvertAllStringValuesInObjectToLowerCase(
-                      _module.category,
-                  ) as typeof _module.category)
+                    _module.category,
+                ) as typeof _module.category)
                 : undefined;
             if (moduleCategory) {
                 let category = categories.get(moduleCategory.name);
@@ -196,17 +196,17 @@ async function start(sourceFolderPath: string, langs?: string[]) {
         : undefined;
     // Generate documentation directory and files
     const writer = new Writer(modules, categories, { tutorial })
-        .prepareDirectoryForDocs()
+    const chapters = await writer.addTutorialsToGeneratedDoc();
+    writer.prepareDirectoryForDocs()
         .writeDocsFromCategoriesToFile();
 
-    const chapters = await writer.addTutorialsToGeneratedDoc();
     await writer.addTutorialChaptersToQuartoYml(chapters);
 
     if (langs) {
         console.log("Running with languages");
         await writer.addLanguageSpecsToQuartoConfig(langs);
 
-        if (process.argv.find((arg) => arg === "include_file_versions")) {
+        if (process.argv.find((arg) => arg === "include_localized_versions")) {
             await writer.createLocalizedFilesForEachLanguage(langs);
         }
     }
@@ -221,13 +221,9 @@ const langs = process.argv
     .find((arg) => arg.startsWith("languages"))
     ?.split("=")[1]
     ?.split(",");
-console.log({
-    langs: langs,
-    include: process.env.npm_create_localized_docs,
-    args: process.argv,
-});
 
-if (process.env.npm_create_localized_docs && !langs) {
+const includeLocalizedVersions = process.argv.find(arg => arg === 'include_localized_versions')
+if (includeLocalizedVersions && !langs) {
     console.log(
         "Please provide languages to create localized docs for using the languages flag",
     );
@@ -239,6 +235,6 @@ const path_ = providedPath
     ? __dirname + `/../${providedPath}`
     : __dirname + `/../source_files`;
 
-start(path_, langs);
+start(path_, { languages: langs ?? [], includeLocalizedVersions: !!includeLocalizedVersions });
 
 // Writer.fixMissingLocalizedIndexFiles(langs ?? [])

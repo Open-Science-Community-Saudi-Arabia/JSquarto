@@ -1,0 +1,102 @@
+# Constructidentifier
+
+the class called constructidentifier, contains methods to identify different types of code constructs
+  (such as functions, variables, classes, and modules) within a line of code.
+  these methods help in extracting and determining the names associated with each construct type.
+
+
+
+## ConstructIdentifier 
+`[class]`
+ 
+
+
+## unknown 
+`[function]`
+ 
+**Description:**
+Retrieves the name of the module construct from a given line of code.
+     
+      
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  line | The line of code to parse. |
+
+
+
+## variableX 
+`[function]`
+ 
+**Description:**
+Retrieves the name of the function construct from a given line of code.
+     
+      
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  line | The line of code to parse. |
+
+
+
+## variableRegex 
+`[variable]`
+ 
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  line | The line of code to parse. |
+
+
+
+## classRegex 
+`[variable]`
+ 
+**Description:**
+Retrieves the name of the class construct from a given line of code.
+     
+      
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  line | The line of code to parse. |
+
+
+
+## declarationconst 
+`[function]`
+ 
+**Description:**
+Identifies the type of construct (function, variable, class, module, other) from the given code text.
+     
+      
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  text | The code text to analyze. |
+
+
+
+## unknown 
+`[function]`
+ 
+**Description:**
+Retrieves the name of the construct from the given code text.
+     
+      
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  text | The code text to analyze. |
+

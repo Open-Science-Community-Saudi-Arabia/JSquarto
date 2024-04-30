@@ -9,7 +9,19 @@ book:
   title: Open Innovation Platform Documentation
   chapters:
     - index.md
-    - part: "Tutorials"
+    - part: Globals
+      chapters:
+        - chapters/globals/globals.qmd
+    - part: Utilities
+      chapters:
+        - chapters/functional doc/utilities/constructidentifier.qmd
+        - chapters/functional doc/utilities/commentsutil.qmd
+        - chapters/functional doc/utilities/components.qmd
+        - chapters/functional doc/utilities/file.qmd
+        - chapters/functional doc/utilities/logger.qmd
+        - chapters/functional doc/utilities/parser.qmd
+        - chapters/functional doc/utilities/writer.qmd
+    - part: Tutorials
       chapters:
         - chapters/tutorials/contributing/improving_documentation.qmd
         - chapters/tutorials/contributing/raising_issues.qmd
@@ -21,18 +33,6 @@ book:
         - chapters/tutorials/environment_setup.qmd
         - chapters/tutorials/changelog.qmd
         - chapters/tutorials/localization.qmd
-    - part: "Globals"
-      chapters:
-        - chapters/globals/globals.qmd
-    - part: "Utilities"
-      chapters:
-        - chapters/functional doc/utilities/constructidentifier.qmd
-        - chapters/functional doc/utilities/commentsutil.qmd
-        - chapters/functional doc/utilities/components.qmd
-        - chapters/functional doc/utilities/file.qmd
-        - chapters/functional doc/utilities/logger.qmd
-        - chapters/functional doc/utilities/parser.qmd
-        - chapters/functional doc/utilities/writer.qmd
 format:
   html:
     theme: cosmo
@@ -43,28 +43,21 @@ babelquarto:
   languagecodes:
     - name: en
       text: Version in en
-    - name: ar
-      text: Version in ar
     - name: es
       text: Version in es
-    - name: fr
-      text: Version in fr
+    - name: ar
+      text: Version in ar
   mainlanguage: en
   languages:
-    - en
-    - ar
     - es
-    - fr
+    - ar
 lang: en
 title-en: Title in en
 description-en: Description in en
 author-en: Author in en
-title-ar: Title in ar
-description-ar: Description in ar
-author-ar: Author in ar
 title-es: Title in es
 description-es: Description in es
 author-es: Author in es
-title-fr: Title in fr
-description-fr: Description in fr
-author-fr: Author in fr
+title-ar: Title in ar
+description-ar: Description in ar
+author-ar: Author in ar
