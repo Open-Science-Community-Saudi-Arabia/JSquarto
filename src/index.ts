@@ -61,7 +61,7 @@ function getJSFilesFromDirectory(
  *
  * @returns void
  */
-async function start(localizationConfig?: { languages: string[], includeLocalizedVersions?: boolean }) {
+async function start() {
     // Get JavaScript files from directory
     const filePaths = getJSFilesFromDirectory(CONFIG.sourceDirectory);
 
@@ -198,12 +198,12 @@ async function start(localizationConfig?: { languages: string[], includeLocalize
     const chapters = await writer.addTutorialsToGeneratedDoc();
     await writer.addTutorialChaptersToQuartoYml(chapters);
 
-    if (localizationConfig?.languages) {
+    if (CONFIG.languages) {
         console.log("Running with languages");
-        writer.addLanguageSpecsToQuartoConfig(localizationConfig.languages);
+        writer.addLanguageSpecsToQuartoConfig(CONFIG.languages);
 
-        if (localizationConfig?.includeLocalizedVersions) {
-            writer.createLocalizedFilesForEachLanguage(localizationConfig.languages);
+        if (CONFIG.includeLocalizedVersions) {
+            writer.createLocalizedFilesForEachLanguage(CONFIG.languages);
         }
     }
 
@@ -233,22 +233,24 @@ CONFIG.sourceDirectory =
         ? specifiedSourceFilesDirectory.startsWith("/")
             ? specifiedSourceFilesDirectory
             : path.join(__dirname, `/../${specifiedSourceFilesDirectory}`)
-        : __dirname + `/../source_files`;
+        : CONFIG.sourceDirectory;
 
 CONFIG.tutorialDirectory =
     specifiedTutorialsDirectory
         ? specifiedTutorialsDirectory.startsWith("/")
             ? specifiedTutorialsDirectory
             : path.join(__dirname, `/../${specifiedTutorialsDirectory}`)
-        : __dirname + `/../tutorials`;
+        : CONFIG.tutorialDirectory;
 
 CONFIG.outputDirectory =
     specifiedOutputDirectory
         ? specifiedOutputDirectory.startsWith("/")
             ? specifiedOutputDirectory
             : path.join(__dirname, `/../${specifiedOutputDirectory}`)
-        : __dirname + `/../docs`;
+        : CONFIG.outputDirectory;
 
-console.log({ CONFIG })
+CONFIG.includeLocalizedVersions = includeLocalizedVersions ? true : CONFIG.includeLocalizedVersions;
 
-start({ languages: specifiedLanguages ?? ['en'], includeLocalizedVersions: !!includeLocalizedVersions });
+CONFIG.languages = specifiedLanguages ?? CONFIG.languages;
+
+start();
