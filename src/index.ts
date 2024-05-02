@@ -12,6 +12,7 @@ import {
 import Parser from "./utils/parser";
 import path from "path";
 import CONFIG from "./config";
+import logger from "./utils/logger";
 
 /**
  * Recursively searches for JavaScript files in a directory and its subdirectories.
@@ -212,6 +213,7 @@ async function start(localizationConfig?: { languages: string[], includeLocalize
 // Access the path argument specified via command line
 const specifiedSourceFilesDirectory = process.env.npm_config_source;
 const specifiedTutorialsDirectory = process.env.npm_config_tutorial;
+const specifiedOutputDirectory = process.env.npm_config_output;
 const specifiedLanguages = process.argv
     .find((arg) => arg.startsWith("languages"))
     ?.split("=")[1]
@@ -239,5 +241,12 @@ CONFIG.tutorialDirectory =
             ? specifiedTutorialsDirectory
             : path.join(__dirname, `/../${specifiedTutorialsDirectory}`)
         : __dirname + `/../tutorials`;
+
+CONFIG.outputDirectory = 
+    specifiedOutputDirectory
+        ? specifiedOutputDirectory.startsWith("/")
+            ? specifiedOutputDirectory
+            : path.join(__dirname, `/../${specifiedOutputDirectory}`)
+        : __dirname + `/../docs`;
 
 start({ languages: specifiedLanguages ?? ['en'], includeLocalizedVersions: !!includeLocalizedVersions });

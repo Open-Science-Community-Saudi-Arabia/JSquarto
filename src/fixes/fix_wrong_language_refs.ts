@@ -2,12 +2,12 @@ import * as Cheerio from "cheerio";
 import fs from 'fs'
 import logger from "../utils/logger";
 import path from "path";
+import CONFIG from "../config";
 
 export async function fixWrongLanguageReferences(languages: string[]) {
     // Get the index files for each language
     for (const lang of languages.slice(1)) {
-        // TODO: Reference out directory
-        const directoryForHtmlFiles = path.join(__dirname, `../../docs/_book/${lang}/`);
+        const directoryForHtmlFiles = path.join(CONFIG.outputDirectory, `/_book/${lang}/`);
 
         logger.info('Reading index file for language: ' + lang)
         const indexFile = await fs.promises.readFile(directoryForHtmlFiles + `index.${lang}.html`, "utf-8");
