@@ -233,21 +233,21 @@ CONFIG.sourceDirectory =
         ? specifiedSourceFilesDirectory.startsWith("/")
             ? specifiedSourceFilesDirectory
             : path.join(__dirname, `/../${specifiedSourceFilesDirectory}`)
-        : __dirname + `/../source_files`;
+        : CONFIG.sourceDirectory;
 
 CONFIG.tutorialDirectory =
     specifiedTutorialsDirectory
         ? specifiedTutorialsDirectory.startsWith("/")
             ? specifiedTutorialsDirectory
             : path.join(__dirname, `/../${specifiedTutorialsDirectory}`)
-        : __dirname + `/../tutorials`;
+        : CONFIG.tutorialDirectory;
 
 CONFIG.outputDirectory =
     specifiedOutputDirectory
         ? specifiedOutputDirectory.startsWith("/")
             ? specifiedOutputDirectory
             : path.join(__dirname, `/../${specifiedOutputDirectory}`)
-        : __dirname + `/../docs`;
+        : CONFIG.outputDirectory;
 
 console.log({ CONFIG })
 
