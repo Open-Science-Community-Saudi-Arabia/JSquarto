@@ -8,6 +8,7 @@ import path from "path";
 export async function fixDuplicateLanguageReferences(languages: string[]) {
     // Get the index files for each language
     for (const lang of languages.slice(1)) {
+        // TODO: Reference out directory
         const directoryForHtmlFiles = path.join(__dirname, `../../docs/_book/${lang}/`);
 
         logger.info('Reading index file for language: ' + lang)

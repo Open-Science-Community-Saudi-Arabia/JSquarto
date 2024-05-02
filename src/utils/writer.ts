@@ -56,6 +56,7 @@ export default class Writer {
     ) {
         this.modules = modules;
         this.categories = categories;
+        // TODO: Reference out dir for docs
         this.tutorialsDirPath = path.join(
             __dirname,
             "..",
@@ -91,6 +92,7 @@ export default class Writer {
         try {
             // Check if there is a index.md file in the root of the docs folder
             // If not, create one
+            // TODO: Reference out directory
             const rootDocsPath = __dirname + "/../../docs";
             const indexFilePath = rootDocsPath + "/index.md";
             if (!fs.existsSync(indexFilePath)) {
@@ -116,6 +118,7 @@ export default class Writer {
             if (chapters.length === 0) {
                 logger.warn("No chapters found for Quarto YAML");
             }
+        // TODO: Reference out dir for docs
 
             const folderPathToWrite = path.join(__dirname, "..", "..", "docs");
             const quartoYAMLPath = path.join(folderPathToWrite, "_quarto.yml");
@@ -278,6 +281,7 @@ export default class Writer {
         ) : undefined
 
         if (subCategoryFolderPath) fs.mkdirSync(subCategoryFolderPath, { recursive: true });
+        // TODO: Reference out dir for docs
 
         const folderPathForTutorialsWithoutParentCategory = path.resolve(__dirname + "../../../docs/chapters/" + tutorialCategory.name)
         const destinationFilePath = path.relative(
@@ -287,6 +291,8 @@ export default class Writer {
                 `${module.info.name}.qmd`
             )
         );
+
+        // TODO: Reference out dir for docs
 
         const filePathToWrite = path.join(__dirname + "../../../docs/", destinationFilePath);
         const directoryPath = path.dirname(filePathToWrite);
@@ -540,6 +546,8 @@ export default class Writer {
     public prepareDirectoryForDocs(): Writer {
         const categories = Array.from(this.categories.values());
 
+        // TODO: Reference out dir for docs
+
         const folderPathToWrite = path.join(
             __dirname,
             "..",
@@ -730,6 +738,8 @@ export default class Writer {
      * @returns
      */
     public async addTutorialChaptersToQuartoYml(chapters: Chapter[]) {
+        // TODO: Reference out dir for docs
+
         const quartoYAMLPath = path.join(
             __dirname,
             "..",
@@ -794,6 +804,8 @@ export default class Writer {
             ...landDesc
         }
 
+        // TODO: Reference out dir for docs
+
         // Wirte this config to the end of the quarto file
         const quartoYAMLPath = path.join(
             __dirname,
@@ -833,6 +845,8 @@ export default class Writer {
     public createLocalizedFilesForEachLanguage(languages: string[]) {
         // Check through all the qmd files in the docs folder and create a copy for each language
         // it should follow this format `filename-lang.language.qmd`
+        // TODO: Reference out dir for docs
+
         const docsFolderPath = path.join(__dirname, "..", "..", "docs");
         
         // Remove the first language which is the default language
@@ -870,6 +884,8 @@ export default class Writer {
     static fixMissingLocalizedIndexFiles(langs: string[]) {
         // In some cases babel quarto will not create localized index files for the languages in this format /ar/index.ar.html instead
         // it will create /ar/index.html, this method will fix that by creating the localized index files for each language
+
+        // TODO: Reference out dir for docs
 
         const docsFolderPath = path.join(__dirname, "..", "..", "docs/_book");
 
