@@ -1,0 +1,5 @@
+{
+    "outputDirectory": "./docs",
+    "sourceDirectory": "./dist",
+    "tutorialDirectory": "./tutorials"
+}

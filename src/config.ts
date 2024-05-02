@@ -1,7 +1,9 @@
+import config from '../config.json'
+
 const CONFIG = {
-    outputDirectory: '../docs',
-    sourceDirectory: '../dis',
-    tutorialDirectory: '../tutorias',
+    outputDirectory: config.outputDirectory,
+    sourceDirectory: config.sourceDirectory,
+    tutorialDirectory: config.tutorialDirectory,
 }
 
 export default CONFIG;
