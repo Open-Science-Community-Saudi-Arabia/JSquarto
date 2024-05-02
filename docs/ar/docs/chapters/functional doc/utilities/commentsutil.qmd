@@ -1,0 +1,95 @@
+# Commentsutil
+
+this file provides utility classes for parsing and extracting information
+  from comments within code files. it includes methods to identify and
+  extract metadata from both module and non-module comments,
+  facilitating better documentation and understanding of code constructs
+  such as functions, variables, classes, and modules.
+
+
+
+## moduleName 
+`[variable]`
+ 
+**Description:**
+This method extracts module block information from comments, including module name, description, category, subcategory, link, and references.
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  comments | The comments to extract module block information from. |
+
+
+
+## description 
+`[variable]`
+ 
+**Description:**
+This method extracts other block information from comments, including description, params, link, examples, returns, thrown errors, and references.
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  comments | The comments to extract other block information from. |
+
+
+
+## fileContent 
+`[variable]`
+ 
+**Description:**
+This method retrieves comments from a source file using Acorn parser.
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  sourceFile | The source file to retrieve comments from. |
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+This class represents a comment extracted from a source file.
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  text | The text content of the comment. |
+|  endLocation | The end location of the comment. |
+
+
+
+## unknown 
+`[function]`
+ 
+**Description:**
+This method sets the construct information of the comment, including the type and name of the construct.
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  info | The construct information to set. |
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+This method retrieves module block information from the comment using the CommentsUtil class.
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+This method retrieves other block information from the comment using the CommentsUtil class.
+
