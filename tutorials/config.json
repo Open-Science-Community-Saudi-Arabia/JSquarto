@@ -31,8 +31,11 @@
             "adding_tutorials": {
                 "title": "Adding tutorials"
             },
-            "optimizing_workflow": {
+            "workflows": {
                 "title": "Optimize your workflow"
+            },
+            "usage": {
+                "title": "Using the Tool"
             },
             "starting_the_project": {
                 "title": "Starting a new build"
