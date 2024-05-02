@@ -39,7 +39,7 @@ export default class Writer {
     private modules: Map<string, Module> = new Map();
     private categories: Map<string, Category> = new Map();
     private tutorialsSourcePath: string;
-    private tutorialsDirPath: string;
+    private tutorialsOutputPath: string;
 
     /**
      * Initializes a new instance of the Writer class.
@@ -57,7 +57,7 @@ export default class Writer {
     ) {
         this.modules = modules;
         this.categories = categories;
-        this.tutorialsDirPath = path.join(CONFIG.outputDirectory, "/chapters/tutorials");
+        this.tutorialsOutputPath = path.join(CONFIG.outputDirectory, "/chapters/tutorials");
         this.tutorialsSourcePath =
             pathConfig.tutorial ?? CONFIG.tutorialDirectory
     }
@@ -263,24 +263,23 @@ export default class Writer {
     }) {
         const sourceFilePath = module.sourceFilePath;
 
-        const subCategoryFolderPath = subCategory ? path.join(
-            this.tutorialsDirPath,
-            subCategory.name,
+        const subCategoryFolderPath = subCategory ? path.relative(
+            CONFIG.outputDirectory,
+            path.join(
+                this.tutorialsOutputPath,
+                subCategory.name,
+            )
         ) : undefined
 
         if (subCategoryFolderPath) fs.mkdirSync(subCategoryFolderPath, { recursive: true });
 
-        const folderPathForTutorialsWithoutParentCategory = path.resolve(CONFIG.outputDirectory, "/chapters/" + tutorialCategory.name)
-        const destinationFilePath = path.relative(
-            CONFIG.outputDirectory,
-            path.join(
-                subCategoryFolderPath ?? folderPathForTutorialsWithoutParentCategory,
-                `${module.info.name}.qmd`
-            )
+        const folderPathForTutorialsWithoutParentCategory = path.join("chapters/" + tutorialCategory.name)
+        const destinationFilePath = path.join(
+            subCategoryFolderPath ?? folderPathForTutorialsWithoutParentCategory,
+            `${module.info.name}.qmd`
         );
 
-
-        const filePathToWrite = path.join(CONFIG.outputDirectory, '/', destinationFilePath);
+        const filePathToWrite = CONFIG.outputDirectory + '/' + destinationFilePath;
         const directoryPath = path.dirname(filePathToWrite);
         if (!fs.existsSync(directoryPath)) fs.mkdirSync(directoryPath, { recursive: true });
 
@@ -421,7 +420,6 @@ export default class Writer {
                     // Add hyperlinks to qmd file
                     fileContent += `**References:**\n\n`;
 
-                    // console.log({ references: doc.blockInfo.references })
                     for (const reference of doc.blockInfo.references) {
                         if (reference.type === "link") {
                             fileContent += `[${reference.text}](${reference.url})\n\n`;
@@ -672,7 +670,7 @@ export default class Writer {
 
         logger.info("Writing tutorials to Quarto YAML");
 
-        fs.mkdirSync(this.tutorialsDirPath, { recursive: true });
+        fs.mkdirSync(this.tutorialsOutputPath, { recursive: true });
 
         const chapters: Chapter[] = [];
         const subCategories = tutorialCategory.getSubCategories();
