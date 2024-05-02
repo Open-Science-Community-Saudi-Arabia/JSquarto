@@ -329,6 +329,7 @@ export default class Writer {
         _module.setDestinationFilePath(qmdfilePath);
 
         try {
+            console.log({ qmdfilePath })
             fs.writeFileSync(qmdfilePath, "", "utf8");
 
             let fileContent = "";
@@ -630,8 +631,7 @@ export default class Writer {
         const categories = Array.from(this.categories.values());
 
         for (const category of categories) {
-            const categoryFolderPath =
-                __dirname + `/../../docs/chapters/${category.name}`;
+            const categoryFolderPath = CONFIG.outputDirectory + `/chapters/${category.name}`;
 
             const directModules = category.getModules();
             for (const module of directModules) {

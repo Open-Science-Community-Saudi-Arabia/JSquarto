@@ -194,7 +194,7 @@ async function start(localizationConfig?: { languages: string[], includeLocalize
     // Generate documentation directory and files
     const writer = new Writer(modules, categories, { tutorial: CONFIG.tutorialDirectory })
     writer.prepareDirectoryForDocs().writeDocsFromCategoriesToFile();
-    
+
     const chapters = await writer.addTutorialsToGeneratedDoc();
     await writer.addTutorialChaptersToQuartoYml(chapters);
 
@@ -242,11 +242,13 @@ CONFIG.tutorialDirectory =
             : path.join(__dirname, `/../${specifiedTutorialsDirectory}`)
         : __dirname + `/../tutorials`;
 
-CONFIG.outputDirectory = 
+CONFIG.outputDirectory =
     specifiedOutputDirectory
         ? specifiedOutputDirectory.startsWith("/")
             ? specifiedOutputDirectory
             : path.join(__dirname, `/../${specifiedOutputDirectory}`)
         : __dirname + `/../docs`;
+
+console.log({ CONFIG })
 
 start({ languages: specifiedLanguages ?? ['en'], includeLocalizedVersions: !!includeLocalizedVersions });
