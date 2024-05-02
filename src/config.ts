@@ -1,7 +1,7 @@
 const CONFIG = {
     outputDirectory: '../docs',
     sourceDirectory: '../dis',
-    tutorial: '../tutorias',
+    tutorialDirectory: '../tutorias',
 }
 
 export default CONFIG;

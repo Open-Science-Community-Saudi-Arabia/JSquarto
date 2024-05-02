@@ -1,5 +1,4 @@
 import fs from "fs";
-import { Doc, ModuleBlockInfo } from "./interfaces";
 import { CommentsUtil } from "./utils/comment";
 import SourceFile from "./utils/file";
 import Writer from "./utils/writer";
@@ -10,9 +9,9 @@ import {
     SubCategory,
     recursivelyConvertAllStringValuesInObjectToLowerCase,
 } from "./utils/components";
-import logger from "./utils/logger";
 import Parser from "./utils/parser";
 import path from "path";
+import CONFIG from "./config";
 
 /**
  * Recursively searches for JavaScript files in a directory and its subdirectories.
@@ -61,9 +60,9 @@ function getJSFilesFromDirectory(
  *
  * @returns void
  */
-async function start(sourceFolderPath: string, localizationConfig?: { languages: string[], includeLocalizedVersions?: boolean }) {
+async function start(localizationConfig?: { languages: string[], includeLocalizedVersions?: boolean }) {
     // Get JavaScript files from directory
-    const filePaths = getJSFilesFromDirectory(sourceFolderPath);
+    const filePaths = getJSFilesFromDirectory(CONFIG.sourceDirectory);
 
     // Initialize maps for modules and categories
     const modules: Map<string, Module> = new Map();
@@ -191,50 +190,54 @@ async function start(sourceFolderPath: string, localizationConfig?: { languages:
         defaultCategory.addModule(defaultFileModule);
     }
 
-    const tutorial = process.env.npm_config_tutorial
-        ? path.join(__dirname, "..", process.env.npm_config_tutorial)
-        : undefined;
     // Generate documentation directory and files
-    const writer = new Writer(modules, categories, { tutorial })
+    const writer = new Writer(modules, categories, { tutorial: CONFIG.tutorialDirectory })
+    writer.prepareDirectoryForDocs().writeDocsFromCategoriesToFile();
+    
     const chapters = await writer.addTutorialsToGeneratedDoc();
-    writer.prepareDirectoryForDocs()
-        .writeDocsFromCategoriesToFile();
-
     await writer.addTutorialChaptersToQuartoYml(chapters);
 
-    if (langs) {
+    if (localizationConfig?.languages) {
         console.log("Running with languages");
-        await writer.addLanguageSpecsToQuartoConfig(langs);
+        writer.addLanguageSpecsToQuartoConfig(localizationConfig.languages);
 
-        if (process.argv.find((arg) => arg === "include_localized_versions")) {
-            await writer.createLocalizedFilesForEachLanguage(langs);
+        if (localizationConfig?.includeLocalizedVersions) {
+            writer.createLocalizedFilesForEachLanguage(localizationConfig.languages);
         }
     }
 
     logger.info("Documentation generation complete");
-    // process.exit(0);
 }
 
-// Access the path argument provided via command line
-const providedPath = process.env.npm_config_source;
-const langs = process.argv
+// Access the path argument specified via command line
+const specifiedSourceFilesDirectory = process.env.npm_config_source;
+const specifiedTutorialsDirectory = process.env.npm_config_tutorial;
+const specifiedLanguages = process.argv
     .find((arg) => arg.startsWith("languages"))
     ?.split("=")[1]
     ?.split(",");
 
 const includeLocalizedVersions = process.argv.find(arg => arg === 'include_localized_versions')
-if (includeLocalizedVersions && !langs) {
+if (includeLocalizedVersions && !specifiedLanguages) {
     console.log(
         "Please provide languages to create localized docs for using the languages flag",
     );
     process.exit(1);
 }
 
-// Use providedPath if available, otherwise fallback to a default path
-const path_ = providedPath
-    ? __dirname + `/../${providedPath}`
-    : __dirname + `/../source_files`;
+// Use specifiedPath if available, otherwise fallback to a default path
+CONFIG.sourceDirectory =
+    specifiedSourceFilesDirectory
+        ? specifiedSourceFilesDirectory.startsWith("/")
+            ? specifiedSourceFilesDirectory
+            : path.join(__dirname, `/../${specifiedSourceFilesDirectory}`)
+        : __dirname + `/../source_files`;
 
-start(path_, { languages: langs ?? [], includeLocalizedVersions: !!includeLocalizedVersions });
+CONFIG.tutorialDirectory =
+    specifiedTutorialsDirectory
+        ? specifiedTutorialsDirectory.startsWith("/")
+            ? specifiedTutorialsDirectory
+            : path.join(__dirname, `/../${specifiedTutorialsDirectory}`)
+        : __dirname + `/../tutorials`;
 
-// Writer.fixMissingLocalizedIndexFiles(langs ?? [])
+start({ languages: specifiedLanguages ?? ['en'], includeLocalizedVersions: !!includeLocalizedVersions });
