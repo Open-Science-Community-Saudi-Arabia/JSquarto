@@ -1,6 +1,6 @@
 files:
   - source: /docs/**/*.qmd
-    translation: /%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
+    translation: /translation/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
     multilingual: 1
   - source: /docs/**/*.md
     translation: /%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
