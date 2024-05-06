@@ -1,0 +1,157 @@
+# Parser
+
+this file is responsible for parsing comments in code files.
+  it extracts various pieces of information such as
+  description, category, subcategory, link, parameters, return values,
+  and thrown errors from comments using regular expressions.
+
+
+
+## descriptionMatch 
+`[variable]`
+ 
+**Description:**
+This method will extract the description from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getDescription(comment) => 'This method will extract the description from the comments block'
+```
+
+
+
+## categoryMatches 
+`[variable]`
+ 
+**Description:**
+This method will extract the category from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getCategory(comment) => 'StringUtil'
+```
+
+
+
+## subCategoryRegex 
+`[variable]`
+ 
+**Description:**
+This method will extract the subcategory from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getSubCategory(comment) => 'StringUtil'
+```
+
+
+
+## linkRegex 
+`[variable]`
+ 
+**Description:**
+This method will extract the link from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getLink(comment) => 'StringUtil'
+```
+
+
+
+## paramsRegex 
+`[variable]`
+ 
+**Description:**
+This method will extract all the params from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getParams(comment) => [{name: 'str', type: 'string', description: 'The string to convert to camel case'}]
+```
+
+
+
+## moduleRegex 
+`[variable]`
+ 
+**Description:**
+This method will extract the module name from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getModuleName(comment) => 'StringUtil'
+```
+
+
+
+## returnsMatches 
+`[variable]`
+ 
+**Description:**
+This method will extract the returns from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getReturnsValues(comment) => [{type: 'string', description: 'The string to convert to camel case'}]
+```
+
+
+
+## exampleRegex 
+`[variable]`
+ 
+**Description:**
+This method will extract the examples from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getExamples(comment) => ['StringUtil.convertToCamelCase(\'hello world\') => \'helloWorld\'']
+```
+
+
+
+## throwsMatches 
+`[variable]`
+ 
+**Description:**
+This method will extract the thrown errors from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getThrownErrors(comment) => [{type: 'Error', description: 'The string to convert to camel case'}]
+```
+
+
+
+## referencesRegex 
+`[variable]`
+ 
+**Description:**
+This method will extract the references from the comments block
+      
+
+**Examples:**
+
+```javascript
+Parser.getReferences(comment) => [{text: 'StringUtil', type: 'localModule'}]
+```
+
