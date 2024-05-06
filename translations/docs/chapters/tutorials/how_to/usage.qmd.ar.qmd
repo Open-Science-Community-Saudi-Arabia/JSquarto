@@ -1,0 +1,69 @@
+###Usage
+
+## Usage {#sec-usage}
+
+### Custom CLI arguments 
+The CLI arguments are used to customize the behavior of the JSquarto tool. These bespoke arguments enable you to tailor the documentation generation process to suit your specific requirements. By leveraging these arguments, you can enhance the efficiency and effectiveness of the documentation generation process, thereby streamlining your workflow and optimizing your documentation output.
+
+Some of the custom CLI arguments supported by JSquarto include:
+1. `--source`:  Source files are pivotal components containing the comments that JSquarto utilizes to generate comprehensive documentation. Specifies the directory containing the source files to be documented. These files can be can be written in various languages supported by JSquarto, such as JavaScript, TypeScript, and JSX. By default, JSquarto will check for the `/source_files` directory within your project structure to locate these the source file. However, you possess the flexibility to designate an alternative directory through the `--source` option.
+
+2. `--tutorial`: Specifies the directory containing the tutorial files to be included in the documentation. This argument allows you to incorporate tutorial content into your documentation, providing additional context and guidance for users. 
+
+3. `--output`: Specifies the output directory where the generated documentation will be stored. By default, JSquarto will save the documentation in the `/docs` directory within your project structure. However, you can customize the output location by specifying an alternative directory through the `--output` option.
+
+4. `languages`: Specifies the languages to be supported in the documentation. This argument enables you to generate documentation in multiple languages, catering to a diverse user base. For example, `languages=en,fr,es` specifies English, French, and Spanish as the supported languages.
+
+5. `include_localized_versions`: Specifies whether to include localized versions of the generated documentation. For example, if specified, JSquarto will generate seperate files for each specified language. 
+
+### Configuration
+The `config.json` file in the root directory of the project is used to store the configuration settings for the JSquarto tool. This file contains the default settings for the documentation generation process, such as the source files directory, tutorial files directory, output directory, and supported languages. You can modify these settings to customize the documentation generation process according to your preferences. This file is useful for cases where the cli arguments specified are multiple and you want to avoid specifying them each time you run the tool.
+
+The `config.json` file contains the following fields:
+1. `sourceDirectory`: Specifies the directory containing the source files to be documented. By default, this field is set to `/source_files` within the project structure. This is the same as the `--source` CLI argument.
+
+2. `tutorialDirectory`: Specifies the directory containing the tutorial files to be included in the documentation. By default, this field is set to `/tutorial_files` within the project structure. This is the same as the `--tutorial` CLI argument.
+
+3. `outputDirectory`: Specifies the output directory where the generated documentation will be stored. By default, this field is set to `/docs` within the project structure. This is the same as the `--output` CLI argument.
+
+
+### Usage
+To utilize these custom CLI arguments, simply append them to the JSquarto command when executing the tool. For example:
+
+To specify the source files directory:
+```bash
+npm run doc:generate --source=/path/to/your/source/files 
+```
+
+To specify the tutorial files directory:
+```bash
+npm run doc:generate --tutorial=/path/to/your/tutorial/files
+```
+
+To specify the output directory:
+```bash
+npm run doc:generate --output=/path/to/your/output/directory
+```
+
+To specify the supported languages:
+```bash
+npm run doc:generate languages=en,fr,es
+```
+This will only add the languages to the config file (_quarto.yml) and not generate the documentation in the specified languages. This is important for cases where an external tool like Crowdin will be used to translate the documentation and generate the files in the specified languages.
+
+To include localized versions of the generated documentation:
+```bash
+npm run doc:generate include_localized_versions languages=en,fr,es
+```
+This will generate the documentation in the specified languages and also add the languages to the config file (_quarto.yml).
+
+Note: If you intend to `include_localized_versions`, you must also specify the `languages` argument to indicate the supported languages for the documentation.
+
+By leveraging these custom CLI arguments, you can tailor the documentation generation process to meet your specific needs and preferences, thereby enhancing the quality and usability of your documentation output.
+
+
+### Leveraging TypeScript in Source Files
+When utilizing TypeScript within your project, it's advisable to transpile your TypeScript source files into JavaScript before initiating the JSquarto process. This recommendation stems from the fact that JSquarto lacks intrinsic support for TypeScript syntax. Once you've transpiled your TypeScript files into JavaScript, you can seamlessly execute JSquarto on the resultant JavaScript files to generate comprehensive documentation.
+
+Integrating TypeScript Transpilation
+Prior to executing JSquarto, ensure to transpile your TypeScript source files into JavaScript using your preferred transpiler, such as TypeScript Compiler (tsc). This step ensures compatibility with JSquarto's documentation generation process, thereby facilitating a smooth and efficient 
