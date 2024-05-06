@@ -1,9 +1,9 @@
 files:
   - source: /docs/**/*.qmd
-    translation: /translation/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
+    translation: /translations/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
     multilingual: 1
   - source: /docs/**/*.md
-    translation: /%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
+    translation: /translations/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
     multilingual: 1
 bundles:
   - 4
