@@ -11,29 +11,31 @@ import CONFIG from "../config";
 import path from 'path'
 import fs from 'fs'
 
-
-async function copyAllFoldersAndFiles(source: string, destination: string) {
-    const files = await fs.promises.readdir(source)
-
-    console.log({ source, destination })
-
-    for (const file of files) {
-        const filePath = path.join(source, file)
-        const newFilePath = path.join(destination, file)
-
-        const stats = await fs.promises.stat(filePath)
-        if (stats.isDirectory()) {
-            console.log({ newFilePath })
-            await fs.promises.mkdir(newFilePath, { recursive: true })
-            await copyAllFoldersAndFiles(filePath, newFilePath)
-        } else {
-            await fs.promises.copyFile(filePath, newFilePath)
-        }
-    }
-}
-
+/**
+ * Move the updated crowdin translations from translations folder to the output directory
+ */
 export async function moveTranslatedFilesToOutputDir() {
     const translationsFolderPath = path.join(__dirname, '/../../translations')
+
+    async function copyAllFoldersAndFiles(source: string, destination: string) {
+        const files = await fs.promises.readdir(source)
+    
+        console.log({ source, destination })
+    
+        for (const file of files) {
+            const filePath = path.join(source, file)
+            const newFilePath = path.join(destination, file)
+    
+            const stats = await fs.promises.stat(filePath)
+            if (stats.isDirectory()) {
+                console.log({ newFilePath })
+                await fs.promises.mkdir(newFilePath, { recursive: true })
+                await copyAllFoldersAndFiles(filePath, newFilePath)
+            } else {
+                await fs.promises.copyFile(filePath, newFilePath)
+            }
+        }
+    }
 
     // Find all folders that are named after the language code
     for (const language of CONFIG.languages) {
@@ -45,6 +47,9 @@ export async function moveTranslatedFilesToOutputDir() {
     }
 }
 
+/**
+ * Fix the structure of the translated files in the output directory
+ */
 export async function fixTranslatedFilesStructureInOutputDir() {
     // Check the output dir for the localized files
     const folderPath = path.join(CONFIG.outputDirectory)
@@ -64,6 +69,13 @@ export async function fixTranslatedFilesStructureInOutputDir() {
     }
 }
 
+/**
+ * Merge the paths for the translated files
+ * 
+ * @description This is necessary because the Crowdin CLI creates a folder for each language    
+ * and places the translated files within that folder. This function will move the files from the language folder
+ * to the same level as the original files.
+ */
 export async function mergePathsForTranslatedFiles() {
     // Go to the folders for the languages within the output dir
     const folderPath = path.join(CONFIG.outputDirectory)
@@ -101,6 +113,14 @@ export async function mergePathsForTranslatedFiles() {
     }
 }
 
+/**
+ * Fix the file extensions for the translated files
+ * 
+ * @description The generated crowdin files have this file extension pattern: <filename>.<language>.<ext>
+ * The problem here is that the <filename> can be <index.md> instead of 'index'.
+ * This will make the generated file to be <index.md>.<language>.<ext>
+ * This function will fix the file name to be <plain_file_name>.<language>.<ext> so it'll be <index.<language>.<ext>>
+ */
 export async function fixFileExtensionsForTranslatedFiles() {
     // Go to the folders for the languages within the output dir
     const folderPath = path.join(CONFIG.outputDirectory)
