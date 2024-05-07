@@ -15,7 +15,7 @@ import fs from 'fs'
  * Move the updated crowdin translations from translations folder to the output directory
  */
 export async function moveTranslatedFilesToOutputDir() {
-    const translationsFolderPath = path.join(__dirname, '/../../translations')
+    const translationsFolderPath = path.join(__dirname, '/../../translation')
 
     async function copyAllFoldersAndFiles(source: string, destination: string) {
         const files = await fs.promises.readdir(source)
