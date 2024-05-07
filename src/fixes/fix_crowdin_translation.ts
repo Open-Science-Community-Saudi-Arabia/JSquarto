@@ -11,6 +11,27 @@ import CONFIG from "../config";
 import path from 'path'
 import fs from 'fs'
 
+
+async function copyAllFoldersAndFiles(source: string, destination: string) {
+    const files = await fs.promises.readdir(source)
+
+    console.log({ source, destination })
+
+    for (const file of files) {
+        const filePath = path.join(source, file)
+        const newFilePath = path.join(destination, file)
+
+        const stats = await fs.promises.stat(filePath)
+        if (stats.isDirectory()) {
+            console.log({ newFilePath })
+            await fs.promises.mkdir(newFilePath, { recursive: true })
+            await copyAllFoldersAndFiles(filePath, newFilePath)
+        } else {
+            await fs.promises.copyFile(filePath, newFilePath)
+        }
+    }
+}
+
 export async function moveTranslatedFilesToOutputDir() {
     const translationsFolderPath = path.join(__dirname, '/../../translations')
 
@@ -19,8 +40,8 @@ export async function moveTranslatedFilesToOutputDir() {
         const langFolderPath = path.join(translationsFolderPath, language)
 
         // Copy the language folder to the output directory
-        const newLangFolderPath = path.join(CONFIG.outputDirectory, language)
-        fs.copyFileSync(langFolderPath, newLangFolderPath)
+        const newLangFolderPath = path.join(__dirname, `../../${CONFIG.outputDirectory}`, language)
+        await copyAllFoldersAndFiles(langFolderPath, newLangFolderPath)
     }
 }
 
@@ -57,13 +78,21 @@ export async function mergePathsForTranslatedFiles() {
             for (const file of files) {
                 const filePath = path.join(folderPath, file)
                 // Remove the prefix /language/outputDir from the file path
-                const newFilePath = filePath.replace(`${language}/${CONFIG.outputDirectory}`, '')
+                // Example move docs/ar/chapter/index.ar.qmd to docs/chapter/index.ar.qmd
+                const index = filePath.indexOf(`/${language}`)
+                let newFilePathArr = filePath.split('')
+                for (let i = 0; i < +language.length + 2; i++) {
+                    newFilePathArr[i + index] = '/'
+                }
+                const newFilePath = path.resolve(newFilePathArr.join(''))
+
                 const stats = await fs.promises.stat(filePath)
 
                 if (stats.isDirectory()) {
                     await recursivelyMoveSubFiles(filePath)
                 } else {
-                    await fs.promises.rename(filePath, newFilePath)
+                    console.log({ filePath, newFilePath, pattern: `${CONFIG.outputDirectory}/${language}` })
+                    fs.renameSync(filePath, newFilePath)
                 }
             }
         }
@@ -91,7 +120,8 @@ export async function fixFileExtensionsForTranslatedFiles() {
                     await recursivelyChangeFileExtensions(filePath)
                 } else {
                     const fileExtension = path.extname(filePath)
-                    const newFilePath = filePath.replace(`.${fileExtension}.${language}`, '')
+                    const newFilePath = filePath.replace(`${fileExtension}.${language}`, `.${language}`)
+                    console.log({ filePath, newFilePath, fileExtension })
                     await fs.promises.rename(filePath, newFilePath)
                 }
             }
@@ -99,6 +129,13 @@ export async function fixFileExtensionsForTranslatedFiles() {
 
         await recursivelyChangeFileExtensions(languageFolderPath)
     }
+}
+
+async function start() {
+    await moveTranslatedFilesToOutputDir()
+    await fixTranslatedFilesStructureInOutputDir()
+    await fixFileExtensionsForTranslatedFiles()
+    await mergePathsForTranslatedFiles()
 }
 
 if (require.main === module) {
@@ -115,9 +152,5 @@ if (require.main === module) {
     }
 
     CONFIG.languages = languages
-
-    moveTranslatedFilesToOutputDir()
-    // fixFileExtensionsForTranslatedFiles()
-    // fixTranslatedFilesStructureInOutputDir()
-    // mergePathsForTranslatedFiles()
+    start()
 }
