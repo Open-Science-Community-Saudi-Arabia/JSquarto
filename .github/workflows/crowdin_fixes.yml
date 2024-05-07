@@ -1,9 +1,6 @@
 name: Fix crowdin updates
 
 on:
-  push:
-    branches:
-      - crowdin_integration
   pull_request:
     branches:
       - crowdin_integration
