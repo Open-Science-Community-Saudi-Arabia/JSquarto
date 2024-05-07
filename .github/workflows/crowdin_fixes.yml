@@ -57,11 +57,11 @@ jobs:
         with:
           source_branch: ${{ env.NEW_BRANCH }}
           destination_branch: build_crowdin_integration
-          pr_title: Update transpiled build
+          pr_title: Restructure new crowdin updates
           pr_body: |
             :crown: *An automated PR*
 
-            Automated PR to update the build branch with the latest transpiled build from main
+            Automated PR to structure the new crowdin updates so to allow book rendering with babel quarto
 
             _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
           pr_reviewer: "@RealRichi3"
