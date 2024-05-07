@@ -39,7 +39,7 @@ jobs:
         run: npm install
 
       - name: Run crowdin fixes
-        run: npm run crowdin:fix languages=en,ar
+        run: npm run fix:crowdin_files languages=en,ar
 
       - name: Commit changes
         run: |
