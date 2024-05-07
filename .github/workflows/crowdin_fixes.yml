@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - crowdin_integration
-  pull-request:
+  pull_request:
     branches:
       - crowdin_integration
+  workflow_dispatch:
 
 env:
   NEW_BRANCH: crowding_updates_fix-
