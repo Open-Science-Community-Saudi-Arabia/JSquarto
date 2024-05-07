@@ -151,11 +151,20 @@ export async function fixFileExtensionsForTranslatedFiles() {
     }
 }
 
+export async function deleteEmptyFoldersInOutDir() {
+    // Delete all the empty folders for each language in the output directory
+    for (const language of CONFIG.languages) {
+        const languageFolderPath = path.join(CONFIG.outputDirectory, language)
+        fs.rmdirSync(languageFolderPath, { recursive: true })
+    }
+}
+
 async function start() {
     await moveTranslatedFilesToOutputDir()
     await fixTranslatedFilesStructureInOutputDir()
     await fixFileExtensionsForTranslatedFiles()
     await mergePathsForTranslatedFiles()
+    await deleteEmptyFoldersInOutDir()
 }
 
 if (require.main === module) {
@@ -171,6 +180,7 @@ if (require.main === module) {
         process.exit(1);
     }
 
+    languages.shift()
     CONFIG.languages = languages
     start()
 }
