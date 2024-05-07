@@ -1,0 +1,211 @@
+# Components
+
+this module is used to generate the quarto yml file
+  
+
+
+
+## recursivelyConvertAllStringValuesInObjectToLowerCase 
+`[function]`
+ 
+**Description:**
+Recursively convert all string values in an object to lowercase
+  
+
+**Examples:**
+
+```javascript
+const obj = {
+    name: 'Hello World',
+    description: 'This is a description',
+    blockInfo: {
+    name: 'Hello World',
+    description: 'This is a description',
+    },
+    };
+    recursivelyConvertAllStringValuesInObjectToLowerCase(obj);
+    // => {
+    //   name: 'hello world',
+    //   description: 'this is a description',
+    //   blockInfo: {
+    //   name: 'hello world',
+    //   description: 'this is a description',
+    //   },
+    //   }
+```
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Add a document to the module
+      
+
+**Examples:**
+
+```javascript
+const module = new Module({ name: 'StringUtil' });
+      const moduleDoc = new ModuleDoc({
+        originalFilePath: 'string.ts',
+        data: {
+     
+           blockInfo: {
+           name: 'StringUtil',
+           description: 'This class contains methods for manipulating strings',
+           },
+           constructInfo: {
+           type: 'class',
+           name: 'StringUtil',
+           },
+           },
+           });
+           module.addDoc(moduleDoc);
+```
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Get the documents in the module
+      
+
+**Examples:**
+
+```javascript
+const module = new Module({ name: 'StringUtil' });
+      const moduleDoc = new ModuleDoc({
+       originalFilePath: 'string.ts',
+       data: {
+       blockInfo: {
+       name: 'StringUtil',
+       description: 'This class contains methods for manipulating strings',
+       },
+       constructInfo: {
+       type: 'class',
+       name: 'StringUtil',
+       },
+       },
+       });
+       module.addDoc(moduleDoc);
+       module.getDocs();
+       // => [ModuleDoc]
+```
+
+
+
+## unknown 
+`[other]`
+ 
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+sets the source file path
+      
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Add a module to the subcategory
+     
+      
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Get the modules in the subcategory
+     
+      
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Get the name of the subcategory
+      
+
+
+
+## Category 
+`[class]`
+ 
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+This class represents a category.
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  name | The name of the category. |
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Adds a subcategory to the category.
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  subCategory | The subcategory to add. |
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Retrieves the subcategories in the category.
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Retrieves the name of the category.
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Adds a module to the category.
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  module | The module to add. |
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Retrieves the modules in the category.
+

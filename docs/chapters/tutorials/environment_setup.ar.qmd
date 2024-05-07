@@ -1,0 +1,75 @@
+### Environment_setup
+
+---
+title: 'Environment Setup'
+---
+
+#### Prerequisites (#environment-setup)
+Before testing the tool locally, ensure you have the following prerequisites installed on your system:
+- Node.js and npm (Node Package Manager)
+- Git (optional, if cloning the repository)
+
+#### Installation
+To test the tool locally, follow these steps:
+
+1. Clone the repository:
+   
+   ```bash
+   git clone https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto
+   ```
+2. Navigate to the projecte directory
+
+3. Install dependencies 
+    
+    ```bash
+    npm install
+    ```
+
+### Running the Tool
+Once the dependencies are installed, you can paste the files in the JS files or folder in the `/source_files` directory you can run the tool using the following command
+    
+1. To generate the documentation run the following command
+   
+   ```bash
+    npm run doc:generate
+   ```
+
+    This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
+
+    You can choose to specify the directory where the `source_files` are, to do this run 
+    
+    ```bash
+    npm run doc:generate --source=<path to source files>
+    ```
+
+    It also supports addition of custom tutorials, to do this add the .qmd files for the tutorials in the `/tutorials` directory
+
+    The generated `.qmd` files can be found in the `/docs/chapters` folder
+
+    This command may vary depending on the workflow you choose, you may want to create the docs files in other languages too. To do this you can run the command below
+
+    ```bash
+    npm run doc:generate languages=en,ar,es include_localized_versions --source=<path to source files>
+    ```
+
+    This will generate the documentation in English, Arabic and Spanish. You can add more languages by separating them with a comma. (This doesn't actually translate the documentation, it just creates a copy of the documentation and renames it to the specified language). To integrate with a translation service, you can use the [Crowdin](https://crowdin.com/) service.
+
+    For more information on the available workflows see the guide here @sec-workflows
+
+
+2. To preview the generated documentation run 
+    
+    ```bash
+    npm run doc:preview
+    ```
+    
+    The docs are previewed with quarto, so make sure to have quarto already installed
+
+
+3. You can choose to generate and preview in one go, to do this run the command below
+    
+    ```bash
+    npm run build --source=<path to source files>
+    ```
+
+    This will generate the documentation, preview with quarto and open a link to preview the docs
