@@ -42,17 +42,11 @@ format:
     number-sections: false
 babelquarto:
   languagecodes:
-    - name: en
-      text: Version in en
     - name: ar
       text: Version in ar
   mainlanguage: en
-  languages:
-    - ar
+  languages: []
 lang: en
-title-en: Title in en
-description-en: Description in en
-author-en: Author in en
 title-ar: Title in ar
 description-ar: Description in ar
 author-ar: Author in ar
