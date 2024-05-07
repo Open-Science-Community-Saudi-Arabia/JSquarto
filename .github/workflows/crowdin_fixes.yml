@@ -1,0 +1,83 @@
+name: Fix crowdin updates
+
+on:
+  push:
+    branches:
+      - crowdin_integration
+  pull-request:
+    branches:
+      - crowdin_integration
+
+env:
+  NEW_BRANCH: crowding_updates_fix-
+
+jobs:
+  merge_and_build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+
+      - name: Set New Branch Name
+        id: set_branch
+        run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run crowdin fixes
+        run: npm run crowdin:fix languages=en,ar
+
+      - name: Commit changes
+        run: |
+          git config --global user.email "molunorichie@gmail.com"
+          git config --global user.name "Richie"
+          git checkout -b $NEW_BRANCH
+          git status
+          git add .
+          git add dist -f
+          git commit -m "New crowdin updates fix"
+          git push origin $NEW_BRANCH
+
+      - name: Create Pull Request
+        id: create_pr
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ env.NEW_BRANCH }}
+          destination_branch: build_crowdin_integration
+          pr_title: Update transpiled build
+          pr_body: |
+            :crown: *An automated PR*
+
+            Automated PR to update the build branch with the latest transpiled build from main
+
+            _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
+          pr_reviewer: "@RealRichi3"
+          pr_assignee: "RealRichi3"
+          pr_label: "auto-pr"
+          pr_draft: false
+          pr_allow_empty: true
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Pull request number
+        run: echo "Pull Request Number - ${{ steps.create_pr.outputs.pull_request_number }}"
+        id: pr_number
+
+      # - name: Approve pull Request
+      #   if: steps.create_pr.outputs.pull_request_number
+      #   uses: hmarr/auto-approve-action@v2
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}
