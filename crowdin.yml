@@ -3,7 +3,7 @@ files:
     translation: /translation/%two_letters_code%/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
     multilingual: 1
   - source: /docs/**/*.md
-    translation: /translations/%two_letters_code%/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
+    translation: /translation/%two_letters_code%/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
     multilingual: 1
 bundles:
   - 4
