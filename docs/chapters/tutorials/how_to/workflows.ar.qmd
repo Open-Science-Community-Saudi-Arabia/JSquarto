@@ -1,0 +1,104 @@
+###Workflows
+
+### Workflows {#sec-workflows}
+There are different workflows that can be adopted to optimize the documentation generation process using JSquarto.
+
+1. Doc generation
+2. Doc generation with manual transalation
+3. Doc generation with crowdin translation
+
+### Doc generation
+This workflow involves generating documentation in a single language. The process is straightforward and involves executing JSquarto on the source files to generate comprehensive documentation in the specified language. This workflow is ideal for projects targeting a specific language audience and seeking to streamline the documentation generation process.
+
+#### STEPS
+1. To do this, simply execute the JSquarto command with the desired custom CLI arguments, such as `--source` and `languages`, to specify the source files directory and supported languages, respectively. For example:
+   
+    ```bash
+        npm run doc:generate --source=/path/to/your/source/files 
+    ```
+
+### Doc generation with manual translation
+For manual translation of the documentation, you can generate the documentation in multiple languages and then manually translate the content into the desired languages. For this workflow, we use [babelquarto](https://docs.ropensci.org/babelquarto/) which helps to preview the documentation in multiple languages. Although this doesn't translate the content, it provides a preview of the documentation in the specified languages, enabling you to manually translate the content.
+
+#### Steps
+1. Generate the documentation in multiple languages using JSquarto with the `languages` argument to specify the supported languages. For example:
+
+    ```bash
+        npm run doc:generate languages=en,fr,es include_localized_versions --source=/path/to/your/source/files
+    ```
+Note: Ensure to include the `include_localized_versions` argument to generate copies of the documentation in the specified languages. If they are not included, only the default language documentation will be generated. But the languages config will only be added to the config (_quarto.yml) file.
+
+2. Manually translate the content in the generated documentation files for each language. You can leverage tools such as Google Translate or professional translation services to facilitate the translation process.
+
+3. Download RStudio and install the `babelquarto` package from CRAN. This package is used to preview the documentation in multiple languages. You can install the package using the following command:
+    
+    ```R
+        install.packages('babelquarto', repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))
+    ```
+
+4. Open the generated doc folder in RStudio, navigate to the console and set the working directory to the doc folder.
+   
+    ```R
+        project_dir <- "/home/richie/Desktop/repos/oscsa/JSquarto/docs"
+    ```
+
+5. Preview the documentation in multiple languages using the `babelquarto` package. For example, to preview the documentation in English, French, and Spanish, execute the following command:
+    
+    ```R
+       babelquarto::render_book(file.path(parent_dir, project_dir))
+    ```
+6. As at the time of writing this, there are minor issues with navigating the previewed documentation in different languages. To fix this temporarily, run 
+    
+    ```bash
+        npm run fix:all languages=en,fr,es
+    ```
+
+    Note: The `fix:all` script is a custom script that fixes the navigation issues in the previewed documentation. This script is used to update the navigation links in the previewed documentation to enable seamless navigation between the different languages. And the languages specified in the script should match the languages specified in the `languages` argument during the documentation generation process.
+
+7. You can navigate to the `/docs/_book` directory to view the previewed documentation in multiple languages. The previewed documentation provides a comprehensive overview of the content in each language, enabling you to verify the translations and ensure the accuracy and quality of the documentation.
+
+
+
+### Doc generation with crowdin translation
+For automated translation of the documentation, you can leverage the Crowdin platform to facilitate the translation process. Crowdin is a cloud-based translation management platform that enables you to automate the translation of content into multiple languages. By integrating Crowdin with JSquarto, you can streamline the translation process and generate comprehensive documentation in various languages efficiently.
+
+#### Steps
+1. Generate the documentation in multiple languages using JSquarto with the `languages` argument to specify the supported languages. For example:
+
+    ```bash
+        npm run doc:generate languages=en,fr,es --source=/path/to/your/source/files
+    ```
+
+    Note that the `include_localized_versions` argument is not required for this workflow, as Crowdin will handle the translation process. And generate the different files for each language.
+
+2. Integrate Crowdin with JSquarto to automate the translation process. To integrate Crowdin, you need to create a Crowdin project and configure the project settings to enable the automatic translation of the documentation. You can refer to the [Crowdin Github integration documentation](https://support.crowdin.com/github-integration/#:~:text=Open%20your%20project%20and%20go%20to%20the%20Integrations,drop-down%20list%20to%20integrate%20via%20your%20GitHub%20account) for detailed instructions on setting up a project and configuring the translation settings.
+On Crowdin, you can set up how the translated files will be named, make sure it follows the format `original_file_name.locale.extension` e.g `index.en.qmd`, `index.fr.qmd`, `index.es.qmd`
+
+3. Once you've configured the Crowdin project settings, you can proceed to render the documentation in multiple languages using the `babelquarto` package. This step enables you to preview the documentation in different languages before initiating the translation process. You can leverage the `babelquarto` package to preview the documentation in multiple languages, as described in the previous workflow. To do this open the generated doc folder in RStudio, navigate to the console and set the working directory to the doc folder.
+    
+    ```R
+        project_dir <- "/home/richie/Desktop/repos/oscsa/JSquarto/docs"
+    ```
+
+    Preview the documentation in multiple languages using the `babelquarto` package. For example, to preview the documentation in English, French, and Spanish, execute the following command:
+    
+    ```R
+       babelquarto::render_book(file.path(parent_dir, project_dir))
+    ```
+
+4. After rendering the book, the html files will be generated and set in the `/docs/_book` directory. You can then serve the book using any static server like `http-server` or `live-server` to preview the documentation in multiple languages. Alternatively, you can run the following command to serve the book:
+    
+    ```bash
+        npm run serve
+    ```
+
+    After serving the book, you can navigate to the specified URL to view the documentation in multiple languages. In some cases you may notice that the navigation links are not working as expected. To fix this, run the following command:
+    
+    ```bash
+        npm run fix:all languages=en,fr,es
+    ```
+
+This workflow uses JSquarto to generate the documentation, and Crowdin to initiate the translation process which creates the translated files in the specified languages, lastly the `babelquarto` package to preview the documentation in multiple languages. 
+
+
+
