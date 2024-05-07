@@ -47,7 +47,6 @@ jobs:
           git checkout -b $NEW_BRANCH
           git status
           git add .
-          git add dist -f
           git commit -m "New crowdin updates fix"
           git push origin $NEW_BRANCH
 
