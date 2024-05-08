@@ -48,7 +48,8 @@ jobs:
       
       - name: Build book 
         run: |
-          Rscript ./scripts/build_book.R
+          tree .
+           Rscript -e 'library(babelquarto); project_dir <- "src/docs"; babelquarto::render_book(project_path = project_dir)'
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
