@@ -48,7 +48,7 @@ jobs:
         run: Rscript -e "install.packages('pak', lib='./my_R_library')"
           
       - name: Install Babel quarto
-        run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')"
+        run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', 'ropensci-review-tools/quarto', lib='./my_R_library')"
       
       - name: Build book 
         run: |
