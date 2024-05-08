@@ -46,7 +46,7 @@ jobs:
 
       - name: Install Babelquarto
         run: |
-          Rscript -e "install.packages('pak', lib='./my_R_library'); pak::pkg_install('ropensci-review-tools/babelquarto', lib='./my_R_library)"
+          Rscript -e "install.packages('pak', lib='./my_R_library'); pak::pkg_install('ropensci-review-tools/babelquarto')"
       
       - name: Build book 
         run: |
