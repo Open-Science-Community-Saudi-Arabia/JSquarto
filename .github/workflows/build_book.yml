@@ -32,14 +32,16 @@ jobs:
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
 
       - name: Install pak
-        run: Rscript -e 'install.packages("pak", repos = "https://cloud.r-project.org")'
+        run: 
 
       - name: Setup R
         run: |
           sudo apt-get update
           sudo apt-get install r-base
           sudo apt-get install r-base-core
-          Rscript -e "pak::pak('ropensci-review-tools/babelquarto')"
+          export R_LIBS_USER="/.R/library"
+          Rscript -e 'install.packages("pak", repos = "https://cloud.r-project.org")'
+          Rscript -e 'pak::pkg_install("babelquarto")'
       
       - name: Build book
         run: |
