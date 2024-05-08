@@ -44,7 +44,7 @@ jobs:
         run: chmod u+w ./my_R_library
 
       - name: Install Babelquarto
-        run: Rscript -e "install.packages('babelquarto', repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))"
+        run: Rscript -e "install.packages('babelquarto', repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'), lib = './my_R_library')"
       
       - name: Build book 
         run: |
