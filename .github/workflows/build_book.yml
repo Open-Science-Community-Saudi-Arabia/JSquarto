@@ -22,7 +22,6 @@ jobs:
         node-version: [16.x]
 
     steps:
-    
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -40,15 +39,12 @@ jobs:
           sudo apt-get install libssl-dev libcurl4-openssl-dev libxml2-dev
 
       - name: Create writable directory
-        run: mkdir ./my_R_library
-
-      - name: Update permissions
-        run: chmod u+w ./my_R_library
+        run: |
+          mkdir ./my_R_library
+          chmod u+w ./my_R_library
 
       - name: Setup quarto
         uses: quarto-dev/quarto-actions/setup@v2
-      - run: |
-          quarto --version
       
       - name: Install PAK
         run: Rscript -e "install.packages('pak', lib='./my_R_library')"
@@ -70,7 +66,7 @@ jobs:
         run: npm install
 
       - name: Prepare crowdin translations
-        run: npm run fix:crowdin_files
+        run: npm run fix:crowdin_files languages=en,ar
 
       - name: Fix built book
         run: npm run fix:all languages=en,ar
@@ -108,10 +104,3 @@ jobs:
       - name: Pull request number
         run: echo "Pull Request Number - ${{ steps.create_pr.outputs.pull_request_number }}"
         id: pr_number
-
-      # - name: Approve pull Request
-      #   if: steps.create_pr.outputs.pull_request_number
-      #   uses: hmarr/auto-approve-action@v2
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}
