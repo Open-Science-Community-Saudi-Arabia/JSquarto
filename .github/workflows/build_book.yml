@@ -52,7 +52,6 @@ jobs:
       
       - name: Build book 
         run: |
-          export R_LIBS_USER=./my_R_library
           Rscript -e '.libPaths(c('./my_R_library', .libPaths())); library(babelquarto); project_dir <- "./docs"; babelquarto::render_book(project_path = project_dir)'
 
       - name: Setup Node.js
