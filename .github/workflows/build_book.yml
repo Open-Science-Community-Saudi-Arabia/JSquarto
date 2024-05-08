@@ -38,7 +38,7 @@ jobs:
           sudo apt-get install r-base-core
 
       - name: Create writable directory
-        run: mkdir my_R_library
+        run: mkdir ../my_R_library
 
       - name: Update permissions
         run: chmod u+w ./my_R_library
@@ -48,8 +48,7 @@ jobs:
       
       - name: Build book 
         run: |
-          tree .
-           Rscript -e 'library(babelquarto); project_dir <- "src/docs"; babelquarto::render_book(project_path = project_dir)'
+          Rscript -e 'library(babelquarto); project_dir <- "/docs"; babelquarto::render_book(project_path = project_dir)'
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
