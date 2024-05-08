@@ -183,5 +183,5 @@ if (require.main === module) {
 
     languages.shift()
     CONFIG.languages = languages
-    start()
+    start() 
 }
