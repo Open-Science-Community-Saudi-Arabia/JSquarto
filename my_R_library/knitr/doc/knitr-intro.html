@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Not An Introduction to knitr</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rstudio/markdown/inst/resources/default.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rstudio/markdown/inst/resources/prism-xcode.css">
+</head>
+<body>
+<div class="frontmatter">
+<div class="title"><h1>Not An Introduction to knitr</h1></div>
+<div class="author"><h2>Yihui Xie</h2></div>
+<div class="date"><h3>2024-04-05</h3></div>
+</div>
+<div class="body">
+<p>The <strong>knitr</strong> package is an alternative tool to Sweave based on a different
+design with more features. This document is not an introduction, but only serves
+as a placeholder to guide you to the real manuals, which are available on the
+package website <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a> (e.g. the <a href="https://yihui.org/knitr/demo/manual/">main
+manual</a> and the <a href="https://yihui.org/knitr/demo/graphics/">graphics
+manual</a> ), and remember to read the help
+pages of functions in this package. There is a book “Dynamic Docuemnts with R
+and knitr” for this package, too.</p>
+<p>Anyway, here is a code chunk that shows you can compile vignettes with <strong>knitr</strong>
+as well using R 3.0.x, which supports non-Sweave vignettes:</p>
+<pre><code class="language-r">options(digits=4)
+rnorm(20)
+</code></pre>
+<pre><code>##  [1]  1.23126 -0.64539  2.05970 -1.65411 -1.41258  0.26679 -1.27438  1.79358
+##  [9]  0.86266 -0.46147 -0.26535  0.62393  0.01589 -0.45401  0.80607 -1.15355
+## [17] -1.53310  0.45087 -0.83925  0.27367
+</code></pre>
+<pre><code class="language-r">fit=lm(dist~speed, data=cars)
+b=coef(fit)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">t value</th>
+<th align="right">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">(Intercept)</td>
+<td align="right">-17.579</td>
+<td align="right">6.7584</td>
+<td align="right">-2.601</td>
+<td align="right">0.0123</td>
+</tr>
+<tr>
+<td align="left">speed</td>
+<td align="right">3.932</td>
+<td align="right">0.4155</td>
+<td align="right">9.464</td>
+<td align="right">0.0000</td>
+</tr>
+</tbody>
+</table>
+<p>The fitted regression equation is \(Y=-17.5791+3.9324x\).</p>
+<pre><code class="language-r">par(mar=c(4, 4, 1, .1))
+plot(cars, pch = 20)
+abline(fit, col = 'red')
+</code></pre>
+<p><img src="data:image/png;base64,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" alt="A scatterplot with a regression line." /></p>
+<h2 id="references">References</h2>
+<p>Xie Y (2024).
+<em>knitr: A General-Purpose Package for Dynamic Report Generation in R</em>.
+R package version 1.46, <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>. 
+</p>
+<p>Xie Y (2015).
+<em>Dynamic Documents with R and knitr</em>, 2nd edition.
+Chapman and Hall/CRC, Boca Raton, Florida.
+ISBN 978-1498716963, <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>. 
+</p>
+<p>Xie Y (2014).
+&ldquo;knitr: A Comprehensive Tool for Reproducible Research in R.&rdquo;
+In Stodden V, Leisch F, Peng RD (eds.), <em>Implementing Reproducible Computational Research</em>.
+Chapman and Hall/CRC.
+ISBN 978-1466561595. 
+</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/combine/npm/katex/dist/katex.min.js,npm/katex/dist/contrib/auto-render.min.js,npm/@xiee/utils/js/render-katex.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+</body>
+</html>
