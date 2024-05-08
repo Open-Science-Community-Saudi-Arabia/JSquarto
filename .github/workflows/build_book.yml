@@ -52,6 +52,9 @@ jobs:
       - name: Install Babel quarto
         run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')"
 
+      - name: Prepare crowdin translations
+        run: npm run fix:crowdin_files languages=en,ar
+
       - name: Build book 
         run: |
           tree docs
@@ -64,9 +67,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Prepare crowdin translations
-        run: npm run fix:crowdin_files languages=en,ar
 
       - name: Fix built book
         run: npm run fix:all languages=en,ar
