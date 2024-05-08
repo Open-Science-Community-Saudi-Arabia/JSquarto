@@ -1,6 +1,6 @@
 # Install babelquarto if not already installed
 if (!requireNamespace("babelquarto", quietly = TRUE)) {
-  install.packages("babelquarto")
+  pak::pak("ropensci-review-tools/babelquarto")
 }
 
 # Load babelquarto package
