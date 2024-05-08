@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - crowdin_integration
+  push:
+    branches:
+      - crowdin_integration
+
   workflow_dispatch:
 
 env:
