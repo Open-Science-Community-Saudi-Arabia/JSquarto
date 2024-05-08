@@ -48,8 +48,7 @@ jobs:
       
       - name: Build book 
         run: |
-          tree .
-          Rscript ./JSquarto/scripts/build_book.R
+          Rscript ./scripts/build_book.R
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
