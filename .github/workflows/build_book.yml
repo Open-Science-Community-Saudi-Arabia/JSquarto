@@ -32,7 +32,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install r-base
           sudo apt-get install r-base-core
-          Rscript -e 'install.packages("babelquarto")'
+          Rscript -e 'pak::pak("ropensci-review-tools/babelquarto")'
       
       - name: Build book
         run: |
