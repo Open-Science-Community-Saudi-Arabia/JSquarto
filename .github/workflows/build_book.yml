@@ -46,7 +46,7 @@ jobs:
       - name: Use pak to install other packages
         run: Rscript -e 'pak::pkg_install("babelquarto", lib = "./my_R_library")'
       
-      - name: Build book
+      - name: Build book 
         run: |
           Rscript ./scripts/build_book.R
 
