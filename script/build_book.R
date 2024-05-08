@@ -7,7 +7,7 @@ if (!requireNamespace("babelquarto", quietly = TRUE)) {
 library(babelquarto)
 
 # Define project directory
-project_dir <- "/home/richie/Desktop/repos/oscsa/JSquarto/docs"
+project_dir <- "src/docs"
 
 # Render book
 babelquarto::render_book(project_path = project_dir)
