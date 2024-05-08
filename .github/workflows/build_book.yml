@@ -43,11 +43,8 @@ jobs:
       - name: Update permissions
         run: chmod u+w ./my_R_library
 
-      - name: Install pak
-        run: Rscript -e 'install.packages("pak", repos = "https://cloud.r-project.org", lib = "./my_R_library")'
-
-      - name: Use pak to install other packages
-        run: Rscript -e 'pak::pkg_install("babelquarto", lib = "./my_R_library")'
+      - name: Install Babelquarto
+        run: Rscript -e "install.packages('babelquarto', repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))"
       
       - name: Build book 
         run: |
