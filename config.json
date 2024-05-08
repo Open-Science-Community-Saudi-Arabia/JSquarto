@@ -1,6 +1,6 @@
 {
-    "outputDirectory": "./docs",
-    "sourceDirectory": "./dist",
-    "tutorialDirectory": "./tutorials",
-    "languages": ["ar"]
+    "outputDirectory": "docs",
+    "sourceDirectory": "dist",
+    "tutorialDirectory": "tutorials",
+    "languages": ["en", "ar"]
 }
