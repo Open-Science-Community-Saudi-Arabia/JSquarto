@@ -14,7 +14,7 @@ env:
   NEW_BRANCH: build_book-
 
 jobs:
-  merge_and_build:
+  build_book:
     runs-on: ubuntu-latest
 
     strategy:
