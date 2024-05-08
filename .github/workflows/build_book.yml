@@ -48,6 +48,7 @@ jobs:
       
       - name: Build book 
         run: |
+          tree .
           Rscript ./JSquarto/scripts/build_book.R
 
       - name: Setup Node.js
