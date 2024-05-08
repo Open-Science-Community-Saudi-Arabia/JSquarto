@@ -31,9 +31,6 @@ jobs:
         id: set_branch
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
 
-      - name: Install pak
-        run: 
-
       - name: Setup R
         run: |
           sudo apt-get update
