@@ -2,5 +2,5 @@
     "outputDirectory": "./docs",
     "sourceDirectory": "./dist",
     "tutorialDirectory": "./tutorials",
-    "languages": ["ar"]
+    "languages": ["en", "ar"]
 }
