@@ -2,3 +2,4 @@ node_modules
 test_files
 dist
 .Rproj.user
+my_R_library

@@ -4,13 +4,17 @@ on:
   pull_request:
     branches:
       - crowdin_integration
+  push:
+    branches:
+      - crowdin_integration
+
   workflow_dispatch:
 
 env:
   NEW_BRANCH: build_book-
 
 jobs:
-  merge_and_build:
+  build_book:
     runs-on: ubuntu-latest
 
     strategy:
@@ -32,11 +36,21 @@ jobs:
           sudo apt-get update
           sudo apt-get install r-base
           sudo apt-get install r-base-core
-          Rscript -e 'install.packages("babelquarto")'
-      
-      - name: Build book
+          sudo apt-get install libssl-dev libcurl4-openssl-dev libxml2-dev
+
+      - name: Create writable directory
         run: |
-          Rscript ./scripts/build_book.R
+          mkdir ./my_R_library
+          chmod u+w ./my_R_library
+
+      - name: Setup quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      
+      - name: Install PAK
+        run: Rscript -e "install.packages('pak', lib='./my_R_library')"
+          
+      - name: Install Babel quarto
+        run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')"
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -46,8 +60,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Prepare crowdin translations
+        run: npm run fix:crowdin_files languages=en,ar
+
+      - name: Build book 
+        run: |
+          Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(babelquarto); project_dir <- 'docs'; babelquarto::render_book(project_path = project_dir)"
+
+     
       - name: Fix built book
-        run: npm run fix:all languages=en,ar
+        run: |
+          tree docs
+          npm run fix:all languages=en,ar
 
       - name: Commit changes
         run: |
@@ -82,10 +106,3 @@ jobs:
       - name: Pull request number
         run: echo "Pull Request Number - ${{ steps.create_pr.outputs.pull_request_number }}"
         id: pr_number
-
-      # - name: Approve pull Request
-      #   if: steps.create_pr.outputs.pull_request_number
-      #   uses: hmarr/auto-approve-action@v2
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}

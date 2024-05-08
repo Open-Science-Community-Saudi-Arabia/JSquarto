@@ -4,8 +4,6 @@ import logger from "../utils/logger";
 import path from "path";
 import CONFIG from "../config";
 
-
-
 export async function fixDuplicateLanguageReferences(languages: string[]) {
     // Get the index files for each language
     for (const lang of languages.slice(1)) {

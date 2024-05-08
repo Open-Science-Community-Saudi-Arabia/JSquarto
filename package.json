@@ -8,6 +8,7 @@
         "doc:generate": "ts-node-dev --transpile-only --project tsconfig.json ./src/index.ts",
         "doc:preview": "quarto preview ./docs",
         "fix:all": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/index.ts",
+        "fix:crowdin_files": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_crowdin_translation.ts",
         "fix:localized_files": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_localized_index_file.ts",
         "fix:duplicate_languages_ref": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_duplicate_language_refs.ts",
         "fix:fix_wrong_language_refs": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_wrong_language_refs.ts",
