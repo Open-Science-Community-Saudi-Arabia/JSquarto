@@ -31,12 +31,14 @@ jobs:
         id: set_branch
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
 
+      - name: Install pak
+        run: Rscript -e 'install.packages("pak", repos = "https://cloud.r-project.org")'
+
       - name: Setup R
         run: |
           sudo apt-get update
           sudo apt-get install r-base
           sudo apt-get install r-base-core
-          Rscript -e "install.packages('pak')"
           Rscript -e "pak::pak('ropensci-review-tools/babelquarto')"
       
       - name: Build book
