@@ -103,7 +103,7 @@ export async function mergePathsForTranslatedFiles() {
                 if (stats.isDirectory()) {
                     await recursivelyMoveSubFiles(filePath)
                 } else {
-                    console.log({ filePath, newFilePath, pattern: `${CONFIG.outputDirectory}/${language}` })
+                    console.log(`Moving ${filePath} to ${newFilePath}`)
                     fs.renameSync(filePath, newFilePath)
                 }
             }
@@ -141,7 +141,8 @@ export async function fixFileExtensionsForTranslatedFiles() {
                 } else {
                     const fileExtension = path.extname(filePath)
                     const newFilePath = filePath.replace(`${fileExtension}.${language}`, `.${language}`)
-                    console.log({ filePath, newFilePath, fileExtension })
+                    
+                    console.log(`Renaming ${filePath} to ${newFilePath}`)
                     await fs.promises.rename(filePath, newFilePath)
                 }
             }
