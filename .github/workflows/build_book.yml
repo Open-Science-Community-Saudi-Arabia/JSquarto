@@ -65,12 +65,13 @@ jobs:
 
       - name: Build book 
         run: |
-          tree docs
           Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(babelquarto); project_dir <- 'docs'; babelquarto::render_book(project_path = project_dir)"
 
      
       - name: Fix built book
-        run: npm run fix:all languages=en,ar
+        run: |
+          tree docs
+          npm run fix:all languages=en,ar
 
       - name: Commit changes
         run: |
