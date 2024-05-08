@@ -36,8 +36,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install r-base
           sudo apt-get install r-base-core
-          Rscript -e 'install.packages("pak", repos = "https://cloud.r-project.org", lib = "$HOME/.Renviron")'
-          Rscript -e 'pak::pkg_install("babelquarto", lib = "$HOME/.Renviron")'
+          
+      - name: Create writable directory
+        run: mkdir -p $HOME/my_R_library
+
+      - name: Install pak
+        run: Rscript -e 'install.packages("pak", repos = "https://cloud.r-project.org", lib = "$HOME/my_R_library")'
+
+      - name: Use pak to install other packages
+        run: Rscript -e 'pak::pkg_install("babelquarto", lib = "$HOME/my_R_library")'
       
       - name: Build book
         run: |
