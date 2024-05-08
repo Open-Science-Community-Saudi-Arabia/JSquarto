@@ -45,8 +45,7 @@ jobs:
         run: chmod u+w ./my_R_library
 
       - name: Install Babelquarto
-        run: |
-          Rscript -e "install.packages('pak', lib='./my_R_library'); 
+        run: Rscript -e "install.packages('pak', lib='./my_R_library')
           
       - name: Install PAK
         run: Rscript -e "pak::pak('ropensci-review-tools/babelquarto')"
