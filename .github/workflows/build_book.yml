@@ -55,11 +55,6 @@ jobs:
           
       - name: Install Babel quarto
         run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')"
-      
-      # - name: Download Quarto .deb package
-      #   run: |
-      #     wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.554/quarto-1.4.554-linux-arm64.deb
-      #     sudo dpkg -i quarto-1.4.554-linux-arm64.deb
 
       - name: Build book 
         run: |
@@ -73,6 +68,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Prepare crowdin translations
+        run: npm run fix:crowdin_files
 
       - name: Fix built book
         run: npm run fix:all languages=en,ar
