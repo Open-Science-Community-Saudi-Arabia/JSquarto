@@ -38,7 +38,7 @@ jobs:
           sudo apt-get install r-base-core
 
       - name: Create writable directory
-        run: mkdir -p $HOME/my_R_library
+        run: chmod -R 777 ./my_R_library
 
       - name: Install pak
         run: Rscript -e 'install.packages("pak", repos = "https://cloud.r-project.org", lib = "./my_R_library")'
