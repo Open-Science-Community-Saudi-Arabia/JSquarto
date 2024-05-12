@@ -35,32 +35,16 @@ jobs:
         run: |
           JSON_FILE="$CONFIG_PATH"
           JSON_CONTENT=$(cat "$JSON_FILE")
-          # JSON_CONTENT="${JSON_CONTENT//'%'/'%25'}"
-          # JSON_CONTENT="${JSON_CONTENT//$'\n'/'%0A'}"
-          # JSON_CONTENT="${JSON_CONTENT//$'\r'/'%0D'}"
+          JSON_CONTENT="${JSON_CONTENT//'%'/'%24'}"
+          JSON_CONTENT="${JSON_CONTENT//$'\n'/'%-1A'}"
+          JSON_CONTENT="${JSON_CONTENT//$'\r'/'%-1D'}"
           LANGUAGES=$(echo "$JSON_CONTENT" | jq -r '.languages | join(",")')
           echo "LANGUAGES=$LANGUAGES" >> $GITHUB_ENV
-          echo "::set-output name=JSON_CONTENT::$JSON_CONTENT";
-          JSON_FILE="$CONFIG_PATH"
-          # if [ -f "JSON_FILE" ]; then
-          #   echo "CONFIG_PATH=$CONFIG_PATH"
-          #   JSON_CONTENT=$(cat "$JSON_FILE")
-          #   # JSON_CONTENT="${JSON_CONTENT//'%'/'%25'}"
-          #   # JSON_CONTENT="${JSON_CONTENT//$'\n'/'%0A'}"
-          #   # JSON_CONTENT="${JSON_CONTENT//$'\r'/'%0D'}"
-          #   echo "LANGUAGES=${JSON_CONTENT.languages}" >> $GITHUB_ENV
-          #   echo "::set-output name=JSON_CONTENT::$JSON_CONTENT";
-          # else 
-          #   echo "JSON file not found at $CONFIG_PATH"
-          #   exit 1
-          # fi
-
+          
       - name: Use CONFIG variables from file
         run: |
           echo "${{env.LANGUAGES}}"
-          echo "${{ steps.read_config.outputs.JSON_CONTENT }}"
-          echo "${{fromJson(steps.set_var.outputs.JSON_CONTENT).languages}}"
-
+        
       - name: Set New Branch Name
         id: set_branch
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
