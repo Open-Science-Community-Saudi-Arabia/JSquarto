@@ -20,12 +20,32 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
+    
+    env:
+      CONFIG_PATH: /config.json
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           persist-credentials: true
+
+      - name: Read CONFIG file   
+        id: read_config
+        run: |
+          JSON_FILE=$CONFIG_PATH
+          if [ -f "JSON_FILE"]: then
+            JSON_CONTENT=$(cat $JSON_FILE)
+            echo "::set-output name=json_content::$JSON_CONTENT"
+          else 
+            echo "JSON file not found at $CONFIG_PATH"
+            exit 1
+          fi
+
+      - name: Use CONFIG variables from file
+        run: |
+          echo "${{ steps.read_config.outputs.json_content }}"
+          echo "CONFIG_FILE=${{ steps.read_config.outputs.json_content }}" >> $GITHUB_ENV
 
       - name: Set New Branch Name
         id: set_branch
