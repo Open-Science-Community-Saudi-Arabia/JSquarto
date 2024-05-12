@@ -11,7 +11,11 @@ on:
   workflow_dispatch:
 
 env:
+  PR_AUTHOR_EMAIL: molunorichie@gmail.com
+  PR_AUTHOR_NAME: Richie
   NEW_BRANCH: build_book-
+  DESTINATION_BRANCH: book
+  CONFIG_PATH: ./config.json  # Path to config file for jsquarto
 
 jobs:
   build_book:
@@ -20,13 +24,28 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-
+   
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           persist-credentials: true
 
+      - name: Extract config variables from config file  
+        id: read_config
+        run: |
+          JSON_FILE="$CONFIG_PATH"
+         
+          LANGUAGES=$(echo "$JSON_CONTENT" | jq -r '.languages | join(",")')
+          OUTPUT_DIR=$(echo "$JSON_CONTENT" | jq -r '.outputDirectory')
+          SOURCE_DIR=$(echo "$JSON_CONTENT" | jq -r '.sourceDirectory')
+          TUTORIALS_DIR=$(echo "$JSON_CONTENT" | jq -r '.tutorialDirectory')
+          
+          echo "LANGUAGES=$LANGUAGES" >> $GITHUB_ENV
+          echo "OUTPUT_DIR=$OUTPUT_DIR" >> $GITHUB_ENV
+          echo "SOURCE_DIR=$SOURCE_DIR" >> $GITHUB_ENV
+          echo "TUTORIALS_DIR=$TUTORIALS_DIR" >> $GITHUB_ENV
+          
       - name: Set New Branch Name
         id: set_branch
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
@@ -38,7 +57,8 @@ jobs:
           sudo apt-get install r-base-core
           sudo apt-get install libssl-dev libcurl4-openssl-dev libxml2-dev
 
-      - name: Create writable directory
+      # Writeable directory is needed for R packages installation, installing to the default library path is not allowed
+      - name: Create writable directory for R packages
         run: |
           mkdir ./my_R_library
           chmod u+w ./my_R_library
@@ -61,7 +81,7 @@ jobs:
         run: npm install
 
       - name: Prepare crowdin translations
-        run: npm run fix:crowdin_files languages=en,ar
+        run: npm run fix:crowdin_files languages="$LANGUAGES"
 
       - name: Build book 
         run: |
@@ -71,12 +91,12 @@ jobs:
       - name: Fix built book
         run: |
           tree docs
-          npm run fix:all languages=en,ar
+          npm run fix:all languages="$LANGUAGES"
 
       - name: Commit changes
         run: |
-          git config --global user.email "molunorichie@gmail.com"
-          git config --global user.name "Richie"
+          git config --global user.email $PR_AUTHOR_EMAIL
+          git config --global user.name $PR_AUTHOR_NAME
           git checkout -b $NEW_BRANCH
           git status
           git add .
@@ -88,7 +108,7 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           source_branch: ${{ env.NEW_BRANCH }}
-          destination_branch: build_crowdin_integration
+          destination_branch: ${{ env.DESTINATION_BRANCH }} 
           pr_title: New book build with babelquarto
           pr_body: |
             :crown: *An automated PR*
@@ -96,8 +116,6 @@ jobs:
             Automated PR build book with babel-quarto
 
             _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
-          pr_reviewer: "@RealRichi3"
-          pr_assignee: "RealRichi3"
           pr_label: "auto-pr"
           pr_draft: false
           pr_allow_empty: true
