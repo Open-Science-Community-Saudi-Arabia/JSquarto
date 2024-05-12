@@ -51,19 +51,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Setup quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-     
-      - name: Create writeable R lib installation directory
+      - name: Create writable directory for R packages
         run: |
           mkdir ./my_R_library
           chmod u+w ./my_R_library
+
+      - name: Setup quarto
+        uses: quarto-dev/quarto-actions/setup@v2
       
       - name: Install PAK
         run: Rscript -e "install.packages('pak', lib='./my_R_library')"
           
       - name: Install Babel quarto
-        run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')"
+        run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')"      
       
       - name: Install Node.js dependencies
         run: npm install
