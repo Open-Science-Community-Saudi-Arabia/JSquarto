@@ -1,3 +1,4 @@
+
 name: Build Book with Babel Quarto
 
 on:
@@ -87,7 +88,6 @@ jobs:
         run: |
           Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(babelquarto); project_dir <- 'docs'; babelquarto::render_book(project_path = project_dir)"
 
-     
       - name: Fix built book
         run: |
           tree docs
@@ -121,6 +121,10 @@ jobs:
           pr_allow_empty: true
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Pull request number
-        run: echo "Pull Request Number - ${{ steps.create_pr.outputs.pull_request_number }}"
-        id: pr_number
+      - name: Approve pull Request
+        if: steps.create_pr.outputs.pull_request_number
+        uses: hmarr/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}
+
