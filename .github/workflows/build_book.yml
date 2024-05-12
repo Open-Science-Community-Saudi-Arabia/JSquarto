@@ -121,6 +121,9 @@ jobs:
           pr_allow_empty: true
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Pull request number
-        run: echo "Pull Request Number - ${{ steps.create_pr.outputs.pull_request_number }}"
-        id: pr_number
+      - name: Auto approve PR  
+        uses: gregswindle/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          pull-request-number: ${{ steps.pr_number.outputs.pr_number }}
+          approval-comment: ":+1: This PR is approved"
