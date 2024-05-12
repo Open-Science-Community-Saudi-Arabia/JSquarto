@@ -33,7 +33,7 @@ jobs:
       - name: Read CONFIG file   
         id: read_config
         run: |
-          JSON_FILE=$CONFIG_PATH
+          JSON_FILE="$CONFIG_PATH"
           if [ -f "JSON_FILE" ]: then
             JSON_CONTENT=$(cat "$JSON_FILE")
             echo "::set-output name=json_content::$JSON_CONTENT"
