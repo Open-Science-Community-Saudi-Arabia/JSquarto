@@ -41,8 +41,8 @@ jobs:
       - name: Use CONFIG variables from file
         run: |
           # Log the value of the LANGUAGES environment variables
-          echo "LANGUAGES=$LANGUAGES"
-          
+          echo "$LANGUAGES"
+
       - name: Set New Branch Name
         id: set_branch
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
