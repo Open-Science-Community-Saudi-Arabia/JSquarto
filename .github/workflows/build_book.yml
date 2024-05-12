@@ -35,16 +35,15 @@ jobs:
         run: |
           JSON_FILE="$CONFIG_PATH"
           JSON_CONTENT=$(cat "$JSON_FILE")
-          JSON_CONTENT="${JSON_CONTENT//'%'/'%24'}"
-          JSON_CONTENT="${JSON_CONTENT//$'\n'/'%-1A'}"
-          JSON_CONTENT="${JSON_CONTENT//$'\r'/'%-1D'}"
           LANGUAGES=$(echo "$JSON_CONTENT" | jq -r '.languages | join(",")')
           echo "LANGUAGES=$LANGUAGES" >> $GITHUB_ENV
           
       - name: Use CONFIG variables from file
         run: |
           echo "${{env.LANGUAGES}}"
-        
+          echo "${{ steps.read_config.outputs.JSON_CONTENT }}"
+          echo "${{fromJson(steps.set_var.outputs.JSON_CONTENT).languages}}"
+
       - name: Set New Branch Name
         id: set_branch
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
