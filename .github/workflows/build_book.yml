@@ -51,6 +51,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+
       - name: Create writable directory for R packages
         run: |
           mkdir ./my_R_library
