@@ -37,10 +37,10 @@ jobs:
           if [ -f "JSON_FILE" ]; then
             echo "CONFIG_PATH=$CONFIG_PATH"
             JSON_CONTENT=$(cat "$JSON_FILE")
-            JSON_CONTENT="${JSON_CONTENT//'%'/'%25'}"
-            JSON_CONTENT="${JSON_CONTENT//$'\n'/'%0A'}"
-            JSON_CONTENT="${JSON_CONTENT//$'\r'/'%0D'}"
-            # echo "LANGUAGES=${JSON_CONTENT.languages}" >> $GITHUB_ENV
+            # JSON_CONTENT="${JSON_CONTENT//'%'/'%25'}"
+            # JSON_CONTENT="${JSON_CONTENT//$'\n'/'%0A'}"
+            # JSON_CONTENT="${JSON_CONTENT//$'\r'/'%0D'}"
+            echo "LANGUAGES=${JSON_CONTENT.languages}" >> $GITHUB_ENV
             echo "::set-output name=JSON_CONTENT::$JSON_CONTENT";
           else 
             echo "JSON file not found at $CONFIG_PATH"
