@@ -22,7 +22,7 @@ jobs:
         node-version: [16.x]
     
     env:
-      CONFIG_PATH: /config.json
+      CONFIG_PATH: ./config.json
 
     steps:
       - name: Checkout
