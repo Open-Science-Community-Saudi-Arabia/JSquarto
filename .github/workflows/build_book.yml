@@ -49,7 +49,7 @@ jobs:
 
   install_dependencies:
     runs-on: ubuntu-latest
-    needs: [setup, read_config]
+    needs: setup
     steps:
       - name: Setup quarto
         uses: quarto-dev/quarto-actions/setup@v2
