@@ -47,27 +47,6 @@ jobs:
           echo "SOURCE_DIR=$SOURCE_DIR" >> $GITHUB_ENV
           echo "TUTORIALS_DIR=$TUTORIALS_DIR" >> $GITHUB_ENV
 
-
-
-  read_config:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Extract config variables from config file  
-        id: read_config
-        run: |
-          JSON_FILE="$CONFIG_PATH"
-          JSON_CONTENT=$(cat "$JSON_FILE")
-          LANGUAGES=$(echo "$JSON_CONTENT" | jq -r '.languages | join(",")')
-          OUTPUT_DIR=$(echo "$JSON_CONTENT" | jq -r '.outputDirectory')
-          SOURCE_DIR=$(echo "$JSON_CONTENT" | jq -r '.sourceDirectory')
-          TUTORIALS_DIR=$(echo "$JSON_CONTENT" | jq -r '.tutorialDirectory')
-          
-          echo "LANGUAGES=$LANGUAGES" >> $GITHUB_ENV
-          echo "OUTPUT_DIR=$OUTPUT_DIR" >> $GITHUB_ENV
-          echo "SOURCE_DIR=$SOURCE_DIR" >> $GITHUB_ENV
-          echo "TUTORIALS_DIR=$TUTORIALS_DIR" >> $GITHUB_ENV
-
   install_dependencies:
     runs-on: ubuntu-latest
     needs: [setup, read_config]
