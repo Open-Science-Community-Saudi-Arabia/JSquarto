@@ -34,7 +34,7 @@ jobs:
         id: read_config
         run: |
           JSON_FILE="$CONFIG_PATH"
-          if [ -f "JSON_FILE" ]: 
+          if [ -f "JSON_FILE" ]; then
             echo "CONFIG_PATH=$CONFIG_PATH"
             JSON_CONTENT=$(cat "$JSON_FILE")
             JSON_CONTENT="${JSON_CONTENT//'%'/'%25'}"
