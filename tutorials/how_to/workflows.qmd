@@ -1,11 +1,10 @@
-### Workflows {#sec-workflows}
 There are different workflows that can be adopted to optimize the documentation generation process using JSquarto.
 
 1. Doc generation
 2. Doc generation with manual transalation
 3. Doc generation with crowdin translation
 
-### Doc generation
+### Doc generation {#sec-workflows}
 This workflow involves generating documentation in a single language. The process is straightforward and involves executing JSquarto on the source files to generate comprehensive documentation in the specified language. This workflow is ideal for projects targeting a specific language audience and seeking to streamline the documentation generation process.
 
 #### STEPS
