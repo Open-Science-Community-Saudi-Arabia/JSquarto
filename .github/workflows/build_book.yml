@@ -65,14 +65,14 @@ jobs:
 
   prepare_translations:
     runs-on: ubuntu-latest
-    needs: [setup, read_config, install_dependencies]
+    needs: [setup, install_dependencies]
     steps:
       - name: Prepare crowdin translations
         run: npm run fix:crowdin_files languages="$LANGUAGES"
 
   build_book:
     runs-on: ubuntu-latest
-    needs: [setup, read_config, install_dependencies, prepare_translations]
+    needs: [setup, install_dependencies, prepare_translations]
     steps:
       - name: Build book 
         run: |
