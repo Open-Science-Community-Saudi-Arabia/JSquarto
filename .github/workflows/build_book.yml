@@ -41,7 +41,7 @@ jobs:
             JSON_CONTENT="${JSON_CONTENT//$'\n'/'%0A'}"
             JSON_CONTENT="${JSON_CONTENT//$'\r'/'%0D'}"
             echo "LANGUAGES=${JSON_CONTENT.languages}" >> $GITHUB_ENV
-            echo "::set-output name=JSON_CONTENT::$JSON_CONTENT"
+            echo "::set-output name=JSON_CONTENT::$JSON_CONTENT";
           else 
             echo "JSON file not found at $CONFIG_PATH"
             exit 1
