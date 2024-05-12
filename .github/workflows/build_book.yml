@@ -38,9 +38,9 @@ jobs:
           LANGUAGES=$(echo "$JSON_CONTENT" | jq -r '.languages | join(",")')
           echo "LANGUAGES=$LANGUAGES" >> $GITHUB_ENV
           
-      - name: Use CONFIG variables from file
-        run: |
-          echo "$LANGUAGES"
+      # - name: Use CONFIG variables from file
+      #   run: |
+      #     echo "$LANGUAGES"
           # echo "${{ steps.read_config.outputs.JSON_CONTENT }}"
           # echo "${{fromJson(steps.set_var.outputs.JSON_CONTENT).languages}}"
 
