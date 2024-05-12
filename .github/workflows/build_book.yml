@@ -35,22 +35,23 @@ jobs:
         run: |
           JSON_FILE="$CONFIG_PATH"
           # log the variables
-          echo "CONFIG_PATH=$CONFIG_PATH"
-           JSON_CONTENT=$(cat "$JSON_FILE")
-           echo "::set-output name=json_content::$JSON_CONTENT"
-        # if [ -f "JSON_FILE" ]: then
-        #        
-        #    
-        #   else 
-        #     echo "JSON file not found at $CONFIG_PATH"
-        #     exit 1
-        #   fi
+          if [ -f "JSON_FILE" ]: then
+            echo "CONFIG_PATH=$CONFIG_PATH"
+            JSON_CONTENT=$(cat "$JSON_FILE")
+            JSON_CONTENT="${JSON_CONTENT//'%'/'%25'}"
+            JSON_CONTENT="${JSON_CONTENT//$'\n'/'%0A'}"
+            JSON_CONTENT="${JSON_CONTENT//$'\r'/'%0D'}"
+            echo "::set-output name=JSON_CONTENT::$JSON_CONTENT"
+          else 
+            echo "JSON file not found at $CONFIG_PATH"
+            exit 1
+          fi
 
       - name: Use CONFIG variables from file
         run: |
-          echo "${{ steps.read_config.outputs.json_content }}"
-          echo "CONFIG_FILE=${{ steps.read_config.outputs.json_content }}" >> $GITHUB_ENV
-
+          echo "${{ steps.read_config.outputs.JSON_CONTENT }}"
+          echo "${{fromJson(steps.set_var.outputs.JSON_CONTENT).languages}}"
+          
       - name: Set New Branch Name
         id: set_branch
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
