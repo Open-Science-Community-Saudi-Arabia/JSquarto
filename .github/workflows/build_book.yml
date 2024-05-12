@@ -38,7 +38,7 @@ jobs:
           # JSON_CONTENT="${JSON_CONTENT//'%'/'%25'}"
           # JSON_CONTENT="${JSON_CONTENT//$'\n'/'%0A'}"
           # JSON_CONTENT="${JSON_CONTENT//$'\r'/'%0D'}"
-          echo "LANGUAGES=${JSON_CONTENT.languages}" >> $GITHUB_ENV
+          echo "LANGUAGES=${JSON_CONTENT.tutorials}" >> $GITHUB_ENV
           echo "::set-output name=JSON_CONTENT::$JSON_CONTENT";
           JSON_FILE="$CONFIG_PATH"
           # if [ -f "JSON_FILE" ]; then
