@@ -36,13 +36,15 @@ jobs:
           JSON_FILE="$CONFIG_PATH"
           # log the variables
           echo "CONFIG_PATH=$CONFIG_PATH"
-          if [ -f "JSON_FILE" ]: then
-            JSON_CONTENT=$(cat "$JSON_FILE")
-            echo "::set-output name=json_content::$JSON_CONTENT"
-          else 
-            echo "JSON file not found at $CONFIG_PATH"
-            exit 1
-          fi
+           JSON_CONTENT=$(cat "$JSON_FILE")
+           echo "::set-output name=json_content::$JSON_CONTENT"
+        # if [ -f "JSON_FILE" ]: then
+        #        
+        #    
+        #   else 
+        #     echo "JSON file not found at $CONFIG_PATH"
+        #     exit 1
+        #   fi
 
       - name: Use CONFIG variables from file
         run: |
