@@ -22,7 +22,8 @@ jobs:
         node-version: [16.x]
     
     env:
-      CONFIG_PATH: ./config.json
+      # Path to config file for jsquarto
+      CONFIG_PATH: ./config.json  
 
     steps:
       - name: Checkout
@@ -30,19 +31,21 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Read CONFIG file   
+      - name: Extract config variables from config file  
         id: read_config
         run: |
           JSON_FILE="$CONFIG_PATH"
-          JSON_CONTENT=$(cat "$JSON_FILE")
+         
           LANGUAGES=$(echo "$JSON_CONTENT" | jq -r '.languages | join(",")')
-          echo "LANGUAGES=$LANGUAGES" >> $GITHUB_ENV
+          OUTPUT_DIR=$(echo "$JSON_CONTENT" | jq -r '.outputDirectory')
+          SOURCE_DIR=$(echo "$JSON_CONTENT" | jq -r '.sourceDirectory')
+          TUTORIALS_DIR=$(echo "$JSON_CONTENT" | jq -r '.tutorialDirectory')
           
-      - name: Use CONFIG variables from file
-        run: |
-          # Log the value of the LANGUAGES environment variables
-          echo "$LANGUAGES"
-
+          echo "LANGUAGES=$LANGUAGES" >> $GITHUB_ENV
+          echo "OUTPUT_DIR=$OUTPUT_DIR" >> $GITHUB_ENV
+          echo "SOURCE_DIR=$SOURCE_DIR" >> $GITHUB_ENV
+          echo "TUTORIALS_DIR=$TUTORIALS_DIR" >> $GITHUB_ENV
+          
       - name: Set New Branch Name
         id: set_branch
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
@@ -77,7 +80,7 @@ jobs:
         run: npm install
 
       - name: Prepare crowdin translations
-        run: npm run fix:crowdin_files languages=en,ar
+        run: npm run fix:crowdin_files languages="$LANGUAGES"
 
       - name: Build book 
         run: |
@@ -87,7 +90,7 @@ jobs:
       - name: Fix built book
         run: |
           tree docs
-          npm run fix:all languages=en,ar
+          npm run fix:all languages="$LANGUAGES"
 
       - name: Commit changes
         run: |
