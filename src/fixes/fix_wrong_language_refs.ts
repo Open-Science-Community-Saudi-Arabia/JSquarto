@@ -1,38 +1,58 @@
 import * as Cheerio from "cheerio";
-import fs from 'fs'
+import fs from "fs";
 import logger from "../utils/logger";
 import path from "path";
 import CONFIG from "../config";
 
-export async function fixWrongLanguageReferences(languages: string[]) {
+export async function fixWrongLanguageReferences() {
+    const languages = CONFIG.languages;
+
     // Get the index files for each language
     for (const lang of languages.slice(1)) {
-        const directoryForHtmlFiles = path.join(CONFIG.outputDirectory, `/_book/${lang}/`);
+        const directoryForHtmlFiles = path.join(
+            CONFIG.outputDirectory,
+            `/_book/${lang}/`,
+        );
 
-        logger.info('Reading index file for language: ' + lang)
-        const indexFile = await fs.promises.readFile(directoryForHtmlFiles + `index.${lang}.html`, "utf-8");
-        logger.info('Finished reading index file for language: ' + lang)
+        logger.info("Reading index file for language: " + lang);
+        const indexFile = await fs.promises.readFile(
+            directoryForHtmlFiles + `index.${lang}.html`,
+            "utf-8",
+        );
+        logger.info("Finished reading index file for language: " + lang);
 
         // Get the html elements (anchor elements) with classname 'dropdown-item' from each index file
         const $ = Cheerio.load(indexFile);
 
         // Get the html element referencing the main language
-        const mainLang = $(`#language-link-${languages[0]}`)
+        const mainLang = $(`#language-link-${languages[0]}`);
 
         // Correct the href attribute of the main language element
-        mainLang.attr('href', `../index.html`);
+        mainLang.attr("href", `../index.html`);
 
         // Get the html elements referencing the other languages
-        const otherLangs = languages.slice(1)
-            .map((code) => ({ code: code, htmlRef: $(`#language-link-${code}`) }))
+        const otherLangs = languages.slice(1).map((code) => ({
+            code: code,
+            htmlRef: $(`#language-link-${code}`),
+        }));
 
         // Correct the href attribute of the other language elements
-        logger.info('Correcting href attribute of other language elements')
-        otherLangs.forEach((language) => language.htmlRef.attr('href', `../${language.code}/index.${language.code}.html`))
-        logger.info('Finished correcting href attribute of other language elements')
+        logger.info("Correcting href attribute of other language elements");
+        otherLangs.forEach((language) =>
+            language.htmlRef.attr(
+                "href",
+                `../${language.code}/index.${language.code}.html`,
+            ),
+        );
+        logger.info(
+            "Finished correcting href attribute of other language elements",
+        );
 
-        await fs.promises.writeFile(directoryForHtmlFiles + `index.${lang}.html`, $.html());
-        logger.info('Updated index file for language: ' + lang)
+        await fs.promises.writeFile(
+            directoryForHtmlFiles + `index.${lang}.html`,
+            $.html(),
+        );
+        logger.info("Updated index file for language: " + lang);
     }
 }
 
@@ -43,11 +63,13 @@ if (require.main === module) {
         ?.split(",");
 
     if (!langs) {
-        console.log(
-            "Please provide languages to create localized docs for using the languages flag",
+        console.warn(
+            "Languages not specified in cli arguments, setting languages to default",
         );
-        process.exit(1);
     }
 
-    fixWrongLanguageReferences(langs)
+    CONFIG.languages = langs ?? CONFIG.languages;
+
+    fixWrongLanguageReferences();
 }
+

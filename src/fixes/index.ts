@@ -1,3 +1,4 @@
+import CONFIG from "../config";
 import { fixDuplicateLanguageReferences } from "./fix_duplicate_language_refs";
 import { fixLocalizedIndexFiles } from "./fix_localized_index_file";
 import { fixWrongLanguageReferences } from "./fix_wrong_language_refs";
@@ -9,15 +10,17 @@ async function start() {
         ?.split(",");
 
     if (!langs) {
-        console.log(
-            "Please provide languages to create localized docs for using the languages flag",
+        console.warn(
+            "Languages not specified in cli arguments, setting languages to default",
         );
-        process.exit(1);
     }
 
-    await fixLocalizedIndexFiles(langs)
-    await fixDuplicateLanguageReferences(langs)
-    await fixWrongLanguageReferences(langs)
+    CONFIG.languages = langs ?? CONFIG.languages;
+
+    await fixLocalizedIndexFiles();
+    await fixDuplicateLanguageReferences();
+    await fixWrongLanguageReferences();
 }
 
-start() 
+start();
+
