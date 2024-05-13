@@ -16,80 +16,80 @@
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  comments | The comments to extract module block information from. |
+<unk> تعليقات <unk> التعليقات لاستخراج معلومات كتلة الوحدة النمطية منها. |
 
 
 
-## description 
+## وصف 
 `[متغير]`
  
 **وصف:**
-This method extracts other block information from comments, including description, params, link, examples, returns, thrown errors, and references.
+تستخرج هذه الطريقة معلومات كتلة أخرى من التعليقات، بما في ذلك الوصف، والمشارجات، والربط، والأمثلة، والإرجاع، والأخطاء التي ألقيت والمراجع.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  comments | The comments to extract other block information from. |
+<unk> تعليقات <unk> التعليقات لاستخراج معلومات كتلة أخرى منها. |
 
 
 
-## fileContent 
+## محتوى الملف 
 `[متغير]`
  
 **وصف:**
-This method retrieves comments from a source file using Acorn parser.
+تسترجع هذه الطريقة التعليقات من ملف مصدر باستخدام Acorn parser.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  sourceFile | The source file to retrieve comments from. |
+<unk> مصدر الملف <unk> مصدر الملف لاسترداد التعليقات منه. |
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-This class represents a comment extracted from a source file.
+يمثل هذا الصف تعليقا مستخرجا من ملف مصدر.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  text | The text content of the comment. |
-|  endLocation | The end location of the comment. |
+<unk> النص <unk> محتوى النص للتعليق. |
+<unk> الموقع النهائي <unk> الموقع النهائي للتعليق. |
 
 
 
-## unknown 
+## غير معروف 
 `[function]`
  
 **وصف:**
-This method sets the construct information of the comment, including the type and name of the construct.
+وتحدد هذه الطريقة المعلومات التجميعية للتعليق، بما في ذلك نوع واسم البناء.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  info | The construct information to set. |
+<unk> معلومات <unk> معلومات البناء التي يجب تعيينها. |
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-This method retrieves module block information from the comment using the CommentsUtil class.
+هذه الطريقة تسترجع معلومات الوحدة النمطية من التعليق باستخدام صف التعليقات.
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-This method retrieves other block information from the comment using the CommentsUtil class.
+تسترجع هذه الطريقة معلومات كتلة أخرى من التعليق باستخدام صف التعليقات.
 
