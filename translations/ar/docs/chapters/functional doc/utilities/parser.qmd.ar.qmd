@@ -1,38 +1,38 @@
 # Parser
 
-this file is responsible for parsing comments in code files.
-  it extracts various pieces of information such as
-  description, category, subcategory, link, parameters, return values,
-  and thrown errors from comments using regular expressions.
+هذا الملف مسؤول عن تحليل التعليقات في ملفات التعليمات البرمجية.
+  وهي تستخرج أجزاء مختلفة من المعلومات مثل
+  وصف الفئة، الفئة الفرعية، الرابط، المعلمات، قيم الإرجاع،
+  و ألقى أخطاء من التعليقات باستخدام التعبيرات العادية.
 
 
 
-## descriptionMatch 
+## وصف المطابقة 
 `[متغير]`
  
 **وصف:**
-This method will extract the description from the comments block
+هذه الطريقة سوف تستخرج الوصف من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getDescription(comment) => 'This method will extract the description from the comments block'
+```جافا سكريبت
+Parser.getDescription(تعليق) => "هذه الطريقة سوف تستخرج الوصف من كتلة التعليقات"
 ```
 
 
 
-## categoryMatches 
+## فئة المطابقات 
 `[متغير]`
  
 **وصف:**
-This method will extract the category from the comments block
+هذه الطريقة سوف تستخرج الفئة من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getCategory(comment) => 'StringUtil'
+```جافا سكريبت
+Parser.getcategorory(تعليق) => 'StringUtil'
 ```
 
 
@@ -41,28 +41,28 @@ Parser.getCategory(comment) => 'StringUtil'
 `[متغير]`
  
 **وصف:**
-This method will extract the subcategory from the comments block
+هذه الطريقة سوف تستخرج الفئة الفرعية من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getSubCategory(comment) => 'StringUtil'
+```جافا سكريبت
+Parser.getSubcategorory(تعليق) => 'StringUtil'
 ```
 
 
 
-## linkRegex 
+## رابط Regex 
 `[متغير]`
  
 **وصف:**
-This method will extract the link from the comments block
+هذه الطريقة سوف تستخرج الرابط من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getLink(comment) => 'StringUtil'
+```جافا سكريبت
+Parser.getLink(تعليق) => 'StringUtil'
 ```
 
 
@@ -71,13 +71,13 @@ Parser.getLink(comment) => 'StringUtil'
 `[متغير]`
  
 **وصف:**
-This method will extract all the params from the comments block
+هذه الطريقة سوف تستخرج كل البارام من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getParams(comment) => [{name: 'str', type: 'string', description: 'The string to convert to camel case'}]
+```جافا سكريبت
+Parser.getParams(تعليق) => [{name: 'str', type: 'string', description: 'The string to convert to camel case'}]
 ```
 
 
@@ -86,28 +86,28 @@ Parser.getParams(comment) => [{name: 'str', type: 'string', description: 'The st
 `[متغير]`
  
 **وصف:**
-This method will extract the module name from the comments block
+هذه الطريقة سوف تستخرج اسم الوحدة من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getModuleName(comment) => 'StringUtil'
+```جافا سكريبت
+Parser.getModuleName(تعليق) => 'StringUtil'
 ```
 
 
 
-## returnsMatches 
+## عمليات الإرجاع 
 `[متغير]`
  
 **وصف:**
-This method will extract the returns from the comments block
+هذه الطريقة سوف تستخرج المردود من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getReturnsValues(comment) => [{type: 'string', description: 'The string to convert to camel case'}]
+```جافا سكريبت
+Parser.getReturnsValues(تعليق) => [{type: 'string', description: 'The string to convert to camel case'}]
 ```
 
 
@@ -116,42 +116,42 @@ Parser.getReturnsValues(comment) => [{type: 'string', description: 'The string t
 `[متغير]`
  
 **وصف:**
-This method will extract the examples from the comments block
+هذه الطريقة سوف تستخرج الأمثلة من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getExamples(comment) => ['StringUtil.convertToCamelCase(\'hello world\') => \'helloWorld\'']
+```جافا سكريبت
+Parser.getexamples(comy) => ['StringUtil.convertToCamelCase(\'hello world\') => \'helloWorld\']
 ```
 
 
 
-## throwsMatches 
+## الرماة 
 `[متغير]`
  
 **وصف:**
-This method will extract the thrown errors from the comments block
+هذه الطريقة سوف تستخرج الأخطاء الملقاة من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getThrownErrors(comment) => [{type: 'Error', description: 'The string to convert to camel case'}]
+```جافا سكريبت
+Parser.getThrownErrors(تعليق) => [{type: 'Error', description: 'The string to convert to camel case'}]
 ```
 
 
 
-## referencesRegex 
+## مراجع Regex 
 `[متغير]`
  
 **وصف:**
-This method will extract the references from the comments block
+هذه الطريقة سوف تستخرج المراجع من كتلة التعليقات
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-Parser.getReferences(comment) => [{text: 'StringUtil', type: 'localModule'}]
+```جافا سكريبت
+Parser.getReferences(تعليق) =[{text: 'StringUtil', type: 'localModule'}]
 ```
 
