@@ -1,211 +1,211 @@
-# Components
+# المكونات
 
-this module is used to generate the quarto yml file
+يتم استخدام هذه الوحدة لتوليد ملف الـ quarto yml
   
 
 
 
-## recursivelyConvertAllStringValuesInObjectToLowerCase 
+## متكررًا yConvertAllStringValuesInObjectToLowerCase 
 `[function]`
  
 **وصف:**
-Recursively convert all string values in an object to lowercase
+تحويل جميع قيم السلسلة بشكل متكرر في كائن إلى أحرف صغيرة
   
 
-**Examples:**
+**أمثلة:**
 
-```javascript
+```جافا سكريبت
 const obj = {
-    name: 'Hello World',
-    description: 'This is a description',
+    الاسم: "مرحبا بالعالم"،
+    الوصف: "هذا وصف"،
     blockInfo: {
-    name: 'Hello World',
-    description: 'This is a description',
+    الاسم: "مرحبا بالعالم"،
+    الوصف: "هذا وصف"،
     },
     };
-    recursivelyConvertAllStringValuesInObjectToLowerCase(obj);
+    متكررًا ConvertAllStringValuesInObjectToLowerCase(obj)؛
     // => {
-    //   name: 'hello world',
-    //   description: 'this is a description',
+    // الاسم: 'مرحبا بالعالم',
+    // الوصف: "هذا وصف"،
     //   blockInfo: {
-    //   name: 'hello world',
-    //   description: 'this is a description',
+    // الاسم: 'مرحبا بالعالم',
+    // الوصف: "هذا وصف"،
     //   },
     //   }
 ```
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Add a document to the module
+إضافة مستند إلى الوحدة
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-const module = new Module({ name: 'StringUtil' });
-      const moduleDoc = new ModuleDoc({
-        originalFilePath: 'string.ts',
-        data: {
+```جافا سكريبت
+الوحدة النمطية = وحدة جديدة({ name: 'StringUtil' })؛
+      وحدة نمطية = وحدة جديدة ({
+        الأصل: 'سلسلة.ts',
+        البيانات: {
      
            blockInfo: {
-           name: 'StringUtil',
-           description: 'This class contains methods for manipulating strings',
+           الاسم: 'StringUtil',
+           الوصف: "يحتوي هذا الفصل على أساليب لمعالجة السلاسل"،
            },
-           constructInfo: {
-           type: 'class',
-           name: 'StringUtil',
+           بناء المعلومات: {
+           النوع: 'صنف'،
+           الاسم: 'StringUtil',
            },
            },
            });
-           module.addDoc(moduleDoc);
+           module.addDoc(moduleDoc)؛
 ```
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Get the documents in the module
+احصل على المستندات في الوحدة
       
 
-**Examples:**
+**أمثلة:**
 
-```javascript
-const module = new Module({ name: 'StringUtil' });
-      const moduleDoc = new ModuleDoc({
-       originalFilePath: 'string.ts',
-       data: {
+```جافا سكريبت
+الوحدة النمطية = وحدة جديدة({ name: 'StringUtil' })؛
+      وحدة نمطية = وحدة جديدة ({
+       الأصل: 'سلسلة.ts',
+       البيانات: {
        blockInfo: {
-       name: 'StringUtil',
-       description: 'This class contains methods for manipulating strings',
+       الاسم: 'StringUtil',
+       الوصف: "يحتوي هذا الفصل على أساليب لمعالجة السلاسل"،
        },
-       constructInfo: {
-       type: 'class',
-       name: 'StringUtil',
+       بناء المعلومات: {
+       النوع: 'صنف'،
+       الاسم: 'StringUtil',
        },
        },
        });
-       module.addDoc(moduleDoc);
+       module.addDoc(moduleDoc)؛
        module.getDocs();
        // => [ModuleDoc]
 ```
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-sets the source file path
+تعيين مسار الملف المصدر
       
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Add a module to the subcategory
+إضافة وحدة إلى الفئة الفرعية
      
       
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Get the modules in the subcategory
+الحصول على الوحدات في الفئة الفرعية
      
       
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Get the name of the subcategory
+احصل على اسم الفئة الفرعية
       
 
 
 
-## Category 
+## فئة 
 `[class]`
  
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-This class represents a category.
+هذا الصف يمثل فئة.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  name | The name of the category. |
+<unk> الاسم <unk> اسم الفئة. |
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Adds a subcategory to the category.
+يضيف فئة فرعية إلى الفئة.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  subCategory | The subcategory to add. |
+<unk> الفئة الفرعية <unk> الفئة الفرعية المراد إضافتها. |
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Retrieves the subcategories in the category.
+يسترجع الفئات الفرعية في الفئة.
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Retrieves the name of the category.
+يسترد اسم الفئة.
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Adds a module to the category.
+يضيف وحدة إلى الفئة.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  module | The module to add. |
+<unk> الوحدة النمطية <unk> الوحدة المراد إضافتها. |
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
 **وصف:**
-Retrieves the modules in the category.
+يسترجع الوحدات النمطية في الفئة.
 
