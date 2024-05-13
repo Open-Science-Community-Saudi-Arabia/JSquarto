@@ -1,122 +1,122 @@
-# Writer
+# كاتب
 
-this typescript module (writer) contains classes and functions
-   for generating documentation structure and content.
-   it interacts with various files and directories to organize
-   documentation chapters, write content to markdown files,
-   and generate quarto yaml configuration for the documentation book.
+هذه الوحدة النصية النصية (كاتب) تحتوي على فئات ووظائف
+   لتوليد هيكل الوثائق ومحتواها.
+   يتفاعل مع مختلف الملفات والدلائل لتنظيم
+   فصول التوثيق، وكتابة المحتوى إلى ملفات markdown،
+   و إنشاء إعداد quarto yaml لكتاب الوثائق.
  
-   note: this module is not yet complete and is still under development.
+   ملاحظة: هذه الوحدة لم تكتمل بعد ولا تزال قيد التطوير.
 
 
 
-## _a 
-`[variable]`
+## _أ 
+`[متغير]`
  
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
-**Description:**
-Formats file names by removing all underscores `(_)`
+**وصف:**
+تنسيق أسماء الملفات عن طريق إزالة جميع الشرطات السفلية `(_)`
     
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
-**Description:**
-This method generates the Quarto YAML configuration file based on the provided chapters.
+**وصف:**
+هذه الطريقة تولد ملف تكوين Quarto YAML استنادًا إلى الفصول المقدمة.
 
 
 
-## _a 
-`[variable]`
+## _أ 
+`[متغير]`
  
-**Description:**
-Creates modules and Categories from tutorials config, these will be required to write them as chapters in the quarto.yml file
+**وصف:**
+إنشاء وحدات وتصنيفات من تكوين الدروس, هذه ستكون مطلوبة لكتابتها كفصول في ملف quarto.yml
      
       
 
 
 
-## unknown 
+## غير معروف 
 `[function]`
  
-**Description:**
-Copies the content of the tutorials in `/tutorials` to `/docs/chapters/tutorials`
+**وصف:**
+نسخ محتوى الدروس في `/tutorials` إلى `/docs/chapters/tutorials`
      
       
 
 
 
-## module 
-`[variable]`
+## وحدة 
+`[متغير]`
  
-**Description:**
-This method writes the documentation content for a module to a specified file path.
+**وصف:**
+تكتب هذه الطريقة محتوى التوثيق لوحدة إلى مسار ملف محدد.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  options | An object containing the module and destination path. |
-|  options.destinationPath | The destination path where the documentation will be written. |
+<unk> خيارات <unk> كائن يحتوي على الوحدة ومسار الوجهة. |
+<unk> خيارات.destinationPath <unk> مسار الوجهة حيث سيتم كتابة الوثائق. |
 
 
 
-## categories 
-`[variable]`
+## فئات 
+`[متغير]`
  
-**Description:**
-This method prepares the directory structure for documentation by creating necessary folders and files.
+**وصف:**
+وتعد هذه الطريقة هيكل الدليل للوثائق عن طريق إنشاء المجلدات والملفات اللازمة.
 
 
 
-## categories 
-`[variable]`
+## فئات 
+`[متغير]`
  
-**Description:**
-This method writes documentation for each category to a corresponding file within the documentation directory.
+**وصف:**
+هذه الطريقة تكتب الوثائق لكل فئة في ملف مناظر داخل دليل الوثائق.
 
 
 
-## unknown 
+## غير معروف 
 `[function]`
  
-**Description:**
-This method reads through the tutorials folder and copies them to the destination `/docs` folder, it also
-      follows the structure of the tutorials set by the `config.json` in the tutorials folder if any
+**وصف:**
+هذه الطريقة تقرأ من خلال مجلد الدروس وتنسخها إلى مجلد الوجهة '/docs` أيضًا
+      تتبع بنية الدروس التي تم تعيينها من قبل `config.json' في مجلد الدروس إن وجدت.
      
       
 
 
 
-## unknown 
+## غير معروف 
 `[function]`
  
-**Description:**
-This method adds the tutorials as chapters into the _quarto.yml file
+**وصف:**
+هذه الطريقة تضيف الدروس كفصول في ملف _quarto.yml
      
       
 
 
 
 ## configToAdd 
-`[variable]`
+`[متغير]`
  
-**Description:**
-This method adds the language specs to the _quarto.yml file
+**وصف:**
+هذه الطريقة تضيف مواصفات اللغة إلى ملف _quarto.yml
      
       
 
 
 
 ## docsFolderPath 
-`[variable]`
+`[متغير]`
  
-**Description:**
-This method creates a copy of each qmd file in the docs folder for each language
+**وصف:**
+هذه الطريقة تنشئ نسخة من كل ملف qmd في مجلد المستندات لكل لغة
 
