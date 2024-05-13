@@ -8,7 +8,7 @@ this module is used to generate the quarto yml file
 ## recursivelyConvertAllStringValuesInObjectToLowerCase 
 `[function]`
  
-**Description:**
+**وصف:**
 Recursively convert all string values in an object to lowercase
   
 
@@ -39,7 +39,7 @@ const obj = {
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Add a document to the module
       
 
@@ -69,7 +69,7 @@ const module = new Module({ name: 'StringUtil' });
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Get the documents in the module
       
 
@@ -105,7 +105,7 @@ const module = new Module({ name: 'StringUtil' });
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 sets the source file path
       
 
@@ -114,7 +114,7 @@ sets the source file path
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Add a module to the subcategory
      
       
@@ -124,7 +124,7 @@ Add a module to the subcategory
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Get the modules in the subcategory
      
       
@@ -134,7 +134,7 @@ Get the modules in the subcategory
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Get the name of the subcategory
       
 
@@ -148,7 +148,7 @@ Get the name of the subcategory
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 This class represents a category.
 
 **Params:**
@@ -162,7 +162,7 @@ This class represents a category.
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Adds a subcategory to the category.
 
 **Params:**
@@ -176,7 +176,7 @@ Adds a subcategory to the category.
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Retrieves the subcategories in the category.
 
 
@@ -184,7 +184,7 @@ Retrieves the subcategories in the category.
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Retrieves the name of the category.
 
 
@@ -192,7 +192,7 @@ Retrieves the name of the category.
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Adds a module to the category.
 
 **Params:**
@@ -206,6 +206,6 @@ Adds a module to the category.
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Retrieves the modules in the category.
 
