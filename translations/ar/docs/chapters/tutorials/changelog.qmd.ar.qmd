@@ -1,43 +1,43 @@
-### Changelog
+### التغييرات
 
 ---
-title: Change log
+title: سجل التغيير
 ---
 
-<!-- PROJECT LOGO -->
-# Changelog
+<!-- سجل المشروع -->
+# تغيير
 
-All notable changes to this project will be documented in this file.
+وسيتم توثيق جميع التغييرات الملحوظة في هذا المشروع في هذا الملف.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+التنسيق مبني على [الحفاظ على تغيير](https://keepachangelog.com/en/1.0.0/)
+ويلتزم هذا المشروع بـ [النسخة السامية](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased (2024-03-05)
+## لم يفرج (2024-03-05)
 
-### Features:
+### الميزات:
 
-- Extract docstrings from javascript files ([`#13`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/3)) 
-- Generate documentation structure in `quarto.yml` file ([`#9`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/7))
-- Link unmatched documents to `Globals` category ([`#21`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/21))
-- References for doc snippets and external resources ([`#22`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/22))
-- Add documentation for JSQuarto ([`#25`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/25))
-- Add tutorials for JSQuarto ([`#26`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/26))
-- Add `How to guides` and custom command line args ([`#30`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/30))
-
-
-### Bugs fixed:
-- Improve formatting for `params`, `thrown errors` and `returns` ([`#14`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/14))
-- Remove code constructs from function documentation ([`#15`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/15))
-- Fix inconsistent header titles from extracted documents ([`#17`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/17))
+- استخراج مستخرجات من ملفات جافا سكريبت ([`#13`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/3)) 
+- إنشاء هيكل التوثيق في ملف `quarto.yml` ([`#9`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/7))
+- ربط الوثائق غير المطابقة بفئة 'Globals' ([`#21'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/21))
+- المراجع المتعلقة بكتل الكتل الكتل والموارد الخارجية ([`#22`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/22))
+- إضافة وثائق لـ JSQuarto ([`#25`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/25))
+- إضافة دروس لـ JSQuarto ([`#26`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/26))
+- إضافة 'كيفية الإرشادات' وخطوط الأوامر المخصصة ([`#30'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/30))
 
 
-#### Contributors ✨
+### تم إصلاح الأخطاء:
+- تحسين التنسيق لـ `params' و `thrown errors' و `returns' ([#14`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/14))
+- إزالة التركيبات البرمجية من وثائق الدالة ([`#15`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/15))
+- إصلاح عناوين الترويسة غير المتسقة من الوثائق المستخرجة ([`#17`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/17))
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+#### المساهمون ✨
+
+شكرا لهؤلاء الناس الرائعين (مفتاح [emoji](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- جميع المواقع: ستارت - لا تقم بإزالة أو تعديل هذا القسم -->
 <!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
+<!-- markdownlint-تعطيل -->
 <table>
   <tbody>
     <tr>
@@ -46,14 +46,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tbody>
 </table>
 
-<!-- markdownlint-restore -->
+<!-- markdownlint-recover-->
 <!-- prettier-ignore-end -->
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- جميع المواقع: LIST:end-->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+هذا المشروع يتبع مواصفات [all-contributors](https://github.com/all-contributors/all-contributors). المساهمات من أي نوع!
 
-<!-- MARKDOWN LINKS & IMAGES -->
+<!-- كلمات و آثار ->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [cc-by]: http://creativecommons.org/licenses/by/4.0/
 [cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
