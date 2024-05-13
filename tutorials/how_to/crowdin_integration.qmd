@@ -26,13 +26,13 @@ This section will go over the necessary steps for integrating crowdin for transl
     Make sure the `outputDirectory` and `translationsDirectory` exists within your project
 3. Commit all necessary changes, including the `config.json` file and push to your github repository.
 4. On your crowdin project, go to the settings page and click on the `Integrations` tab.
-   ![Integrations]('../images/open_integrations_tab.png')
+   ![Integrations](../images/open_integrations_tab.png){fig-align='center'}
 5. Search for Github integration and click on the `Install` button.
-   ![Github Integration]('../images/search_github_integration.png')
+   ![Github Integration](../images/search_github_integration.png){fig-align='center'}
 6. Go back to the integrations tab and select find the Github integration then click `Set Up Integration`
-   ![Set Up Integration]('../images/open_integrations_tab.png')
+   ![Set Up Integration](../images/open_integrations_tab.png){fig-align='center'}
 7. Click the dropdown menu for `Set Up Integration` and select the `Source and translation files mode`
-   ![Source and translation files mode]('../images/source_and_translation_mode.png')
+   ![Source and translation files mode](../images/source_translation_mode.png){fig-align='center'}
 8. Fill the repository details, specify the branch for translations and translation mode.
-   ![Repository Details]('../images/select_github_repo.png')
+   ![Repository Details](../images/select_github_repo.png){fig-align='center'}
 9. Now go back to the Integrations tab and select Github Integration.
