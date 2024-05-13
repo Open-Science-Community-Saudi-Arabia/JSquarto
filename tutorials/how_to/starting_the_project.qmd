@@ -1,4 +1,3 @@
-### Starting the project environment
 
 Before you start, make sure you have the following installed on your machine:
 - [Quarto](https://quarto.org/docs/get-started/index.html)
@@ -12,11 +11,13 @@ Before you start, make sure you have the following installed on your machine:
     Refer to environment setup guide for more details [See here](#environment-setup)
 
 2. For cases where you are working with a project that uses typescript, you will need to compile the typescript files to javascript. To do this, run the following command in the terminal:
+    
     ```bash
     tsc -b 
     ```
     
     Make sure to direct the transpiled files to the correct directory. You can do this by updating the `tsconfig.json` file to include the `outDir` property. For example:
+    
     ```json
     {
         "compilerOptions": {
@@ -26,6 +27,7 @@ Before you start, make sure you have the following installed on your machine:
     ```
 
 3. Start the project
+    
     ```bash
     yarn run build
     ```
@@ -43,6 +45,7 @@ Before you start, make sure you have the following installed on your machine:
 5. Once you are done, you can stop the server by pressing `Ctrl + C` on your terminal.
 
 6. To generate the documentation without starting the server, run the following command:
+    
     ```bash
     npm run doc:generate
     ```
@@ -53,6 +56,7 @@ Before you start, make sure you have the following installed on your machine:
     yarn run doc:generate
     ```
 9: To preview the documentation without starting the server, run the following command:
+    
     ```bash
     npm run doc:preview
     ```
@@ -66,6 +70,7 @@ Before you start, make sure you have the following installed on your machine:
     This command will startup a quarto server to preview the already generated documentation and open it in your default browser.
 
 8. To clean the generated documentation, run the following command:
+    
     ```bash
     npm run doc:clean
     ```

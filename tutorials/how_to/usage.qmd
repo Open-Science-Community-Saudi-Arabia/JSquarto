@@ -1,6 +1,6 @@
-## Usage {#sec-usage}
+This section provides an overview of the JSquarto tool and its usage, including the custom CLI arguments and configuration settings that can be leveraged to customize the documentation generation process.
 
-### Custom CLI arguments 
+### Custom CLI arguments {#sec-usage}
 The CLI arguments are used to customize the behavior of the JSquarto tool. These bespoke arguments enable you to tailor the documentation generation process to suit your specific requirements. By leveraging these arguments, you can enhance the efficiency and effectiveness of the documentation generation process, thereby streamlining your workflow and optimizing your documentation output.
 
 Some of the custom CLI arguments supported by JSquarto include:
