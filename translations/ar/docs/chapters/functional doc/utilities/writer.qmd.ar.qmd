@@ -11,14 +11,14 @@ this typescript module (writer) contains classes and functions
 
 
 ## _a 
-`[variable]`
+`[متغير]`
  
 
 
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 Formats file names by removing all underscores `(_)`
     
 
@@ -27,15 +27,15 @@ Formats file names by removing all underscores `(_)`
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 This method generates the Quarto YAML configuration file based on the provided chapters.
 
 
 
 ## _a 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 Creates modules and Categories from tutorials config, these will be required to write them as chapters in the quarto.yml file
      
       
@@ -45,7 +45,7 @@ Creates modules and Categories from tutorials config, these will be required to 
 ## unknown 
 `[function]`
  
-**Description:**
+**وصف:**
 Copies the content of the tutorials in `/tutorials` to `/docs/chapters/tutorials`
      
       
@@ -53,9 +53,9 @@ Copies the content of the tutorials in `/tutorials` to `/docs/chapters/tutorials
 
 
 ## module 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method writes the documentation content for a module to a specified file path.
 
 **Params:**
@@ -68,17 +68,17 @@ This method writes the documentation content for a module to a specified file pa
 
 
 ## categories 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method prepares the directory structure for documentation by creating necessary folders and files.
 
 
 
 ## categories 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method writes documentation for each category to a corresponding file within the documentation directory.
 
 
@@ -86,7 +86,7 @@ This method writes documentation for each category to a corresponding file withi
 ## unknown 
 `[function]`
  
-**Description:**
+**وصف:**
 This method reads through the tutorials folder and copies them to the destination `/docs` folder, it also
       follows the structure of the tutorials set by the `config.json` in the tutorials folder if any
      
@@ -97,7 +97,7 @@ This method reads through the tutorials folder and copies them to the destinatio
 ## unknown 
 `[function]`
  
-**Description:**
+**وصف:**
 This method adds the tutorials as chapters into the _quarto.yml file
      
       
@@ -105,9 +105,9 @@ This method adds the tutorials as chapters into the _quarto.yml file
 
 
 ## configToAdd 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method adds the language specs to the _quarto.yml file
      
       
@@ -115,8 +115,8 @@ This method adds the language specs to the _quarto.yml file
 
 
 ## docsFolderPath 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method creates a copy of each qmd file in the docs folder for each language
 
