@@ -1,7 +1,9 @@
+import CONFIG from "../config";
 import Writer from "../utils/writer";
 
-export async function fixLocalizedIndexFiles(langs: string[]) {
-    await Writer.fixMissingLocalizedIndexFiles(langs)
+export async function fixLocalizedIndexFiles() {
+    const langs = CONFIG.languages;
+    await Writer.fixMissingLocalizedIndexFiles(langs);
 }
 
 if (require.main === module) {
@@ -11,11 +13,13 @@ if (require.main === module) {
         ?.split(",");
 
     if (!langs) {
-        console.log(
-            "Please provide languages to create localized docs for using the languages flag",
+        console.warn(
+            "Languages not specified in cli arguments, setting languages to default",
         );
-        process.exit(1);
     }
 
-    fixLocalizedIndexFiles(langs)
+    CONFIG.languages = langs ?? CONFIG.languages;
+
+    fixLocalizedIndexFiles();
 }
+
