@@ -1,8 +1,8 @@
 # Constructidentifier
 
-the class called constructidentifier, contains methods to identify different types of code constructs
-  (such as functions, variables, classes, and modules) within a line of code.
-  these methods help in extracting and determining the names associated with each construct type.
+الفصل المسمى بناء، يحتوي على طرق لتحديد أنواع مختلفة من التركيبات البرمجية
+  (مثل الدوال والمتغيرات والفصول والوحدات) ضمن سطر من الكود.
+  وتساعد هذه الأساليب في استخراج وتحديد الأسماء المرتبطة بكل نوع من أنواع البناء.
 
 
 
@@ -11,19 +11,19 @@ the class called constructidentifier, contains methods to identify different typ
  
 
 
-## unknown 
+## غير معروف 
 `[function]`
  
 **وصف:**
-Retrieves the name of the module construct from a given line of code.
+يسترجع اسم وحدة بناء من سطر معين من التعليمات البرمجية.
      
       
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  line | The line of code to parse. |
+<unk> السطر <unk> سطر التعليمات البرمجية إلى التحليل. |
 
 
 
@@ -31,26 +31,26 @@ Retrieves the name of the module construct from a given line of code.
 `[function]`
  
 **وصف:**
-Retrieves the name of the function construct from a given line of code.
+يسترجع اسم بناء الدالة من سطر معين من الكود.
      
       
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  line | The line of code to parse. |
+<unk> السطر <unk> سطر التعليمات البرمجية إلى التحليل. |
 
 
 
-## variableRegex 
+## متغير ريجكس 
 `[متغير]`
  
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  line | The line of code to parse. |
+<unk> السطر <unk> سطر التعليمات البرمجية إلى التحليل. |
 
 
 
@@ -58,45 +58,45 @@ Retrieves the name of the function construct from a given line of code.
 `[متغير]`
  
 **وصف:**
-Retrieves the name of the class construct from a given line of code.
+يسترجع اسم بناء الصف الدراسي من سطر معين من الكود.
      
       
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  line | The line of code to parse. |
+<unk> السطر <unk> سطر التعليمات البرمجية إلى التحليل. |
 
 
 
-## declarationconst 
+## إعلان 
 `[function]`
  
 **وصف:**
-Identifies the type of construct (function, variable, class, module, other) from the given code text.
+يحدد نوع البناء (الدالة، المتغير، الصف، الوحدة، أخرى) من نص الرمز المحدد.
      
       
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  text | The code text to analyze. |
+<unk> النص <unk> النص البرمجي لتحليله. |
 
 
 
-## unknown 
+## غير معروف 
 `[function]`
  
 **وصف:**
-Retrieves the name of the construct from the given code text.
+يسترجع اسم البناء من نص الكود المعين.
      
       
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  text | The code text to analyze. |
+<unk> النص <unk> النص البرمجي لتحليله. |
 
