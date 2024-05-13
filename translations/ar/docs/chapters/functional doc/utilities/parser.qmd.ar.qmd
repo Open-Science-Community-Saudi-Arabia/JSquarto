@@ -8,9 +8,9 @@ this file is responsible for parsing comments in code files.
 
 
 ## descriptionMatch 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract the description from the comments block
       
 
@@ -23,9 +23,9 @@ Parser.getDescription(comment) => 'This method will extract the description from
 
 
 ## categoryMatches 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract the category from the comments block
       
 
@@ -38,9 +38,9 @@ Parser.getCategory(comment) => 'StringUtil'
 
 
 ## subCategoryRegex 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract the subcategory from the comments block
       
 
@@ -53,9 +53,9 @@ Parser.getSubCategory(comment) => 'StringUtil'
 
 
 ## linkRegex 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract the link from the comments block
       
 
@@ -68,9 +68,9 @@ Parser.getLink(comment) => 'StringUtil'
 
 
 ## paramsRegex 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract all the params from the comments block
       
 
@@ -83,9 +83,9 @@ Parser.getParams(comment) => [{name: 'str', type: 'string', description: 'The st
 
 
 ## moduleRegex 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract the module name from the comments block
       
 
@@ -98,9 +98,9 @@ Parser.getModuleName(comment) => 'StringUtil'
 
 
 ## returnsMatches 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract the returns from the comments block
       
 
@@ -113,9 +113,9 @@ Parser.getReturnsValues(comment) => [{type: 'string', description: 'The string t
 
 
 ## exampleRegex 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract the examples from the comments block
       
 
@@ -128,9 +128,9 @@ Parser.getExamples(comment) => ['StringUtil.convertToCamelCase(\'hello world\') 
 
 
 ## throwsMatches 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract the thrown errors from the comments block
       
 
@@ -143,9 +143,9 @@ Parser.getThrownErrors(comment) => [{type: 'Error', description: 'The string to 
 
 
 ## referencesRegex 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method will extract the references from the comments block
       
 
