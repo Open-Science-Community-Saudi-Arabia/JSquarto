@@ -696,10 +696,34 @@ export default class Writer {
         if (fs.existsSync(imagesFolderPath)) {
             const imagesDestinationPath = path.join(
                 CONFIG.outputDirectory,
-                "/images",
+                "/chapters/tutorials/images",
             );
             fs.mkdirSync(imagesDestinationPath, { recursive: true });
-            fs.copyFileSync(imagesFolderPath, imagesDestinationPath);
+            function recursivelyCopyContentOfFolderToNewPath(
+                currentPath: string,
+                newPath: string,
+            ) {
+                const files = fs.readdirSync(currentPath);
+                for (const file of files) {
+                    const filePath = path.join(currentPath, file);
+                    const newFilePath = path.join(newPath, file);
+                    const stats = fs.statSync(filePath);
+                    if (stats.isDirectory()) {
+                        fs.mkdirSync(newFilePath, { recursive: true });
+                        recursivelyCopyContentOfFolderToNewPath(
+                            filePath,
+                            newFilePath,
+                        );
+                    } else {
+                        fs.copyFileSync(filePath, newFilePath);
+                    }
+                }
+            }
+            // Copy all content of the folder to new destination
+            recursivelyCopyContentOfFolderToNewPath(
+                imagesFolderPath,
+                imagesDestinationPath,
+            );
         }
 
         const chapters: Chapter[] = [];
