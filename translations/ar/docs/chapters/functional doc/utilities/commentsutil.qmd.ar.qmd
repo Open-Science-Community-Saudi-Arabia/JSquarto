@@ -1,18 +1,18 @@
-# Commentsutil
+#تعليقسوتيل
 
-this file provides utility classes for parsing and extracting information
-  from comments within code files. it includes methods to identify and
-  extract metadata from both module and non-module comments,
-  facilitating better documentation and understanding of code constructs
-  such as functions, variables, classes, and modules.
+يوفر هذا الملف فئات فائدة لتحليل المعلومات واستخراجها
+  من التعليقات داخل ملفات التعليمات البرمجية. ويتضمن طرقًا لتحديد و
+  استخراج البيانات الوصفية من تعليقات الوحدة وغير الوحدة،
+  تسهيل التوثيق بشكل أفضل وفهم بنيات التعليمات البرمجية
+  مثل الوظائف والمتغيرات والفئات والوحدات النمطية.
 
 
 
-## moduleName 
-`[variable]`
+## اسم وحدة 
+`[متغير]`
  
-**Description:**
-This method extracts module block information from comments, including module name, description, category, subcategory, link, and references.
+**وصف:**
+تستخرج هذه الطريقة معلومات كتلة الوحدة من التعليقات، بما في ذلك اسم الوحدة والوصف والفئة والفئة الفرعية والرابط والمراجع.
 
 **Params:**
 
@@ -23,9 +23,9 @@ This method extracts module block information from comments, including module na
 
 
 ## description 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method extracts other block information from comments, including description, params, link, examples, returns, thrown errors, and references.
 
 **Params:**
@@ -37,9 +37,9 @@ This method extracts other block information from comments, including descriptio
 
 
 ## fileContent 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 This method retrieves comments from a source file using Acorn parser.
 
 **Params:**
@@ -53,7 +53,7 @@ This method retrieves comments from a source file using Acorn parser.
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 This class represents a comment extracted from a source file.
 
 **Params:**
@@ -68,7 +68,7 @@ This class represents a comment extracted from a source file.
 ## unknown 
 `[function]`
  
-**Description:**
+**وصف:**
 This method sets the construct information of the comment, including the type and name of the construct.
 
 **Params:**
@@ -82,7 +82,7 @@ This method sets the construct information of the comment, including the type an
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 This method retrieves module block information from the comment using the CommentsUtil class.
 
 
@@ -90,6 +90,6 @@ This method retrieves module block information from the comment using the Commen
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 This method retrieves other block information from the comment using the CommentsUtil class.
 

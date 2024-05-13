@@ -13,7 +13,7 @@ this module is used to read and write files
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 This method returns the type and name of the code construct linked to a comment
      
       

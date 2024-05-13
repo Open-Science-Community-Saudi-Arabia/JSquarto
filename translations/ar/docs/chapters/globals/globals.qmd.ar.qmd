@@ -7,7 +7,7 @@ global constructs
 ## getJSFilesFromDirectory 
 `[function]`
  
-**Description:**
+**وصف:**
 This function recursively traverses the specified directory and its subdirectories to find JavaScript files (.js).
   It starts by checking each item in the directory. If the item is a directory, it recursively calls itself
   to search for JavaScript files within that directory. If the item is a JavaScript file, it adds the file path
@@ -20,7 +20,7 @@ This function recursively traverses the specified directory and its subdirectori
 ## start 
 `[function]`
  
-**Description:**
+**وصف:**
 Starts the documentation generation process.
  
   This function initiates the documentation generation process by performing the following steps:
@@ -41,7 +41,7 @@ Starts the documentation generation process.
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 This method will convert a string to camel toUpperCase
       
 
@@ -60,7 +60,7 @@ StringUtil.convertToCamelCase('hello world') => 'helloWorld'
 ## unknown 
 `[other]`
  
-**Description:**
+**وصف:**
 This method will convert a string to camel toUpperCase
       
 
