@@ -14,7 +14,7 @@ the class called constructidentifier, contains methods to identify different typ
 ## unknown 
 `[function]`
  
-**Description:**
+**وصف:**
 Retrieves the name of the module construct from a given line of code.
      
       
@@ -30,7 +30,7 @@ Retrieves the name of the module construct from a given line of code.
 ## variableX 
 `[function]`
  
-**Description:**
+**وصف:**
 Retrieves the name of the function construct from a given line of code.
      
       
@@ -44,7 +44,7 @@ Retrieves the name of the function construct from a given line of code.
 
 
 ## variableRegex 
-`[variable]`
+`[متغير]`
  
 **Params:**
 
@@ -55,9 +55,9 @@ Retrieves the name of the function construct from a given line of code.
 
 
 ## classRegex 
-`[variable]`
+`[متغير]`
  
-**Description:**
+**وصف:**
 Retrieves the name of the class construct from a given line of code.
      
       
@@ -73,7 +73,7 @@ Retrieves the name of the class construct from a given line of code.
 ## declarationconst 
 `[function]`
  
-**Description:**
+**وصف:**
 Identifies the type of construct (function, variable, class, module, other) from the given code text.
      
       
@@ -89,7 +89,7 @@ Identifies the type of construct (function, variable, class, module, other) from
 ## unknown 
 `[function]`
  
-**Description:**
+**وصف:**
 Retrieves the name of the construct from the given code text.
      
       
