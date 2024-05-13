@@ -53,7 +53,7 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           source_branch: ${{ env.NEW_BRANCH }}
-          destination_branch: build_crowdin_integration
+          destination_branch: crowdin_integration
           pr_title: Restructure new crowdin updates
           pr_body: |
             :crown: *An automated PR*
