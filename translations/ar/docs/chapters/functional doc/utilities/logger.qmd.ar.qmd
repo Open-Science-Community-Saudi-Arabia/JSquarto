@@ -1,5 +1,5 @@
 # Logger
 
-this module is used to log messages to the console
+يتم استخدام هذه الوحدة لتسجيل الرسائل إلى وحدة التحكم
   
 
