@@ -1,10 +1,6 @@
-## Improving Documentation with JSDoc
-
-### Introduction
-
 Effective documentation is crucial for maintaining a clear and understandable codebase. One powerful tool for enhancing documentation within your code is JSDoc. JSDoc is a markup language that allows you to annotate your code with structured comments, enabling automatic generation of documentation. In this guide, we will explore the uses of JSDoc and how it can improve your project's documentation.
 
-### Using JSDoc for Genereated Documentation
+### Using JSDoc for Generated Documentation
 
 One of the primary uses of JSDoc is to generate documentation directly from your codebase. By adding JSDoc comments to your functions, classes, and variables, you can provide essential information that is automatically extracted and transformed into comprehensive documentation.
 

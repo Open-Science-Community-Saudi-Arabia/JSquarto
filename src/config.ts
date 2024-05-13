@@ -1,11 +1,12 @@
-import config from '../config.json'
+import config from "../config.json";
 
 const CONFIG = {
     outputDirectory: config.outputDirectory,
     sourceDirectory: config.sourceDirectory,
     tutorialDirectory: config.tutorialDirectory,
-    languages: config.languages,
+    translationsDirectory: config.translationsDirectory,
     includeLocalizedVersions: config.includeLocalizedVersions,
-}
+    languages: config.languages,
+};
 
 export default CONFIG;
