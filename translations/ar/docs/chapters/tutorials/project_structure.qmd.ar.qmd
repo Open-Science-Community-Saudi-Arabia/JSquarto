@@ -1,17 +1,17 @@
-### Project_structure
+### بنية المشروع
 
 ---
-title: Project structure
+title: بنية المشروع
 ---
 
 
-#### Project file structure
-JSQuarto is structured as follows:
+#### بنية ملف المشروع
+وفيما يلي هيكل الرابطة اليابانية للتعاون التقني:
 
-```bash
+“`باش
 ├── src
-│   ├── intefaces
-│   │   ├── index.ts
+<unk> <unk> - وصية
+<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> - فهارس
 │   ├── utils
 │   │   ├── codeconstruct.ts
 │   │   ├── component.ts
@@ -19,29 +19,29 @@ JSQuarto is structured as follows:
 │   │   ├── logger.ts
 │   │   ├── parser.ts
 │   │   ├── string.ts
-│   │   ├── writer.ts
-│   ├── tutorials
-│   │   ├── contributing/
-│   │   ├── how_to/
-│   │   ├── environment_setup.qmd
-│   │   ├── localization.qmd
-│   │   ├── project_structure.qmd
-│   │   ├── config.json
+<unk> <unk> <unk> <unk> <unk> <unk> <unk> - كتاب
+<unk> <unk> - دروس
+<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> -- مساهمة/
+<unk> <unk> <unk> <unk> <unk> <unk> <unk> -how_to /
+<unk> <unk> <unk> <unk> <unk> <unk> <unk> environment_setup.qmd
+<unk> <unk> <unk> <unk> <unk> <unk> <unk> -localization.qmd
+<unk> <unk> <unk> <unk> <unk> ', project_structure.qmd
+<unk> <unk> <unk> <unk> <unk> )-config.json
 │   │
-│   ├── index.ts
+<unk> <unk> <unk> <unk> <unk> <unk> - فهارس
 │   │
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── .prettierrc
+<unk> <unk> <unk> ', package.json
+<unk> <unk> <unk> ', package-lock.json
+<unk> <unk> <unk> <unk> <unk> <unk> .prettierrc
 
 ``` 
 
 
-The `API` directory contains the source code for JSQuarto. The `API` directory is structured as follows:
+يحتوي دليل "API" على رمز المصدر لـ JSQuarto. وينظم دليل "API" على النحو التالي:
 
-- `src/interfaces` - Contains the all type/intefaces definitions for the project.
-- `src/utils` - Contains the all utility functions for the project. These utility functions are used to perform various tasks such as parsing, writing, and logging.
-- `src/tutorials` - Contains the all tutorials for the project. These tutorials are written in Quarto Markdown format. Note that the `config.json` file is used to define how the tutorials are structured.
-- `src/index.ts` - The main entry point for the project.
-- `src/package.json` - The project's package.json file.
-- `src/.prettierrc` - The project's prettier configuration file.
+- 'src/interfaces' - يحتوي على جميع تعاريف النوع/العناوين للمشروع.
+- 'src/utils' - يحتوي على جميع وظائف المنفعة للمشروع. وتستخدم هذه الوظائف المفيدة لأداء مهام مختلفة مثل الوقوف والكتابة وقطع الأخشاب.
+- 'src/tutorials' - يحتوي على جميع الدروس للمشروع. هذه الدروس مكتوبة بتنسيق Quarto Markdown. لاحظ أن ملف `config.json` يستخدم لتحديد كيفية هيكلة الدروس.
+- 'src/index.ts' - المدخل الرئيسي للمشروع.
+- 'src/package.json' - ملف حزمة المشروع؛
+- 'src/.prettierrc' - ملف التكوين المسبق للمشروع.

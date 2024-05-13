@@ -1,24 +1,24 @@
-###Starting-the-project
+###بدء المشروع
 
-### Starting the project environment
+### بدء بيئة المشروع
 
-Before you start, make sure you have the following installed on your machine:
+قبل البدء، تأكد من تثبيت ما يلي على جهازك:
 - [Quarto](https://quarto.org/docs/get-started/index.html)
 - [Node.js](https://nodejs.org/en/download/)
-- [Yarn](https://yarnpkg.com/getting-started/install) or [NPM](https://www.npmjs.com/get-npm)
-- [Typescript](https://www.typescriptlang.org/download) (optional - Only required if the files you're working with are in typescript)
+- [Yarn](https://yarnpkg.com/getting-started/install) أو [NPM](https://www.npmjs.com/get-npm)
+- [Typescript](https://www.typescriptlang.org/download) (اختياري - فقط إذا كانت الملفات التي تعمل معها موجودة في النص النصي
 
 
-### Steps
-1. Environment Setup
-    Refer to environment setup guide for more details [See here](#environment-setup)
+### خطوات
+1. إعداد البيئة
+    الرجوع إلى دليل إعداد البيئة لمزيد من التفاصيل [انظر هنا](#environment-setup)
 
-2. For cases where you are working with a project that uses typescript, you will need to compile the typescript files to javascript. To do this, run the following command in the terminal:
-    ```bash
+2. في الحالات التي تعمل فيها مع مشروع يستخدم الكتابة، سوف تحتاج إلى تجميع ملفات الكتابة إلى جافا سكريبت. للقيام بذلك، قم بتشغيل الأمر التالي في المحطة الطرفية:
+    “`باش
     tsc -b 
     ```
     
-    Make sure to direct the transpiled files to the correct directory. You can do this by updating the `tsconfig.json` file to include the `outDir` property. For example:
+    تأكد من توجيه الملفات المنقولة إلى الدليل الصحيح. يمكنك القيام بذلك عن طريق تحديث ملف 'tsconfig.json' ليشمل خاصية 'outDir'. وعلى سبيل المثال:
     ```json
     {
         "compilerOptions": {
@@ -27,89 +27,89 @@ Before you start, make sure you have the following installed on your machine:
     }
     ```
 
-3. Start the project
-    ```bash
-    yarn run build
+3. بدء المشروع
+    “`باش
+    تشغيل بناء يارن
     ```
 
-    OR 
+    أو 
 
-    ```bash
-    npm run build
+    “`باش
+    npm تشغيل البناء
     ```
 
-    This command will command will generate the documentation and also start a local quarto server. You can access the documentation by visiting the http link shown on your terminal.
+    سيولد هذا الأمر التوثيق وسيبدأ أيضًا خادم محلي. يمكنك الوصول إلى الوثائق عن طريق زيارة الرابط الهاتفي المعروض على المحطة الطرفية الخاصة بك.
 
-4. Make changes to the documentation and see the changes reflect on the browser.
+4. إجراء تغييرات على التوثيق ومشاهدة التغييرات تعكس على المتصفح.
 
-5. Once you are done, you can stop the server by pressing `Ctrl + C` on your terminal.
+5. بمجرد الانتهاء من ذلك، يمكنك إيقاف الخادم بالضغط على 'Ctrl + C` في المحطة الطرفية الخاصة بك.
 
-6. To generate the documentation without starting the server, run the following command:
-    ```bash
-    npm run doc:generate
+6. لإنشاء الوثائق دون بدء تشغيل الخادم، قم بتشغيل الأمر التالي:
+    “`باش
+    npm تشغيل doc:generate
     ```
 
-    OR
+    أو
 
-    ```bash
-    yarn run doc:generate
+    “`باش
+    تشغيل yarn doc:generate
     ```
-9: To preview the documentation without starting the server, run the following command:
-    ```bash
-    npm run doc:preview
-    ```
-
-    OR
-
-    ```bash
-    yarn run doc:preview
+9: لمعاينة الوثائق دون بدء تشغيل الخادم، قم بتشغيل الأمر التالي:
+    “`باش
+    npm تشغيل doc:preview
     ```
 
-    This command will startup a quarto server to preview the already generated documentation and open it in your default browser.
+    أو
 
-8. To clean the generated documentation, run the following command:
-    ```bash
-    npm run doc:clean
+    “`باش
+    yarn تشغيل doc:preview
     ```
 
-    OR
+    سيؤدي هذا الأمر إلى بدء تشغيل خادم quarto لمعاينة الوثائق التي تم إنشاؤها بالفعل وفتحها في المتصفح الافتراضي الخاص بك.
 
-    ```bash
-    yarn run doc:clean
+8. لتنظيف الوثائق التي تم إنشاؤها، قم بتشغيل الأمر التالي:
+    “`باش
+    npm تشغيل doc:clean
     ```
 
-    This command will delete the generated documentation files. Note that this command will not delete the `/tutorials` or `/source_files directory or wherever the tutorials and source_files are stored. Only the generated documentation files will be deleted.
+    أو
+
+    “`باش
+    تشغيل yarn doc:clean
+    ```
+
+    سيؤدي هذا الأمر إلى حذف ملفات المستندات التي تم إنشاؤها. لاحظ أن هذا الأمر لن يحذف دليل `/tutorials` أو `/source_files أو حيثما يتم تخزين الدروس و source_files. سيتم حذف ملفات المستندات التي تم إنشاؤها فقط.
 
 
 
-You can specify the source files path by including the `--source` flag in the command. For example:
-```bash
-npm run build --source=./path/to/source_files
+يمكنك تحديد مسار الملفات المصدر عن طريق تضمين علم `--source` في الأمر. وعلى سبيل المثال:
+“`باش
+npm تشغيل البناء --source=./path/to/source_files
 ```
 
-OR
+أو
 
-```bash
-yarn run build --source=./path/to/source_files
+“`باش
+تشغيل yarn لبناء --source=./path/to/source_files
 ```
 
-You can also specify the tutorials path by including the `--tutorial` flag in the command. For example:
-```bash
-npm run build --tutorials=./path/to/tutorials
+يمكنك أيضا تحديد مسار الدروس عن طريق تضمين علم `--البرنامج التعليمي` في الأمر. وعلى سبيل المثال:
+“`باش
+npm تشغيل البناء --دروس تعليمية=./path/to/tutorials
 ```
 
 
-Summary of commands:
-- `npm run build` - Generate the documentation and start a local quarto server
-- `yarn run build` - Generate the documentation and start a local quarto server
-- `npm run doc:generate` - Generate the documentation without starting the server
-- `yarn run doc:generate` - Generate the documentation without starting the server
-- `npm run doc:preview` - Preview the generated documentation without starting the server
-- `yarn run doc:preview` - Preview the generated documentation without starting the server
-- `npm run doc:clean` - Delete the generated documentation files
-- `yarn run doc:clean` - Delete the generated documentation files
+موجز الأوامر:
+- 'npm قيد الإنشاء' - إنشاء الوثائق وبدء خادم محلي للحجر
+- 'yarn قيد الإنشاء' - توليد الوثائق وبدء خادم الحجر المحلي
+- 'npm run doc:generate' - إنشاء الوثائق دون بدء تشغيل الخادم
+- 'yarn run doc:generate' - إنشاء الوثائق دون بدء تشغيل الخادم
+- 'npm تشغيل doc:preview' - معاينة الوثائق التي تم إنشاؤها دون بدء تشغيل الخادم
+- 'yarn run doc:preview' - معاينة الوثائق التي تم إنشاؤها دون بدء تشغيل الخادم
+- 'npm run doc:Cle' - حذف ملفات الوثائق التي تم إنشاؤها
+- 'yarn run doc:Cle' - حذف ملفات الوثائق التي تم إنشاؤها
 
-Tags
-- `--source` - Specify the source files path
-- `--tutorial` - Specify the tutorials path
+الوسوم
+- `--source` - تحديد مسار الملفات المصدر
+- `--البرنامج التعليمي` - تحديد مسار الدروس
 
