@@ -72,9 +72,9 @@ jobs:
         run: echo "Pull Request Number - ${{ steps.create_pr.outputs.pull_request_number }}"
         id: pr_number
 
-      # - name: Approve pull Request
-      #   if: steps.create_pr.outputs.pull_request_number
-      #   uses: hmarr/auto-approve-action@v2
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}
+      - name: Approve pull Request
+        if: steps.create_pr.outputs.pull_request_number
+        uses: hmarr/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}
