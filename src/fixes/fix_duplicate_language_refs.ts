@@ -1,38 +1,53 @@
 import * as Cheerio from "cheerio";
-import fs from 'fs'
+import fs from "fs";
 import logger from "../utils/logger";
 import path from "path";
 import CONFIG from "../config";
 
-export async function fixDuplicateLanguageReferences(languages: string[]) {
+export async function fixDuplicateLanguageReferences() {
+    const languages = CONFIG.languages;
     // Get the index files for each language
     for (const lang of languages.slice(1)) {
-        const directoryForHtmlFiles = path.join(CONFIG.outputDirectory, `_book/${lang}/`);
+        const directoryForHtmlFiles = path.join(
+            CONFIG.outputDirectory,
+            `_book/${lang}/`,
+        );
 
-        logger.info('Reading index file for language: ' + lang)
-        const indexFile = await fs.promises.readFile(directoryForHtmlFiles + `index.${lang}.html`, "utf-8");
-        logger.info('Finished reading index file for language: ' + lang)
+        logger.info("Reading index file for language: " + lang);
+        const indexFile = await fs.promises.readFile(
+            directoryForHtmlFiles + `index.${lang}.html`,
+            "utf-8",
+        );
+        logger.info("Finished reading index file for language: " + lang);
 
         // Get the html elements (anchor elements) with classname 'dropdown-item' from each index file
         const $ = Cheerio.load(indexFile);
-        const dropdownItems = $('.dropdown-item');
+        const dropdownItems = $(".dropdown-item");
         const uniqueItems = new Set();
 
         // Remove duplicate elements from index file (use the href as the unique idendifier)
         dropdownItems.each((index, element) => {
-            logger.info('Removing duplicate items from index file for language: ' + lang)
-            const href = $(element).attr('href');
+            logger.info(
+                "Removing duplicate items from index file for language: " +
+                    lang,
+            );
+            const href = $(element).attr("href");
             if (uniqueItems.has(href)) {
                 $(element).remove();
             }
             uniqueItems.add(href);
         });
 
-        await fs.promises.writeFile(directoryForHtmlFiles + `index.${lang}.html`, $.html());
-        logger.info('Finished removing duplicate items from index file for language: ' + lang)
+        await fs.promises.writeFile(
+            directoryForHtmlFiles + `index.${lang}.html`,
+            $.html(),
+        );
+        logger.info(
+            "Finished removing duplicate items from index file for language: " +
+                lang,
+        );
     }
 }
-
 
 if (require.main === module) {
     const langs = process.argv
@@ -41,11 +56,13 @@ if (require.main === module) {
         ?.split(",");
 
     if (!langs) {
-        console.log(
-            "Please provide languages to create localized docs for using the languages flag",
+        console.warn(
+            "Languages not specified in cli arguments, setting languages to default",
         );
-        process.exit(1);
     }
 
-    fixDuplicateLanguageReferences(langs)
+    CONFIG.languages = langs ?? CONFIG.languages;
+
+    fixDuplicateLanguageReferences();
 }
+

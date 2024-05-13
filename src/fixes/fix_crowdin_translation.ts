@@ -15,7 +15,10 @@ import fs from "fs";
  * Move the updated crowdin translations from translations folder to the output directory
  */
 export async function moveTranslatedFilesToOutputDir() {
-    const translationsFolderPath = path.join(__dirname, "/../../" + CONFIG.translationsDirectory);
+    const translationsFolderPath = path.join(
+        __dirname,
+        "/../../" + CONFIG.translationsDirectory,
+    );
 
     async function copyAllFoldersAndFiles(source: string, destination: string) {
         const files = await fs.promises.readdir(source);
@@ -182,20 +185,19 @@ async function start() {
 }
 
 if (require.main === module) {
-    const languages = process.argv
+    const langs = process.argv
         .find((arg) => arg.startsWith("languages"))
         ?.split("=")[1]
         ?.split(",");
 
-    if (!languages) {
-        console.log(
-            "Please provide languages to create localized docs for using the languages flag",
+    if (!langs) {
+        console.warn(
+            "Languages not specified in cli arguments, setting languages to default",
         );
-        process.exit(1);
     }
 
-    languages.shift();
-    CONFIG.languages = languages;
+    CONFIG.languages = langs ?? CONFIG.languages;
+    CONFIG.languages.shift(); // Remove the default language from the list of Languages
+
     start();
 }
-

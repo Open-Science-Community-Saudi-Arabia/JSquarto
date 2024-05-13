@@ -690,6 +690,42 @@ export default class Writer {
 
         fs.mkdirSync(this.tutorialsOutputPath, { recursive: true });
 
+        // Check if there is an image folder in the tutorials folder
+        // If there is, copy it to the images folder in the docs folder
+        const imagesFolderPath = path.join(this.tutorialsSourcePath, "images");
+        if (fs.existsSync(imagesFolderPath)) {
+            const imagesDestinationPath = path.join(
+                CONFIG.outputDirectory,
+                "/chapters/tutorials/images",
+            );
+            fs.mkdirSync(imagesDestinationPath, { recursive: true });
+            function recursivelyCopyContentOfFolderToNewPath(
+                currentPath: string,
+                newPath: string,
+            ) {
+                const files = fs.readdirSync(currentPath);
+                for (const file of files) {
+                    const filePath = path.join(currentPath, file);
+                    const newFilePath = path.join(newPath, file);
+                    const stats = fs.statSync(filePath);
+                    if (stats.isDirectory()) {
+                        fs.mkdirSync(newFilePath, { recursive: true });
+                        recursivelyCopyContentOfFolderToNewPath(
+                            filePath,
+                            newFilePath,
+                        );
+                    } else {
+                        fs.copyFileSync(filePath, newFilePath);
+                    }
+                }
+            }
+            // Copy all content of the folder to new destination
+            recursivelyCopyContentOfFolderToNewPath(
+                imagesFolderPath,
+                imagesDestinationPath,
+            );
+        }
+
         const chapters: Chapter[] = [];
         const subCategories = tutorialCategory.getSubCategories();
 
