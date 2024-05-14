@@ -2,7 +2,7 @@
 title: 'Environment Setup'
 ---
 
-#### Prerequisites (#environment-setup)
+#### Prerequisites {#environment-setup}
 Before testing the tool locally, ensure you have the following prerequisites installed on your system:
 - Node.js and npm (Node Package Manager)
 - Git (optional, if cloning the repository)

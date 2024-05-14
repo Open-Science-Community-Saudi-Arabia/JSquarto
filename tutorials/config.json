@@ -39,6 +39,9 @@
             },
             "starting_the_project": {
                 "title": "Starting a new build"
+            },
+            "crowdin_integration": {
+                "title": "Crowdin Integration"
             }
         }
     }
