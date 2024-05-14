@@ -122,6 +122,6 @@ jobs:
         if: steps.create_pr.outputs.pull_request_number
         uses: hmarr/auto-approve-action@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAT_TOKEN }}
           pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}
 
