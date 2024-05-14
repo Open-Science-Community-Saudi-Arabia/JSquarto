@@ -90,8 +90,7 @@ jobs:
 
       - name: Fix built book
         run: |
-          tree docs
-          npm run fix:all languages="$LANGUAGES"
+          npm run fix:all languages=$LANGUAGES
 
       - name: Commit changes
         run: |
