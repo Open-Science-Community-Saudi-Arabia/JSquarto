@@ -1,33 +1,33 @@
-# Welcome to JSQuarto Documentation
+# مرحبا بكم في وثائق JSQuarto
 
-## About
+## حول
 
-JSQuarto is a tool designed to generate JavaScript package API reference documentation using Markdown and Quarto. It serves as an alternative to JSDoc, providing a simpler and more flexible approach for documenting JavaScript code.
+JSQuarto هي أداة مصممة لتوليد وثائق مرجعية لحزمة API جافا سكريبت باستخدام Markdown و Quarto. يعمل كبديل لـ JSDoc، ويوفر نهجا أبسط وأكثر مرونة لتوثيق شفرة جافا سكريبت.
 
-## Purpose
+## الغرض
 
-The purpose of JSQuarto is to streamline the process of generating API reference documentation for JavaScript packages. By leveraging Markdown and Quarto, developers can easily create and maintain comprehensive documentation for their JavaScript projects.
+الغرض من JSQuarto هو تبسيط عملية إنشاء وثائق API المرجعية لحزم جافا سكريبت. من خلال الاستفادة من Markdown و Quarto، يمكن للمطورين إنشاء وحفظ وثائق شاملة لمشاريع جافا سكريبت الخاصة بهم.
 
-## Inspiration
+## إلهام
 
-JSQuarto draws inspiration from various documentation tools and methodologies, including:  </br>
+JSQuarto يستلهم من أدوات ومنهجيات التوثيق المختلفة، بما في ذلك:  </br>
 
-- [JSDoc](https://jsdoc.app/): JSDoc is a popular tool for generating API documentation from JavaScript source code. </br>
-- [Quarto](https://quarto.org/): Quarto is a versatile document authoring and publishing tool that supports Markdown, LaTeX, and R Markdown formats. </br>
-- [Sphinx](https://www.sphinx-doc.org/): Sphinx is a documentation generation tool widely used in the Python community. </br>
+- [JSDoc](https://jsdoc.app/): JSDoc هو أداة شائعة لتوليد وثائق API من كود مصدر جافا سكريبت. </br>
+- [Quarto](https://quarto.org/): Quarto هي أداة مؤلفة ونشر وثيقة متنوعة تدعم تنسيقات Markdown, LaTeX, and R Markdown. </br>
+- [Sphinx](https://www.sphinx-doc.org/): Sphinx هو أداة لتوليد الوثائق تستخدم على نطاق واسع في مجتمع Python. </br>
 
-## Localization and Translation
+## التعريب والترجمة
 
-JSQuarto is committed to supporting localization and translation of generated documentation. We are planning to integrate Crowdin, a localization management platform, to facilitate translation efforts. This will enable users to present the generated QMD files in multiple languages, making documentation accessible to a wider audience.
+وشركة JSQuarto ملتزمة بدعم توطين وترجمة الوثائق التي تم إنشاؤها. نحن نخطط لدمج كراودن، وهي منصة لإدارة التعريب ، لتسهيل جهود الترجمة. وهذا سيمكن المستخدمين من تقديم ملفات QMD التي تم إنشاؤها بلغات متعددة، مما يجعل الوثائق متاحة لجمهور أوسع.
 
-## Contributing Organization
+## المنظمة المساهمة
 
-JSQuarto is developed and maintained by the [Open Science Community Saudi Arabia](https://github.com/Open-Science-Community-Saudi-Arabia). Our mission is to promote open science practices and foster collaboration among researchers and developers in Saudi Arabia.
+تم تطوير وصيانة JSQuarto من قبل [المجتمع العلمي المفتوح في المملكة العربية السعودية] (https://github.com/Open-Science-Community-Saudi-Arabia). وتتمثل مهمتنا في تعزيز الممارسات العلمية المفتوحة وتعزيز التعاون بين الباحثين والمطورين في المملكة العربية السعودية.
 
-## Getting Started
+## بدء العمل
 
-To start using JSQuarto, visit the [GitHub repository](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto) for installation instructions and usage documentation.
+لبدء استخدام JSQuarto، قم بزيارة [GitHub repository](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto) للحصول على تعليمات التثبيت ووثائق الاستخدام.
 
-## Feedback and Support
+## الملاحظات والدعم
 
-If you have any questions, feedback, or need support, please [open an issue](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues) on GitHub or [join our community](https://github.com/Open-Science-Community-Saudi-Arabia) for assistance.
+إذا كان لديك أي أسئلة، أو ردود فعل، أو تحتاج إلى دعم، يرجى [فتح مشكلة] (https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues) على GitHub أو [الانضمام إلى مجتمعنا](https://github.com/Open-Science-Community-Saudi-Arabia) للحصول على المساعدة.

@@ -1,52 +1,52 @@
 ###Raising-pr
 
-## Introduction
-A pull request is a way for contributors to submit changes to a project maintained by others. The changes are proposed and then reviewed and potentially merged by the project maintainers. In this guide, we will walk you through the steps of making a pull request to the Open-Science-Community-Saudi-Arabia/JSquarto repository on GitHub.
+## مقدمة
+طلب السحب هو طريقة للمساهمين لإرسال تغييرات إلى مشروع يديره الآخرون. ويُقترح إجراء التغييرات ثم يقوم المشرفون على المشروع باستعراضها وربما دمجها. في هذا الدليل، سنمضي معكم عبر خطوات تقديم طلب سحب إلى مستودع العلوم المفتوحة - المجتمع السعودي - العربي/JSquarto في GitHub.
 
-## Steps
-1. Find a feature or bug that you want to work on.
-2. Fork the Open-Science-Community-Saudi-Arabia/JSquarto repository to your GitHub account.
-3. Clone the forked repository on your local machine.
+## خطوات
+1. ابحث عن ميزة أو خطأ تريد العمل عليه.
+2. فورك مستودع Open-Science-Community-Sou-Arabia/JSquarto إلى حساب GitHub الخاص بك.
+3. استنساخ المستودع المتشابك على جهازك المحلي.
     
-    ```bash
-    git clone https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto
+    “`باش
+    نسخة git https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto
     ```
 
-4. Sync the fork, to avoid merge conflicts.
+4. مزامنة الشوك، لتجنب دمج الصراعات.
     
-    ```bash
-    git remote add upstream https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto 
-    git fetch upstream
-    git pull upstream main
-    git push
+    “`باش
+    git بعد إضافة أعلى مسار https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto 
+    Git يجلب أعلى مجرى
+    Git سحب الرئيسية
+    دفعة git
     ```
 
-5. Create a new branch with your GitHub username as its name.
+5. إنشاء فرع جديد مع اسم المستخدم الخاص بك GitHub كاسم له.
     
-    ```bash
-    git checkout -b <your-github-username>
+    “`باش
+    Git الدفع -b <your-github-username>
     ```
-It is not mandatory to name the new branch with your GitHub username, but it is a good practice to do so, as long as the name of the branch is clear and concise, you can name it whatever you want.
+ليس إلزامياً تسمية الفرع الجديد باسم مستخدم GitHub الخاص بك، ولكن من الممارسات الجيدة القيام بذلك.
 
-6. Make your changes on this new branch.
-7. Commit your changes with a clear commit message.
+6. قم بإجراء التغييرات الخاصة بك على هذا الفرع الجديد.
+7. قم بإجراء التغييرات الخاصة بك مع رسالة التزام واضحة.
     
-    ```bash
-    git add .
-    git commit -m "Clear and concise commit message"
-    ```
-
-8. Push your changes to your forked repository.
-    
-    ```bash
-    git push origin <your-github-username>
+    “`باش
+    git يضاف
+    git الالتزام -m "رسالة التزام واضحة وموجزة"
     ```
 
-9. Go to the [Open-Science-Community-Saudi-Arabia/JSquarto](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto) repository on GitHub, and you should see a message suggesting to create a new pull request. Click on it.
-10. To raise the PR choose the PR template and fill it with the required information. The PR template is a set of questions that you need to answer to make it easier for the maintainers to review your pull request. you can find the PR template [here](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
+8. قم بدفع التغييرات الخاصة بك إلى مستودع الشوكات الخاص بك.
+    
+    “`باش
+    دفعة منشأ git <your-github-username>
+    ```
 
-11. Add a clear and concise title and description for your pull request, explaining the changes you made.
+9. انتقل إلى مستودع [Open-Science-Community-Saudi-Arabia/JSquarto](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto) على GitHub، ويجب أن ترى رسالة تقترح إنشاء طلب سحب جديد. انقر عليها.
+10. لإثارة كلمة المرور ، اختر قالب "PR" وملأه بالمعلومات المطلوبة. قالب PR هو مجموعة من الأسئلة التي تحتاج إلى الإجابة عليها لجعل من الأسهل على المشرفين مراجعة طلب السحب الخاص بك. يمكنك العثور على قالب PR [here](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/blob/main/.github/PUL_REQUEST_TEMPLATE.md)
 
-12. Submit your pull request, and wait for the maintainers to review your changes.
+11. إضافة عنوان ووصف واضحين وموجزين لطلب السحب الخاص بك، وشرح التغييرات التي أجريتها.
 
-Congratulations! You've just made a pull request to the Open-Science-Community-Saudi-Arabia/JSquarto repository.
+12. قم بتقديم طلب السحب الخاص بك، وانتظر المشرفين لمراجعة التغييرات الخاصة بك.
+
+تهانينا! لقد قمت للتو بتقديم طلب سحب إلى مستودع Open-Science-Community-Sou-Arabia/JSquarto

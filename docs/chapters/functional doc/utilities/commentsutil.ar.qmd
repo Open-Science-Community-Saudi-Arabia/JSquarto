@@ -1,95 +1,95 @@
-# Commentsutil
+#تعليقسوتيل
 
-this file provides utility classes for parsing and extracting information
-  from comments within code files. it includes methods to identify and
-  extract metadata from both module and non-module comments,
-  facilitating better documentation and understanding of code constructs
-  such as functions, variables, classes, and modules.
+يوفر هذا الملف فئات فائدة لتحليل المعلومات واستخراجها
+  من التعليقات داخل ملفات التعليمات البرمجية. ويتضمن طرقًا لتحديد و
+  استخراج البيانات الوصفية من تعليقات الوحدة وغير الوحدة،
+  تسهيل التوثيق بشكل أفضل وفهم بنيات التعليمات البرمجية
+  مثل الوظائف والمتغيرات والفئات والوحدات النمطية.
 
 
 
-## moduleName 
-`[variable]`
+## اسم وحدة 
+`[متغير]`
  
-**Description:**
-This method extracts module block information from comments, including module name, description, category, subcategory, link, and references.
+**وصف:**
+تستخرج هذه الطريقة معلومات كتلة الوحدة من التعليقات، بما في ذلك اسم الوحدة والوصف والفئة والفئة الفرعية والرابط والمراجع.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  comments | The comments to extract module block information from. |
+<unk> تعليقات <unk> التعليقات لاستخراج معلومات كتلة الوحدة النمطية منها. |
 
 
 
-## description 
-`[variable]`
+## وصف 
+`[متغير]`
  
-**Description:**
-This method extracts other block information from comments, including description, params, link, examples, returns, thrown errors, and references.
+**وصف:**
+تستخرج هذه الطريقة معلومات كتلة أخرى من التعليقات، بما في ذلك الوصف، والمشارجات، والربط، والأمثلة، والإرجاع، والأخطاء التي ألقيت والمراجع.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  comments | The comments to extract other block information from. |
+<unk> تعليقات <unk> التعليقات لاستخراج معلومات كتلة أخرى منها. |
 
 
 
-## fileContent 
-`[variable]`
+## محتوى الملف 
+`[متغير]`
  
-**Description:**
-This method retrieves comments from a source file using Acorn parser.
+**وصف:**
+تسترجع هذه الطريقة التعليقات من ملف مصدر باستخدام Acorn parser.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  sourceFile | The source file to retrieve comments from. |
+<unk> مصدر الملف <unk> مصدر الملف لاسترداد التعليقات منه. |
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
-**Description:**
-This class represents a comment extracted from a source file.
+**وصف:**
+يمثل هذا الصف تعليقا مستخرجا من ملف مصدر.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  text | The text content of the comment. |
-|  endLocation | The end location of the comment. |
+<unk> النص <unk> محتوى النص للتعليق. |
+<unk> الموقع النهائي <unk> الموقع النهائي للتعليق. |
 
 
 
-## unknown 
+## غير معروف 
 `[function]`
  
-**Description:**
-This method sets the construct information of the comment, including the type and name of the construct.
+**وصف:**
+وتحدد هذه الطريقة المعلومات التجميعية للتعليق، بما في ذلك نوع واسم البناء.
 
 **Params:**
 
-| Name | Description |
+<unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-|  info | The construct information to set. |
+<unk> معلومات <unk> معلومات البناء التي يجب تعيينها. |
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
-**Description:**
-This method retrieves module block information from the comment using the CommentsUtil class.
+**وصف:**
+هذه الطريقة تسترجع معلومات الوحدة النمطية من التعليق باستخدام صف التعليقات.
 
 
 
-## unknown 
+## غير معروف 
 `[other]`
  
-**Description:**
-This method retrieves other block information from the comment using the CommentsUtil class.
+**وصف:**
+تسترجع هذه الطريقة معلومات كتلة أخرى من التعليق باستخدام صف التعليقات.
 
