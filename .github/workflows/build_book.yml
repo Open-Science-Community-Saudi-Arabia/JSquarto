@@ -4,11 +4,8 @@ name: Build Book with Babel Quarto
 on:
   pull_request:
     branches:
-      - crowdin_integration
-  push:
-    branches:
-      - crowdin_integration
-
+      - build_crowdin_integration
+ 
   workflow_dispatch:
 
 env:
@@ -125,6 +122,6 @@ jobs:
         if: steps.create_pr.outputs.pull_request_number
         uses: hmarr/auto-approve-action@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAT_TOKEN }}
           pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}
 
