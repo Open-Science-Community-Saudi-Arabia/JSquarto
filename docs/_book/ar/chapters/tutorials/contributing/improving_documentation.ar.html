@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.554">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Description in ar">
+<title>Title in ar - Improving Documentation with JSDoc</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script><script src="../../../site_libs/quarto-nav/headroom.min.js"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script><script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script><script src="../../../site_libs/quarto-search/fuse.min.js"></script><script src="../../../site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="../../../">
+<link href="../../../chapters/tutorials/contributing/raising_issues.ar.html" rel="next">
+<link href="../../../chapters/functional%20doc/utilities/writer.ar.html" rel="prev">
+<script src="../../../site_libs/quarto-html/quarto.js"></script><script src="../../../site_libs/quarto-html/popper.min.js"></script><script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script><script src="../../../site_libs/quarto-html/anchor.min.js"></script><link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script><link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="../../../chapters/tutorials/contributing/improving_documentation.ar.html">Tutorials</a></li>
+<li class="breadcrumb-item"><a href="../../../chapters/tutorials/contributing/improving_documentation.ar.html"><span class="chapter-title">Improving Documentation with JSDoc</span></a></li>
+</ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../../">Title in ar</a> 
+    </div>
+      </div>
+<div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links">
+<a class="dropdown-item" href="/ar/chapters/tutorials/contributing/improving_documentation.ar.ar.html" id="language-link-ar">Version in ar</a><a class="dropdown-item" href="/chapters/tutorials/contributing/improving_documentation.html" id="language-link-en">Version in en</a>
+</ul>
+</div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome to JSQuarto Documentation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Globals</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/globals/globals.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Globals</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Utilities</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/functional%20doc/utilities/constructidentifier.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Constructidentifier</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/functional%20doc/utilities/commentsutil.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Commentsutil</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/functional%20doc/utilities/components.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Components</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/functional%20doc/utilities/file.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">File</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/functional%20doc/utilities/logger.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Logger</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/functional%20doc/utilities/parser.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Parser</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/functional%20doc/utilities/writer.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writer</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/contributing/improving_documentation.ar.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Improving Documentation with JSDoc</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/contributing/raising_issues.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Issue templates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/contributing/raising_pr.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/how_to/adding_tutorials.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tutorials</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/how_to/workflows.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflows</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/how_to/usage.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Usage</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/how_to/starting_the_project.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Starting the project environment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/project_structure.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/environment_setup.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Environment Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/changelog.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Change log</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/localization.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Localization</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#using-jsdoc-for-genereated-documentation" id="toc-using-jsdoc-for-genereated-documentation" class="nav-link" data-scroll-target="#using-jsdoc-for-genereated-documentation">Using JSDoc for Genereated Documentation</a></li>
+  <li><a href="#using-jsdoc-for-writing-documentation" id="toc-using-jsdoc-for-writing-documentation" class="nav-link" data-scroll-target="#using-jsdoc-for-writing-documentation">Using JSDoc for Writing Documentation</a></li>
+  <li><a href="#improving-jsquarto-documentation-with-jsdoc" id="toc-improving-jsquarto-documentation-with-jsdoc" class="nav-link" data-scroll-target="#improving-jsquarto-documentation-with-jsdoc">Improving JSQuarto documentation with JSDoc</a></li>
+  <li><a href="#tutorials-guide" id="toc-tutorials-guide" class="nav-link" data-scroll-target="#tutorials-guide">Tutorials guide</a></li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="../../../chapters/tutorials/contributing/improving_documentation.ar.html">Tutorials</a></li>
+<li class="breadcrumb-item"><a href="../../../chapters/tutorials/contributing/improving_documentation.ar.html"><span class="chapter-title">Improving Documentation with JSDoc</span></a></li>
+</ol></nav><div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Improving Documentation with JSDoc</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>###Improving-documentation</p>
+<section id="introduction" class="level3"><h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>Effective documentation is crucial for maintaining a clear and understandable codebase. One powerful tool for enhancing documentation within your code is JSDoc. JSDoc is a markup language that allows you to annotate your code with structured comments, enabling automatic generation of documentation. In this guide, we will explore the uses of JSDoc and how it can improve your project’s documentation.</p>
+</section><section id="using-jsdoc-for-genereated-documentation" class="level3"><h3 class="anchored" data-anchor-id="using-jsdoc-for-genereated-documentation">Using JSDoc for Genereated Documentation</h3>
+<p>One of the primary uses of JSDoc is to generate documentation directly from your codebase. By adding JSDoc comments to your functions, classes, and variables, you can provide essential information that is automatically extracted and transformed into comprehensive documentation.</p>
+<p>To use JSDoc for generating documentation, follow these steps:</p>
+<ol type="1">
+<li><p>Markup Comments: Add JSDoc comments directly above the code elements you want to document. Use the /*_ … _/ syntax to indicate a JSDoc comment block.</p></li>
+<li><p>Documenting Functions: Use JSDoc tags to describe function parameters, return values, and additional information. Tags like <span class="citation" data-cites="param">@param</span>, <span class="citation" data-cites="returns">@returns</span>, and <span class="citation" data-cites="description">@description</span> are commonly used for this purpose. Other important custom tags are <span class="citation" data-cites="category">@category</span> and <span class="citation" data-cites="subcategory">@subcategory</span>, these tags help to structure the generated documentation into chapters. All modules under a <code>subcategory</code> will be under one chapter, the chapter name will correspond to the name assigned to the <code>subcategory</code>. The main idea around <span class="citation" data-cites="category">@category</span> and <span class="citation" data-cites="subcategory">@subcategory</span> is to allow nested chapters for example one parent chapter A can have other subchapters (Chapter Aa, Chapter Ab, Chapter Ac) with each of these subchapters having their individual modules. Note that this is only two levels of nesting, with Chapter A being the <span class="citation" data-cites="category">@category</span> and the <span class="citation" data-cites="subcategory">@subcategory</span> will be the other chapters. Initially we intend to implement 2 levels of nested chapters but this as at the time of writing this quarto only allows 1 levels of nesting (i.e, you can only have 1 parent chapter with no subChapters, as a result, only the <span class="citation" data-cites="subcategories">@subcategories</span> will be displayed as chapters in the rendered document.</p></li>
+<li><p>Documenting Classes: For classes, use JSDoc comments to provide descriptions, document class properties, and document class methods. Tags like <span class="citation" data-cites="class">@class</span>, <span class="citation" data-cites="property">@property</span>, and <span class="citation" data-cites="method">@method</span> are commonly used in this context.</p></li>
+<li><p>Running JSDoc Generation: Use a JSDoc generator tool, such as JSDoc itself or other popular tools like TypeDoc or JSDoc3, to parse your codebase and generate the documentation output. Configure the generator to target the desired output format, such as HTML or Markdown.</p></li>
+<li><p>Review and Update: Review the generated documentation and ensure it accurately represents your code. Update the JSDoc comments as needed to provide clearer explanations or additional information.</p></li>
+</ol>
+<p>For more information on using JSDoc for generating documentation, see the <a href="https://jsdoc.app/">JSDoc documentation</a> or <a href="https://jsdoc.app/about-getting-started.html">Getting started with JSDoc</a>.</p>
+</section><section id="using-jsdoc-for-writing-documentation" class="level3"><h3 class="anchored" data-anchor-id="using-jsdoc-for-writing-documentation">Using JSDoc for Writing Documentation</h3>
+<p>JSDoc can also be used beyond generating code documentation. Its flexible syntax and tagging system make it a valuable tool for writing other aspects of your project’s documentation, such as tutorials, guides, and reference materials.</p>
+<p>To use JSDoc for writing documentation, consider the following approaches:</p>
+<ol type="1">
+<li><p>Tutorials and Guides: Utilize JSDoc comments to write step-by-step tutorials and guides within your codebase. By embedding tutorial content in JSDoc comments, you can keep the documentation closely tied to the relevant code, making it easier for developers to follow along and understand the concepts.</p></li>
+<li><p>Inline Examples: Use JSDoc comments to include inline code examples that demonstrate the usage of functions, classes, or modules. These examples can serve as both instructional material and a quick reference for developers.</p></li>
+<li><p>Reference Materials: JSDoc comments can be used to provide additional information in reference materials, such as explaining design patterns, outlining best practices, or clarifying complex concepts. Leverage JSDoc tags like <span class="citation" data-cites="example">@example</span> or <span class="citation" data-cites="see">@see</span> to link to relevant resources or code examples.</p></li>
+<li><p>Integration with Markdown: JSDoc supports Markdown within comments, allowing you to incorporate formatted text, headings, lists, and other Markdown features into your documentation. This enables you to create more visually appealing and structured content within your JSDoc comments.</p></li>
+</ol></section><section id="improving-jsquarto-documentation-with-jsdoc" class="level3"><h3 class="anchored" data-anchor-id="improving-jsquarto-documentation-with-jsdoc">Improving JSQuarto documentation with JSDoc</h3>
+<p>The JSQuarto documentation is not yet complete. There are several areas that could be improved, including:</p>
+<ul>
+<li>More detailed explanations of the JSQuarto project structure and codebase</li>
+<li>Additional information on how to contribute to the project</li>
+<li>Implementing JSQuarto as a CLI tool</li>
+<li>Additional information on how to maintain the JSQuarto project</li>
+<li>Additional information on how to deploy the JSQuarto project</li>
+<li>Project roadmap and future plans</li>
+</ul>
+<p>To improve the JSQuarto documentation, you can use JSDoc to add additional documentation directly within the codebase. This will allow you to provide more detailed explanations of the code and project structure, as well as additional information on how to contribute to the project, how to use the JSQuarto API, and how to maintain and deploy the project. As at the time of writing this, the documentation was built with other packages to improve the User interface, one of which is <a href="https://github.com/SoftwareBrothers/better-docs">Better-docs</a>.</p>
+</section><section id="tutorials-guide" class="level3"><h3 class="anchored" data-anchor-id="tutorials-guide">Tutorials guide</h3>
+<p>This section provides an overview of the <code>config.json</code> files used in the JSQuarto documentation, specifically focusing on the <code>tutorials</code> folder. The <code>config.json</code> file serve as configuration files that help structure and organize the documentation, while the <code>tutorials</code> folder contains the Markdown files for various tutorials.</p>
+<section id="the-tutorials-folder" class="level4"><h4 class="anchored" data-anchor-id="the-tutorials-folder">The <code>tutorials</code> Folder</h4>
+<p>The <code>tutorials</code> folder within the documentation directory is dedicated to hosting tutorials on various topics related to the JSQuarto platform. This folder contains a collection of Markdown files, each representing an individual tutorial.</p>
+<p>Markdown is a lightweight markup language that allows for easy formatting and structuring of text, making it ideal for creating tutorials. Markdown files provide a simple yet powerful way to document step-by-step instructions, code examples, explanations, and other relevant information.</p>
+<p>The <code>tutorials</code> folder can be organized into subfolders to further categorize and group related tutorials. This helps users easily locate and access the tutorials they need based on their specific interests or requirements.</p>
+<p>By structuring tutorials within the <code>tutorials</code> folder using Markdown, contributors can contribute new tutorials, update existing ones, and ensure that the documentation remains comprehensive and user-friendly.</p>
+<p>Overall, the combination of <code>.json</code> files and the <code>tutorials</code> folder enables a well-organized and accessible documentation structure, allowing users to navigate and explore the JSQuarto platform documentation with ease.</p>
+</section><section id="overview-of-config.json-files" class="level4"><h4 class="anchored" data-anchor-id="overview-of-config.json-files">Overview of <code>config.json</code> Files</h4>
+<p>The <code>config.json</code> file in the JSQuarto documentation play a crucial role in organizing and categorizing the content. This file define the structure of the documentation and provide metadata for each section, tutorial, or topic. They allow maintainers and contributors to easily navigate and manage the documentation by specifying titles, creating nested structures, and linking related topics.</p>
+<p>By using <code>config.json</code> file, the documentation can be dynamically generated and updated based on the defined structure. This makes it easier to maintain consistency, track changes, and add new content.</p>
+</section><section id="the-.json-configuration" class="level4"><h4 class="anchored" data-anchor-id="the-.json-configuration">The <code>.json</code> configuration</h4>
+<p>Let’s explain how this structure works by looking at the <code>config.json</code> file in the <code>tutorials /</code> folder. This file defines the structure of the tutorials section of the documentation, including the titles, descriptions links for each tutorial.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"changelog"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"title"</span><span class="fu">:</span> <span class="st">"Changelog"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"environment_setup"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"title"</span><span class="fu">:</span> <span class="st">"Environment Setup"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"contributing"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"title"</span><span class="fu">:</span> <span class="st">"Contributing"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example, the <code>.json</code> file defines the titles and relationships of the main sections within your documentation. The sections are represented as objects, with each object having a unique key and a <code>"title"</code> key-value pair. 1. “changelog” represents the “Changelog” section. The <code>"title"</code> key-value pair specifies the title of this section as “Changelog.”</p>
+<ol start="2" type="1">
+<li><p>“environment_setup” represents the “Environment Setup” section. The <code>"title"</code> key-value pair specifies the title of this section as “Environment Setup.”</p></li>
+<li><p>“contributing” represents the “Contributing” section. The <code>"title"</code> key-value pair specifies the title of this section as “Contributing.”</p></li>
+</ol>
+<p>With this structure, your documentation folder will contain separate Markdown files for each section, named according to the keys in the <code>.json</code> file. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> `documentation /`</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> `docs /`</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> `changelog.md`</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> `environment_setup.md`</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> `contributing.md`</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> `tutorials.json`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Each Markdown file will correspond to a section in your documentation and should contain the relevant content for that section.</p>
+<p>This simplified structure allows you to organize your documentation into distinct sections, making it easier for readers to locate and access the specific topics they need. It provides a clear and concise way to represent the main sections of your documentation without the need for nested tutorials or complex hierarchies.</p>
+<p>Remember to update the <code>.json</code> file whenever you add or modify sections to ensure that the documentation structure accurately reflects the content of your documentation.</p>
+<p>By following this structure, you can maintain a well-organized and easily navigable documentation repository.</p>
+</section><section id="nested-.json-configuration-for-tutorials" class="level4"><h4 class="anchored" data-anchor-id="nested-.json-configuration-for-tutorials">Nested <code>.json</code> configuration for tutorials</h4>
+<p>To structure tutorials and create nested tutorials within your documentation, you can use the <code>.json</code> file to define the hierarchy and relationships between tutorials. Here’s an example of how you can structure tutorials using a <code>.json</code> file:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">"maintainers"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Technical guide for Maintainers"</span><span class="kw">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"children"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"reviewing_pr"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Reviewing pull requests"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"ci_workflow"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"CI Workflow"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"secrets_and_security"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Secret Access/Management"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"deployment_guide"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Deployment Guide"</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">}</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">},</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">"contributing"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Contributing to the project"</span><span class="kw">,</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"children"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"adding_a_course"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Adding a course"</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"api_project_structure"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"API project structure"</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"improving_documentation"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Improving documentation"</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"project_structure"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Project structure"</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"raising_issues"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Raising issues"</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"raising_pr"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Raising pull requests"</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">}</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">}</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">},</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">"review"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Reviewing the project"</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">}</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example, the <code>.json</code> file represents a documentation structure with two main sections: “Technical guide for Maintainers” and “Technical guide for API developers”. Each section has its own set of tutorials represented as nested objects.</p>
+<ol type="1">
+<li><p>Define the main sections or categories as top-level objects within the <code>.json</code> file, such as “maintainers” and “contributing”.</p></li>
+<li><p>Within each main section, provide a <code>"title"</code> key to specify the title or heading for that section. For example, “Technical guide for Maintainers” and “Technical guide for API developers”.</p></li>
+<li><p>Add a <code>"children"</code> key within each main section to define the nested tutorials. Each tutorial is represented as a child object within the <code>"children"</code> object. Not all tutorials may have children tutorials, an example of this is the <code>review</code> tutorial. Since it has no children the program will only look for a <code>review.qmd</code> file and not a <code>review</code> folder</p></li>
+<li><p>For each tutorial, provide a unique key as the object’s key, such as “reviewing_pr” and “ci_workflow”.</p></li>
+<li><p>Within each tutorial object, include a <code>"title"</code> key to specify the title or heading for that specific tutorial.</p></li>
+</ol>
+<p>For this example here is what the folder structure would look like assuming the root folder is <code>tutorials /</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> tutorials/</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> maintainers/</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> maintainers.qmd</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> reviewing_pr.qmd</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> ci_workflow.qmd</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> secrets_and_security.qmd</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> deployment_guide.qmd</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> contributing/</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> api.md</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> api_structure.md</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> api_authentication_flow.qmd</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> jwt_token_management.qmd</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> rbac_handler_flow.qmd</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="at">            </span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> review.qmd</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="at">              </span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> config.json</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this structure:</p>
+<ul>
+<li>The <code>.json</code> configuration file is located in the <code>tutorials/</code> folder</li>
+<li>The <code>tutorials</code> folder contains subfolders representing different sections or categories of tutorials.</li>
+<li>Each section or category folder, such as <code>maintainers</code> and <code>contributing</code>, contains the <code>.qmd</code> files for individual tutorials. <!-- - Additionally, for each section or category folder, there should be an accompanying `*.md` file that serves as the entry overview, providing an overview of the tutorials within that section. For example, `maintainers.md` provides an overview of the tutorials in the "Technical guide for Maintainers" section. -->
+</li>
+</ul>
+<p>The nested structure allows you to organize tutorials hierarchically, making it easier to navigate and find specific tutorials based on their topic or category.</p>
+<p>It’s important to note that the tutorial structure allows only one level of nesting. This means you can have main sections and their respective tutorials, but you cannot create further nested folders within the tutorials.</p>
+<p>By following this folder structure and accompanying <code>.qmd</code> overview files, you can easily define the hierarchy and relationships between tutorials, allowing you to create nested tutorials and organize your documentation in a logical and structured manner.</p>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../../../chapters/functional%20doc/utilities/writer.ar.html" class="pagination-link" aria-label="Writer">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Writer</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../chapters/tutorials/contributing/raising_issues.ar.html" class="pagination-link" aria-label="Issue templates">
+        <span class="nav-page-text"><span class="chapter-title">Issue templates</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body>
+</html>
