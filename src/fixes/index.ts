@@ -1,6 +1,7 @@
 import CONFIG from "../config";
 import { fixDuplicateLanguageReferences } from "./fix_duplicate_language_refs";
 import { fixLocalizedIndexFiles } from "./fix_localized_index_file";
+import { fixAndStyleArabicHtmlFiles } from "./fix_rtl";
 import { fixWrongLanguageReferences } from "./fix_wrong_language_refs";
 
 async function start() {
@@ -20,6 +21,7 @@ async function start() {
     await fixLocalizedIndexFiles();
     await fixDuplicateLanguageReferences();
     await fixWrongLanguageReferences();
+    await fixAndStyleArabicHtmlFiles()
 }
 
 start();
