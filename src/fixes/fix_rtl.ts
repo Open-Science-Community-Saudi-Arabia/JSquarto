@@ -39,11 +39,17 @@ async function processHtmlFile(filePath: string, cssContent: string) {
 
 export async function fixAndStyleArabicHtmlFiles() {
     if (!CONFIG.languages.includes("ar")) {
+        console.log({
+            config: CONFIG,
+        });
         logger.info("Arabic language not found in the list of languages");
         return;
     }
 
-    const directoryForHtmlFiles = path.join(CONFIG.outputDirectory, `_book/ar/`);
+    const directoryForHtmlFiles = path.join(
+        CONFIG.outputDirectory,
+        `_book/ar/`,
+    );
     const cssFilePath = path.join(__dirname, "/rtl.css");
 
     // Read the CSS file
