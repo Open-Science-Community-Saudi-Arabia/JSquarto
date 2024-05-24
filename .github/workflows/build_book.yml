@@ -4,7 +4,7 @@ name: Build Book with Babel Quarto
 on:
   pull_request:
     branches:
-      - build_crowdin_integration
+      - crowdin_integration
  
   workflow_dispatch:
 
