@@ -72,6 +72,6 @@ if (require.main === module) {
     }
 
     CONFIG.languages = langs ?? CONFIG.languages;
-    
+
     fixAndStyleArabicHtmlFiles();
 }

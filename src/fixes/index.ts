@@ -18,11 +18,11 @@ async function start() {
 
     CONFIG.languages = langs ?? CONFIG.languages;
 
+    console.log({ arguments: process.argv });
     await fixLocalizedIndexFiles();
     await fixDuplicateLanguageReferences();
     await fixWrongLanguageReferences();
-    await fixAndStyleArabicHtmlFiles()
+    await fixAndStyleArabicHtmlFiles();
 }
 
 start();
-
