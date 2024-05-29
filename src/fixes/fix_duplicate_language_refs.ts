@@ -27,7 +27,7 @@ export async function fixDuplicateLanguageReferences() {
         const uniqueItems = new Set();
 
         // Remove duplicate elements from index file (use the href as the unique idendifier)
-        dropdownItems.each((index, element) => {
+        dropdownItems.each((_, element) => {
             logger.info(
                 "Removing duplicate items from index file for language: " +
                     lang,
