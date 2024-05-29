@@ -20,7 +20,7 @@ this typescript module (writer) contains classes and functions
  
 **Description:**
 Formats file names by removing all underscores `(_)`
-    
+      
 
 
 
@@ -114,8 +114,8 @@ This method adds the language specs to the _quarto.yml file
 
 
 
-## docsFolderPath 
-`[variable]`
+## unknown 
+`[other]`
  
 **Description:**
 This method creates a copy of each qmd file in the docs folder for each language

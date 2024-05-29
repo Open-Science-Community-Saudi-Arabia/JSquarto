@@ -21,6 +21,15 @@ book:
         - chapters/functional doc/utilities/logger.qmd
         - chapters/functional doc/utilities/parser.qmd
         - chapters/functional doc/utilities/writer.qmd
+    - part: Functional doc
+      chapters:
+        - chapters/functional doc/constructidentifier.qmd
+        - chapters/functional doc/commentsutil.qmd
+        - chapters/functional doc/components.qmd
+        - chapters/functional doc/file.qmd
+        - chapters/functional doc/logger.qmd
+        - chapters/functional doc/parser.qmd
+        - chapters/functional doc/writer.qmd
     - part: Tutorials
       chapters:
         - chapters/tutorials/contributing/improving_documentation.qmd
@@ -30,6 +39,7 @@ book:
         - chapters/tutorials/how_to/workflows.qmd
         - chapters/tutorials/how_to/usage.qmd
         - chapters/tutorials/how_to/starting_the_project.qmd
+        - chapters/tutorials/how_to/crowdin_integration.qmd
         - chapters/tutorials/project_structure.qmd
         - chapters/tutorials/environment_setup.qmd
         - chapters/tutorials/changelog.qmd

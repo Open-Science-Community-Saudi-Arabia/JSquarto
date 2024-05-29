@@ -1,0 +1,122 @@
+# Writer
+
+this typescript module (writer) contains classes and functions
+   for generating documentation structure and content.
+   it interacts with various files and directories to organize
+   documentation chapters, write content to markdown files,
+   and generate quarto yaml configuration for the documentation book.
+ 
+   note: this module is not yet complete and is still under development.
+
+
+
+## _a 
+`[variable]`
+ 
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+Formats file names by removing all underscores `(_)`
+    
+
+
+
+## unknown 
+`[other]`
+ 
+**Description:**
+This method generates the Quarto YAML configuration file based on the provided chapters.
+
+
+
+## _a 
+`[variable]`
+ 
+**Description:**
+Creates modules and Categories from tutorials config, these will be required to write them as chapters in the quarto.yml file
+     
+      
+
+
+
+## unknown 
+`[function]`
+ 
+**Description:**
+Copies the content of the tutorials in `/tutorials` to `/docs/chapters/tutorials`
+     
+      
+
+
+
+## module 
+`[variable]`
+ 
+**Description:**
+This method writes the documentation content for a module to a specified file path.
+
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  options | An object containing the module and destination path. |
+|  options.destinationPath | The destination path where the documentation will be written. |
+
+
+
+## categories 
+`[variable]`
+ 
+**Description:**
+This method prepares the directory structure for documentation by creating necessary folders and files.
+
+
+
+## categories 
+`[variable]`
+ 
+**Description:**
+This method writes documentation for each category to a corresponding file within the documentation directory.
+
+
+
+## unknown 
+`[function]`
+ 
+**Description:**
+This method reads through the tutorials folder and copies them to the destination `/docs` folder, it also
+      follows the structure of the tutorials set by the `config.json` in the tutorials folder if any
+     
+      
+
+
+
+## unknown 
+`[function]`
+ 
+**Description:**
+This method adds the tutorials as chapters into the _quarto.yml file
+     
+      
+
+
+
+## configToAdd 
+`[variable]`
+ 
+**Description:**
+This method adds the language specs to the _quarto.yml file
+     
+      
+
+
+
+## docsFolderPath 
+`[variable]`
+ 
+**Description:**
+This method creates a copy of each qmd file in the docs folder for each language
+
