@@ -15,7 +15,11 @@
         "doc:serve": "serve ./docs/_book",
         "setup-quarto": "git clone https://github.com/quarto-dev/quarto-cli && cd quarto-cli && ./configure.sh",
         "update-quarto": "cd quarto-cli && git pull",
-        "build": "npm run doc:generate && npm run doc:preview"
+        "build": "npm run doc:generate && npm run doc:preview",
+        "tsc": "tsc -b && ts-node-dev ./src/add-shebang.ts"
+    },
+    "bin": {
+        "jsq": "./bin/src/index.js"
     },
     "keywords": [],
     "author": "",
