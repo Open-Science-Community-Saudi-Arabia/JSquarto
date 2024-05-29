@@ -13,6 +13,7 @@ export interface Config {
 
 export interface ConfigMap {
     source: "sourceDirectory";
+    output: "outputDirectory";
     tutorial: "tutorialDirectory";
     include_localized_versions: "includeLocalizedVersions";
     languages: "languages";
@@ -34,6 +35,7 @@ export default class ConfigMgr {
     // keys are the cli arguments, values are the config keys
     static configMap: ConfigMap = {
         source: "sourceDirectory",
+        output: "outputDirectory",
         tutorial: "tutorialDirectory",
         include_localized_versions: "includeLocalizedVersions",
         languages: "languages",
