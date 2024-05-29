@@ -11,10 +11,10 @@ import {
 } from "./utils/components";
 import Parser from "./utils/parser";
 import path from "path";
-import CONFIG from "./config";
 import logger from "./utils/logger";
 import ConfigMgr from "./utils/config_mgr";
 
+const CONFIG = ConfigMgr.getConfig();
 /**
  * Recursively searches for JavaScript files in a directory and its subdirectories.
  *

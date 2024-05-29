@@ -6,10 +6,10 @@
  * Merge the paths for the translated files
  * And fix the file extensions for the translated files
  */
-
-import CONFIG from "../config";
 import path from "path";
 import fs from "fs";
+import ConfigMgr from "../utils/config_mgr";
+const CONFIG = ConfigMgr.getConfig();
 
 /**
  * Move the updated crowdin translations from translations folder to the output directory
@@ -185,19 +185,5 @@ async function start() {
 }
 
 if (require.main === module) {
-    const langs = process.argv
-        .find((arg) => arg.startsWith("languages"))
-        ?.split("=")[1]
-        ?.split(",");
-
-    if (!langs) {
-        console.warn(
-            "Languages not specified in cli arguments, setting languages to default",
-        );
-    }
-
-    CONFIG.languages = langs ?? CONFIG.languages;
-    CONFIG.languages.shift(); // Remove the default language from the list of Languages
-
     start();
 }

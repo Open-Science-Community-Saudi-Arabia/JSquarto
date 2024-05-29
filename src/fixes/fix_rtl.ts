@@ -2,7 +2,8 @@ import * as Cheerio from "cheerio";
 import fs from "fs";
 import logger from "../utils/logger";
 import path from "path";
-import CONFIG from "../config";
+import ConfigMgr from "../utils/config_mgr";
+const CONFIG = ConfigMgr.getConfig();
 
 async function processHtmlFilesInDirectory(
     directory: string,

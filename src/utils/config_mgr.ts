@@ -1,9 +1,36 @@
-import CONFIG, { Config, ConfigMap } from "../config";
 import { ValueOf } from "../interfaces";
 import logger from "./logger";
+import config from "../../config.json";
+
+export interface Config {
+    outputDirectory: string;
+    sourceDirectory: string;
+    tutorialDirectory: string;
+    translationsDirectory: string;
+    includeLocalizedVersions: boolean;
+    languages: string[];
+}
+
+export interface ConfigMap {
+    source: "sourceDirectory";
+    tutorial: "tutorialDirectory";
+    include_localized_versions: "includeLocalizedVersions";
+    languages: "languages";
+    translations: "translationsDirectory";
+}
 
 type CliArgs = Partial<{ [k in keyof ConfigMap]: string }>;
+
 export default class ConfigMgr {
+    private static CONFIG = {
+        outputDirectory: config.outputDirectory,
+        sourceDirectory: config.sourceDirectory,
+        tutorialDirectory: config.tutorialDirectory,
+        translationsDirectory: config.translationsDirectory,
+        includeLocalizedVersions: config.includeLocalizedVersions,
+        languages: config.languages,
+    } as Config;
+
     // keys are the cli arguments, values are the config keys
     static configMap: ConfigMap = {
         source: "sourceDirectory",
@@ -29,7 +56,7 @@ export default class ConfigMgr {
     static updateConfigStore(): { config: Config; inputData: Partial<Config> } {
         const cliArgs = this.getArgsFromCli();
 
-        const currentConfig = CONFIG;
+        const currentConfig = this.CONFIG;
         const configToUpdate = {} as Config;
         for (const entries of cliArgs.entries()) {
             const [cliKey, cliValue] = entries as [
@@ -60,9 +87,9 @@ export default class ConfigMgr {
         });
         for (const [key, value] of Object.entries(updatedConfig)) {
             if (key === "languages") {
-                CONFIG.languages = value as string[];
+                this.CONFIG.languages = value as string[];
             } else {
-                CONFIG[
+                this.CONFIG[
                     key as
                         | "outputDirectory"
                         | "sourceDirectory"
@@ -76,5 +103,10 @@ export default class ConfigMgr {
             inputData: configToUpdate,
             config: updatedConfig,
         };
+    }
+
+    static getConfig() {
+        this.updateConfigStore();
+        return this.CONFIG;
     }
 }
