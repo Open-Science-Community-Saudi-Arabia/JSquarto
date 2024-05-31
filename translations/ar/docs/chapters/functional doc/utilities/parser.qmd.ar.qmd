@@ -1,9 +1,9 @@
 # Parser
 
-هذا الملف مسؤول عن تحليل التعليقات في ملفات التعليمات البرمجية.
+هذا الملف مسؤول عن تحليل التعليقات في ملفات الرموز.
   وهي تستخرج أجزاء مختلفة من المعلومات مثل
-  وصف الفئة، الفئة الفرعية، الرابط، المعلمات، قيم الإرجاع،
-  و ألقى أخطاء من التعليقات باستخدام التعبيرات العادية.
+  الوصف، الفئة، الفئة الفرعية، الارتباط، المعلمات، قيم الإرجاع،
+  ورمي أخطاء من التعليقات باستخدام التعبيرات العادية.
 
 
 
@@ -17,7 +17,7 @@
 **أمثلة:**
 
 ```جافا سكريبت
-Parser.getDescription(تعليق) => "هذه الطريقة سوف تستخرج الوصف من كتلة التعليقات"
+Parser.getDescription(تعليق) => 'هذه الطريقة سوف تستخرج الوصف من كتلة التعليقات'
 ```
 
 
@@ -26,13 +26,13 @@ Parser.getDescription(تعليق) => "هذه الطريقة سوف تستخرج 
 `[متغير]`
  
 **وصف:**
-هذه الطريقة سوف تستخرج الفئة من كتلة التعليقات
+سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
       
 
 **أمثلة:**
 
 ```جافا سكريبت
-Parser.getcategorory(تعليق) => 'StringUtil'
+Parser.getCategory(تعليق) => 'StringUtil'
 ```
 
 
@@ -41,7 +41,7 @@ Parser.getcategorory(تعليق) => 'StringUtil'
 `[متغير]`
  
 **وصف:**
-هذه الطريقة سوف تستخرج الفئة الفرعية من كتلة التعليقات
+سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
       
 
 **أمثلة:**
@@ -56,7 +56,7 @@ Parser.getSubcategorory(تعليق) => 'StringUtil'
 `[متغير]`
  
 **وصف:**
-هذه الطريقة سوف تستخرج الرابط من كتلة التعليقات
+سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
       
 
 **أمثلة:**
@@ -71,13 +71,13 @@ Parser.getLink(تعليق) => 'StringUtil'
 `[متغير]`
  
 **وصف:**
-هذه الطريقة سوف تستخرج كل البارام من كتلة التعليقات
+سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
       
 
 **أمثلة:**
 
 ```جافا سكريبت
-Parser.getParams(تعليق) => [{name: 'str', type: 'string', description: 'The string to convert to camel case'}]
+Parser.getParams(comment) => [{name: 'str', type: 'string', description: 'The string to convert to camel case'}]
 ```
 
 
@@ -122,7 +122,7 @@ Parser.getReturnsValues(تعليق) => [{type: 'string', description: 'The strin
 **أمثلة:**
 
 ```جافا سكريبت
-Parser.getexamples(comy) => ['StringUtil.convertToCamelCase(\'hello world\') => \'helloWorld\']
+Parser.getExamples(comment) => ['StringUtil.convertToCamelCase(\'hello world\') => \'helloWorld\'']
 ```
 
 
@@ -131,13 +131,13 @@ Parser.getexamples(comy) => ['StringUtil.convertToCamelCase(\'hello world\') => 
 `[متغير]`
  
 **وصف:**
-هذه الطريقة سوف تستخرج الأخطاء الملقاة من كتلة التعليقات
+سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
       
 
 **أمثلة:**
 
 ```جافا سكريبت
-Parser.getThrownErrors(تعليق) => [{type: 'Error', description: 'The string to convert to camel case'}]
+Parser.getThrownErrors(comment) => [{type: 'Error', description: 'The string to convert to camel case'}]
 ```
 
 
@@ -146,12 +146,12 @@ Parser.getThrownErrors(تعليق) => [{type: 'Error', description: 'The string 
 `[متغير]`
  
 **وصف:**
-هذه الطريقة سوف تستخرج المراجع من كتلة التعليقات
+سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
       
 
 **أمثلة:**
 
 ```جافا سكريبت
-Parser.getReferences(تعليق) =[{text: 'StringUtil', type: 'localModule'}]
+Parser.getReferences(comment) => [{text: 'StringUtil', type: 'localModule'}]
 ```
 
