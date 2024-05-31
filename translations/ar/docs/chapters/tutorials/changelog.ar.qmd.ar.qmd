@@ -16,26 +16,26 @@ title: سجل التغيير
 
 ### الميزات:
 
-- استخراج مستخرجات من ملفات جافا سكريبت ([`#13`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/3)) 
-- إنشاء هيكل التوثيق في ملف `quarto.yml` ([`#9`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/7))
-- ربط الوثائق غير المطابقة بفئة 'Globals' ([`#21'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/21))
-- المراجع المتعلقة بكتل الكتل الكتل والموارد الخارجية ([`#22`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/22))
-- إضافة وثائق لـ JSQuarto ([`#25`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/25))
-- إضافة دروس لـ JSQuarto ([`#26`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/26))
-- إضافة 'كيفية الإرشادات' وخطوط الأوامر المخصصة ([`#30'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/30))
+- استدراك دراية مستخرجة عن مسعى مضمار مضمار مضمار مضمار ([`#13`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/3)) 
+- الفصل الأول من القانون الدولي للعلوم التطبيقية: 'quarto.yml` ([`#9'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/7))
+- - * الوصف الوالد ثانية<unk> <unk> <unk> <unk> <unk> <unk> <unk> ' Globals' (['#21'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/21))
+- قضية: قضية: قصارا: ([#22`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/22))
+- <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> ' JSQuarto ([`#25'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/25))
+- [[#26`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/26))
+- ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا)
 
 
-### تم إصلاح الأخطاء:
-- تحسين التنسيق لـ `params' و `thrown errors' و `returns' ([#14`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/14))
-- إزالة التركيبات البرمجية من وثائق الدالة ([`#15`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/15))
-- إصلاح عناوين الترويسة غير المتسقة من الوثائق المستخرجة ([`#17`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/17))
+### تم إصلاح الأخطاء:
+- في الجزء الأول من التقرير الأول للتقريرين الأول والثاني من التقرير الدوري الثاني
+- - التركيبة التركيبية التركيبية التركيبية التركيبة التركيبية للأحداث: عشير-عربيا/JSquarto/pull/15(['#15`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/15))
+- ألف - ألف - 1 - 1 - 1 - 1 - 2 - 3 - 3 - 3 - 3 - 3 - 3 - 3 - 3 - 3 - 3 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 3 - 3 - 3 - 3
 
 
 #### المساهمون ✨
 
-شكرا لهؤلاء الناس الرائعين (مفتاح [emoji](https://allcontributors.org/docs/en/emoji-key)):
+شكرا لهؤلاء الناس الرائعين (مفتاح [emoji](https://allcontributors.org/docs/en/emoji-key)):
 
-<!-- جميع المواقع: ستارت - لا تقم بإزالة أو تعديل هذا القسم -->
+<!-- جميع المواقع: ستارت - لا تقم بإزالة أو تعديل هذا القسم -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-تعطيل -->
 <table>
@@ -51,9 +51,9 @@ title: سجل التغيير
 
 <!-- جميع المواقع: LIST:end-->
 
-هذا المشروع يتبع مواصفات [all-contributors](https://github.com/all-contributors/all-contributors). المساهمات من أي نوع!
+هذا المشروع يتبع مواصفات [all-contributors](https://github.com/all-contributors/all-contributors). المساهمات من أي نوع!
 
-<!-- كلمات و آثار ->
+<!-- كلمات و آثار ->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [cc-by]: http://creativecommons.org/licenses/by/4.0/
 [cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png

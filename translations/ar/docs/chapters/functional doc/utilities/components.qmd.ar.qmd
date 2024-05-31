@@ -1,67 +1,67 @@
 # المكونات
 
-يتم استخدام هذه الوحدة لتوليد ملف الـ quarto yml
+يتم استخدام هذه الوحدة لإنشاء ملف الـ quarto yml
   
 
 
 
-## متكررًا yConvertAllStringValuesInObjectToLowerCase 
+## متكررًا 
 `[function]`
  
 **وصف:**
-تحويل جميع قيم السلسلة بشكل متكرر في كائن إلى أحرف صغيرة
+تحويل جميع قيم السلسلة بشكل متكرر في الكائن إلى أحرف صغيرة
   
 
-**أمثلة:**
+* أمثلة: **
 
-```جافا سكريبت
+```javascript
 const obj = {
-    الاسم: "مرحبا بالعالم"،
-    الوصف: "هذا وصف"،
+    name: 'Hello World',
+    description: 'This is a description',
     blockInfo: {
-    الاسم: "مرحبا بالعالم"،
-    الوصف: "هذا وصف"،
+    name: 'Hello World',
+    description: 'This is a description',
     },
     };
-    متكررًا ConvertAllStringValuesInObjectToLowerCase(obj)؛
+    recursivelyConvertAllStringValuesInObjectToLowerCase(obj);
     // => {
-    // الاسم: 'مرحبا بالعالم',
-    // الوصف: "هذا وصف"،
+    //   name: 'hello world',
+    //   description: 'this is a description',
     //   blockInfo: {
-    // الاسم: 'مرحبا بالعالم',
-    // الوصف: "هذا وصف"،
+    //   name: 'hello world',
+    //   description: 'this is a description',
     //   },
     //   }
 ```
 
 
 
-## غير معروف 
+## مجهول 
 `[other]`
  
 **وصف:**
-إضافة مستند إلى الوحدة
+إضافة مستند إلى الوحدة النمطية
       
 
-**أمثلة:**
+* أمثلة: **
 
-```جافا سكريبت
-الوحدة النمطية = وحدة جديدة({ name: 'StringUtil' })؛
-      وحدة نمطية = وحدة جديدة ({
-        الأصل: 'سلسلة.ts',
-        البيانات: {
+```javascript
+const module = new Module({ name: 'StringUtil' });
+      const moduleDoc = new ModuleDoc({
+        originalFilePath: 'string.ts',
+        data: {
      
            blockInfo: {
-           الاسم: 'StringUtil',
-           الوصف: "يحتوي هذا الفصل على أساليب لمعالجة السلاسل"،
+           name: 'StringUtil',
+           description: 'This class contains methods for manipulating strings',
            },
-           بناء المعلومات: {
-           النوع: 'صنف'،
-           الاسم: 'StringUtil',
+           constructInfo: {
+           type: 'class',
+           name: 'StringUtil',
            },
            },
            });
-           module.addDoc(moduleDoc)؛
+           module.addDoc(moduleDoc);
 ```
 
 
@@ -69,20 +69,20 @@ const obj = {
 ## غير معروف 
 `[other]`
  
-**وصف:**
-احصل على المستندات في الوحدة
+**الوصف:**
+إضافة مستند إلى الوحدة النمطية
       
 
 **أمثلة:**
 
-```جافا سكريبت
-الوحدة النمطية = وحدة جديدة({ name: 'StringUtil' })؛
-      وحدة نمطية = وحدة جديدة ({
-       الأصل: 'سلسلة.ts',
+```javascript
+const module = new Module({ name: 'StringUtil' });
+      const moduleDoc = new ModuleDoc({
+       originalFilePath: 'string.ts',
        البيانات: {
        blockInfo: {
-       الاسم: 'StringUtil',
-       الوصف: "يحتوي هذا الفصل على أساليب لمعالجة السلاسل"،
+       name: 'StringUtil',
+       description: 'This class contains methods for manipulating strings',
        },
        بناء المعلومات: {
        النوع: 'صنف'،
@@ -105,8 +105,8 @@ const obj = {
 ## غير معروف 
 `[other]`
  
-**وصف:**
-تعيين مسار الملف المصدر
+**الوصف:**
+تعيين مسار ملف المصدر
       
 
 
@@ -115,7 +115,7 @@ const obj = {
 `[other]`
  
 **وصف:**
-إضافة وحدة إلى الفئة الفرعية
+إضافة وحدة نمطية إلى الفئة الفرعية
      
       
 
@@ -125,7 +125,7 @@ const obj = {
 `[other]`
  
 **وصف:**
-الحصول على الوحدات في الفئة الفرعية
+إضافة وحدة نمطية إلى الفئة الفرعية
      
       
 
@@ -135,12 +135,12 @@ const obj = {
 `[other]`
  
 **وصف:**
-احصل على اسم الفئة الفرعية
+إضافة وحدة نمطية إلى الفئة الفرعية
       
 
 
 
-## فئة 
+## فئات 
 `[class]`
  
 
@@ -149,27 +149,13 @@ const obj = {
 `[other]`
  
 **وصف:**
-هذا الصف يمثل فئة.
+هذا الصف يمثل فئةً.
 
-**Params:**
-
-<unk> الاسم <unk> الوصف <unk>
-| --- | --- |
-<unk> الاسم <unk> اسم الفئة. |
-
-
-
-## غير معروف 
-`[other]`
- 
-**وصف:**
-يضيف فئة فرعية إلى الفئة.
-
-**Params:**
+** المعلمات (Params):**
 
 <unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-<unk> الفئة الفرعية <unk> الفئة الفرعية المراد إضافتها. |
+|  إضافة وحدة نمطية إلى الفئة الفرعية. |
 
 
 
@@ -177,7 +163,13 @@ const obj = {
 `[other]`
  
 **وصف:**
-يسترجع الفئات الفرعية في الفئة.
+يضيف فئة فرعية إلى التصنيف.
+
+** المعلمات (Params):**
+
+<unk> الاسم <unk> الوصف <unk>
+| --- | --- |
+<unk> الفئة الفرعية <unk> الفئة الفرعية التي يراد إضافتها. |
 
 
 
@@ -185,7 +177,7 @@ const obj = {
 `[other]`
  
 **وصف:**
-يسترد اسم الفئة.
+يسترد الفئات الفرعية في الفئة.
 
 
 
@@ -193,9 +185,17 @@ const obj = {
 `[other]`
  
 **وصف:**
-يضيف وحدة إلى الفئة.
+إضافة وحدة نمطية إلى الفئة الفرعية.
 
-**Params:**
+
+
+## غير معروف 
+`[other]`
+ 
+**وصف:**
+إضافة وحدة نمطية إلى الفئة الفرعية.
+
+** المعلمات (Params):**
 
 <unk> الاسم <unk> الوصف <unk>
 | --- | --- |
@@ -207,5 +207,5 @@ const obj = {
 `[other]`
  
 **وصف:**
-يسترجع الوحدات النمطية في الفئة.
+يسترد الفئات الفرعية في الفئة.
 
