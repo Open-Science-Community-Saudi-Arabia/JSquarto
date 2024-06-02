@@ -1,7 +1,11 @@
 files:
   - source: /docs/**/*.qmd
+    ignore:
+      - /docs/**/*.%two_letters_code%.*
     translation: /translations/%two_letters_code%/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
   - source: /docs/**/*.md
+    ignore:
+      - /docs/**/*.%two_letters_code%.*
     translation: /translations/%two_letters_code%/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
 bundles:
   - 4
