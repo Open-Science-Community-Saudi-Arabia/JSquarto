@@ -46,10 +46,7 @@ export async function fixAndStyleArabicHtmlFiles() {
         return;
     }
 
-    const directoryForHtmlFiles = path.join(
-        CONFIG.outputDirectory,
-        `_book/ar/`,
-    );
+    const directoryForHtmlFiles = path.join(CONFIG.outputDirectory, `_book/ar/`);
     const cssFilePath = path.join(__dirname, "/rtl.css");
 
     // Read the CSS file

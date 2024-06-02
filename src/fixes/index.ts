@@ -22,7 +22,7 @@ async function start() {
     await fixLocalizedIndexFiles();
     await fixDuplicateLanguageReferences();
     await fixWrongLanguageReferences();
-    await fixAndStyleArabicHtmlFiles();
+    await fixAndStyleArabicHtmlFiles()
 }
 
 start();

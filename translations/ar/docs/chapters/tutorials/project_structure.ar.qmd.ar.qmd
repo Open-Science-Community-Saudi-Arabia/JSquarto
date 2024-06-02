@@ -11,7 +11,7 @@ title: بنية المشروع
 “`باش
 ├── src
 <unk> <unk> - وصية
-<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> - فهارس
+<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> - مسرحية
 │   ├── utils
 │   │   ├── codeconstruct.ts
 │   │   ├── component.ts
@@ -21,14 +21,14 @@ title: بنية المشروع
 │   │   ├── string.ts
 <unk> <unk> <unk> <unk> <unk> <unk> <unk> - كتاب
 <unk> <unk> - دروس
-<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> -- مساهمة/
+<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> -- ٢٥ /
 <unk> <unk> <unk> <unk> <unk> <unk> <unk> -how_to /
 <unk> <unk> <unk> <unk> <unk> <unk> <unk> environment_setup.qmd
 <unk> <unk> <unk> <unk> <unk> <unk> <unk> -localization.qmd
 <unk> <unk> <unk> <unk> <unk> ', project_structure.qmd
 <unk> <unk> <unk> <unk> <unk> )-config.json
 │   │
-<unk> <unk> <unk> <unk> <unk> <unk> - فهارس
+<unk> <unk> <unk> <unk> <unk> <unk> - آخر
 │   │
 <unk> <unk> <unk> ', package.json
 <unk> <unk> <unk> ', package-lock.json
@@ -40,8 +40,8 @@ title: بنية المشروع
 يحتوي دليل "API" على رمز المصدر لـ JSQuarto. وينظم دليل "API" على النحو التالي:
 
 - 'src/interfaces' - يحتوي على جميع تعاريف النوع/العناوين للمشروع.
-- 'src/utils' - يحتوي على جميع وظائف المنفعة للمشروع. وتستخدم هذه الوظائف المفيدة لأداء مهام مختلفة مثل الوقوف والكتابة وقطع الأخشاب.
-- 'src/tutorials' - يحتوي على جميع الدروس للمشروع. هذه الدروس مكتوبة بتنسيق Quarto Markdown. لاحظ أن ملف `config.json` يستخدم لتحديد كيفية هيكلة الدروس.
-- 'src/index.ts' - المدخل الرئيسي للمشروع.
+- 'src/utils' - يحتوي على جميع وظائف المنفعة للمشروع. وتستخدم هذه الوظائف المفيدة لأداء مهام مختلفة مثل الوقوف والكتابة وقطع الأخشاب.
+- 'src/tutorials' - يحتوي على جميع الدروس للمشروع. هذه الدروس مكتوبة بتنسيق Quarto Markdown. لاحظ أن ملف `config.json` يستخدم لتحديد كيفية هيكلة الدروس.
+- 'src/index.ts' - المدخل الرئيسي للمشروع.
 - 'src/package.json' - ملف حزمة المشروع؛
 - 'src/.prettierrc' - ملف التكوين المسبق للمشروع.
