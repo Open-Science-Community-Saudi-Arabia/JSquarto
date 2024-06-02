@@ -18,6 +18,9 @@
         "build": "npm run doc:generate && npm run doc:preview",
         "tsc": "tsc -b && ts-node-dev ./src/add-shebang.ts"
     },
+    "bin": {
+        "jsq": "./bin/src/jsq.js"
+    },
     "keywords": [],
     "author": "",
     "license": "ISC",
