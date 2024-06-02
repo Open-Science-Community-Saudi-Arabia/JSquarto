@@ -64,7 +64,7 @@
     "href": "index.html#getting-started",
     "title": "Open Innovation Platform Documentation",
     "section": "Getting Started",
-    "text": "Getting Started\nTo start using JSQuarto, visit the GitHub repository for installation instructions and usage documentation.",
+    "text": "Getting Started\nTo start using JSQuarto the requirements below must be met: - Node.js download - Quarto download - Babel download\nAfter installing the requirements, follow the instructions below\n\nOpen your terminal and run the following command to install JSQuarto:\n\nnpm install -g jsquarto\n\nNavigate to your project directory and run the following command to generate the documentation:\n\njsq doc:generate",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome to JSQuarto Documentation</span>"
     ]
