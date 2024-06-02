@@ -26,7 +26,25 @@ JSQuarto يستلهم من أدوات ومنهجيات التوثيق المخت
 
 ## بدء العمل
 
-لبدء استخدام JSQuarto، قم بزيارة [GitHub repository](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto) للحصول على تعليمات التثبيت ووثائق الاستخدام.
+To start using JSQuarto the requirements below must be met:
+
+- Node.js [download](https://nodejs.org/en/download/)
+- Quarto [download](https://quarto.org/docs/getting-started/installation.html)
+- Babel [download](https://docs.ropensci.org/babelquarto/)
+
+After installing the requirements, follow the instructions below
+
+1. Open your terminal and run the following command to install JSQuarto:
+
+```bash
+npm install -g jsquarto
+```
+
+2. Navigate to your project directory and run the following command to generate the documentation:
+
+```bash
+jsq doc:generate
+```
 
 ## الملاحظات والدعم
 
