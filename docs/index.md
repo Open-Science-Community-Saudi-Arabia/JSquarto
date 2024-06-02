@@ -21,7 +21,22 @@ JSQuarto is committed to supporting localization and translation of generated do
 JSQuarto is developed and maintained by the [Open Science Community Saudi Arabia](https://github.com/Open-Science-Community-Saudi-Arabia). Our mission is to promote open science practices and foster collaboration among researchers and developers in Saudi Arabia.
 
 ## Getting Started
-To start using JSQuarto, visit the [GitHub repository](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto) for installation instructions and usage documentation.
+To start using JSQuarto the requirements below must be met: 
+- Node.js [download](https://nodejs.org/en/download/)
+- Quarto [download](https://quarto.org/docs/getting-started/installation.html)
+- Babel [download](https://docs.ropensci.org/babelquarto/)
+
+After installing the requirements, follow the instructions below
+
+1. Open your terminal and run the following command to install JSQuarto:
+```bash
+npm install -g jsquarto
+```
+
+2. Navigate to your project directory and run the following command to generate the documentation:
+```bash
+jsq doc:generate
+```
 
 ## Feedback and Support
 If you have any questions, feedback, or need support, please [open an issue](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues) on GitHub or [join our community](https://github.com/Open-Science-Community-Saudi-Arabia) for assistance.
