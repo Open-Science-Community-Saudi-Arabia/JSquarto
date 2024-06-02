@@ -67,6 +67,15 @@ export default class ConfigMgr {
             const arg = args[i];
             let [key, value] = arg.split("=");
 
+            if (
+                key === "source" ||
+                key === "output" ||
+                key === "tutorial" ||
+                key === "translations"
+            ) {
+                value = `${this.currentWorkingDirectory}/${value}`;
+            }
+
             argMap.set(key.startsWith("--") ? key.slice(2) : key, value);
         }
 
@@ -79,7 +88,7 @@ export default class ConfigMgr {
         const currentConfig = this.CONFIG;
         const configToUpdate = {} as Config;
         for (const entries of cliArgs.entries()) {
-            let [cliKey, cliValue] = entries as [
+            const [cliKey, cliValue] = entries as [
                 keyof CliArgs,
                 ValueOf<CliArgs>,
             ];
@@ -105,19 +114,10 @@ export default class ConfigMgr {
                 newData: configToUpdate,
             },
         });
-        for (let [key, value] of Object.entries(updatedConfig)) {
+        for (const [key, value] of Object.entries(updatedConfig)) {
             if (key === "languages") {
                 this.CONFIG.languages = value as string[];
             } else {
-                if (
-                    key === "sourceDirectory" ||
-                    key === "outputDirectory" ||
-                    key === "tutorialDirectory" ||
-                    key === "translationsDirectory"
-                ) {
-                    value = `${this.currentWorkingDirectory}/${value}`;
-                }
-
                 this.CONFIG[
                     key as
                         | "outputDirectory"
