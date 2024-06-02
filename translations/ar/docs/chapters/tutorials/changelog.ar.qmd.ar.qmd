@@ -1,70 +1,0 @@
-### التغييرات
-
----
-title: سجل التغيير
----
-
-<!-- سجل المشروع -->
-# تغيير
-
-وسيتم توثيق جميع التغييرات الملحوظة في هذا المشروع في هذا الملف.
-
-التنسيق مبني على [الحفاظ على تغيير](https://keepachangelog.com/en/1.0.0/)
-ويلتزم هذا المشروع بـ [النسخة السامية](https://semver.org/spec/v2.0.0.html).
-
-## لم يفرج (2024-03-05)
-
-### الميزات:
-
-- استدراك دراية مستخرجة عن مسعى مضمار مضمار مضمار مضمار ([`#13`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/3)) 
-- الفصل الأول من القانون الدولي للعلوم التطبيقية: 'quarto.yml` ([`#9'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/7))
-- - * الوصف الوالد ثانية<unk> <unk> <unk> <unk> <unk> <unk> <unk> ' Globals' (['#21'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/21))
-- قضية: قضية: قصارا: ([#22`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/22))
-- <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> ' JSQuarto ([`#25'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/25))
-- [[#26`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/26))
-- ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا.ا)
-
-
-### تم إصلاح الأخطاء:
-- في الجزء الأول من التقرير الأول للتقريرين الأول والثاني من التقرير الدوري الثاني
-- - التركيبة التركيبية التركيبية التركيبية التركيبة التركيبية للأحداث: عشير-عربيا/JSquarto/pull/15(['#15`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/15))
-- ألف - ألف - 1 - 1 - 1 - 1 - 2 - 3 - 3 - 3 - 3 - 3 - 3 - 3 - 3 - 3 - 3 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 3 - 3 - 3 - 3
-
-
-#### المساهمون ✨
-
-شكرا لهؤلاء الناس الرائعين (مفتاح [emoji](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- جميع المواقع: ستارت - لا تقم بإزالة أو تعديل هذا القسم -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-تعطيل -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center"><a href="https://realrichi3.github.io"><img src="https://avatars.githubusercontent.com/u/76791916?v=4?s=100" width="100px;" alt="Richie"/><br /><sub><b>Richie</b></sub></a><br /><a href="#infra-RealRichi3" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-RealRichi3" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/pulls?q=is%3Apr+reviewed-by%3ARealRichi3" title="Reviewed Pull Requests">👀</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- markdownlint-recover-->
-<!-- prettier-ignore-end -->
-
-<!-- جميع المواقع: LIST:end-->
-
-هذا المشروع يتبع مواصفات [all-contributors](https://github.com/all-contributors/all-contributors). المساهمات من أي نوع!
-
-<!-- كلمات و آثار ->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[cc-by]: http://creativecommons.org/licenses/by/4.0/
-[cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
-[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg?style=flat-square
-[forks-shield]: https://img.shields.io/github/forks/Open-Science-Community-Saudi-Arabia/MOOCs.svg?style=flat-square
-[forks-url]: https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/network/members
-[stars-shield]: https://img.shields.io/github/stars/Open-Science-Community-Saudi-Arabia/MOOCs.svg?style=flat-square&color=brightgreen
-[stars-url]: https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Open-Science-Community-Saudi-Arabia/MOOCs.svg?style=flat-square
-[issues-url]: https://github.com/Open-Science-Community-Saudi-Arabia/MOOCs/issues
-
-
-
-
