@@ -39,6 +39,9 @@ async function processHtmlFile(filePath: string, cssContent: string) {
 
 export async function fixAndStyleArabicHtmlFiles() {
     if (!CONFIG.languages.includes("ar")) {
+        console.log({
+            config: CONFIG,
+        });
         logger.info("Arabic language not found in the list of languages");
         return;
     }
@@ -64,6 +67,8 @@ if (require.main === module) {
             "Languages not specified in cli arguments, setting languages to default",
         );
     }
+
+    CONFIG.languages = langs ?? CONFIG.languages;
 
     fixAndStyleArabicHtmlFiles();
 }

@@ -18,6 +18,7 @@ async function start() {
 
     CONFIG.languages = langs ?? CONFIG.languages;
 
+    console.log({ arguments: process.argv });
     await fixLocalizedIndexFiles();
     await fixDuplicateLanguageReferences();
     await fixWrongLanguageReferences();
@@ -25,4 +26,3 @@ async function start() {
 }
 
 start();
-
