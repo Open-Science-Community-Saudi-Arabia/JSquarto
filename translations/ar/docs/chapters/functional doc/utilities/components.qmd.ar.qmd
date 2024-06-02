@@ -134,7 +134,7 @@ const module = new Module({ name: 'StringUtil' });
 ## مجهول 
 `[other]`
  
-**وصف:**
+**الوصف:**
 إضافة وحدة نمطية إلى الفئة الفرعية
       
 
@@ -145,7 +145,7 @@ const module = new Module({ name: 'StringUtil' });
  
 
 
-## غير معروف 
+## مجهول 
 `[other]`
  
 **الوصف:**
@@ -206,6 +206,6 @@ const module = new Module({ name: 'StringUtil' });
 ## غير معروف 
 `[other]`
  
-**وصف:**
+**الوصف:**
 إضافة وحدة نمطية إلى الفئة الفرعية.
 
