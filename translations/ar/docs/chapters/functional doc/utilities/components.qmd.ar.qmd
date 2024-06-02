@@ -73,7 +73,7 @@ const module = new Module({ name: 'StringUtil' });
 إضافة مستند إلى الوحدة النمطية
       
 
-**أمثلة:**
+* أمثلة: **
 
 ```javascript
 const module = new Module({ name: 'StringUtil' });
@@ -97,7 +97,7 @@ const module = new Module({ name: 'StringUtil' });
 
 
 
-## غير معروف 
+## مجهول 
 `[other]`
  
 
@@ -162,7 +162,7 @@ const module = new Module({ name: 'StringUtil' });
 ## غير معروف 
 `[other]`
  
-**وصف:**
+**الوصف:**
 يضيف فئة فرعية إلى التصنيف.
 
 ** المعلمات (Params):**
@@ -176,7 +176,7 @@ const module = new Module({ name: 'StringUtil' });
 ## غير معروف 
 `[other]`
  
-**وصف:**
+**الوصف:**
 يسترد الفئات الفرعية في الفئة.
 
 
@@ -184,8 +184,8 @@ const module = new Module({ name: 'StringUtil' });
 ## غير معروف 
 `[other]`
  
-**وصف:**
-إضافة وحدة نمطية إلى الفئة الفرعية.
+**الوصف:**
+يسترد الفئات الفرعية في الفئة.
 
 
 
@@ -199,7 +199,7 @@ const module = new Module({ name: 'StringUtil' });
 
 <unk> الاسم <unk> الوصف <unk>
 | --- | --- |
-<unk> الوحدة النمطية <unk> الوحدة المراد إضافتها. |
+|  إضافة وحدة نمطية إلى الفئة الفرعية. |
 
 
 
@@ -207,5 +207,5 @@ const module = new Module({ name: 'StringUtil' });
 `[other]`
  
 **وصف:**
-يسترد الفئات الفرعية في الفئة.
+إضافة وحدة نمطية إلى الفئة الفرعية.
 
