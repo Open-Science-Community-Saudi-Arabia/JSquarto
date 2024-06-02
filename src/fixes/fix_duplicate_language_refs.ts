@@ -2,7 +2,8 @@ import * as Cheerio from "cheerio";
 import fs from "fs";
 import logger from "../utils/logger";
 import path from "path";
-import CONFIG from "../config";
+import ConfigMgr from "../utils/config_mgr";
+const CONFIG = ConfigMgr.getConfig();
 
 export async function fixDuplicateLanguageReferences() {
     const languages = CONFIG.languages;
@@ -26,7 +27,7 @@ export async function fixDuplicateLanguageReferences() {
         const uniqueItems = new Set();
 
         // Remove duplicate elements from index file (use the href as the unique idendifier)
-        dropdownItems.each((index, element) => {
+        dropdownItems.each((_, element) => {
             logger.info(
                 "Removing duplicate items from index file for language: " +
                     lang,
@@ -50,19 +51,5 @@ export async function fixDuplicateLanguageReferences() {
 }
 
 if (require.main === module) {
-    const langs = process.argv
-        .find((arg) => arg.startsWith("languages"))
-        ?.split("=")[1]
-        ?.split(",");
-
-    if (!langs) {
-        console.warn(
-            "Languages not specified in cli arguments, setting languages to default",
-        );
-    }
-
-    CONFIG.languages = langs ?? CONFIG.languages;
-
     fixDuplicateLanguageReferences();
 }
-

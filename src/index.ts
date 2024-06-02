@@ -11,9 +11,10 @@ import {
 } from "./utils/components";
 import Parser from "./utils/parser";
 import path from "path";
-import CONFIG from "./config";
 import logger from "./utils/logger";
+import ConfigMgr from "./utils/config_mgr";
 
+const CONFIG = ConfigMgr.getConfig();
 /**
  * Recursively searches for JavaScript files in a directory and its subdirectories.
  *
@@ -125,8 +126,8 @@ async function start() {
             // Create category and subcategory if they exist in the module information
             const moduleCategory = _module.category
                 ? (recursivelyConvertAllStringValuesInObjectToLowerCase(
-                    _module.category,
-                ) as typeof _module.category)
+                      _module.category,
+                  ) as typeof _module.category)
                 : undefined;
             if (moduleCategory) {
                 let category = categories.get(moduleCategory.name);
@@ -192,11 +193,18 @@ async function start() {
     }
 
     // Generate documentation directory and files
-    const writer = new Writer(modules, categories, { tutorial: CONFIG.tutorialDirectory })
+    const writer = new Writer(modules, categories, {
+        tutorial: CONFIG.tutorialDirectory,
+    });
     writer.prepareDirectoryForDocs().writeDocsFromCategoriesToFile();
 
-    const chapters = await writer.addTutorialsToGeneratedDoc();
-    await writer.addTutorialChaptersToQuartoYml(chapters);
+    const tutorialsFolderExists = fs.existsSync(
+        path.resolve(CONFIG.tutorialDirectory),
+    );
+    if (tutorialsFolderExists) {
+        const chapters = await writer.addTutorialsToGeneratedDoc();
+        await writer.addTutorialChaptersToQuartoYml(chapters);
+    }
 
     if (CONFIG.languages) {
         console.log("Running with languages");
@@ -211,46 +219,13 @@ async function start() {
 }
 
 // Access the path argument specified via command line
-const specifiedSourceFilesDirectory = process.env.npm_config_source;
-const specifiedTutorialsDirectory = process.env.npm_config_tutorial;
-const specifiedOutputDirectory = process.env.npm_config_output;
-const specifiedLanguages = process.argv
-    .find((arg) => arg.startsWith("languages"))
-    ?.split("=")[1]
-    ?.split(",");
+const { inputData } = ConfigMgr.updateConfigStore();
 
-const includeLocalizedVersions = process.argv.find(arg => arg === 'include_localized_versions')
-if (includeLocalizedVersions && !specifiedLanguages) {
+if (inputData.includeLocalizedVersions && !inputData.languages) {
     console.log(
         "Please provide languages to create localized docs for using the languages flag",
     );
     process.exit(1);
 }
-
-// Use specifiedPath if available, otherwise fallback to a default path
-CONFIG.sourceDirectory =
-    specifiedSourceFilesDirectory
-        ? specifiedSourceFilesDirectory.startsWith("/")
-            ? specifiedSourceFilesDirectory
-            : path.join(__dirname, `/../${specifiedSourceFilesDirectory}`)
-        : CONFIG.sourceDirectory;
-
-CONFIG.tutorialDirectory =
-    specifiedTutorialsDirectory
-        ? specifiedTutorialsDirectory.startsWith("/")
-            ? specifiedTutorialsDirectory
-            : path.join(__dirname, `/../${specifiedTutorialsDirectory}`)
-        : CONFIG.tutorialDirectory;
-
-CONFIG.outputDirectory =
-    specifiedOutputDirectory
-        ? specifiedOutputDirectory.startsWith("/")
-            ? specifiedOutputDirectory
-            : path.join(__dirname, `/../${specifiedOutputDirectory}`)
-        : CONFIG.outputDirectory;
-
-CONFIG.includeLocalizedVersions = includeLocalizedVersions ? true : CONFIG.includeLocalizedVersions;
-
-CONFIG.languages = specifiedLanguages ?? CONFIG.languages;
 
 start();
