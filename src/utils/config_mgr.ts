@@ -31,6 +31,7 @@ export default class ConfigMgr {
         includeLocalizedVersions: config.includeLocalizedVersions,
         languages: config.languages,
     } as Config;
+    private static currentWorkingDirectory: string;
 
     // keys are the cli arguments, values are the config keys
     static configMap: ConfigMap = {
@@ -46,9 +47,35 @@ export default class ConfigMgr {
         const args = process.argv.slice(2);
         const argMap = new Map<string, string>();
 
+        // Find working directory
         for (let i = 0; i < args.length; i++) {
             const arg = args[i];
-            const [key, value] = arg.split("=");
+            if (arg.startsWith("workingDir")) {
+                // Directory where user called the `jsq` command from
+                // Will be used to resolve relative paths
+                this.currentWorkingDirectory = arg.split("=")[1];
+                break;
+            }
+        }
+
+        if (!this.currentWorkingDirectory) {
+            logger.error("No working directory provided");
+            process.exit(1);
+        }
+
+        for (let i = 0; i < args.length; i++) {
+            const arg = args[i];
+            let [key, value] = arg.split("=");
+
+            if (
+                key === "source" ||
+                key === "output" ||
+                key === "tutorial" ||
+                key === "translations"
+            ) {
+                value = `${this.currentWorkingDirectory}/${value}`;
+            }
+
             argMap.set(key.startsWith("--") ? key.slice(2) : key, value);
         }
 
