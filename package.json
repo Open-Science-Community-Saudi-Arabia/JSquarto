@@ -19,7 +19,7 @@
         "tsc": "tsc -b && ts-node-dev ./src/add-shebang.ts"
     },
     "bin": {
-        "jsq": "./bin/src/index.js"
+        "jsq": "./bin/src/jsq.js"
     },
     "keywords": [],
     "author": "",
