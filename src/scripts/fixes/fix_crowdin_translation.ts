@@ -8,7 +8,7 @@
  */
 import path from "path";
 import fs from "fs";
-import ConfigMgr from "../utils/config_mgr";
+import ConfigMgr from "../../utils/config_mgr";
 const CONFIG = ConfigMgr.getConfig();
 
 /**
