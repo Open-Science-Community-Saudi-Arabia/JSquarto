@@ -149,7 +149,24 @@ export default class ConfigMgr {
             fs.mkdirSync(path.dirname(configPath), { recursive: true });
         }
 
-        fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 4));
+        const configFileAlreadyExists = fs.existsSync(configPath);
+        if (configFileAlreadyExists) {
+            const forceOverwrite = cliArgument.get("force");
+            if (!forceOverwrite) {
+                logger.error(
+                    `Config file already exists at ${configPath}. Use the --force flag to overwrite`,
+                );
+                process.exit(1);
+            }
+
+            // TODO: Ask for confirmation before overwriting
+            logger.warn("Overwriting existing config file...");
+        }
+
+        fs.writeFileSync(
+            configPath,
+            JSON.stringify(updatedConfig.config, null, 4),
+        );
         logger.info("Config file written successfully");
     }
 
