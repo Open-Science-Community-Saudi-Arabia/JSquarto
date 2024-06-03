@@ -2,6 +2,8 @@ import { ValueOf } from "../interfaces";
 import logger from "./logger";
 import config from "../../config.json";
 import CliArgParser from "./arg-parser";
+import path from "path";
+import fs from "fs";
 
 export interface Config {
     outputDirectory: string;
@@ -117,6 +119,32 @@ export default class ConfigMgr {
             inputData: configToUpdate,
             config: updatedConfig,
         };
+    }
+
+    static async initializeConfigFile() {
+        const cliArgument = CliArgParser.getArgs();
+
+        const currentWorkingDirectory = cliArgument.get("workingDirectory");
+        if (!currentWorkingDirectory) {
+            console.error("No working directory provided");
+            process.exit(1);
+        }
+
+        const defaultConfigPath = path.join(
+            currentWorkingDirectory,
+            "/jsquarto/config.json",
+        );
+        const configPath = cliArgument.get("config") ?? defaultConfigPath;
+
+        const updatedConfig = this.updateConfigStore();
+
+        logger.info("Writing updated config to file...", {
+            meta: {
+                updatedConfig,
+            },
+        });
+        fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 4));
+        logger.info("Config file written successfully");
     }
 
     static getConfig() {
