@@ -12,6 +12,8 @@ const allowedCommands = [
     "fix:localized_files",
     "fix:duplicate_languages_ref",
     "fix:wrong_languages_ref",
+    "config:init",
+    "config:set",
 ];
 const commandsWithNoArgs = [
     "doc:preview",

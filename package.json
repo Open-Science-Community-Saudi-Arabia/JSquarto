@@ -4,9 +4,12 @@
     "description": "Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc",
     "main": "index.js",
     "scripts": {
-        "init": "ts-node-dev --transpile-only --project tsconfig.json ./src/scripts/init.ts",
+        "config:init": "ts-node-dev --transpile-only --project tsconfig.json ./src/scripts/config.ts --command=init",
+        "config:set": "ts-node-dev --transpile-only --project tsconfig.json ./src/scripts/config.ts --command=set",
         "doc:generate": "ts-node-dev --transpile-only --project tsconfig.json ./src/index.ts",
         "doc:preview": "quarto preview ./docs",
+        "doc:clean": "rm -rf ./docs",
+        "doc:serve": "serve ./docs/_book",
         "fix:all": "ts-node-dev --transpile-only --project tsconfig.json ./src/scripts/fixes/index.ts",
         "fix:crowdin_files": "ts-node-dev --transpile-only --project tsconfig.json ./src/scripts/fixes/fix_crowdin_translation.ts",
         "fix:localized_files": "ts-node-dev --transpile-only --project tsconfig.json ./src/scripts/fixes/fix_localized_index_file.ts",
@@ -16,7 +19,7 @@
         "doc:serve": "serve ./docs/_book",
         "setup-quarto": "git clone https://github.com/quarto-dev/quarto-cli && cd quarto-cli && ./configure.sh",
         "update-quarto": "cd quarto-cli && git pull",
-        "tsc": "tsc -b && ts-node-dev ./src/add_shebang.ts"
+        "tsc": "tsc -b && ts-node-dev ./src/scripts/add_shebang.ts"
     },
     "bin": {
         "jsq": "./bin/src/jsq.js"
