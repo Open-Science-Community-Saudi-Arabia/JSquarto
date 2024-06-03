@@ -132,7 +132,7 @@ export default class ConfigMgr {
 
         const defaultConfigPath = path.join(
             currentWorkingDirectory,
-            "/jsquarto/config.json",
+            "/.jsquarto/config.json",
         );
         const configPath = cliArgument.get("config") ?? defaultConfigPath;
 
