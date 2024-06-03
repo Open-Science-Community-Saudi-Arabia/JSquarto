@@ -1,6 +1,7 @@
 import { ValueOf } from "../interfaces";
 import logger from "./logger";
 import config from "../../config.json";
+import CliArgParser from "./arg-parser";
 
 export interface Config {
     outputDirectory: string;
@@ -44,42 +45,16 @@ export default class ConfigMgr {
     } as const;
 
     static getArgsFromCli() {
-        const args = process.argv.slice(2);
-        const argMap = new Map<string, string>();
-
-        // Find working directory
-        for (let i = 0; i < args.length; i++) {
-            const arg = args[i];
-            if (arg.startsWith("workingDir")) {
-                // Directory where user called the `jsq` command from
-                // Will be used to resolve relative paths
-                this.currentWorkingDirectory = arg.split("=")[1];
-                break;
-            }
-        }
-
-        if (!this.currentWorkingDirectory) {
+        const cliArguments = CliArgParser.getArgs();
+        const workingDir = cliArguments.get("workingDirectory");
+        if (!workingDir) {
             logger.error("No working directory provided");
             process.exit(1);
         }
 
-        for (let i = 0; i < args.length; i++) {
-            const arg = args[i];
-            let [key, value] = arg.split("=");
+        this.currentWorkingDirectory = workingDir;
 
-            if (
-                key === "source" ||
-                key === "output" ||
-                key === "tutorial" ||
-                key === "translations"
-            ) {
-                value = `${this.currentWorkingDirectory}/${value}`;
-            }
-
-            argMap.set(key.startsWith("--") ? key.slice(2) : key, value);
-        }
-
-        return argMap;
+        return cliArguments;
     }
 
     static updateConfigStore(): { config: Config; inputData: Partial<Config> } {
@@ -98,6 +73,16 @@ export default class ConfigMgr {
                     configToUpdate[_key] = cliValue.split(",");
                 } else if (_key === "includeLocalizedVersions") {
                     configToUpdate[_key] = cliValue ? true : false;
+                } else if (
+                    [
+                        "translationsDirectory",
+                        "sourceDirectory",
+                        "outputDirectory",
+                        "tutorialDirectory",
+                    ].includes(_key)
+                ) {
+                    configToUpdate[_key] =
+                        this.currentWorkingDirectory + "/" + cliValue;
                 } else {
                     configToUpdate[_key] = cliValue;
                 }
