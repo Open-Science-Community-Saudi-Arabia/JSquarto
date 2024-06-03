@@ -9,11 +9,11 @@ switch (command) {
         ConfigMgr.initializeConfigFile();
         break;
     case "set":
-        ConfigMgr.setConfig();
+        ConfigMgr.setConfigInFile();
         break;
     case "get":
-        const configValue = ConfigMgr.getConfigValue();
-        logger.info(configValue);
+        // const configValue = ConfigMgr.getConfigValue();
+        // logger.info(configValue);
         break;
     default:
         logger.error("Invalid command");

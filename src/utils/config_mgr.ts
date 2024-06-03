@@ -136,11 +136,11 @@ export default class ConfigMgr {
         );
         const configPath = cliArgument.get("config") ?? defaultConfigPath;
 
-        const updatedConfig = this.updateConfigStore();
+        const updatedConfig = this.updateConfigStore().config;
 
         logger.info("Writing updated config to file...", {
             meta: {
-                updatedConfig,
+                updatedConfig: updatedConfig,
             },
         });
 
@@ -163,10 +163,67 @@ export default class ConfigMgr {
             logger.warn("Overwriting existing config file...");
         }
 
-        fs.writeFileSync(
-            configPath,
-            JSON.stringify(updatedConfig.config, null, 4),
+        fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 4));
+        logger.info("Config file written successfully");
+    }
+
+    static async setConfigInFile() {
+        const cliArgs = CliArgParser.getArgs();
+        const workingDir = cliArgs.get("workingDirectory");
+        if (!workingDir) {
+            logger.error("No working directory provided");
+            process.exit(1);
+        }
+
+        const configFileExists = fs.existsSync(
+            workingDir + "/.jsquarto/config.json",
         );
+        if (!configFileExists) {
+            this.initializeConfigFile();
+            process.exit(1);
+        }
+
+        const allowedConfigKeys = Object.keys(this.configMap);
+        const configToSet = new Map<string, string>();
+
+        for (const [key, value] of cliArgs.entries()) {
+            if (allowedConfigKeys.includes(key)) {
+                configToSet.set(key, value);
+            }
+        }
+
+        const configPath = workingDir + "/.jsquarto/config.json";
+        const configFile = fs.readFileSync(configPath, "utf-8");
+        const config = JSON.parse(configFile);
+
+        for (const [_key, value] of cliArgs.entries()) {
+            const key = this.configMap[_key as keyof ConfigMap];
+
+            if (key === "languages") {
+                config[key] = value.split(",");
+            } else if (key === "includeLocalizedVersions") {
+                config[key] = value ? true : false;
+            } else if (
+                [
+                    "translationsDirectory",
+                    "sourceDirectory",
+                    "outputDirectory",
+                    "tutorialDirectory",
+                ].includes(key)
+            ) {
+                config[key] = workingDir + "/" + value;
+            } else {
+                config[key] = value;
+            }
+        }
+
+        logger.info("Writing updated config to file...", {
+            meta: {
+                updatedConfig: config,
+            },
+        });
+
+        fs.writeFileSync(configPath, JSON.stringify(config, null, 4));
         logger.info("Config file written successfully");
     }
 
