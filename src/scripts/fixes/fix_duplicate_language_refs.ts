@@ -1,8 +1,8 @@
 import * as Cheerio from "cheerio";
 import fs from "fs";
-import logger from "../utils/logger";
+import logger from "../../utils/logger";
 import path from "path";
-import ConfigMgr from "../utils/config_mgr";
+import ConfigMgr from "../../utils/config_mgr";
 const CONFIG = ConfigMgr.getConfig();
 
 export async function fixDuplicateLanguageReferences() {

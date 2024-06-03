@@ -9,7 +9,6 @@ import {
     SubCategory,
     recursivelyConvertAllStringValuesInObjectToLowerCase,
 } from "./utils/components";
-import Parser from "./utils/parser";
 import path from "path";
 import logger from "./utils/logger";
 import ConfigMgr from "./utils/config_mgr";

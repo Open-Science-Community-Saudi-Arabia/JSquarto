@@ -1,6 +1,9 @@
 import { ValueOf } from "../interfaces";
 import logger from "./logger";
 import config from "../../config.json";
+import CliArgParser from "./arg-parser";
+import path from "path";
+import fs from "fs";
 
 export interface Config {
     outputDirectory: string;
@@ -44,42 +47,16 @@ export default class ConfigMgr {
     } as const;
 
     static getArgsFromCli() {
-        const args = process.argv.slice(2);
-        const argMap = new Map<string, string>();
-
-        // Find working directory
-        for (let i = 0; i < args.length; i++) {
-            const arg = args[i];
-            if (arg.startsWith("workingDir")) {
-                // Directory where user called the `jsq` command from
-                // Will be used to resolve relative paths
-                this.currentWorkingDirectory = arg.split("=")[1];
-                break;
-            }
-        }
-
-        if (!this.currentWorkingDirectory) {
+        const cliArguments = CliArgParser.getArgs();
+        const workingDir = cliArguments.get("workingDirectory");
+        if (!workingDir) {
             logger.error("No working directory provided");
             process.exit(1);
         }
 
-        for (let i = 0; i < args.length; i++) {
-            const arg = args[i];
-            let [key, value] = arg.split("=");
+        this.currentWorkingDirectory = workingDir;
 
-            if (
-                key === "source" ||
-                key === "output" ||
-                key === "tutorial" ||
-                key === "translations"
-            ) {
-                value = `${this.currentWorkingDirectory}/${value}`;
-            }
-
-            argMap.set(key.startsWith("--") ? key.slice(2) : key, value);
-        }
-
-        return argMap;
+        return cliArguments;
     }
 
     static updateConfigStore(): { config: Config; inputData: Partial<Config> } {
@@ -98,6 +75,16 @@ export default class ConfigMgr {
                     configToUpdate[_key] = cliValue.split(",");
                 } else if (_key === "includeLocalizedVersions") {
                     configToUpdate[_key] = cliValue ? true : false;
+                } else if (
+                    [
+                        "translationsDirectory",
+                        "sourceDirectory",
+                        "outputDirectory",
+                        "tutorialDirectory",
+                    ].includes(_key)
+                ) {
+                    configToUpdate[_key] =
+                        this.currentWorkingDirectory + "/" + cliValue;
                 } else {
                     configToUpdate[_key] = cliValue;
                 }
@@ -132,6 +119,112 @@ export default class ConfigMgr {
             inputData: configToUpdate,
             config: updatedConfig,
         };
+    }
+
+    static async initializeConfigFile() {
+        const cliArgument = CliArgParser.getArgs();
+
+        const currentWorkingDirectory = cliArgument.get("workingDirectory");
+        if (!currentWorkingDirectory) {
+            console.error("No working directory provided");
+            process.exit(1);
+        }
+
+        const defaultConfigPath = path.join(
+            currentWorkingDirectory,
+            "/.jsquarto/config.json",
+        );
+        const configPath = cliArgument.get("config") ?? defaultConfigPath;
+
+        const updatedConfig = this.updateConfigStore().config;
+
+        logger.info("Writing updated config to file...", {
+            meta: {
+                updatedConfig: updatedConfig,
+            },
+        });
+
+        const dirExists = fs.existsSync(path.dirname(configPath));
+        if (!dirExists) {
+            fs.mkdirSync(path.dirname(configPath), { recursive: true });
+        }
+
+        const configFileAlreadyExists = fs.existsSync(configPath);
+        if (configFileAlreadyExists) {
+            const forceOverwrite = cliArgument.get("force");
+            if (!forceOverwrite) {
+                logger.error(
+                    `Config file already exists at ${configPath}. Use the --force flag to overwrite`,
+                );
+                process.exit(1);
+            }
+
+            // TODO: Ask for confirmation before overwriting
+            logger.warn("Overwriting existing config file...");
+        }
+
+        fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 4));
+        logger.info("Config file written successfully");
+    }
+
+    static async setConfigInFile() {
+        const cliArgs = CliArgParser.getArgs();
+        const workingDir = cliArgs.get("workingDirectory");
+        if (!workingDir) {
+            logger.error("No working directory provided");
+            process.exit(1);
+        }
+
+        const configFileExists = fs.existsSync(
+            workingDir + "/.jsquarto/config.json",
+        );
+        if (!configFileExists) {
+            this.initializeConfigFile();
+            process.exit(1);
+        }
+
+        const allowedConfigKeys = Object.keys(this.configMap);
+        const configToSet = new Map<string, string>();
+
+        for (const [key, value] of cliArgs.entries()) {
+            if (allowedConfigKeys.includes(key)) {
+                configToSet.set(key, value);
+            }
+        }
+
+        const configPath = workingDir + "/.jsquarto/config.json";
+        const configFile = fs.readFileSync(configPath, "utf-8");
+        const config = JSON.parse(configFile);
+
+        for (const [_key, value] of cliArgs.entries()) {
+            const key = this.configMap[_key as keyof ConfigMap];
+
+            if (key === "languages") {
+                config[key] = value.split(",");
+            } else if (key === "includeLocalizedVersions") {
+                config[key] = value ? true : false;
+            } else if (
+                [
+                    "translationsDirectory",
+                    "sourceDirectory",
+                    "outputDirectory",
+                    "tutorialDirectory",
+                ].includes(key)
+            ) {
+                config[key] = workingDir + "/" + value;
+            } else {
+                config[key] = value;
+            }
+        }
+
+        logger.info("Writing updated config to file...", {
+            meta: {
+                updatedConfig: config,
+            },
+        });
+
+        fs.writeFileSync(configPath, JSON.stringify(config, null, 4));
+        logger.info("Config file written successfully");
     }
 
     static getConfig() {

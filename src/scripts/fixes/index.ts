@@ -1,4 +1,4 @@
-import ConfigMgr from "../utils/config_mgr";
+import ConfigMgr from "../../utils/config_mgr";
 import { fixDuplicateLanguageReferences } from "./fix_duplicate_language_refs";
 import { fixLocalizedIndexFiles } from "./fix_localized_index_file";
 import { fixAndStyleArabicHtmlFiles } from "./fix_rtl";

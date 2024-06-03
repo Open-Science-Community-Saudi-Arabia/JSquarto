@@ -12,6 +12,8 @@ const allowedCommands = [
     "fix:localized_files",
     "fix:duplicate_languages_ref",
     "fix:wrong_languages_ref",
+    "config:init",
+    "config:set",
 ];
 const commandsWithNoArgs = [
     "doc:preview",
@@ -20,7 +22,6 @@ const commandsWithNoArgs = [
     "update-quarto",
 ];
 
-// const additionalArgs = args.slice(1).join(" ") + " workingDir=" + process.cwd();
 // Determine the jsq tool directory
 const projectDir = path.resolve(__dirname, "..");
 const args = process.argv.slice(2);
@@ -34,7 +35,9 @@ if (!allowedCommands.includes(script)) {
 
 const command = commandsWithNoArgs.includes(script)
     ? script
-    : `${script} -- ${additionalArgs}`;
+    : `${script} -- ${additionalArgs}  workingDirectory=${process.cwd()}`;
 
 process.chdir(projectDir);
-execSync(`npm run ${command}`, { stdio: "inherit" });
+execSync(`npm run ${command}`, {
+    stdio: "inherit",
+});

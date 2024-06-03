@@ -1,5 +1,5 @@
-import Writer from "../utils/writer";
-import ConfigMgr from "../utils/config_mgr";
+import Writer from "../../utils/writer";
+import ConfigMgr from "../../utils/config_mgr";
 const CONFIG = ConfigMgr.getConfig();
 
 export async function fixLocalizedIndexFiles() {
