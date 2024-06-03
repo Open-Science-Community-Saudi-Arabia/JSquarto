@@ -18,65 +18,61 @@
 </div>
 <br/>
 
-### Testing Your Tool Locally
 
 #### Prerequisites
 
 Before testing the tool locally, ensure you have the following prerequisites installed on your system:
 
 -   [Quarto](https://quarto.org/)
+-   [Babel Quarto](https://docs.ropensci.org/babelquarto/)
 -   Node.js and npm (Node Package Manager)
--   Git (optional, if cloning the repository)
 
 #### Installation
 
 To test the tool locally, follow these steps:
 
-1. Clone the repository:
+1. Install the tool by running the command below
     ```bash
-        git clone https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto
-    ```
-2. Navigate to the projecte directory
-
-3. Install dependencies
-    ```bash
-        npm install
+        npm install -g @oscsa/jsquarto  
     ```
 
-### Running the Tool
+### Usage
 
-Once the dependencies are installed, you can paste the files in the JS files or folder in the `/source_files` directory you can run the tool using the following command
+Once the dependencies are installed, you can navigate to the root directory of your project and follow the steps below:
 
 1. To generate the documentation run the following command
 
     ```bash
-    npm run doc:generate --source=<path to source files> --tutorial=<path to tutorials>
+    jsq doc:generate source=<path to source files> 
     ```
 
     This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
 
-    If the `--source` and `--tutorial` flags are not provided, the tool will use the default source files and tutorials in the `/source_files` and `/tutorials` directories respectively.
+    If the `source` flag is not provided, the tool will set `/source_files` as default.
 
-    The generated `.qmd` files can be found in the `/docs/chapters` folder
+    The generated `.qmd` files can be found in the `/docs` folder, you can change the output directory by providing the `output` flag.
 
 2. To preview the generated documentation run
 
     ```bash
-    npm run doc:preview
-    ```
-
-    The docs are previewed with quarto, so make sure to have quarto already installed
-
-3. You can choose to generate and preview in one go, to do this run the command below
-
-    ```bash
-    npm run build
+    jsq doc:preview
     ```
 
     This will generate the documentation, preview with quarto and open a link to preview the docs
 
+3. The generated `.qmd` files can be found in the `/docs` folder, you can change the output directory by providing the `output` flag.
 
-For more information on how to integrate translation tools like Crowdin with JSquarto, refer to the [Documentation](https://jsquarto.netlify.app/chapters/tutorials/how_to/optimizing_workflow#workflows).
+    ```bash
+    jsq doc:generate source=<path to source files> output=<path to output dir>
+    ```
+    
+4. To include tutorials in the generated documentation, provide the `tutorials` flag.
+
+    ```bash
+    jsq doc:generate source=<path to source files> tutorials=<path to tutorials directory>
+    ```
+
+For more information on how to integrate translation tools like Crowdin with JSquarto, refer to the [Crowdin Worflow guide](https://jsquarto.netlify.app/chapters/tutorials/how_to/workflows#doc-generation-with-crowdin-translation).
 
 For more details on using JSquarto and to see an example of the generated documentation, visit the [JSQuarto documentation](https://jsquarto.netlify.app/)
 
