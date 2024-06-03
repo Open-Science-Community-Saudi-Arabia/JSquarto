@@ -143,6 +143,12 @@ export default class ConfigMgr {
                 updatedConfig,
             },
         });
+
+        const dirExists = fs.existsSync(path.dirname(configPath));
+        if (!dirExists) {
+            fs.mkdirSync(path.dirname(configPath), { recursive: true });
+        }
+
         fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 4));
         logger.info("Config file written successfully");
     }
