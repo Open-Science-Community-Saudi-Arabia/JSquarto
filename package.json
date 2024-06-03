@@ -4,6 +4,7 @@
     "description": "Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc",
     "main": "index.js",
     "scripts": {
+        "init": "ts-node-dev --transpile-only --project tsconfig.json ./src/scripts/init.ts",
         "doc:generate": "ts-node-dev --transpile-only --project tsconfig.json ./src/index.ts",
         "doc:preview": "quarto preview ./docs",
         "fix:all": "ts-node-dev --transpile-only --project tsconfig.json ./src/scripts/fixes/index.ts",
