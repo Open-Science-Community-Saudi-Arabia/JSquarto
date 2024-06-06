@@ -22,6 +22,7 @@ export interface ConfigMap {
     include_localized_versions: "includeLocalizedVersions";
     languages: "languages";
     translations: "translationsDirectory";
+    config: "configDirectory";
 }
 
 interface ProjectConfig {
@@ -39,7 +40,9 @@ const DEFAULT_CONFIG = {
     languages: config.languages,
 };
 export default class ConfigMgr {
-    private static CONFIG = DEFAULT_CONFIG as Config;
+    private static CONFIG = DEFAULT_CONFIG as Config & {
+        configDirectory: string;
+    };
     private static configHasBeenUpdated = false;
     private static currentWorkingDirectory: string;
     private static projectConfigPaths: ProjectConfig["paths"] | null = null;
@@ -50,6 +53,7 @@ export default class ConfigMgr {
         include_localized_versions: "includeLocalizedVersions",
         languages: "languages",
         translations: "translationsDirectory",
+        config: "configDirectory",
     } as const;
 
     private static async updateProjectPathsToConfigRecord({
@@ -184,7 +188,7 @@ export default class ConfigMgr {
         };
 
         // Extract data to update
-        const configToUpdate = {} as Config;
+        const configToUpdate = {} as typeof ConfigMgr.CONFIG;
         for (const entries of cliArgs.entries()) {
             const [cliKey, cliValue] = entries as [
                 keyof CliArgs,
@@ -202,6 +206,7 @@ export default class ConfigMgr {
                         "sourceDirectory",
                         "outputDirectory",
                         "tutorialDirectory",
+                        "configDirectory",
                     ].includes(_key)
                 ) {
                     configToUpdate[_key] =
@@ -214,6 +219,12 @@ export default class ConfigMgr {
             }
         }
 
+        if (configToUpdate["configDirectory"]) {
+            this.updateProjectPathsToConfigRecord({
+                projectDir: this.currentWorkingDirectory,
+                configDir: configToUpdate["configDirectory"],
+            });
+        }
         const updatedConfig = { ...currentConfig, ...configToUpdate };
 
         // If there is new data to update, save to class  instance variable and project config file
