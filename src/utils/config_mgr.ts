@@ -160,9 +160,21 @@ export default class ConfigMgr {
     }
 
     static updateConfigStore(): { config: Config; inputData: Partial<Config> } {
-        const cliArgs = this.getArgsFromCli();
+        const cliArgs = CliArgParser.getArgs();
+        const workingDir = cliArgs.get("workingDirectory");
+        if (!workingDir) {
+            logger.error("No working directory provided");
+            process.exit(1);
+        }
 
-        const currentConfig = this.CONFIG;
+        this.currentWorkingDirectory = workingDir;
+
+        const currentConfig = {
+            ...this.CONFIG,
+            ...this.getConfigForProject({ projectDir: workingDir }),
+        };
+
+        // Extract data to update
         const configToUpdate = {} as Config;
         for (const entries of cliArgs.entries()) {
             const [cliKey, cliValue] = entries as [
