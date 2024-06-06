@@ -36,6 +36,61 @@ export default class ConfigMgr {
     } as Config;
     private static currentWorkingDirectory: string;
 
+    private static async updateProjectPathsToConfigRecord({
+        projectDir,
+        configDir,
+    }: {
+        projectDir: string;
+        configDir: string;
+    }) {
+        const configFileExists = fs.existsSync(configDir);
+        if (!configFileExists) {
+            logger.error("No config file found");
+            process.exit(1);
+        }
+
+        const configFile = fs.readFileSync(configDir, "utf-8");
+        let config = JSON.parse(configFile);
+
+        const fileIsEmpty = Object.keys(config).length === 0;
+        if (fileIsEmpty) {
+            config = {
+                paths: [],
+            } as { paths: { projectDir: string; configDir: string }[] };
+        }
+
+        const updatedConfig = {
+            paths: [...config.paths, { projectDir, configDir }],
+        };
+
+        logger.info("Updating config store...", {
+            meta: {
+                currentConfig: config,
+                newConfig: updatedConfig,
+            },
+        });
+
+        fs.writeFileSync(configDir, JSON.stringify(updatedConfig, null, 4));
+
+        return {
+            projectDir,
+            configDir,
+            config: updatedConfig,
+        };
+    }
+
+    private static async getProjectPathToConfigRecord({
+        projectDir,
+    }: {
+        projectDir: string;
+        configDir: string;
+    }) {
+        return {
+            projectDir,
+            configDir: "",
+        };
+    }
+
     // keys are the cli arguments, values are the config keys
     static configMap: ConfigMap = {
         source: "sourceDirectory",
@@ -167,7 +222,7 @@ export default class ConfigMgr {
         logger.info("Config file written successfully");
     }
 
-    static async setConfigInFile() {
+    static async writeConfigToFile() {
         const cliArgs = CliArgParser.getArgs();
         const workingDir = cliArgs.get("workingDirectory");
         if (!workingDir) {
@@ -232,3 +287,9 @@ export default class ConfigMgr {
         return this.CONFIG;
     }
 }
+
+/**
+ * Specify path to config file in any project
+ * The config in that path should be used whenever a jsq command is run within the project
+ * Find a way to reference the config if even if you're in a subdirectory of the project
+ * */
