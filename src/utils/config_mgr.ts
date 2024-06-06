@@ -366,9 +366,17 @@ export default class ConfigMgr {
         logger.info("Config file written successfully");
     }
 
-    static getConfig() {
-        this.updateConfigStore();
-        return this.CONFIG;
+    static getConfig(): Config {
+        let config = DEFAULT_CONFIG;
+
+        if (this.configHasBeenUpdated) {
+            config = { ...config, ...this.CONFIG };
+        } else {
+            const updatedConfig = this.updateConfigStore().config;
+            config = { ...config, ...updatedConfig };
+        }
+
+        return config;
     }
 }
 
