@@ -102,7 +102,7 @@ export default class ConfigMgr {
         };
     }
 
-    private static async getProjectPathToConfigRecord({
+    private static getProjectConfigPath({
         projectDir,
     }: {
         projectDir: string;
@@ -195,24 +195,51 @@ export default class ConfigMgr {
 
         const updatedConfig = { ...currentConfig, ...configToUpdate };
 
-        logger.info("Updating config store...", {
-            meta: {
-                updatedConfig,
-                newData: configToUpdate,
-            },
-        });
-        for (const [key, value] of Object.entries(updatedConfig)) {
-            if (key === "languages") {
-                this.CONFIG.languages = value as string[];
-            } else {
-                this.CONFIG[
-                    key as
-                        | "outputDirectory"
-                        | "sourceDirectory"
-                        | "tutorialDirectory"
-                        | "translationsDirectory"
-                ] = value as string;
+        // If there is new data to update, save to class  instance variable and project config file
+        if (Object.keys(configToUpdate).length !== 0) {
+            logger.info("Updating config store...", {
+                meta: {
+                    updatedConfig,
+                    newData: configToUpdate,
+                },
+            });
+
+            for (const [key, value] of Object.entries(configToUpdate)) {
+                if (key === "languages") {
+                    this.CONFIG.languages = value as string[];
+                } else {
+                    this.CONFIG[
+                        key as
+                            | "outputDirectory"
+                            | "sourceDirectory"
+                            | "tutorialDirectory"
+                            | "translationsDirectory"
+                    ] = value as string;
+                }
             }
+
+            // Update config in  project config config file
+            const projectConfig = this.getProjectConfigPath({
+                projectDir: this.currentWorkingDirectory,
+            });
+            if (!projectConfig || !projectConfig.configDir) {
+                logger.error("No config found for project");
+                process.exit(1);
+            }
+
+            const configFileExists = fs.existsSync(projectConfig.configDir);
+            if (!configFileExists) {
+                logger.error("No config file found for project");
+                process.exit(1);
+            }
+
+            fs.writeFileSync(
+                projectConfig.configDir,
+                JSON.stringify(configToUpdate, null, 4),
+            );
+
+            this.configHasBeenUpdated = true;
+            logger.info("Config file updated successfully");
         }
 
         return {
