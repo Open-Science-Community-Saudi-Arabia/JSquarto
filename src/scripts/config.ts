@@ -9,7 +9,7 @@ switch (command) {
         ConfigMgr.initializeConfigFile();
         break;
     case "set":
-        ConfigMgr.setConfigInFile();
+        ConfigMgr.writeConfigToFile();
         break;
     case "get":
         // const configValue = ConfigMgr.getConfigValue();
