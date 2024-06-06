@@ -30,17 +30,27 @@ interface ProjectConfig {
 
 type CliArgs = Partial<{ [k in keyof ConfigMap]: string }>;
 
+const DEFAULT_CONFIG = {
+    outputDirectory: config.outputDirectory,
+    sourceDirectory: config.sourceDirectory,
+    tutorialDirectory: config.tutorialDirectory,
+    translationsDirectory: config.translationsDirectory,
+    includeLocalizedVersions: config.includeLocalizedVersions,
+    languages: config.languages,
+};
 export default class ConfigMgr {
-    private static CONFIG = {
-        outputDirectory: config.outputDirectory,
-        sourceDirectory: config.sourceDirectory,
-        tutorialDirectory: config.tutorialDirectory,
-        translationsDirectory: config.translationsDirectory,
-        includeLocalizedVersions: config.includeLocalizedVersions,
-        languages: config.languages,
-    } as Config;
+    private static CONFIG = DEFAULT_CONFIG as Config;
+    private static configHasBeenUpdated = false;
     private static currentWorkingDirectory: string;
     private static projectConfigPaths: ProjectConfig["paths"] | null = null;
+    static configMap: ConfigMap = {
+        source: "sourceDirectory",
+        output: "outputDirectory",
+        tutorial: "tutorialDirectory",
+        include_localized_versions: "includeLocalizedVersions",
+        languages: "languages",
+        translations: "translationsDirectory",
+    } as const;
 
     private static async updateProjectPathsToConfigRecord({
         projectDir,
