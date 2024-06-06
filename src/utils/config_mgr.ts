@@ -85,9 +85,31 @@ export default class ConfigMgr {
         projectDir: string;
         configDir: string;
     }) {
+        if (this.projectConfigPaths) {
+            return this.projectConfigPaths.find(
+                (config) => config.projectDir === projectDir,
+            );
+        }
+
+        const storeExists = fs.existsSync(PROJECTS_CONFIG_STORE_PATH);
+        if (!storeExists) {
+            logger.error("No config store found");
+            process.exit(1);
+        }
+
+        const configStore = fs.readFileSync(
+            PROJECTS_CONFIG_STORE_PATH,
+            "utf-8",
+        );
+        const config = JSON.parse(configStore) as ProjectConfig;
+
+        this.projectConfigPaths = config.paths;
+
         return {
             projectDir,
-            configDir: "",
+            configDir: config.paths.find(
+                (config) => config.projectDir === projectDir,
+            )?.configDir,
         };
     }
 
