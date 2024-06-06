@@ -1,3 +1,5 @@
+import path from "path";
+
 export const DEFAULT_QUARTO_YAML_CONTENT = {
     project: {
         type: "book",
@@ -105,4 +107,4 @@ JSQuarto is developed and maintained by the [Open Science Community Saudi Arabia
 ## Feedback and Support
 If you have any questions, feedback, or need support, please [open an issue](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues) on GitHub or [join our community](https://github.com/Open-Science-Community-Saudi-Arabia) for assistance.`;
 
-export const PROJECTS_CONFIG_STORE_PATH = path.join(__dirname, "./store/paths.json");
+export const CONFIG_STORE_PATH = path.join(__dirname, "./store/paths.json");

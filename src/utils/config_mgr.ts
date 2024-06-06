@@ -4,6 +4,7 @@ import config from "../../config.json";
 import CliArgParser from "./arg-parser";
 import path from "path";
 import fs from "fs";
+import { PROJECTS_CONFIG_STORE_PATH } from "../constants";
 
 export interface Config {
     outputDirectory: string;
@@ -21,6 +22,10 @@ export interface ConfigMap {
     include_localized_versions: "includeLocalizedVersions";
     languages: "languages";
     translations: "translationsDirectory";
+}
+
+interface ProjectConfig {
+    paths: { projectDir: string; configDir: string }[];
 }
 
 type CliArgs = Partial<{ [k in keyof ConfigMap]: string }>;
