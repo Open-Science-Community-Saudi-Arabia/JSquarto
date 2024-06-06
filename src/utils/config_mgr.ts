@@ -116,7 +116,6 @@ export default class ConfigMgr {
         projectDir,
     }: {
         projectDir: string;
-        configDir: string;
     }) {
         if (this.projectConfigPaths) {
             return this.projectConfigPaths.find(
@@ -314,6 +313,19 @@ export default class ConfigMgr {
 
         fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 4));
         logger.info("Config file written successfully");
+
+        // Add config file and project path to store
+        const { projectDir, configDir } =
+            await this.updateProjectPathsToConfigRecord({
+                projectDir: currentWorkingDirectory,
+                configDir: configPath,
+            });
+
+        return {
+            projectDir,
+            configDir,
+            config: updatedConfig,
+        };
     }
 
     static async writeConfigToFile() {
