@@ -35,6 +35,7 @@ export default class ConfigMgr {
         languages: config.languages,
     } as Config;
     private static currentWorkingDirectory: string;
+    private static projectConfigPaths: ProjectConfig["paths"] | null = null;
 
     private static async updateProjectPathsToConfigRecord({
         projectDir,
@@ -49,14 +50,19 @@ export default class ConfigMgr {
             process.exit(1);
         }
 
-        const configFile = fs.readFileSync(configDir, "utf-8");
-        let config = JSON.parse(configFile);
+        // Get current records of project paths
+        const configStore = fs.readFileSync(
+            PROJECTS_CONFIG_STORE_PATH,
+            "utf-8",
+        );
+        let config = JSON.parse(configStore);
 
-        const fileIsEmpty = Object.keys(config).length === 0;
-        if (fileIsEmpty) {
+        // Check if our records are empty
+        const configStoreIsEmpty = Object.keys(config).length === 0;
+        if (configStoreIsEmpty) {
             config = {
                 paths: [],
-            } as { paths: { projectDir: string; configDir: string }[] };
+            } as ProjectConfig;
         }
 
         const updatedConfig = {
@@ -70,7 +76,19 @@ export default class ConfigMgr {
             },
         });
 
-        fs.writeFileSync(configDir, JSON.stringify(updatedConfig, null, 4));
+        // Update the config store
+        fs.writeFileSync(
+            PROJECTS_CONFIG_STORE_PATH,
+            JSON.stringify(updatedConfig, null, 4),
+        );
+
+        this.projectConfigPaths = updatedConfig.paths;
+
+        logger.info("Config store updated successfully", {
+            meta: {
+                updatedConfig,
+            },
+        });
 
         return {
             projectDir,
