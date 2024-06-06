@@ -136,27 +136,27 @@ export default class ConfigMgr {
         };
     }
 
-    // keys are the cli arguments, values are the config keys
-    static configMap: ConfigMap = {
-        source: "sourceDirectory",
-        output: "outputDirectory",
-        tutorial: "tutorialDirectory",
-        include_localized_versions: "includeLocalizedVersions",
-        languages: "languages",
-        translations: "translationsDirectory",
-    } as const;
-
-    static getArgsFromCli() {
-        const cliArguments = CliArgParser.getArgs();
-        const workingDir = cliArguments.get("workingDirectory");
-        if (!workingDir) {
-            logger.error("No working directory provided");
+    private static async getConfigForProject({
+        projectDir,
+    }: {
+        projectDir: string;
+    }) {
+        const projectConfig = this.getProjectConfigPath({ projectDir });
+        if (!projectConfig || !projectConfig.configDir) {
+            logger.error("No config found for project");
             process.exit(1);
         }
 
-        this.currentWorkingDirectory = workingDir;
+        const configFileExists = fs.existsSync(projectConfig.configDir);
+        if (!configFileExists) {
+            logger.error("No config file found for project");
+            process.exit(1);
+        }
 
-        return cliArguments;
+        const configFile = fs.readFileSync(projectConfig.configDir, "utf-8");
+        const config = JSON.parse(configFile) as Config;
+
+        return config;
     }
 
     static updateConfigStore(): { config: Config; inputData: Partial<Config> } {
