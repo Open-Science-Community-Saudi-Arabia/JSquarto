@@ -156,8 +156,8 @@ export default class ConfigMgr {
     }) {
         const projectConfig = this.getProjectConfigPath({ projectDir });
         if (!projectConfig || !projectConfig.configDir) {
-            logger.error("No config found for project");
-            process.exit(1);
+            logger.warn("No config found for project");
+            return {};
         }
 
         const configFileExists = fs.existsSync(projectConfig.configDir);
