@@ -220,6 +220,30 @@ export default class ConfigMgr {
         }
 
         if (configToUpdate["configDirectory"]) {
+            // Check if force flag is set
+            const forceUpdate = cliArgs.get("force");
+            const fileExists = fs.existsSync(configToUpdate["configDirectory"]);
+            if (!fileExists) {
+                if (forceUpdate) {
+                    logger.warn("Creating new config file...");
+                    fs.mkdirSync(
+                        path.dirname(configToUpdate["configDirectory"]),
+                        {
+                            recursive: true,
+                        },
+                    );
+                    fs.writeFileSync(
+                        configToUpdate["configDirectory"],
+                        JSON.stringify(configToUpdate, null, 4),
+                    );
+                } else {
+                    logger.error(
+                        "No config file found at specified path. Use the --force flag to create a new config file",
+                    );
+                    process.exit(1);
+                }
+            }
+
             this.updateProjectPathsToConfigRecord({
                 projectDir: this.currentWorkingDirectory,
                 configDir: configToUpdate["configDirectory"],
@@ -295,7 +319,9 @@ export default class ConfigMgr {
         );
         const configPath = cliArgument.get("config") ?? defaultConfigPath;
 
+        let configPath = cliArgument.get("config") ?? defaultConfigPath;
         const updatedConfig = this.updateConfigStore().config;
+        configPath = updatedConfig.configDirectory ?? configPath;
 
         logger.info("Writing updated config to file...", {
             meta: {
