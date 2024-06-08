@@ -384,20 +384,25 @@ export default class ConfigMgr {
             configFileAlreadyExists,
         });
         // If it's a directory, that means the user wants to initialize a new config file
-        if (configFileAlreadyExists) {
+        // Default config can exists in cases where it was initialized from another device or manually created
+        // In this case the store wouldn't have a record of it
+        if (configFileAlreadyExists || configExistsInDefaultPath) {
             const forceOverwrite = cliArgument.has("force");
             if (!forceOverwrite) {
-                configFileFromArgsExists
-                    ? logger.error(
-                          `An existing config file was found at ${configPath} Use the --force flag to overwrite`,
-                      )
-                    : logger.error(
-                          `An existing record was set for ${configFileInStore} Use the --force flag to overwrite the current record`,
-                      );
+                let msg = "";
+                if (configFileFromArgsExists || configExistsInDefaultPath) {
+                    msg = `An existing config file was found at ${configPath ?? defaultConfigPath}`;
+                } else {
+                    msg = `An existing record was set for ${configFileInStore ?? defaultConfigPath}`;
+                }
+                logger.error(
+                    msg +
+                        `\n Run 'jsq config:init --force' to overwrite the current record or \n Run 'jsq config:set --config <path>' to set a new config file path
+                             `,
+                );
                 process.exit(1);
             }
 
-            // TODO: Ask for confirmation before overwriting
             logger.warn("Overwriting existing config file...");
         }
 
