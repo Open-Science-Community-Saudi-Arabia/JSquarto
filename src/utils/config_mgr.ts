@@ -390,7 +390,7 @@ export default class ConfigMgr {
         };
     }
 
-    static async writeConfigToFile() {
+    static writeConfigToFile() {
         const cliArgs = CliArgParser.getArgs();
         const workingDir = cliArgs.get("workingDirectory");
         if (!workingDir) {
@@ -398,47 +398,25 @@ export default class ConfigMgr {
             process.exit(1);
         }
 
-        const configFileExists = fs.existsSync(
-            workingDir + "/.jsquarto/config.json",
-        );
-        if (!configFileExists) {
-            this.initializeConfigFile();
-            process.exit(1);
+        let configPath = this.getProjectConfigPath({
+            projectDir: workingDir,
+        })?.configDir;
+        const configFileExists = configPath && fs.existsSync(configPath);
+
+        configPath = configFileExists
+            ? configPath
+            : this.initializeConfigFile().configDir;
+
+        // Just for typescript sake
+        if (!configPath) {
+            throw new Error("No config file found");
         }
 
-        const allowedConfigKeys = Object.keys(this.configMap);
-        const configToSet = new Map<string, string>();
-
-        for (const [key, value] of cliArgs.entries()) {
-            if (allowedConfigKeys.includes(key)) {
-                configToSet.set(key, value);
-            }
-        }
-
-        const configPath = workingDir + "/.jsquarto/config.json";
-        const configFile = fs.readFileSync(configPath, "utf-8");
-        const config = JSON.parse(configFile);
-
-        for (const [_key, value] of cliArgs.entries()) {
-            const key = this.configMap[_key as keyof ConfigMap];
-
-            if (key === "languages") {
-                config[key] = value.split(",");
-            } else if (key === "includeLocalizedVersions") {
-                config[key] = value ? true : false;
-            } else if (
-                [
-                    "translationsDirectory",
-                    "sourceDirectory",
-                    "outputDirectory",
-                    "tutorialDirectory",
-                ].includes(key)
-            ) {
-                config[key] = workingDir + "/" + value;
-            } else {
-                config[key] = value;
-            }
-        }
+        let config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+        config = this.transformCliArgsToConfigData({
+            config,
+            cliArgs: Object.fromEntries(cliArgs),
+        });
 
         logger.info("Writing updated config to file...", {
             meta: {
