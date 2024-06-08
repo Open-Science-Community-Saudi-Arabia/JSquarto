@@ -339,7 +339,9 @@ export default class ConfigMgr {
         );
         const configPath = cliArgument.get("config") ?? defaultConfigPath;
 
-        let configPath = cliArgument.get("config") ?? defaultConfigPath;
+        let configPath: string | null = cliArgument.get("config") ?? null;
+        configPath = configPath ? path.resolve(configPath) : null;
+
         const updatedConfig = this.updateConfigStore().config;
         configPath = updatedConfig.configDirectory ?? configPath;
 
@@ -349,18 +351,49 @@ export default class ConfigMgr {
             },
         });
 
-        const dirExists = fs.existsSync(path.dirname(configPath));
-        if (!dirExists) {
-            fs.mkdirSync(path.dirname(configPath), { recursive: true });
-        }
+        // const dirExists = fs.existsSync(path.dirname(configPath));
+        // if (!dirExists) {
+        //     fs.mkdirSync(path.dirname(configPath), { recursive: true });
+        // }
 
-        const configFileAlreadyExists = fs.existsSync(configPath);
+        // const configPathStat = configPath
+        //     ? fs.statSync(configPath, {
+        //           throwIfNoEntry: false,
+        //       })
+        //     : null;
+        // const pathIsDir = configPathStat?.isDirectory();
+        // const defaultConfigDir = path.resolve(
+        //     currentWorkingDirectory + "/.jsquarto/",
+        // );
+
+        const configFileInStore = this.getProjectConfigPath({
+            projectDir: currentWorkingDirectory,
+        })?.configDir;
+        const configFileInStoreExists =
+            configFileInStore && fs.existsSync(configFileInStore);
+        const configFileFromArgsExists =
+            configPath && fs.existsSync(configPath);
+        const configFileAlreadyExists =
+            configFileInStore || configFileFromArgsExists;
+
+        console.log({
+            configFileInStore,
+            configFileInStoreExists,
+            configFileFromArgsExists,
+            configPath,
+            configFileAlreadyExists,
+        });
+        // If it's a directory, that means the user wants to initialize a new config file
         if (configFileAlreadyExists) {
-            const forceOverwrite = cliArgument.get("force");
+            const forceOverwrite = cliArgument.has("force");
             if (!forceOverwrite) {
-                logger.error(
-                    `Config file already exists at ${configPath}. Use the --force flag to overwrite`,
-                );
+                configFileFromArgsExists
+                    ? logger.error(
+                          `An existing config file was found at ${configPath} Use the --force flag to overwrite`,
+                      )
+                    : logger.error(
+                          `An existing record was set for ${configFileInStore} Use the --force flag to overwrite the current record`,
+                      );
                 process.exit(1);
             }
 
@@ -368,19 +401,20 @@ export default class ConfigMgr {
             logger.warn("Overwriting existing config file...");
         }
 
+        configPath = configPath ?? defaultConfigPath;
+
         fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 4));
         logger.info("Config file written successfully");
 
         // Add config file and project path to store
-        const { projectDir, configDir } =
-            await this.updateProjectPathsToConfigRecord({
-                projectDir: currentWorkingDirectory,
-                configDir: configPath,
-            });
+        const { projectDir } = await this.addProjectConfigPathToStore({
+            projectDir: currentWorkingDirectory,
+            configDir: configPath,
+        });
 
         return {
             projectDir,
-            configDir,
+            configDir: configPath,
             config: updatedConfig,
         };
     }
