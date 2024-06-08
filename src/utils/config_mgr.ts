@@ -192,25 +192,21 @@ export default class ConfigMgr {
         return config;
     }
 
-    static updateConfigStore(): { config: Config; inputData: Partial<Config> } {
-        const cliArgs = CliArgParser.getArgs();
-        const workingDir = cliArgs.get("workingDirectory");
-        if (!workingDir) {
-            logger.error("No working directory provided");
-            process.exit(1);
-        }
+    private static transformCliArgsToConfigData({
+        config: configToUpdate,
+        cliArgs,
+    }: {
+        config: Config & { configDirectory: string };
+        cliArgs: CliArgs;
+    }) {
+        const allowedConfigKeys = Object.keys(this.configMap);
 
-        this.currentWorkingDirectory = workingDir;
+        for (const entry of Object.entries(cliArgs)) {
+            if (!allowedConfigKeys.includes(entry[0] as string)) {
+                continue;
+            }
 
-        const currentConfig = {
-            ...this.CONFIG,
-            ...this.getConfigForProject({ projectDir: workingDir }),
-        };
-
-        // Extract data to update
-        const configToUpdate = {} as typeof ConfigMgr.CONFIG;
-        for (const entries of cliArgs.entries()) {
-            const [cliKey, cliValue] = entries as [
+            const [cliKey, cliValue] = entry as [
                 keyof CliArgs,
                 ValueOf<CliArgs>,
             ];
@@ -229,8 +225,10 @@ export default class ConfigMgr {
                         "configDirectory",
                     ].includes(_key)
                 ) {
-                    configToUpdate[_key] =
-                        this.currentWorkingDirectory + "/" + cliValue;
+                    configToUpdate[_key] = path.join(
+                        this.currentWorkingDirectory,
+                        cliValue,
+                    );
                 } else {
                     configToUpdate[_key] = cliValue;
                 }
@@ -239,30 +237,8 @@ export default class ConfigMgr {
             }
         }
 
-        if (configToUpdate["configDirectory"]) {
-            // Check if force flag is set
-            const forceUpdate = cliArgs.get("force");
-            const fileExists = fs.existsSync(configToUpdate["configDirectory"]);
-            if (!fileExists) {
-                if (forceUpdate) {
-                    logger.warn("Creating new config file...");
-                    fs.mkdirSync(
-                        path.dirname(configToUpdate["configDirectory"]),
-                        {
-                            recursive: true,
-                        },
-                    );
-                    fs.writeFileSync(
-                        configToUpdate["configDirectory"],
-                        JSON.stringify(configToUpdate, null, 4),
-                    );
-                } else {
-                    logger.error(
-                        "No config file found at specified path. Use the --force flag to create a new config file",
-                    );
-                    process.exit(1);
-                }
-            }
+        return configToUpdate;
+    }
 
             this.updateProjectPathsToConfigRecord({
                 projectDir: this.currentWorkingDirectory,
