@@ -320,13 +320,13 @@ export default class ConfigMgr {
                 : path.resolve(currentWorkingDirectory, configPath)
             : null;
 
-        const updatedConfig = this.updateConfigStore().config;
-
-        logger.info("Writing updated config to file...", {
-            meta: {
-                updatedConfig,
-            },
-        });
+        // const updatedConfig = this.updateConfigStore().config;
+        //
+        // logger.info("Writing updated config to file...", {
+        //     meta: {
+        //         updatedConfig,
+        //     },
+        // });
 
         const projectConfigPathSavedInStore = this.getProjectConfigPath({
             projectDir: currentWorkingDirectory,
@@ -378,11 +378,7 @@ export default class ConfigMgr {
                 recursive: true,
             });
 
-        fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 4));
-        logger.info("Config file written successfully");
-
-        // Add config file and project path to store
-        const { projectDir } = await this.addProjectConfigPathToStore({
+        const { projectDir } = this.addProjectConfigPathToStore({
             projectDir: currentWorkingDirectory,
             configDir: configPath,
         });
