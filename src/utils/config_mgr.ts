@@ -182,7 +182,7 @@ export default class ConfigMgr {
 
         const configFileExists = fs.existsSync(projectConfig.configDir);
         if (!configFileExists) {
-            logger.error("No config file found for project");
+            logger.error("Config path in store but file doesn't exist");
             process.exit(1);
         }
 
