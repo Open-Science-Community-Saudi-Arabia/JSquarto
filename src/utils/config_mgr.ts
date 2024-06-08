@@ -395,12 +395,10 @@ export default class ConfigMgr {
                 } else {
                     msg = `An existing record was set for ${configFileInStore ?? defaultConfigPath}`;
                 }
-                logger.error(
-                    msg +
-                        `\n Run 'jsq config:init --force' to overwrite the current record or \n Run 'jsq config:set --config <path>' to set a new config file path
-                             `,
-                );
-                process.exit(1);
+                msg +=
+                    `\n Run 'jsq config:init --force' to overwrite the current record or \n Run 'jsq config:set --config <path>' to set a new config file path
+                             `;
+                throw new Error(msg);
             }
 
             logger.warn("Overwriting existing config file...");
