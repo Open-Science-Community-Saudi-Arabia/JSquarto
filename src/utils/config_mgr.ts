@@ -84,8 +84,28 @@ export default class ConfigMgr {
             } as ProjectConfig;
         }
 
+        // Check if project path already exists in store
+        const projectPathExists = config.paths.some(
+            (path: { projectDir: string }) => path.projectDir === projectDir,
+        );
+        if (projectPathExists) {
+            logger.warn("Project path already exists in store, updating...");
+            const projectIndex = config.paths.findIndex(
+                (path: { projectDir: string }) =>
+                    path.projectDir === projectDir,
+            );
+
+            config.paths[projectIndex] = {
+                projectDir,
+                configDir,
+            };
+        } else {
+            logger.info("Adding project path to store...");
+            config.paths.push({ projectDir, configDir });
+        }
+
         const updatedConfig = {
-            paths: [...config.paths, { projectDir, configDir }],
+            paths: config.paths,
         };
 
         logger.info("Updating config store...", {
