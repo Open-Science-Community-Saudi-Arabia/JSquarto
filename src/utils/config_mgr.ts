@@ -329,74 +329,64 @@ export default class ConfigMgr {
 
         const currentWorkingDirectory = cliArgument.get("workingDirectory");
         if (!currentWorkingDirectory) {
-            console.error("No working directory provided");
-            process.exit(1);
+            throw new Error("No working directory provided");
         }
 
-        const defaultConfigPath = path.join(
+        const DEFAULT_PATH_FOR_CONFIG = path.join(
             currentWorkingDirectory,
             "/.jsquarto/config.json",
         );
-        const configPath = cliArgument.get("config") ?? defaultConfigPath;
 
-        let configPath: string | null = cliArgument.get("config") ?? null;
-        configPath = configPath ? path.resolve(configPath) : null;
+        let configPath = cliArgument.get("config") ?? null;
+        configPath = configPath
+            ? path.isAbsolute(configPath)
+                ? path.resolve(configPath)
+                : path.resolve(currentWorkingDirectory, configPath)
+            : null;
 
         const updatedConfig = this.updateConfigStore().config;
-        configPath = updatedConfig.configDirectory ?? configPath;
 
         logger.info("Writing updated config to file...", {
             meta: {
-                updatedConfig: updatedConfig,
+                updatedConfig,
             },
         });
 
-        // const dirExists = fs.existsSync(path.dirname(configPath));
-        // if (!dirExists) {
-        //     fs.mkdirSync(path.dirname(configPath), { recursive: true });
-        // }
-
-        // const configPathStat = configPath
-        //     ? fs.statSync(configPath, {
-        //           throwIfNoEntry: false,
-        //       })
-        //     : null;
-        // const pathIsDir = configPathStat?.isDirectory();
-        // const defaultConfigDir = path.resolve(
-        //     currentWorkingDirectory + "/.jsquarto/",
-        // );
-
-        const configFileInStore = this.getProjectConfigPath({
+        const projectConfigPathSavedInStore = this.getProjectConfigPath({
             projectDir: currentWorkingDirectory,
         })?.configDir;
-        const configFileInStoreExists =
-            configFileInStore && fs.existsSync(configFileInStore);
-        const configFileFromArgsExists =
-            configPath && fs.existsSync(configPath);
-        const configFileAlreadyExists =
-            configFileInStore || configFileFromArgsExists;
+        let configFileFromArgsExists = configPath && fs.existsSync(configPath);
 
-        console.log({
-            configFileInStore,
-            configFileInStoreExists,
-            configFileFromArgsExists,
-            configPath,
-            configFileAlreadyExists,
-        });
+        if (
+            configPath &&
+            configFileFromArgsExists &&
+            fs.statSync(configPath).isDirectory()
+        ) {
+            configPath = path.join(configPath, ".jsquarto/config.json");
+            configFileFromArgsExists = fs.existsSync(configPath);
+        }
+
+        const configFileAlreadyExists =
+            projectConfigPathSavedInStore || configFileFromArgsExists;
+        const configExistsInDefaultPath = fs.existsSync(
+            DEFAULT_PATH_FOR_CONFIG,
+        );
+
         // If it's a directory, that means the user wants to initialize a new config file
         // Default config can exists in cases where it was initialized from another device or manually created
         // In this case the store wouldn't have a record of it
         if (configFileAlreadyExists || configExistsInDefaultPath) {
             const forceOverwrite = cliArgument.has("force");
+            // If the config dir passed already exists, we should overwrite
+            // The --force flagg is required to overwrite any record
             if (!forceOverwrite) {
                 let msg = "";
                 if (configFileFromArgsExists || configExistsInDefaultPath) {
-                    msg = `An existing config file was found at ${configPath ?? defaultConfigPath}`;
+                    msg = `An existing config file was found at ${configPath ?? DEFAULT_PATH_FOR_CONFIG}`;
                 } else {
-                    msg = `An existing record was set for ${configFileInStore ?? defaultConfigPath}`;
+                    msg = `An existing record was set for ${projectConfigPathSavedInStore ?? DEFAULT_PATH_FOR_CONFIG}`;
                 }
-                msg +=
-                    `\n Run 'jsq config:init --force' to overwrite the current record or \n Run 'jsq config:set --config <path>' to set a new config file path
+                msg += `\n Run 'jsq config:init --force' to overwrite the current record or \n Run 'jsq config:set --config <path>' to set a new config file path
                              `;
                 throw new Error(msg);
             }
@@ -404,7 +394,13 @@ export default class ConfigMgr {
             logger.warn("Overwriting existing config file...");
         }
 
-        configPath = configPath ?? defaultConfigPath;
+        configPath = configPath ?? DEFAULT_PATH_FOR_CONFIG;
+
+        const configFileExists = fs.existsSync(configPath);
+        !configFileExists &&
+            fs.mkdirSync(path.dirname(configPath), {
+                recursive: true,
+            });
 
         fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 4));
         logger.info("Config file written successfully");
