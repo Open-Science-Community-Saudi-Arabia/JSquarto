@@ -196,13 +196,24 @@ export default class ConfigMgr {
         config: configToUpdate,
         cliArgs,
     }: {
-        config: Config & { configDirectory: string };
+        config: Config & ExternalConfig;
         cliArgs: CliArgs;
     }) {
         const allowedConfigKeys = Object.keys(this.configMap);
+        // const booleanConfigKeys = ["includeLocalizedVersions", "force"] as (keyof ConfigMap)[];
+        const dirConfigKeys = [
+            "translationsDirectory",
+            "sourceDirectory",
+            "outputDirectory",
+            "tutorialDirectory",
+            "configDirectory",
+        ] as const;
 
         for (const entry of Object.entries(cliArgs)) {
-            if (!allowedConfigKeys.includes(entry[0] as string)) {
+            const configKeyIsAllowed = allowedConfigKeys.includes(
+                entry[0] as string,
+            );
+            if (!configKeyIsAllowed) {
                 continue;
             }
 
@@ -210,30 +221,28 @@ export default class ConfigMgr {
                 keyof CliArgs,
                 ValueOf<CliArgs>,
             ];
-            if (cliValue) {
-                const _key = this.configMap[cliKey];
-                if (_key === "languages") {
-                    configToUpdate[_key] = cliValue.split(",");
-                } else if (_key === "includeLocalizedVersions") {
-                    configToUpdate[_key] = cliValue ? true : false;
-                } else if (
-                    [
-                        "translationsDirectory",
-                        "sourceDirectory",
-                        "outputDirectory",
-                        "tutorialDirectory",
-                        "configDirectory",
-                    ].includes(_key)
-                ) {
-                    configToUpdate[_key] = path.join(
-                        this.currentWorkingDirectory,
-                        cliValue,
-                    );
-                } else {
-                    configToUpdate[_key] = cliValue;
-                }
-            } else {
+            const _key = this.configMap[cliKey];
+
+            if (_key === "includeLocalizedVersions" || _key === "force") {
+                console.log({ equal: cliValue === "true" });
+                configToUpdate[_key] = (cliValue as unknown) != false;
+                continue;
+            }
+
+            if (!cliValue) {
                 logger.warn(`No value provided for ${cliKey}`);
+                continue;
+            }
+
+            if (_key === "languages") {
+                configToUpdate[_key] = cliValue!.split(",");
+            } else if (dirConfigKeys.includes(_key)) {
+                configToUpdate[_key] = path.join(
+                    this.currentWorkingDirectory,
+                    cliValue,
+                );
+            } else {
+                configToUpdate[_key] = cliValue;
             }
         }
 
