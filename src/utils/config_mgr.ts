@@ -224,8 +224,8 @@ export default class ConfigMgr {
             const _key = this.configMap[cliKey];
 
             if (_key === "includeLocalizedVersions" || _key === "force") {
-                console.log({ equal: cliValue === "true" });
-                configToUpdate[_key] = (cliValue as unknown) != false;
+                console.log({ equal: cliValue === "true", cliValue });
+                configToUpdate[_key] = cliValue != "false";
                 continue;
             }
 
@@ -406,6 +406,8 @@ export default class ConfigMgr {
             logger.error("No working directory provided");
             process.exit(1);
         }
+
+        this.currentWorkingDirectory = workingDir
 
         let configPath = this.getProjectConfigPath({
             projectDir: workingDir,
