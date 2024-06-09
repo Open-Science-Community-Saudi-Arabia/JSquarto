@@ -382,10 +382,7 @@ export default class ConfigMgr {
         configPath = configPath ?? DEFAULT_PATH_FOR_CONFIG;
 
         const configFileExists = fs.existsSync(configPath);
-        !configFileExists &&
-            fs.mkdirSync(path.dirname(configPath), {
-                recursive: true,
-            });
+        !configFileExists && this.ensureFileExists(configPath);
 
         const { projectDir } = this.addProjectConfigPathToStore({
             projectDir: currentWorkingDirectory,
@@ -407,12 +404,33 @@ export default class ConfigMgr {
             process.exit(1);
         }
 
-        this.currentWorkingDirectory = workingDir
+        this.currentWorkingDirectory = workingDir;
 
         let configPath = this.getProjectConfigPath({
             projectDir: workingDir,
         })?.configDir;
         const configFileExists = configPath && fs.existsSync(configPath);
+
+        // Check if user is trying to set the path to a new config file
+        if (!configPath && !configFileExists) {
+            // Check if user is trying to set the path to a new config file
+            const configPathFromArgs = cliArgs.get("config");
+            if (configPathFromArgs) {
+                configPath = path.isAbsolute(configPathFromArgs)
+                    ? path.resolve(configPathFromArgs)
+                    : path.resolve(workingDir, configPathFromArgs);
+
+                const configFileExists = fs.existsSync(configPath);
+                if (!configFileExists) {
+                    throw new Error("No config file found at specified path");
+                }
+
+                this.addProjectConfigPathToStore({
+                    projectDir: workingDir,
+                    configDir: configPath,
+                });
+            }
+        }
 
         configPath = configFileExists
             ? configPath
