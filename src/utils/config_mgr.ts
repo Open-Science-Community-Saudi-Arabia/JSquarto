@@ -169,11 +169,7 @@ export default class ConfigMgr {
         };
     }
 
-    private static async getConfigForProject({
-        projectDir,
-    }: {
-        projectDir: string;
-    }) {
+    private static getConfigForProject({ projectDir }: { projectDir: string }) {
         const projectConfig = this.getProjectConfigPath({ projectDir });
         if (!projectConfig || !projectConfig.configDir) {
             logger.warn("No config found for project");
@@ -182,8 +178,8 @@ export default class ConfigMgr {
 
         const configFileExists = fs.existsSync(projectConfig.configDir);
         if (!configFileExists) {
-            logger.error("Config path in store but file doesn't exist");
-            process.exit(1);
+            logger.warn("Config path in store but file doesn't exist");
+            return {};
         }
 
         const configFile = fs.readFileSync(projectConfig.configDir, "utf-8");
@@ -309,7 +305,7 @@ export default class ConfigMgr {
         };
     }
 
-    static async initializeConfigFile() {
+    static initializeConfigFile() {
         const cliArgument = CliArgParser.getArgs();
 
         const currentWorkingDirectory = cliArgument.get("workingDirectory");
@@ -412,24 +408,21 @@ export default class ConfigMgr {
         const configFileExists = configPath && fs.existsSync(configPath);
 
         // Check if user is trying to set the path to a new config file
-        if (!configPath && !configFileExists) {
-            // Check if user is trying to set the path to a new config file
-            const configPathFromArgs = cliArgs.get("config");
-            if (configPathFromArgs) {
-                configPath = path.isAbsolute(configPathFromArgs)
-                    ? path.resolve(configPathFromArgs)
-                    : path.resolve(workingDir, configPathFromArgs);
+        const configPathFromArgs = cliArgs.get("config");
+        if (configPathFromArgs) {
+            configPath = path.isAbsolute(configPathFromArgs)
+                ? path.resolve(configPathFromArgs)
+                : path.resolve(workingDir, configPathFromArgs);
 
-                const configFileExists = fs.existsSync(configPath);
-                if (!configFileExists) {
-                    throw new Error("No config file found at specified path");
-                }
-
-                this.addProjectConfigPathToStore({
-                    projectDir: workingDir,
-                    configDir: configPath,
-                });
+            const configFileExists = fs.existsSync(configPath);
+            if (!configFileExists) {
+                throw new Error("No config file found at specified path");
             }
+
+            this.addProjectConfigPathToStore({
+                projectDir: workingDir,
+                configDir: configPath,
+            });
         }
 
         configPath = configFileExists
