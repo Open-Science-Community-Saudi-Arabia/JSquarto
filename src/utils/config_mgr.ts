@@ -433,6 +433,13 @@ export default class ConfigMgr {
             },
         });
 
+        // Remove cli commands from keys
+        config = Object.fromEntries(
+            Object.entries(config).filter(
+                ([key, _]) => !key.includes("config") && !key.includes("force"),
+            ),
+        );
+
         fs.writeFileSync(configPath, JSON.stringify(config, null, 4));
         logger.info("Config file written successfully");
     }
