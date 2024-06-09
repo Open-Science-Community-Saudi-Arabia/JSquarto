@@ -447,6 +447,10 @@ export default class ConfigMgr {
     static getConfig(): Config {
         let config = DEFAULT_CONFIG;
 
+        const configForProject = this.getConfigForProject({
+            projectDir: this.currentWorkingDirectory,
+        });
+
         if (this.configHasBeenUpdated) {
             config = { ...config, ...this.CONFIG };
         } else {
@@ -454,7 +458,7 @@ export default class ConfigMgr {
             config = { ...config, ...updatedConfig };
         }
 
-        return config;
+        return { ...config, ...configForProject };
     }
 }
 
