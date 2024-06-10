@@ -19,7 +19,7 @@
         "doc:serve": "serve ./docs/_book",
         "setup-quarto": "git clone https://github.com/quarto-dev/quarto-cli && cd quarto-cli && ./configure.sh",
         "update-quarto": "cd quarto-cli && git pull",
-        "tsc": "tsc -b && ts-node-dev ./src/scripts/add_shebang.ts"
+        "tsc": "tsc -b ./tsconfig.bin.json && ts-node-dev ./src/scripts/add_shebang.ts"
     },
     "bin": {
         "jsq": "./bin/src/jsq.js"

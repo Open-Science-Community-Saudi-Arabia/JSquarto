@@ -13,6 +13,6 @@ const config = {
     languages: ["en"],
 };
 
-const configPath = path.join(currentWorkingDirectory, "/jsquarto/config.json");
+const configPath = path.join(currentWorkingDirectory, "/.jsquarto/config.json");
 
 fs.writeFileSync(configPath, JSON.stringify(config, null, 4));
