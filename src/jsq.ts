@@ -14,13 +14,9 @@ const allowedCommands = [
     "fix:wrong_languages_ref",
     "config:init",
     "config:set",
+    "config:get",
 ];
-const commandsWithNoArgs = [
-    "doc:preview",
-    "doc:clean",
-    "setup-quarto",
-    "update-quarto",
-];
+const commandsWithNoArgs = ["setup-quarto", "update-quarto"];
 
 // Determine the jsq tool directory
 const projectDir = path.resolve(__dirname, "..");

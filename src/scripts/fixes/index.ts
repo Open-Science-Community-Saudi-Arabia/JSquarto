@@ -22,4 +22,6 @@ export default class Fixes {
     static fixAndStyleArabicHtmlFiles = fixAndStyleArabicHtmlFiles;
 }
 
-Fixes.run();
+if (require.main === module) {
+    Fixes.run();
+}
