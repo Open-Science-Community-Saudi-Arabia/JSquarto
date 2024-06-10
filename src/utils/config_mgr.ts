@@ -594,7 +594,21 @@ export default class ConfigMgr {
         }
         console.log({ config, configForProject, configFromCli });
 
-        return { ...config, ...configForProject, ...configFromCli };
+        const finalConfig = {
+            ...config,
+            ...configForProject,
+            ...configFromCli,
+        } as Config & ExternalConfig;
+
+        // Resolve all directories in config
+        for (const key in finalConfig) {
+            const _key = key as DirConfigKeys;
+            if (key.includes("Directory")) {
+                finalConfig[_key] = path.resolve(finalConfig[_key]);
+            }
+        }
+
+        return finalConfig;
     }
 }
 
