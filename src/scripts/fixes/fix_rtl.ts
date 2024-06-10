@@ -3,7 +3,6 @@ import fs from "fs";
 import logger from "../../utils/logger";
 import path from "path";
 import ConfigMgr from "../../utils/config_mgr";
-const CONFIG = ConfigMgr.getConfig();
 
 async function processHtmlFilesInDirectory(
     directory: string,
@@ -38,7 +37,8 @@ async function processHtmlFile(filePath: string, cssContent: string) {
     logger.info(`Finished processing file: ${filePath}`);
 }
 
-export async function fixAndStyleArabicHtmlFiles() {
+export default async function fixAndStyleArabicHtmlFiles() {
+    const CONFIG = ConfigMgr.getConfig();
     if (!CONFIG.languages.includes("ar")) {
         console.log({
             config: CONFIG,
@@ -61,18 +61,5 @@ export async function fixAndStyleArabicHtmlFiles() {
 }
 
 if (require.main === module) {
-    const langs = process.argv
-        .find((arg) => arg.startsWith("languages"))
-        ?.split("=")[1]
-        ?.split(",");
-
-    if (!langs) {
-        console.warn(
-            "Languages not specified in cli arguments, setting languages to default",
-        );
-    }
-
-    CONFIG.languages = langs ?? CONFIG.languages;
-
     fixAndStyleArabicHtmlFiles();
 }

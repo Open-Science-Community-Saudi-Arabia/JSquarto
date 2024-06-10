@@ -3,6 +3,14 @@
         {
             "projectDir": "/",
             "configDir": "/"
+        },
+        {
+            "projectDir": "/home/richie/Desktop/repos/oscsa/MOOCs/API",
+            "configDir": "/home/richie/Desktop/repos/oscsa/MOOCs/API/.jsquarto/config.json"
+        },
+        {
+            "projectDir": "/home/richie/Desktop/repos/oscsa/JSquarto",
+            "configDir": "/home/richie/Desktop/repos/oscsa/JSquarto/.jsquarto/config.json"
         }
     ]
 }

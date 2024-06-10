@@ -301,7 +301,6 @@ export default class Writer {
             fs.mkdirSync(directoryPath, { recursive: true });
 
         fs.writeFileSync(filePathToWrite, "", "utf8");
-
         const subCategoryTitle = subCategory
             ? StringUtil.capitalizeFirstLetter(subCategory.name)
             : undefined;
@@ -351,8 +350,6 @@ export default class Writer {
 
         try {
             console.log({ qmdfilePath });
-            fs.writeFileSync(qmdfilePath, "", "utf8");
-
             let fileContent = "";
 
             // Add module title to qmd file

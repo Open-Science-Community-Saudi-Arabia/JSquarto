@@ -1,19 +1,18 @@
 import fs from "fs";
-import { CommentsUtil } from "./utils/comment";
-import SourceFile from "./utils/file";
-import Writer from "./utils/writer";
+import { CommentsUtil } from "../utils/comment";
+import SourceFile from "../utils/file";
+import Writer from "../utils/writer";
 import {
     Category,
     Module,
     ModuleDoc,
     SubCategory,
     recursivelyConvertAllStringValuesInObjectToLowerCase,
-} from "./utils/components";
+} from "../utils/components";
 import path from "path";
-import logger from "./utils/logger";
-import ConfigMgr from "./utils/config_mgr";
+import logger from "../utils/logger";
+import ConfigMgr from "../utils/config_mgr";
 
-const CONFIG = ConfigMgr.getConfig();
 /**
  * Recursively searches for JavaScript files in a directory and its subdirectories.
  *
@@ -61,7 +60,8 @@ function getJSFilesFromDirectory(
  *
  * @returns void
  */
-async function start() {
+export async function generateDoc() {
+    const CONFIG = ConfigMgr.getConfig();
     // Get JavaScript files from directory
     const filePaths = getJSFilesFromDirectory(CONFIG.sourceDirectory);
 
@@ -215,16 +215,10 @@ async function start() {
     }
 
     logger.info("Documentation generation complete");
+    return;
 }
 
 // Access the path argument specified via command line
-const { inputData } = ConfigMgr.updateConfigStore();
-
-if (inputData.includeLocalizedVersions && !inputData.languages) {
-    console.log(
-        "Please provide languages to create localized docs for using the languages flag",
-    );
-    process.exit(1);
+if (require.main === module) {
+    generateDoc();
 }
-
-start();

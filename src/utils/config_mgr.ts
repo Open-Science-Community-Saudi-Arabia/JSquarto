@@ -45,6 +45,14 @@ const DEFAULT_CONFIG = {
     includeLocalizedVersions: config.includeLocalizedVersions,
     languages: config.languages,
 };
+const dirConfigKeys = [
+    "translationsDirectory",
+    "sourceDirectory",
+    "outputDirectory",
+    "tutorialDirectory",
+    "configDirectory",
+] as const;
+type DirConfigKeys = (typeof dirConfigKeys)[number];
 export default class ConfigMgr {
     private static CONFIG = DEFAULT_CONFIG as Config & ExternalConfig;
     private static configHasBeenUpdated = false;
@@ -215,13 +223,6 @@ export default class ConfigMgr {
     }) {
         const allowedConfigKeys = Object.keys(this.configMap);
         // const booleanConfigKeys = ["includeLocalizedVersions", "force"] as (keyof ConfigMap)[];
-        const dirConfigKeys = [
-            "translationsDirectory",
-            "sourceDirectory",
-            "outputDirectory",
-            "tutorialDirectory",
-            "configDirectory",
-        ] as const;
 
         for (const entry of Object.entries(cliArgs)) {
             const configKeyIsAllowed = allowedConfigKeys.includes(
@@ -592,9 +593,22 @@ export default class ConfigMgr {
         } else {
             configFromCli = this.updateConfigStore().config;
         }
-        console.log({ config, configForProject, configFromCli });
 
-        return { ...config, ...configForProject, ...configFromCli };
+        const finalConfig = {
+            ...config,
+            ...configForProject,
+            ...configFromCli,
+        } as Config & ExternalConfig;
+
+        // Resolve all directories in config
+        for (const key in finalConfig) {
+            const _key = key as DirConfigKeys;
+            if (key.includes("Directory")) {
+                finalConfig[_key] = path.resolve(finalConfig[_key]);
+            }
+        }
+
+        return finalConfig;
     }
 }
 

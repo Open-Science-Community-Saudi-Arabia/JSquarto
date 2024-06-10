@@ -12,7 +12,7 @@ env:
   PR_AUTHOR_NAME: Richie
   NEW_BRANCH: build_book-
   DESTINATION_BRANCH: book
-  CONFIG_PATH: ./config.json  # Path to config file for jsquarto
+  CONFIG_FILE: ./.jsquarto/config.json
 
 jobs:
   build_book:
@@ -28,21 +28,6 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Extract config variables from config file  
-        id: read_config
-        run: |
-          JSON_CONTENT=$(cat $CONFIG_PATH)
-         
-          LANGUAGES=$(echo "$JSON_CONTENT" | jq -r '.languages | join(",")')
-          OUTPUT_DIR=$(echo "$JSON_CONTENT" | jq -r '.outputDirectory')
-          SOURCE_DIR=$(echo "$JSON_CONTENT" | jq -r '.sourceDirectory')
-          TUTORIALS_DIR=$(echo "$JSON_CONTENT" | jq -r '.tutorialDirectory')
-          
-          echo "LANGUAGES=$LANGUAGES" >> $GITHUB_ENV
-          echo "OUTPUT_DIR=$OUTPUT_DIR" >> $GITHUB_ENV
-          echo "SOURCE_DIR=$SOURCE_DIR" >> $GITHUB_ENV
-          echo "TUTORIALS_DIR=$TUTORIALS_DIR" >> $GITHUB_ENV
-          
       - name: Set New Branch Name
         id: set_branch
         run: echo "NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
@@ -75,13 +60,16 @@ jobs:
           node-version: 16.x
 
       - name: Install dependencies
-        run: npm install
+        run: npm install && npm install -g @oscsa/jsquarto
+
+      - name: Set jsquarto config
+        run: jsq config:set config=$CONFIG_FILE --force
 
       - name: Remove content of the _book
-        run: rm -rf $OUTPUT_DIR/_book
+        run: jsq doc:clean
 
       - name: Prepare crowdin translations
-        run: npm run fix:crowdin_files languages="$LANGUAGES"
+        run: jsq fix:crowdin_files 
 
       - name: Build book 
         run: |
@@ -89,7 +77,7 @@ jobs:
 
       - name: Fix built book
         run: |
-          npm run fix:all languages=$LANGUAGES
+          jsq fix:all
 
       - name: Commit changes
         run: |
