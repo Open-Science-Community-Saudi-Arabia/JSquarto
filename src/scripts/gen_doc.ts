@@ -225,7 +225,6 @@ if (inputData.includeLocalizedVersions && !inputData.languages) {
     throw new Error(
         "Please provide languages to create localized docs for using the languages flag",
     );
-    process.exit(1);
 }
 
 if (require.main === module) {
