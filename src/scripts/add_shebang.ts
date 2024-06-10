@@ -12,4 +12,4 @@ const addShebang = (path: string) => {
     console.log(`Shebang added to ${path}`);
 };
 
-addShebang("bin/src/jsq.js");
+addShebang("bin/jsq.js");
