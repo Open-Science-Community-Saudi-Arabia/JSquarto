@@ -38,7 +38,7 @@ async function processHtmlFile(filePath: string, cssContent: string) {
     logger.info(`Finished processing file: ${filePath}`);
 }
 
-export async function fixAndStyleArabicHtmlFiles() {
+export default async function fixAndStyleArabicHtmlFiles() {
     if (!CONFIG.languages.includes("ar")) {
         console.log({
             config: CONFIG,

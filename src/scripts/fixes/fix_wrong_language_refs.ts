@@ -5,7 +5,7 @@ import path from "path";
 import ConfigMgr from "../../utils/config_mgr";
 const CONFIG = ConfigMgr.getConfig();
 
-export async function fixWrongLanguageReferences() {
+export default async function fixWrongLanguageReferences() {
     const languages = CONFIG.languages;
 
     // Get the index files for each language

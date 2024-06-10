@@ -14,7 +14,7 @@ const CONFIG = ConfigMgr.getConfig();
 /**
  * Move the updated crowdin translations from translations folder to the output directory
  */
-export async function moveTranslatedFilesToOutputDir() {
+async function moveTranslatedFilesToOutputDir() {
     const translationsFolderPath = CONFIG.translationsDirectory;
 
     async function copyAllFoldersAndFiles(source: string, destination: string) {
@@ -50,7 +50,7 @@ export async function moveTranslatedFilesToOutputDir() {
 /**
  * Fix the structure of the translated files in the output directory
  */
-export async function fixTranslatedFilesStructureInOutputDir() {
+async function fixTranslatedFilesStructureInOutputDir() {
     // Check the output dir for the localized files
     const folderPath = path.join(CONFIG.outputDirectory);
 
@@ -82,7 +82,7 @@ export async function fixTranslatedFilesStructureInOutputDir() {
  * and places the translated files within that folder. This function will move the files from the language folder
  * to the same level as the original files.
  */
-export async function mergePathsForTranslatedFiles() {
+async function mergePathsForTranslatedFiles() {
     // Go to the folders for the languages within the output dir
     const folderPath = CONFIG.outputDirectory;
 
@@ -127,7 +127,7 @@ export async function mergePathsForTranslatedFiles() {
  * This will make the generated file to be <index.md>.<language>.<ext>
  * This function will fix the file name to be <plain_file_name>.<language>.<ext> so it'll be <index.<language>.<ext>>
  */
-export async function fixFileExtensionsForTranslatedFiles() {
+async function fixFileExtensionsForTranslatedFiles() {
     // Go to the folders for the languages within the output dir
     const folderPath = CONFIG.outputDirectory;
 
@@ -161,7 +161,7 @@ export async function fixFileExtensionsForTranslatedFiles() {
     }
 }
 
-export async function deleteEmptyFoldersInOutDir() {
+async function deleteEmptyFoldersInOutDir() {
     // Delete all the empty folders for each language in the output directory
     for (const language of CONFIG.languages) {
         const languageFolderPath = path.join(CONFIG.outputDirectory, language);
@@ -169,7 +169,7 @@ export async function deleteEmptyFoldersInOutDir() {
     }
 }
 
-async function start() {
+export default async function fixCrowdinTranslations() {
     await moveTranslatedFilesToOutputDir();
     await fixTranslatedFilesStructureInOutputDir();
     await fixFileExtensionsForTranslatedFiles();
@@ -178,5 +178,5 @@ async function start() {
 }
 
 if (require.main === module) {
-    start();
+    fixCrowdinTranslations();
 }
