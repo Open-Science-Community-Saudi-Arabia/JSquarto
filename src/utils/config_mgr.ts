@@ -223,13 +223,6 @@ export default class ConfigMgr {
     }) {
         const allowedConfigKeys = Object.keys(this.configMap);
         // const booleanConfigKeys = ["includeLocalizedVersions", "force"] as (keyof ConfigMap)[];
-        const dirConfigKeys = [
-            "translationsDirectory",
-            "sourceDirectory",
-            "outputDirectory",
-            "tutorialDirectory",
-            "configDirectory",
-        ] as const;
 
         for (const entry of Object.entries(cliArgs)) {
             const configKeyIsAllowed = allowedConfigKeys.includes(
@@ -600,7 +593,6 @@ export default class ConfigMgr {
         } else {
             configFromCli = this.updateConfigStore().config;
         }
-        console.log({ config, configForProject, configFromCli });
 
         const finalConfig = {
             ...config,
