@@ -1,6 +1,6 @@
 import { ValueOf } from "../interfaces";
 import logger from "./logger";
-import config from "../../config.json";
+import config from "../config.json";
 import CliArgParser from "./arg-parser";
 import path from "path";
 import fs, { copyFileSync } from "fs";
