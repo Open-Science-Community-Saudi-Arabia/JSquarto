@@ -9,6 +9,7 @@
 import path from "path";
 import fs from "fs";
 import ConfigMgr from "../../utils/config_mgr";
+import logger from "../../utils/logger";
 const CONFIG = ConfigMgr.getConfig();
 
 /**
@@ -18,9 +19,8 @@ async function moveTranslatedFilesToOutputDir() {
     const translationsFolderPath = CONFIG.translationsDirectory;
 
     async function copyAllFoldersAndFiles(source: string, destination: string) {
+        logger.info({ source, destination });
         const files = await fs.promises.readdir(source);
-
-        console.log({ source, destination });
 
         for (const file of files) {
             const filePath = path.join(source, file);
@@ -28,7 +28,7 @@ async function moveTranslatedFilesToOutputDir() {
 
             const stats = await fs.promises.stat(filePath);
             if (stats.isDirectory()) {
-                console.log({ newFilePath });
+                logger.info({ newFilePath });
                 await fs.promises.mkdir(newFilePath, { recursive: true });
                 await copyAllFoldersAndFiles(filePath, newFilePath);
             } else {
@@ -38,13 +38,15 @@ async function moveTranslatedFilesToOutputDir() {
     }
 
     // Find all folders that are named after the language code
-    for (const language of CONFIG.languages) {
+    for (const language of CONFIG.languages.slice(1)) {
+        logger.info({ language });
         const langFolderPath = path.join(translationsFolderPath, language);
 
         // Copy the language folder to the output directory
         const newLangFolderPath = path.join(CONFIG.outputDirectory, language);
         await copyAllFoldersAndFiles(langFolderPath, newLangFolderPath);
     }
+    logger.info("Finished moving translated files to output directory");
 }
 
 /**
@@ -54,11 +56,9 @@ async function fixTranslatedFilesStructureInOutputDir() {
     // Check the output dir for the localized files
     const folderPath = path.join(CONFIG.outputDirectory);
 
-    for (const language of CONFIG.languages) {
-        const langFolderPath = path.join(
-            folderPath,
-            language + `/${CONFIG.outputDirectory}`,
-        );
+    for (const language of CONFIG.languages.slice(1)) {
+        console.log({ folderPath });
+        const langFolderPath = path.join(folderPath, language);
 
         // Move the folders and files from the language/<ouput folder> to the language folder
         const files = await fs.promises.readdir(langFolderPath);
@@ -73,6 +73,9 @@ async function fixTranslatedFilesStructureInOutputDir() {
             await fs.promises.rename(filePath, newFilePath);
         }
     }
+    logger.info(
+        "Finished fixing the structure of the translated files in the output directory",
+    );
 }
 
 /**
@@ -87,29 +90,50 @@ async function mergePathsForTranslatedFiles() {
     const folderPath = CONFIG.outputDirectory;
 
     // Go through each language folder
-    for (const language of CONFIG.languages) {
+    for (const language of CONFIG.languages.slice(1)) {
         const languageFolderPath = path.join(folderPath, language);
 
         async function recursivelyMoveSubFiles(folderPath: string) {
             const files = await fs.promises.readdir(folderPath);
 
             for (const file of files) {
-                const filePath = path.join(folderPath, file);
+                const filePath = path.resolve(path.join(folderPath, file));
                 // Remove the prefix /language/outputDir from the file path
                 // Example move docs/ar/chapter/index.ar.qmd to docs/chapter/index.ar.qmd
                 const index = filePath.indexOf(`/${language}`);
+                const indexOfFolderAfterLanguage = index + language.length + 1;
                 let newFilePathArr = filePath.split("");
-                for (let i = 0; i < +language.length + 2; i++) {
-                    newFilePathArr[i + index] = "/";
-                }
-                const newFilePath = newFilePathArr.join("");
+                newFilePathArr.splice(index, language.length + 1);
 
-                const stats = await fs.promises.stat(filePath);
+                const folderAfterLanguageArr = filePath
+                    .slice(indexOfFolderAfterLanguage)
+                    .split("");
+
+                const filePathBeforeLanguage = filePath.slice(0, index);
+
+                folderAfterLanguageArr.shift();
+                const indexOfFirstSlash = folderAfterLanguageArr.indexOf("/");
+                folderAfterLanguageArr.splice(0, indexOfFirstSlash);
+
+                const folderAfterLanguage = folderAfterLanguageArr.join("");
+                const newPath = path.resolve(
+                    path.join(filePathBeforeLanguage, folderAfterLanguage),
+                );
+
+                const endOfFirstFolderInFolderAfterLanguage =
+                    folderAfterLanguageArr.indexOf("/");
+                newFilePathArr.splice(
+                    indexOfFolderAfterLanguage,
+                    endOfFirstFolderInFolderAfterLanguage,
+                );
+
+                const newFilePath = path.resolve(newPath);
+                const stats = fs.statSync(filePath);
 
                 if (stats.isDirectory()) {
                     await recursivelyMoveSubFiles(filePath);
                 } else {
-                    console.log(`Moving ${filePath} to ${newFilePath}`);
+                    logger.info(`Moving ${filePath} to ${newFilePath}`);
                     fs.renameSync(filePath, newFilePath);
                 }
             }
@@ -117,6 +141,7 @@ async function mergePathsForTranslatedFiles() {
 
         await recursivelyMoveSubFiles(languageFolderPath);
     }
+    logger.info("Finished merging paths for the translated files");
 }
 
 /**
@@ -132,7 +157,7 @@ async function fixFileExtensionsForTranslatedFiles() {
     const folderPath = CONFIG.outputDirectory;
 
     // Go through each language folder
-    for (const language of CONFIG.languages) {
+    for (const language of CONFIG.languages.slice(1)) {
         const languageFolderPath = path.join(folderPath, language);
 
         async function recursivelyChangeFileExtensions(folderPath: string) {
@@ -151,7 +176,7 @@ async function fixFileExtensionsForTranslatedFiles() {
                         `.${language}`,
                     );
 
-                    console.log(`Renaming ${filePath} to ${newFilePath}`);
+                    logger.info(`Renaming ${filePath} to ${newFilePath}`);
                     await fs.promises.rename(filePath, newFilePath);
                 }
             }
@@ -159,11 +184,12 @@ async function fixFileExtensionsForTranslatedFiles() {
 
         await recursivelyChangeFileExtensions(languageFolderPath);
     }
+    logger.info("Finished fixing the file extensions for the translated files");
 }
 
 async function deleteEmptyFoldersInOutDir() {
     // Delete all the empty folders for each language in the output directory
-    for (const language of CONFIG.languages) {
+    for (const language of CONFIG.languages.slice(1)) {
         const languageFolderPath = path.join(CONFIG.outputDirectory, language);
         fs.rmdirSync(languageFolderPath, { recursive: true });
     }

@@ -16,7 +16,6 @@ import { ConstructType, ModuleBlockInfo, OtherBlockInfo } from "../interfaces";
 import { Position } from "acorn";
 import acorn from "acorn";
 import Parser from "./parser";
-import { ConstructIdentifier } from "./codeconstruct";
 import SourceFile from "./file";
 import * as ts from "typescript";
 import logger from "./logger";

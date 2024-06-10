@@ -13,7 +13,6 @@ import path from "path";
 import logger from "../utils/logger";
 import ConfigMgr from "../utils/config_mgr";
 
-const CONFIG = ConfigMgr.getConfig();
 /**
  * Recursively searches for JavaScript files in a directory and its subdirectories.
  *
@@ -62,6 +61,7 @@ function getJSFilesFromDirectory(
  * @returns void
  */
 export async function generateDoc() {
+    const CONFIG = ConfigMgr.getConfig();
     // Get JavaScript files from directory
     const filePaths = getJSFilesFromDirectory(CONFIG.sourceDirectory);
 
@@ -219,14 +219,6 @@ export async function generateDoc() {
 }
 
 // Access the path argument specified via command line
-const { inputData } = ConfigMgr.updateConfigStore();
-
-if (inputData.includeLocalizedVersions && !inputData.languages) {
-    throw new Error(
-        "Please provide languages to create localized docs for using the languages flag",
-    );
-}
-
 if (require.main === module) {
     generateDoc();
 }
