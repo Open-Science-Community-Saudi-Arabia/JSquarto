@@ -45,6 +45,14 @@ const DEFAULT_CONFIG = {
     includeLocalizedVersions: config.includeLocalizedVersions,
     languages: config.languages,
 };
+const dirConfigKeys = [
+    "translationsDirectory",
+    "sourceDirectory",
+    "outputDirectory",
+    "tutorialDirectory",
+    "configDirectory",
+] as const;
+type DirConfigKeys = (typeof dirConfigKeys)[number];
 export default class ConfigMgr {
     private static CONFIG = DEFAULT_CONFIG as Config & ExternalConfig;
     private static configHasBeenUpdated = false;

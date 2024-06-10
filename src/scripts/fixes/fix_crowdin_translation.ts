@@ -15,10 +15,7 @@ const CONFIG = ConfigMgr.getConfig();
  * Move the updated crowdin translations from translations folder to the output directory
  */
 export async function moveTranslatedFilesToOutputDir() {
-    const translationsFolderPath = path.join(
-        __dirname,
-        "/../../" + CONFIG.translationsDirectory,
-    );
+    const translationsFolderPath = CONFIG.translationsDirectory;
 
     async function copyAllFoldersAndFiles(source: string, destination: string) {
         const files = await fs.promises.readdir(source);
@@ -45,11 +42,7 @@ export async function moveTranslatedFilesToOutputDir() {
         const langFolderPath = path.join(translationsFolderPath, language);
 
         // Copy the language folder to the output directory
-        const newLangFolderPath = path.join(
-            __dirname,
-            `../../${CONFIG.outputDirectory}`,
-            language,
-        );
+        const newLangFolderPath = path.join(CONFIG.outputDirectory, language);
         await copyAllFoldersAndFiles(langFolderPath, newLangFolderPath);
     }
 }
@@ -91,7 +84,7 @@ export async function fixTranslatedFilesStructureInOutputDir() {
  */
 export async function mergePathsForTranslatedFiles() {
     // Go to the folders for the languages within the output dir
-    const folderPath = path.join(CONFIG.outputDirectory);
+    const folderPath = CONFIG.outputDirectory;
 
     // Go through each language folder
     for (const language of CONFIG.languages) {
@@ -109,7 +102,7 @@ export async function mergePathsForTranslatedFiles() {
                 for (let i = 0; i < +language.length + 2; i++) {
                     newFilePathArr[i + index] = "/";
                 }
-                const newFilePath = path.resolve(newFilePathArr.join(""));
+                const newFilePath = newFilePathArr.join("");
 
                 const stats = await fs.promises.stat(filePath);
 
@@ -136,7 +129,7 @@ export async function mergePathsForTranslatedFiles() {
  */
 export async function fixFileExtensionsForTranslatedFiles() {
     // Go to the folders for the languages within the output dir
-    const folderPath = path.join(CONFIG.outputDirectory);
+    const folderPath = CONFIG.outputDirectory;
 
     // Go through each language folder
     for (const language of CONFIG.languages) {

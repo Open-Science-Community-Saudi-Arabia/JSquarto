@@ -61,18 +61,11 @@ export async function fixAndStyleArabicHtmlFiles() {
 }
 
 if (require.main === module) {
-    const langs = process.argv
-        .find((arg) => arg.startsWith("languages"))
-        ?.split("=")[1]
-        ?.split(",");
-
-    if (!langs) {
+    if (!CONFIG.languages || CONFIG.languages.length === 0) {
         console.warn(
             "Languages not specified in cli arguments, setting languages to default",
         );
     }
-
-    CONFIG.languages = langs ?? CONFIG.languages;
 
     fixAndStyleArabicHtmlFiles();
 }
