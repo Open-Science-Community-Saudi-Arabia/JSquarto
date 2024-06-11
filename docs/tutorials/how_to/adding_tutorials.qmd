@@ -9,7 +9,7 @@ Tutorials are written in Quarto markdown. Quarto is a markdown language that is 
 
 
 ### Folder to write the tutorial 
-By default, tutorials are written in the `/tutorials` folder. This is the folder where all the tutorials are stored. Each tutorial is stored in a separate folder, and the folder name is the name of the tutorial. Inside the folder, there are serveral `.qmd` files that contains the tutorial contents. 
+By default, tutorials are written in the `docs/tutorials` folder. This is the folder where all the tutorials are stored. Each tutorial is stored in a separate folder, and the folder name is the name of the tutorial. Inside the folder, there are serveral `.qmd` files that contains the tutorial contents. 
 
 
 ### Configuring the tutorial
