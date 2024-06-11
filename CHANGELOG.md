@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## 1.1.0 (2024-06-11)
+## 1.0.4 (2024-06-11)
 
 ### Features
 
@@ -36,7 +36,6 @@ All notable changes to this project will be documented in this file. See [standa
 -   npm scripts throwing error when extra args are passed ([c91f59f](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/c91f59f0e179aed83e6453c7a60b1dfee19eb0f9))
 -   tutorials without chapter not included in quarto.yaml ([71452ce](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/71452ce397d5542b76776149476bb64d306a0230))
 -   wrong code construct name in generated doc ([c939628](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/c939628b69f2c575beb2e41eb3e9272ed0405ef4))
-
 
 ## Unreleased (2024-03-05)
 
