@@ -1,7 +1,12 @@
 {
     "name": "@oscsa/jsquarto",
-    "version": "1.0.3",
+    "version": "1.1.0",
     "description": "Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto"
+    },
+    "homepage": ".",
     "main": "index.js",
     "scripts": {
         "base:tsc": "ts-node-dev --transpile-only --project tsconfig.json",
@@ -20,7 +25,8 @@
         "fix:fix_wrong_languages_ref": "npm run base:command -- --command=fix:fix_wrong_languages_ref",
         "setup-quarto": "git clone https://github.com/quarto-dev/quarto-cli && cd quarto-cli && ./configure.sh",
         "update-quarto": "cd quarto-cli && git pull",
-        "tsc": "tsc -b ./tsconfig.bin.json && ts-node-dev ./src/scripts/add_shebang.ts"
+        "tsc": "tsc -b ./tsconfig.bin.json && ts-node-dev ./src/scripts/add_shebang.ts",
+        "release": "standard-version"
     },
     "bin": {
         "jsq": "./bin/jsq.js"
@@ -39,6 +45,7 @@
         "yaml": "^2.3.4"
     },
     "devDependencies": {
-        "@types/uuid": "^9.0.8"
+        "@types/uuid": "^9.0.8",
+        "standard-version": "^9.5.0"
     }
 }
