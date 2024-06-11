@@ -131,6 +131,8 @@ You can also manually edit the `config.json` file to modify the configuration se
 | `jsq doc:clean` | Delete the existing docs |
 | `jsq doc:serve` | Serve html files in browser (if translation workflow is used. [See](https://jsquarto.netlify.app/chapters/tutorials/how_to/workflows.html)) |
 
+#
+
 For more information on how to integrate translation tools like Crowdin with JSquarto, refer to the [Crowdin Worflow guide](https://jsquarto.netlify.app/chapters/tutorials/how_to/workflows#doc-generation-with-crowdin-translation).
 
 For more details on using JSquarto and to see an example of the generated documentation, visit the [JSQuarto documentation](https://jsquarto.netlify.app/)
