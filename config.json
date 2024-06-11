@@ -1,9 +1,0 @@
-{
-    "includeLocalizedVersions": false,
-    "outputDirectory": "docs",
-    "sourceDirectory": "dist",
-    "translationsDirectory": "translations",
-    "tutorialDirectory": "tutorials",
-    "languages": ["en", "ar"],
-    "translationsDirectory": "translations"
-}

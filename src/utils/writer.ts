@@ -13,16 +13,16 @@
  *
  *  **Note**: This module is not yet complete and is still under development.
  *  */
-
-import { Doc, ModuleBlockInfo } from "../interfaces";
 import fs from "fs";
-import { Category, Module, ModuleDoc, SubCategory } from "./components";
+import { Category, Module, SubCategory } from "./components";
 import logger from "./logger";
 import path from "path";
 import YAML from "yaml";
 import { DEFAULT_QUARTO_YAML_CONTENT, INDEX_QMD_CONTENT } from "../constants";
 import { StringUtil } from "./string";
-import CONFIG from "../config";
+import ConfigMgr from "./config_mgr";
+
+const CONFIG = ConfigMgr.getConfig();
 
 interface Chapter {
     part: string;
@@ -141,6 +141,12 @@ export default class Writer {
         modules: Map<string, Module>;
         tutorialCategory: Category;
     } {
+        // Check if tutorials folder exist
+        const tutorialsFolderExists = fs.existsSync(this.tutorialsSourcePath);
+        if (!tutorialsFolderExists) {
+            logger.warn("Tutorials folder does not exist");
+        }
+
         // Get the path to the tutorials configuration file
         const tutorialsConfigPath = path.join(
             this.tutorialsSourcePath,
@@ -295,7 +301,6 @@ export default class Writer {
             fs.mkdirSync(directoryPath, { recursive: true });
 
         fs.writeFileSync(filePathToWrite, "", "utf8");
-
         const subCategoryTitle = subCategory
             ? StringUtil.capitalizeFirstLetter(subCategory.name)
             : undefined;
@@ -345,8 +350,6 @@ export default class Writer {
 
         try {
             console.log({ qmdfilePath });
-            fs.writeFileSync(qmdfilePath, "", "utf8");
-
             let fileContent = "";
 
             // Add module title to qmd file
@@ -900,7 +903,7 @@ export default class Writer {
         localizeFilesInFolder(CONFIG.outputDirectory);
     }
 
-    static fixMissingLocalizedIndexFiles(langs: string[]) {
+    static async fixMissingLocalizedIndexFiles(langs: string[]) {
         // In some cases babel quarto will not create localized index files for the languages in this format /ar/index.ar.html instead
         // it will create /ar/index.html, this method will fix that by creating the localized index files for each language
 
