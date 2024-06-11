@@ -1,12 +1,20 @@
 {
     "name": "@oscsa/jsquarto",
-    "version": "1.1.0",
+    "version": "1.0.4",
     "description": "Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc",
     "repository": {
         "type": "git",
         "url": "https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto"
     },
-    "homepage": ".",
+    "keywords": {
+        "jsquarto",
+        "jsdoc",
+        "quarto",
+        "documentation",
+        "markdown",
+        "cli"
+    },
+    "homepage": "https://jsquarto.netlify.app/",
     "main": "index.js",
     "scripts": {
         "base:tsc": "ts-node-dev --transpile-only --project tsconfig.json",
@@ -46,6 +54,12 @@
     },
     "devDependencies": {
         "@types/uuid": "^9.0.8",
+        "cz-conventional-changelog": "^3.3.0",
         "standard-version": "^9.5.0"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }
