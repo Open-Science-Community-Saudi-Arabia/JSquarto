@@ -31,14 +31,11 @@
             "adding_tutorials": {
                 "title": "Adding tutorials"
             },
-            "workflows": {
-                "title": "Optimize your workflow"
-            },
             "usage": {
                 "title": "Using the Tool"
             },
-            "starting_the_project": {
-                "title": "Starting a new build"
+            "workflows": {
+                "title": "Document generation workflows"
             },
             "crowdin_integration": {
                 "title": "Crowdin Integration"
