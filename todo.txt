@@ -1,0 +1,38 @@
+### TODO
+- [x] Make all commands runnable from the cli tool
+- [x] Add feature to reference config file from different directory
+- [ ] Add option to specify path to index.md file
+- [ ] NPM scripts dont reference config variable for outputDirectory instead they use the default value
+
+
+### Issue
+Passing additionalArgs to script that dont' require them causes an error
+> @oscsa/jsquarto@1.0.1 doc:preview
+> quarto preview ./docs workingDir=/home/richie/Desktop/repos/oscsa/JSquarto/src
+
+Preparing to preview
+[ 1/20] index.md
+pandoc: workingDir=/home/richie/Desktop/repos/oscsa/JSquarto/src: withBinaryFile: does not exist (No such file or directory)
+node:child_process:965
+    throw err;
+    ^
+
+Error: Command failed: npm run doc:preview --  workingDir=/home/richie/Desktop/repos/oscsa/JSquarto/src
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at Object.<anonymous> (/home/richie/Desktop/repos/oscsa/JSquarto/bin/src/jsq.js:15:30)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49 {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 228144,
+  stdout: null,
+  stderr: null
+}
+
+

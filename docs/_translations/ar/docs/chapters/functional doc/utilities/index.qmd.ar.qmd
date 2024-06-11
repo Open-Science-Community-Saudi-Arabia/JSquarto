@@ -1,3 +1,7 @@
 ---
+<<<<<<< HEAD
 title: utilities
+=======
+title: المنافع العامة
+>>>>>>> dev
 ---

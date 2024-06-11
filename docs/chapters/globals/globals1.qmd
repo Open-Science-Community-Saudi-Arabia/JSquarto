@@ -38,6 +38,47 @@ Starts the documentation generation process.
 
 
 
+## path_1 
+`[variable]`
+ 
+
+
+## moveTranslatedFilesToOutputDir 
+`[function]`
+ 
+
+
+## fixTranslatedFilesStructureInOutputDir 
+`[function]`
+ 
+
+
+## mergePathsForTranslatedFiles 
+`[function]`
+ 
+**Description:**
+This is necessary because the Crowdin CLI creates a folder for each language
+  and places the translated files within that folder. This function will move the files from the language folder
+  to the same level as the original files.
+
+
+
+## fixFileExtensionsForTranslatedFiles 
+`[function]`
+ 
+**Description:**
+The generated crowdin files have this file extension pattern: <filename>.<language>.<ext>
+  The problem here is that the <filename> can be <index.md> instead of 'index'.
+  This will make the generated file to be <index.md>.<language>.<ext>
+  This function will fix the file name to be <plain_file_name>.<language>.<ext> so it'll be <index.<language>.<ext>>
+
+
+
+## unknown 
+`[other]`
+ 
+
+
 ## unknown 
 `[other]`
  
