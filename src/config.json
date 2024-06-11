@@ -1,6 +1,6 @@
 {
     "includeLocalizedVersions": false,
-    "outputDirectory": "docs/build",
+    "outputDirectory": "docs/output",
     "sourceDirectory": "docs/source",
     "tutorialDirectory": "docs/tutorials",
     "languages": ["en", "ar"],

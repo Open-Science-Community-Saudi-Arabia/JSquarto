@@ -21,7 +21,7 @@ Below is an example of the `config.json` file:
 ```json
 {
     "includeLocalizedVersions": false,
-    "outputDirectory": "docs/build",
+    "outputDirectory": "docs/output",
     "sourceDirectory": "docs/source",
     "tutorialDirectory": "docs/tutorials",
     "languages": ["en", "ar"],
@@ -34,7 +34,7 @@ It contains the following fields:
 
 2. `tutorialDirectory`: Specifies the directory containing the tutorial files to be included in the documentation. By default, this field is set to `docs/tutorials` within the project structure. This is the same as the `tutorial` CLI argument.
 
-3. `outputDirectory`: Specifies the output directory where the generated documentation will be stored. By default, this field is set to `docs/build` within the project structure. This is the same as the `output` CLI argument.
+3. `outputDirectory`: Specifies the output directory where the generated documentation will be stored. By default, this field is set to `docs/output` within the project structure. This is the same as the `output` CLI argument.
 
 
 ### Basic Usage {#sec-basic-usage}

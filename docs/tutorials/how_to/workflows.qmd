@@ -52,7 +52,7 @@ Note: Ensure to include the `include_localized_versions` argument to generate co
 
     Note: The `fix:all` script is a custom script that fixes the navigation issues in the previewed documentation. This script is used to update the navigation links in the previewed documentation to enable seamless navigation between the different languages. And the languages specified in the script should match the languages specified in the `languages` argument during the documentation generation process.
 
-7. You can navigate to the `docs/build/_book` directory to view the previewed documentation in multiple languages. The previewed documentation provides a comprehensive overview of the content in each language, enabling you to verify the translations and ensure the accuracy and quality of the documentation.
+7. You can navigate to the `docs/output/_book` directory to view the previewed documentation in multiple languages. The previewed documentation provides a comprehensive overview of the content in each language, enabling you to verify the translations and ensure the accuracy and quality of the documentation.
 
 
 
@@ -83,7 +83,7 @@ On Crowdin, you can set up how the translated files will be named, make sure it 
        babelquarto::render_book(file.path(parent_dir, project_dir))
     ```
 
-4. After rendering the book, the html files will be generated and set in the `docs/build/_book` directory. You can then serve the book using any static server like `http-server` or `live-server` to preview the documentation in multiple languages. Alternatively, you can run the following command to serve the book:
+4. After rendering the book, the html files will be generated and set in the `docs/output/_book` directory. You can then serve the book using any static server like `http-server` or `live-server` to preview the documentation in multiple languages. Alternatively, you can run the following command to serve the book:
     
     ```bash
         jsq serve
