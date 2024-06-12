@@ -10,6 +10,7 @@ import path from "path";
 import fs from "fs";
 import ConfigMgr from "../../utils/config_mgr";
 import logger from "../../utils/logger";
+import StringAlgo from "../algo/string";
 const CONFIG = ConfigMgr.getConfig();
 
 /**
@@ -46,7 +47,11 @@ async function moveTranslatedFilesToOutputDir() {
         const newLangFolderPath = path.join(CONFIG.outputDirectory, language);
         await copyAllFoldersAndFiles(langFolderPath, newLangFolderPath);
     }
-    logger.info("Finished moving translated files to output directory");
+    logger.info(
+        `
+        Finished moving the updated crowdin translations from the translations folder to the output directory,
+        `,
+    );
 }
 
 /**
@@ -74,7 +79,9 @@ async function fixTranslatedFilesStructureInOutputDir() {
         }
     }
     logger.info(
-        "Finished fixing the structure of the translated files in the output directory",
+        `
+        Finished fixing the structure of the translated files in the output directory,
+        `,
     );
 }
 
@@ -100,32 +107,49 @@ async function mergePathsForTranslatedFiles() {
                 const filePath = path.resolve(path.join(folderPath, file));
                 // Remove the prefix /language/outputDir from the file path
                 // Example move docs/ar/chapter/index.ar.qmd to docs/chapter/index.ar.qmd
-                const index = filePath.indexOf(`/${language}`);
-                const indexOfFolderAfterLanguage = index + language.length + 1;
-                let newFilePathArr = filePath.split("");
-                newFilePathArr.splice(index, language.length + 1);
 
-                const folderAfterLanguageArr = filePath
-                    .slice(indexOfFolderAfterLanguage)
-                    .split("");
+                // /home/richie/Desktop/repos/oscsa/JSquarto/docs/build/ar/docs/build/chapters/functional doc/index.ar.qmd
+                const [languageIdxStart, languageIdxEnd] =
+                    StringAlgo.findStartAndEndOfSubstring(
+                        filePath,
+                        `/${language}/`,
+                    );
+                if (languageIdxStart === -1) {
+                    logger.info(`Skipping ${filePath}`);
+                    continue;
+                }
 
-                const filePathBeforeLanguage = filePath.slice(0, index);
+                const remainingPath = filePath.slice(languageIdxEnd);
+                const pathBeforeLanguage = filePath.slice(0, languageIdxStart);
+                const folderBeforeLanguage = pathBeforeLanguage
+                    .split("/")
+                    .pop() as string;
 
-                folderAfterLanguageArr.shift();
-                const indexOfFirstSlash = folderAfterLanguageArr.indexOf("/");
-                folderAfterLanguageArr.splice(0, indexOfFirstSlash);
+                const folderBeforeLanguageNotBeforeRemainingPathIdx =
+                    remainingPath.indexOf(folderBeforeLanguage);
 
-                const folderAfterLanguage = folderAfterLanguageArr.join("");
-                const newPath = path.resolve(
-                    path.join(filePathBeforeLanguage, folderAfterLanguage),
+                // Cut everything form just before language to just before chapters
+                const pathFromChaptersOnwards =
+                    folderBeforeLanguageNotBeforeRemainingPathIdx === -1
+                        ? remainingPath.slice(0)
+                        : remainingPath.slice(
+                              folderBeforeLanguageNotBeforeRemainingPathIdx,
+                          );
+                const newPath = path.join(
+                    pathBeforeLanguage,
+                    pathFromChaptersOnwards,
                 );
 
-                const endOfFirstFolderInFolderAfterLanguage =
-                    folderAfterLanguageArr.indexOf("/");
-                newFilePathArr.splice(
-                    indexOfFolderAfterLanguage,
-                    endOfFirstFolderInFolderAfterLanguage,
-                );
+                console.log({
+                    languageIdxStart,
+                    languageIdxEnd,
+                    remainingPath,
+                    pathBeforeLanguage,
+                    pathFromChaptersOnwards,
+                    folderBeforeLanguageNotBeforeRemainingPathIdx,
+                    newPath,
+                    filePath,
+                });
 
                 const newFilePath = path.resolve(newPath);
                 const stats = fs.statSync(filePath);
@@ -134,6 +158,10 @@ async function mergePathsForTranslatedFiles() {
                     await recursivelyMoveSubFiles(filePath);
                 } else {
                     logger.info(`Moving ${filePath} to ${newFilePath}`);
+                    // Move the file
+                    fs.mkdirSync(path.dirname(newFilePath), {
+                        recursive: true,
+                    });
                     fs.renameSync(filePath, newFilePath);
                 }
             }
@@ -141,7 +169,11 @@ async function mergePathsForTranslatedFiles() {
 
         await recursivelyMoveSubFiles(languageFolderPath);
     }
-    logger.info("Finished merging paths for the translated files");
+    logger.info(
+        `
+        Finished merging the paths for the translated files,
+        `,
+    );
 }
 
 /**
@@ -184,7 +216,11 @@ async function fixFileExtensionsForTranslatedFiles() {
 
         await recursivelyChangeFileExtensions(languageFolderPath);
     }
-    logger.info("Finished fixing the file extensions for the translated files");
+    logger.info(
+        `
+        Finished fixing the file extensions for the translated files,
+        `,
+    );
 }
 
 async function deleteEmptyFoldersInOutDir() {
