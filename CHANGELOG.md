@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 * incorrect file paths while merging crowdin translations ([0196156](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/01961566ef87639cb120d6704b401473d7a7c969))
-* translations dir in config ([cfa81fc](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/cfa81fc650b0d52ee2e1b830fa0a0d131fd7b43f))
+* incorrect translations directory in default config ([cfa81fc](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/cfa81fc650b0d52ee2e1b830fa0a0d131fd7b43f))
 
 ## 1.0.4 (2024-06-11)
 
