@@ -10,6 +10,9 @@
             },
             "raising_pr": {
                 "title": "Raising pull requests"
+            },
+            "tutorial_overview": {
+                "title": "Tutorial overview"
             }
         }
     },
