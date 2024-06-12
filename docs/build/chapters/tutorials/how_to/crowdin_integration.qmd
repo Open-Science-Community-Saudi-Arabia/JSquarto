@@ -2,7 +2,6 @@
 title: Crowdin integration 
 ---
 
-
 This section will go over the necessary steps for integrating crowdin for translations.
 
 ### Prerequisites
@@ -11,9 +10,12 @@ This section will go over the necessary steps for integrating crowdin for transl
 3. You need to host your project on github. If you don't have one, you can create one [here](https://github.com)
 
 ### Steps
-1. Generate the documentation using JSquarton. You can follow the steps @crowdin-documentation
-2. Add a `config.json` file to the root of your project. The file should look like this:
-
+1. Initialize a new config file if you dont have one already. 
+   To do this run the following command:
+   ```bash
+   jsq config:init
+   ```
+   The file should look like this:
    ```json
         {
             "outputDirectory": "docs",
@@ -27,6 +29,7 @@ This section will go over the necessary steps for integrating crowdin for transl
     - `translationsDirectory`: The directory where the translations will be stored. This directory will be used by crowdin to store the translations.
     
     Make sure the `outputDirectory` and `translationsDirectory` exists within your project
+2. Generate the documentation using JSquarto. You can follow the steps @usage-basic
 3. Commit all necessary changes, including the `config.json` file and push to your github repository.
 4. On your crowdin project, go to the settings page and click on the `Integrations` tab.
    ![Integrations](../images/open_integrations_tab.png){fig-align='center'}
