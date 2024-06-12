@@ -4,5 +4,5 @@
     "sourceDirectory": "docs/source",
     "tutorialDirectory": "docs/tutorials",
     "languages": ["en", "ar"],
-    "translationsDirectory": "dosc/translations"
+    "translationsDirectory": "doc/_translations"
 }
