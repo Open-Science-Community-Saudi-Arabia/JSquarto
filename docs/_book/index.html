@@ -18,6 +18,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
 <link href="./chapters/globals/globals.html" rel="next">
@@ -276,7 +310,16 @@ ul.task-list li input[type="checkbox"] {
 </section><section id="contributing-organization" class="level2"><h2 class="anchored" data-anchor-id="contributing-organization">Contributing Organization</h2>
 <p>JSQuarto is developed and maintained by the <a href="https://github.com/Open-Science-Community-Saudi-Arabia">Open Science Community Saudi Arabia</a>. Our mission is to promote open science practices and foster collaboration among researchers and developers in Saudi Arabia.</p>
 </section><section id="getting-started" class="level2"><h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<p>To start using JSQuarto, visit the <a href="https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto">GitHub repository</a> for installation instructions and usage documentation.</p>
+<p>To start using JSQuarto the requirements below must be met: - Node.js <a href="https://nodejs.org/en/download/">download</a> - Quarto <a href="https://quarto.org/docs/getting-started/installation.html">download</a> - Babel <a href="https://docs.ropensci.org/babelquarto/">download</a></p>
+<p>After installing the requirements, follow the instructions below</p>
+<ol type="1">
+<li>Open your terminal and run the following command to install JSQuarto:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> jsquarto</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Navigate to your project directory and run the following command to generate the documentation:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jsq</span> doc:generate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="feedback-and-support" class="level2"><h2 class="anchored" data-anchor-id="feedback-and-support">Feedback and Support</h2>
 <p>If you have any questions, feedback, or need support, please <a href="https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues">open an issue</a> on GitHub or <a href="https://github.com/Open-Science-Community-Saudi-Arabia">join our community</a> for assistance.</p>
 

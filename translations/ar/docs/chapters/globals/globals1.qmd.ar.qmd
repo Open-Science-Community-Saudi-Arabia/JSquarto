@@ -7,7 +7,7 @@
 ## getJSFilesFromDirectory 
 `[function]`
  
-**وصف:**
+**الوصف:**
 هذه الوظيفة تتعقب بشكل متكرر الدليل المحدد ودلائله الفرعية للعثور على ملفات جافا سكريبت (.js).
   يبدأ بالتحقق من كل عنصر في الدليل. إذا كان البند دليل ، فإنه يتكرر الاتصال بنفسه
   للبحث عن ملفات جافا سكريبت داخل ذلك الدليل. إذا كان العنصر ملف جافا سكريبت ، فإنه يضيف مسار الملف
@@ -20,7 +20,7 @@
 ## بداية 
 `[function]`
  
-**وصف:**
+**الوصف:**
 يبدأ عملية توليد الوثائق.
  
   وتبدأ هذه الوظيفة عملية توليد الوثائق عن طريق القيام بالخطوات التالية:
@@ -41,13 +41,13 @@
 ## غير معروف 
 `[other]`
  
-**وصف:**
+**الوصف:**
 هذه الطريقة ستقوم بتحويل سلسلة إلى جمال toUpperCase
       
 
-**أمثلة:**
+* أمثلة: **
 
-```جافا سكريبت
+```javascript
 StringUtil.convertToCamelCase('hello world') => 'helloWorld'
       StringUtil.convertToCamelCase('hello-world') => 'helloWorld'
       StringUtil.convertToCamelCase('hello_world') => 'helloWorld'
@@ -60,13 +60,13 @@ StringUtil.convertToCamelCase('hello world') => 'helloWorld'
 ## غير معروف 
 `[other]`
  
-**وصف:**
+**الوصف:**
 هذه الطريقة ستقوم بتحويل سلسلة إلى جمال toUpperCase
       
 
-**أمثلة:**
+* أمثلة: **
 
-```جافا سكريبت
+```javascript
 StringUtil.convertToCamelCase('hello world') => 'helloWorld'
       StringUtil.convertToCamelCase('hello-world') => 'helloWorld'
       StringUtil.convertToCamelCase('hello_world') => 'helloWorld'
