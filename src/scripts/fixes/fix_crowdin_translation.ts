@@ -10,7 +10,6 @@ import path from "path";
 import fs from "fs";
 import ConfigMgr from "../../utils/config_mgr";
 import logger from "../../utils/logger";
-import StringAlgo from "../algo/string";
 const CONFIG = ConfigMgr.getConfig();
 
 /**
@@ -62,7 +61,6 @@ async function fixTranslatedFilesStructureInOutputDir() {
     const folderPath = path.join(CONFIG.outputDirectory);
 
     for (const language of CONFIG.languages.slice(1)) {
-        console.log({ folderPath });
         const langFolderPath = path.join(folderPath, language);
 
         // Move the folders and files from the language/<ouput folder> to the language folder
@@ -70,12 +68,20 @@ async function fixTranslatedFilesStructureInOutputDir() {
 
         for (const file of files) {
             const filePath = path.join(langFolderPath, file);
-            const newFilePath = path.join(
-                path.join(folderPath, language),
-                file,
+
+            const currentFolderName = path.basename(folderPath);
+
+            // Find subfolder with same name as output folder
+            const subFolder = findSubFolderWithMatchingName(
+                filePath,
+                currentFolderName,
             );
 
-            await fs.promises.rename(filePath, newFilePath);
+            if (subFolder === "") {
+                continue;
+            }
+
+            moveDirContents(subFolder, langFolderPath);
         }
     }
     logger.info(
@@ -83,6 +89,60 @@ async function fixTranslatedFilesStructureInOutputDir() {
         Finished fixing the structure of the translated files in the output directory,
         `,
     );
+}
+
+/**
+ * Find the subfolder with the same name as the output folder
+ *
+ * @param folderPath - The path to the folder to search for the subfolder in.
+ * @param outputFolderName - The name of the output folder to search for.
+ * @returns The path to the subfolder with the same name as the output folder.
+ */
+function findSubFolderWithMatchingName(
+    folderPath: string,
+    outputFolderName: string,
+): string {
+    const files = fs.readdirSync(folderPath);
+
+    for (const file of files) {
+        const stats = fs.statSync(path.join(folderPath, file));
+        if (stats.isDirectory() && file === outputFolderName) {
+            return path.join(folderPath, file);
+        }
+    }
+    return "";
+}
+
+/**
+ * Moves the contents of one directory to another while maintaining the file structure and hierarchy.
+ *
+ * @param sourceDir - The directory to move files and folders from.
+ * @param destDir - The directory to move files and folders to.
+ */
+function moveDirContents(sourceDir: string, destDir: string) {
+    // Ensure the destination directory exists
+    fs.mkdirSync(destDir, { recursive: true });
+
+    // Get all items (files and directories) in the source directory
+    const items = fs.readdirSync(sourceDir);
+
+    // Loop through each item in the source directory
+    for (const item of items) {
+        const sourceItemPath = path.join(sourceDir, item);
+        const destItemPath = path.join(destDir, item);
+
+        // Check if the item is a directory
+        const itemStat = fs.statSync(sourceItemPath);
+        if (itemStat.isDirectory()) {
+            // Recursively move the directory
+            moveDirContents(sourceItemPath, destItemPath);
+            // Remove the original empty directory
+            fs.rmdirSync(sourceItemPath);
+        } else {
+            // Move the file
+            fs.renameSync(sourceItemPath, destItemPath);
+        }
+    }
 }
 
 /**
@@ -100,74 +160,8 @@ async function mergePathsForTranslatedFiles() {
     for (const language of CONFIG.languages.slice(1)) {
         const languageFolderPath = path.join(folderPath, language);
 
-        async function recursivelyMoveSubFiles(folderPath: string) {
-            const files = await fs.promises.readdir(folderPath);
-
-            for (const file of files) {
-                const filePath = path.resolve(path.join(folderPath, file));
-                // Remove the prefix /language/outputDir from the file path
-                // Example move docs/ar/chapter/index.ar.qmd to docs/chapter/index.ar.qmd
-
-                // /home/richie/Desktop/repos/oscsa/JSquarto/docs/build/ar/docs/build/chapters/functional doc/index.ar.qmd
-                const [languageIdxStart, languageIdxEnd] =
-                    StringAlgo.findStartAndEndOfSubstring(
-                        filePath,
-                        `/${language}/`,
-                    );
-                if (languageIdxStart === -1) {
-                    logger.info(`Skipping ${filePath}`);
-                    continue;
-                }
-
-                const remainingPath = filePath.slice(languageIdxEnd);
-                const pathBeforeLanguage = filePath.slice(0, languageIdxStart);
-                const folderBeforeLanguage = pathBeforeLanguage
-                    .split("/")
-                    .pop() as string;
-
-                const folderBeforeLanguageNotBeforeRemainingPathIdx =
-                    remainingPath.indexOf(folderBeforeLanguage);
-
-                // Cut everything form just before language to just before chapters
-                const pathFromChaptersOnwards =
-                    folderBeforeLanguageNotBeforeRemainingPathIdx === -1
-                        ? remainingPath.slice(0)
-                        : remainingPath.slice(
-                              folderBeforeLanguageNotBeforeRemainingPathIdx,
-                          );
-                const newPath = path.join(
-                    pathBeforeLanguage,
-                    pathFromChaptersOnwards,
-                );
-
-                console.log({
-                    languageIdxStart,
-                    languageIdxEnd,
-                    remainingPath,
-                    pathBeforeLanguage,
-                    pathFromChaptersOnwards,
-                    folderBeforeLanguageNotBeforeRemainingPathIdx,
-                    newPath,
-                    filePath,
-                });
-
-                const newFilePath = path.resolve(newPath);
-                const stats = fs.statSync(filePath);
-
-                if (stats.isDirectory()) {
-                    await recursivelyMoveSubFiles(filePath);
-                } else {
-                    logger.info(`Moving ${filePath} to ${newFilePath}`);
-                    // Move the file
-                    fs.mkdirSync(path.dirname(newFilePath), {
-                        recursive: true,
-                    });
-                    fs.renameSync(filePath, newFilePath);
-                }
-            }
-        }
-
-        await recursivelyMoveSubFiles(languageFolderPath);
+        // Move the folders and files from the language/ to ../
+        moveDirContents(languageFolderPath, folderPath);
     }
     logger.info(
         `
