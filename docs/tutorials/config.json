@@ -1,0 +1,45 @@
+{
+    "contributing": {
+        "title": "Contributing to the project",
+        "children": {
+            "improving_documentation": {
+                "title": "Improving documentation"
+            },
+            "raising_issues": {
+                "title": "Raising issues"
+            },
+            "raising_pr": {
+                "title": "Raising pull requests"
+            }
+        }
+    },
+    "project_structure": {
+        "title": "Project structure"
+    },
+    "environment_setup": {
+        "title": "Environment Setup"
+    },
+    "changelog": {
+        "title": "Change log"
+    },
+    "localization": {
+        "title": "Localization"
+    },
+    "how_to": {
+        "title": "How to",
+        "children": {
+            "adding_tutorials": {
+                "title": "Adding tutorials"
+            },
+            "usage": {
+                "title": "Using the Tool"
+            },
+            "workflows": {
+                "title": "Document generation workflows"
+            },
+            "crowdin_integration": {
+                "title": "Crowdin Integration"
+            }
+        }
+    }
+}

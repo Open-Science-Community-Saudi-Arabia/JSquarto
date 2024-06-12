@@ -1,0 +1,11 @@
+{
+    "outputDirectory": "docs/build",
+    "sourceDirectory": "dist",
+    "tutorialDirectory": "docs/tutorials",
+    "translationsDirectory": "docs/_translations",
+    "includeLocalizedVersions": false,
+    "languages": [
+        "en",
+        "ar"
+    ]
+}

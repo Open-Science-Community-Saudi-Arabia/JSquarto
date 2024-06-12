@@ -1,0 +1,7 @@
+docs
+.jsquarto
+dist
+node_modules
+.git
+.github
+.Rproj.user

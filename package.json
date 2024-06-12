@@ -1,29 +1,42 @@
 {
-    "name": "jsquarto",
-    "version": "1.0.0",
+    "name": "@oscsa/jsquarto",
+    "version": "1.0.5",
     "description": "Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc",
-    "main": "index.js",
-    "scripts": {
-        "doc:generate": "ts-node-dev --transpile-only --project tsconfig.json ./src/index.ts",
-        "doc:preview": "quarto preview ./docs",
-        "fix:all": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/index.ts",
-        "fix:crowdin_files": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_crowdin_translation.ts",
-        "fix:localized_files": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_localized_index_file.ts",
-        "fix:duplicate_languages_ref": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_duplicate_language_refs.ts",
-        "fix:fix_wrong_language_refs": "ts-node-dev --transpile-only --project tsconfig.json ./src/fixes/fix_wrong_language_refs.ts",
-        "doc:clean": "rm -rf ./docs",
-        "doc:serve": "serve ./docs/_book",
-        "setup-quarto": "git clone https://github.com/quarto-dev/quarto-cli && cd quarto-cli && ./configure.sh",
-        "update-quarto": "cd quarto-cli && git pull",
-        "build": "npm run doc:generate && npm run doc:preview"
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto"
     },
     "keywords": [],
+    "homepage": "https://jsquarto.netlify.app/",
+    "main": "index.js",
+    "scripts": {
+        "base:tsc": "ts-node-dev --transpile-only --project tsconfig.json",
+        "base:command": "npm run base:tsc -- ./src/scripts/command.ts",
+        "config:init": "npm run base:command -- --command=config:init",
+        "config:set": "npm run base:command -- --command=config:set",
+        "config:get": "npm run base:command -- --command=config:get",
+        "doc:generate": "npm run base:command -- --command=doc:generate",
+        "doc:preview": "npm run base:command -- --command=doc:preview",
+        "doc:clean": "npm run base:command -- --command=doc:clean",
+        "doc:serve": "npm run base:command -- --command=doc:serve",
+        "fix:all": "npm run base:command -- --command=fix:all",
+        "fix:crowdin_files": "npm run base:command -- --command=fix:crowdin_files",
+        "fix:localized_files": "npm run base:command -- --command=fix:localized_files",
+        "fix:duplicate_languages_ref": "npm run base:command -- --command=fix:duplicate_languages_ref",
+        "fix:fix_wrong_languages_ref": "npm run base:command -- --command=fix:fix_wrong_languages_ref",
+        "setup-quarto": "git clone https://github.com/quarto-dev/quarto-cli && cd quarto-cli && ./configure.sh",
+        "update-quarto": "cd quarto-cli && git pull",
+        "tsc": "tsc -b ./tsconfig.bin.json && ts-node-dev ./src/scripts/add_shebang.ts",
+        "release": "standard-version"
+    },
+    "bin": {
+        "jsq": "./bin/jsq.js"
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "acorn": "^8.11.3",
         "cheerio": "^1.0.0-rc.12",
-        "cross-env": "^7.0.3",
         "fs": "^0.0.1-security",
         "serve": "^14.2.3",
         "ts-node-dev": "^2.0.0",
@@ -32,6 +45,13 @@
         "yaml": "^2.3.4"
     },
     "devDependencies": {
-        "@types/uuid": "^9.0.8"
+        "@types/uuid": "^9.0.8",
+        "cz-conventional-changelog": "^3.3.0",
+        "standard-version": "^9.5.0"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }

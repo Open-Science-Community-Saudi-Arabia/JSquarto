@@ -1,0 +1,133 @@
+This section provides an overview of the JSquarto tool and its usage, including the custom CLI arguments and configuration settings that can be leveraged to customize the documentation generation process.
+
+### CLI arguments {#sec-usage}
+The CLI arguments are used to customize the behavior of the JSquarto tool. These bespoke arguments enable you to tailor the documentation generation process to suit your specific requirements. By leveraging these arguments, you can enhance the efficiency and effectiveness of the documentation generation process, thereby streamlining your workflow and optimizing your documentation output.
+
+Some of the custom CLI arguments supported by JSquarto include:
+1. `source`:  Source files are pivotal components containing the comments that JSquarto utilizes to generate comprehensive documentation. Specifies the directory containing the source files to be documented. These files can be can be written in various languages supported by JSquarto, such as JavaScript, TypeScript, and JSX. By default, JSquarto will check for the `docs/source` directory within your project structure to locate these the source file. However, you possess the flexibility to designate an alternative directory through the `source` option.
+
+2. `tutorial`: Specifies the directory containing the tutorial files to be included in the documentation. This argument allows you to incorporate tutorial content into your documentation, providing additional context and guidance for users. 
+
+3. `output`: Specifies the output directory where the generated documentation will be stored. By default, JSquarto will save the documentation in the `docs` directory within your project structure. However, you can customize the output location by specifying an alternative directory through the `output` option.
+
+4. `languages`: Specifies the languages to be supported in the documentation. This argument enables you to generate documentation in multiple languages, catering to a diverse user base. For example, `languages=en,fr,es` specifies English, French, and Spanish as the supported languages.
+
+5. `include_localized_versions`: Specifies whether to include localized versions of the generated documentation. For example, if specified, JSquarto will generate seperate files for each specified language. 
+
+### Configuration
+The `config.json` file in the root directory of the project is used to store the configuration settings for the JSquarto tool. This file contains the default settings for the documentation generation process, such as the source files directory, tutorial files directory, output directory, and supported languages. This config file can come in handy when you want to persist your settings for a particular project. You can modify these settings to customize the documentation generation process according to your preferences. 
+
+Below is an example of the `config.json` file:
+```json
+{
+    "includeLocalizedVersions": false,
+    "outputDirectory": "docs/output",
+    "sourceDirectory": "docs/source",
+    "tutorialDirectory": "docs/tutorials",
+    "languages": ["en", "ar"],
+    "translationsDirectory": "dosc/translations"
+}
+```
+
+It contains the following fields:
+1. `sourceDirectory`: Specifies the directory containing the source files to be documented. By default, this field is set to `docs/source` within the project structure. This is the same as the `source` CLI argument.
+
+2. `tutorialDirectory`: Specifies the directory containing the tutorial files to be included in the documentation. By default, this field is set to `docs/tutorials` within the project structure. This is the same as the `tutorial` CLI argument.
+
+3. `outputDirectory`: Specifies the output directory where the generated documentation will be stored. By default, this field is set to `docs/output` within the project structure. This is the same as the `output` CLI argument.
+
+
+### Basic Usage {#sec-basic-usage}
+To utilize these custom CLI arguments, simply append them to the JSquarto command when executing the tool. For example:
+
+To specify the source files directory:
+```bash
+jsq doc:generate source=/path/to/your/source/files 
+```
+
+To specify the tutorial files directory:
+```bash
+jsq doc:generate tutorial=/path/to/your/tutorial/files
+```
+
+To specify the output directory:
+```bash
+jsq doc:generate output=/path/to/your/output/directory
+```
+
+To specify the supported languages:
+```bash
+jsq doc:generate languages=en,fr,es
+```
+This will only add the languages to the config file (_quarto.yml) and not generate the documentation in the specified languages. This is important for cases where an external tool like Crowdin will be used to translate the documentation and generate the files in the specified languages.
+
+To include localized versions of the generated documentation:
+```bash
+jsq doc:generate include_localized_versions=true languages=en,fr,es
+```
+This will generate the documentation in the specified languages and also add the languages to the config file (_quarto.yml).
+
+Note: If you intend to `include_localized_versions`, you must also specify the `languages` argument to indicate the supported languages for the documentation.
+
+### Usage with Configuration File {#sec-config-usage}
+Alternatively, you can leverage the `config.json` file to store your custom settings and avoid specifying them each time you run the JSquarto tool. By modifying the fields in the `config.json` file, you can customize the documentation generation process according to your requirements.
+
+To use a configuration file follow the steps below:
+1. Initialize the configuration file using the command below:
+    ```bash
+    jsq config:init  
+    ```
+    This will create a `config.json` file in the `.jsquarto` directory within your project structure. You might have an already existing config file, for this case you can tell jsq to use this file instead by running;
+    ```bash
+    jsq config:set config=/path/to/your/directory
+    ```
+
+2. Set the desired configuration settings in the `config.json` file according to your preferences.
+   To set the source files directory run
+   ```bash
+   jsq config:set source=/path/to/your/source/files
+   ```
+
+   To set the tutorial files directory run
+   ```bash
+   jsq config:set tutorial=/path/to/your/tutorial/files
+   ```
+
+   To set the output directory run
+   ```bash
+   jsq config:set output=/path/to/your/output/directory
+   ```
+   To set the supported languages run
+   ```bash
+   jsq config:set languages=en,fr,es
+   ```
+
+   To include localized versions of the generated documentation run
+   ```bash
+   jsq config:set include_localized_versions=true
+   ```
+
+This will update the `config.json` file with the specified settings, which will be used by the JSquarto tool during the documentation generation process.
+
+You can also manually edit the `config.json` file to modify the configuration settings according to your requirements.
+
+#### ::: {.notes}
+**Note:**
+- After initializing a config file the default configuration will be added to the file. You can then modify the settings in the file to suit your needs.
+
+- Your `config.json` file location will be stored by jsquarto in cache, so you don't have to specify the file location each time you run jsquarto. It is stored together with your project directory (the directory where `jsq` command is run).
+
+- Even when you have multiple projects, jsquarto will store the config file location for each project separately. This means that you can have different config files for different projects.
+
+- If you already initialized a config file for project, and you want to use a different config file for the same project, you can run the command below:
+    ```bash
+    jsq config:set config=/path/to/your/directory force
+    ```
+    This will update the config file location for the project.
+:::
+
+### Leveraging TypeScript in Source Files
+When utilizing TypeScript within your project, it's advisable to transpile your TypeScript source files into JavaScript before initiating the JSquarto process. This recommendation stems from the fact that JSquarto lacks intrinsic support for TypeScript syntax. Once you've transpiled your TypeScript files into JavaScript, you can seamlessly execute JSquarto on the resultant JavaScript files to generate comprehensive documentation.
+
+Integrating TypeScript Transpilation
+Prior to executing JSquarto, ensure to transpile your TypeScript source files into JavaScript using your preferred transpiler, such as TypeScript Compiler (tsc). This step ensures compatibility with JSquarto's documentation generation process, thereby facilitating a smooth and efficient 
