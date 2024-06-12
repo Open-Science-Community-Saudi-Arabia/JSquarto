@@ -5,7 +5,7 @@
 
 
 ## path_1 
-`[variable]`
+`[متغير]`
  
 
 
@@ -88,7 +88,7 @@ The generated crowdin files have this file extension pattern: <filename>.<langua
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 StringUtil.convertToCamelCase('hello world') => 'helloWorld'
       StringUtil.convertToCamelCase('hello-world') => 'helloWorld'
       StringUtil.convertToCamelCase('hello_world') => 'helloWorld'
@@ -107,7 +107,7 @@ StringUtil.convertToCamelCase('hello world') => 'helloWorld'
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 StringUtil.convertToCamelCase('hello world') => 'helloWorld'
       StringUtil.convertToCamelCase('hello-world') => 'helloWorld'
       StringUtil.convertToCamelCase('hello_world') => 'helloWorld'
