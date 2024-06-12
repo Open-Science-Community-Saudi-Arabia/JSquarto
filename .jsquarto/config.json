@@ -1,8 +1,8 @@
 {
-    "outputDirectory": "/home/richie/Desktop/repos/oscsa/JSquarto/docs/build",
-    "sourceDirectory": "/home/richie/Desktop/repos/oscsa/JSquarto/dist",
-    "tutorialDirectory": "/home/richie/Desktop/repos/oscsa/JSquarto/docs/tutorials",
-    "translationsDirectory": "/home/richie/Desktop/repos/oscsa/JSquarto/docs/_translations",
+    "outputDirectory": "docs/build",
+    "sourceDirectory": "dist",
+    "tutorialDirectory": "docs/tutorials",
+    "translationsDirectory": "docs/_translations",
     "includeLocalizedVersions": false,
     "languages": [
         "en",
