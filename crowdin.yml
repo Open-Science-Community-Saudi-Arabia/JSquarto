@@ -2,10 +2,10 @@ files:
   - source: /docs/build/**/*.qmd
     ignore:
       - /docs/build/**/*.%two_letters_code%.*
-    translation: /docs/build/_translations/%two_letters_code%/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
+    translation: /docs/_translations/%two_letters_code%/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
   - source: /docs/build/**/*.md
     ignore:
       - /docs/build/**/*.%two_letters_code%.*
-    translation: /docs/build/_translations/%two_letters_code%/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
+    translation: /docs/_translations/%two_letters_code%/%original_path%/%original_file_name%.%two_letters_code%.%file_extension%
 bundles:
   - 4
