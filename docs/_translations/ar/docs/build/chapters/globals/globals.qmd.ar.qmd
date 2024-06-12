@@ -1,0 +1,117 @@
+# Globals
+
+الإنشاءات العالمية
+
+
+
+## path_1 
+`[variable]`
+ 
+
+
+## moveTranslatedFilesToOutputDir 
+`[function]`
+ 
+
+
+## fixTranslatedFilesStructureInOutputDir 
+`[function]`
+ 
+
+
+## mergePathsForTranslatedFiles 
+`[function]`
+ 
+**الوصف:**
+This is necessary because the Crowdin CLI creates a folder for each language
+  and places the translated files within that folder. This function will move the files from the language folder
+  to the same level as the original files.
+
+
+
+## fixFileExtensionsForTranslatedFiles 
+`[function]`
+ 
+**الوصف:**
+The generated crowdin files have this file extension pattern: <filename>.<language>.<ext>
+  The problem here is that the <filename> can be <index.md> instead of 'index'.
+  This will make the generated file to be <index.md>.<language>.<ext>
+  This function will fix the file name to be <plain_file_name>.<language>.<ext> so it'll be <index.<language>.<ext>>
+
+
+
+## getJSFilesFromDirectory 
+`[function]`
+ 
+**الوصف:**
+هذه الوظيفة تتعقب بشكل متكرر الدليل المحدد ودلائله الفرعية للعثور على ملفات جافا سكريبت (.js).
+  يبدأ بالتحقق من كل عنصر في الدليل. إذا كان البند دليل ، فإنه يتكرر الاتصال بنفسه
+  للبحث عن ملفات جافا سكريبت داخل ذلك الدليل. إذا كان العنصر ملف جافا سكريبت ، فإنه يضيف مسار الملف
+  إلى مجموعة من ملفات جافا سكريبت التي تم العثور عليها.
+ 
+  
+
+
+
+## generateDoc 
+`[function]`
+ 
+**الوصف:**
+يبدأ عملية توليد الوثائق.
+ 
+  وتبدأ هذه الوظيفة عملية توليد الوثائق عن طريق القيام بالخطوات التالية:
+ 
+  1. يبحث عن ملفات جافا سكريبت في الدليل المحدد والدلائل الفرعية الخاصة به.
+  2. يقارن التعليقات من كل ملف من ملفات JavaScript باستخدام `CommentsUtil.getCommentsFromFile()`.
+  3. وهو يجهز التعليقات لاستخراج المعلومات النموذجية ويستكمل هياكل بيانات الوحدة وفئاتها وفقا لذلك.
+  4. إذا تم تعريف الوحدة الافتراضية، فإنها تضيف الوحدة ومستنداتها إلى الفئة المناسبة أو الفئة الافتراضية.
+  5. يقوم بإنشاء دليل الوثائق والملفات باستخدام أداة "الكتاب".
+  6. وأخيرا، يسجل التقرير رسالة تشير إلى أن عملية توليد الوثائق قد اكتملت.
+ 
+  تعمل هذه الوظيفة كنقطة دخول لتوليد الوثائق لملفات جافا سكريبت.
+ 
+  
+
+
+
+## غير معروف 
+`[other]`
+ 
+
+
+## غير معروف 
+`[other]`
+ 
+**الوصف:**
+هذه الطريقة ستقوم بتحويل سلسلة إلى جمال toUpperCase
+      
+
+* أمثلة: **
+
+```javascript
+StringUtil.convertToCamelCase('hello world') => 'helloWorld'
+      StringUtil.convertToCamelCase('hello-world') => 'helloWorld'
+      StringUtil.convertToCamelCase('hello_world') => 'helloWorld'
+      StringUtil.convertToCamelCase('helloWorld') => 'helloWorld'
+      StringUtil.convertToCamelCase('hello') => 'hello'
+```
+
+
+
+## غير معروف 
+`[other]`
+ 
+**الوصف:**
+هذه الطريقة ستقوم بتحويل سلسلة إلى جمال toUpperCase
+      
+
+* أمثلة: **
+
+```javascript
+StringUtil.convertToCamelCase('hello world') => 'helloWorld'
+      StringUtil.convertToCamelCase('hello-world') => 'helloWorld'
+      StringUtil.convertToCamelCase('hello_world') => 'helloWorld'
+      StringUtil.convertToCamelCase('helloWorld') => 'helloWorld'
+      StringUtil.convertToCamelCase('hello') => 'hello'
+```
+
