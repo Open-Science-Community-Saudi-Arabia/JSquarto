@@ -8,7 +8,7 @@
 
 
 ## وصف المطابقة 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 هذه الطريقة سوف تستخرج الوصف من كتلة التعليقات
@@ -16,14 +16,14 @@
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getDescription(تعليق) => 'هذه الطريقة سوف تستخرج الوصف من كتلة التعليقات'
 ```
 
 
 
 ## فئة المطابقات 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
@@ -31,14 +31,14 @@ Parser.getDescription(تعليق) => 'هذه الطريقة سوف تستخرج 
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getCategory(تعليق) => 'StringUtil'
 ```
 
 
 
 ## subCategoryRegex 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
@@ -46,14 +46,14 @@ Parser.getCategory(تعليق) => 'StringUtil'
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getSubcategorory(تعليق) => 'StringUtil'
 ```
 
 
 
 ## رابط Regex 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
@@ -61,14 +61,14 @@ Parser.getSubcategorory(تعليق) => 'StringUtil'
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getLink(تعليق) => 'StringUtil'
 ```
 
 
 
 ## paramsRegex 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
@@ -76,14 +76,14 @@ Parser.getLink(تعليق) => 'StringUtil'
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getParams(comment) => [{name: 'str', type: 'string', description: 'The string to convert to camel case'}]
 ```
 
 
 
 ## moduleRegex 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 هذه الطريقة سوف تستخرج اسم الوحدة من كتلة التعليقات
@@ -91,14 +91,14 @@ Parser.getParams(comment) => [{name: 'str', type: 'string', description: 'The st
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getModuleName(تعليق) => 'StringUtil'
 ```
 
 
 
 ## عمليات الإرجاع 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 هذه الطريقة سوف تستخرج المردود من كتلة التعليقات
@@ -106,14 +106,14 @@ Parser.getModuleName(تعليق) => 'StringUtil'
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getReturnsValues(تعليق) => [{type: 'string', description: 'The string to convert to camel case'}]
 ```
 
 
 
 ## exampleRegex 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 هذه الطريقة سوف تستخرج الأمثلة من كتلة التعليقات
@@ -121,14 +121,14 @@ Parser.getReturnsValues(تعليق) => [{type: 'string', description: 'The strin
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getExamples(comment) => ['StringUtil.convertToCamelCase(\'hello world\') => \'helloWorld\'']
 ```
 
 
 
 ## الرماة 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
@@ -136,14 +136,14 @@ Parser.getExamples(comment) => ['StringUtil.convertToCamelCase(\'hello world\') 
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getThrownErrors(comment) => [{type: 'Error', description: 'The string to convert to camel case'}]
 ```
 
 
 
 ## مراجع Regex 
-`[variable]`
+`[متغير]`
  
 **الوصف:**
 سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات
@@ -151,7 +151,7 @@ Parser.getThrownErrors(comment) => [{type: 'Error', description: 'The string to 
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 Parser.getReferences(comment) => [{text: 'StringUtil', type: 'localModule'}]
 ```
 

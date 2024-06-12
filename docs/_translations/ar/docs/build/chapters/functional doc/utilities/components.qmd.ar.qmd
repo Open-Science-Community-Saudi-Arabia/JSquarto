@@ -14,7 +14,7 @@
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 const obj = {
     name: 'Hello World',
     description: 'This is a description',
@@ -45,7 +45,7 @@ const obj = {
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 const module = new Module({ name: 'StringUtil' });
       const moduleDoc = new ModuleDoc({
         originalFilePath: 'string.ts',
@@ -75,7 +75,7 @@ const module = new Module({ name: 'StringUtil' });
 
 * أمثلة: **
 
-```javascript
+```جافا سكريبت
 const module = new Module({ name: 'StringUtil' });
       const moduleDoc = new ModuleDoc({
        originalFilePath: 'string.ts',
