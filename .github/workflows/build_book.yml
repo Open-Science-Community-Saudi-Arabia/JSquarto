@@ -76,7 +76,7 @@ jobs:
         run: |
           config_output=$(jsq config:get | tail -n 10)
           echo "$config_output"
-          OUTPUT_DIRECTORY=$(echo "$config_output" | grep -oP '(?<=outputDirectory: ).*' | tr -d "'")
+          OUTPUT_DIRECTORY=$(echo "$config_output" | grep -oP '(?<=outputDirectory: ).*' | tr -d "',")
           echo "outputDirectory: $OUTPUT_DIRECTORY"
 
           OUTPUT_DIRECTORY=$OUTPUT_DIRECTORY

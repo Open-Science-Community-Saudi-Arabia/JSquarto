@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.6](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/compare/v1.0.5...v1.0.6) (2024-06-18)
+
+### Bug Fixes
+
+* **gh_workflow:** output directory not referenced while building with babelquarto ([729bab5](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/729bab55b709a66e1faf9c9c5b122cb5100aad82))
+* relative dir config variables not resolved from working directory ([b179ef5](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/b179ef5ef411e092c14552c749291a75e753a251))
+
 ### [1.0.5](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/compare/v1.1.0...v1.0.5) (2024-06-12)
 
 
