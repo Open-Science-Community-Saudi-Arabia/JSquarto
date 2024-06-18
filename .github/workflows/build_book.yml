@@ -39,11 +39,6 @@ jobs:
           sudo apt-get install r-base-core
           sudo apt-get install libssl-dev libcurl4-openssl-dev libxml2-dev
 
-      # Writeable directory is needed for R packages installation, installing to the default library path is not allowed
-      - name: Create writable directory for R packages
-        run: |
-          mkdir ./my_R_library
-          chmod u+w ./my_R_library
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -61,6 +56,12 @@ jobs:
 
       - name: Prepare crowdin translations
         run: jsq fix:crowdin_files 
+
+      # Writeable directory is needed for R packages installation, installing to the default library path is not allowed
+      - name: Create writable directory for R packages
+        run: |
+          mkdir ./my_R_library
+          chmod u+w ./my_R_library
 
       - name: Setup quarto
         uses: quarto-dev/quarto-actions/setup@v1
