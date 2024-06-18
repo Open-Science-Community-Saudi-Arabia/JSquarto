@@ -45,15 +45,6 @@ jobs:
           mkdir ./my_R_library
           chmod u+w ./my_R_library
 
-      - name: Setup quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-      
-      - name: Install PAK
-        run: Rscript -e "install.packages('pak', lib='./my_R_library')"
-          
-      - name: Install Babel quarto
-        run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')"
-
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -71,6 +62,14 @@ jobs:
       - name: Prepare crowdin translations
         run: jsq fix:crowdin_files 
 
+      - name: Setup quarto
+        uses: quarto-dev/quarto-actions/setup@v1
+      
+      - name: Install PAK
+        run: Rscript -e "install.packages('pak', lib='./my_R_library')"
+          
+      - name: Install Babel quarto
+        run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')"
       - name: Build book 
         run: |
           Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(babelquarto); project_dir <- 'docs'; babelquarto::render_book(project_path = project_dir)"
