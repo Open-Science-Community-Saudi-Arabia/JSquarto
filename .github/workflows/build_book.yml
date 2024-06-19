@@ -63,6 +63,9 @@ jobs:
       - name: Remove content of the _book
         run: jsq doc:clean
 
+      - name: Build book (jsquarto) 
+        run: jsq doc:generate
+
       - name: Prepare crowdin translations
         run: jsq fix:crowdin_files 
 
@@ -72,7 +75,7 @@ jobs:
       - name: Install Babel quarto
         run: Rscript -e ".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')"
 
-      - name: Build book 
+      - name: Build book (babelquarto) 
         run: |
           config_output=$(jsq config:get | tail -n 10)
           echo "$config_output"
