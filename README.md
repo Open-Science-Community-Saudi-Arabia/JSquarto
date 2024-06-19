@@ -126,6 +126,7 @@ You can also manually edit the `config.json` file to modify the configuration se
 | --- | --- |
 | `jsq config:init` | Initialize the configuration file |
 | `jsq config:set` | Set or update configuration settings |
+| `jsq config:get` | Get current configuration settings |
 | `jsq doc:generate` | Generate the documentation |
 | `jsq doc:preview` | Preview the generated documentation |
 | `jsq doc:clean` | Delete the existing docs |

@@ -604,7 +604,14 @@ export default class ConfigMgr {
         for (const key in finalConfig) {
             const _key = key as DirConfigKeys;
             if (key.includes("Directory")) {
-                finalConfig[_key] = path.resolve(finalConfig[_key]);
+                const pathIsAbsolute = path.isAbsolute(finalConfig[_key]);
+
+                finalConfig[_key] = pathIsAbsolute
+                    ? finalConfig[_key]
+                    : path.resolve(
+                          this.currentWorkingDirectory,
+                          finalConfig[_key],
+                      );
             }
         }
 

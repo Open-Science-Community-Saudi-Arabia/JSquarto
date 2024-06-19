@@ -19,6 +19,28 @@ global constructs
  
 
 
+## findSubFolderWithMatchingName 
+`[function]`
+ 
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  h | The path to the folder to search for the subfolder in. |
+
+
+
+## moveDirContents 
+`[function]`
+ 
+**Params:**
+
+| Name | Description |
+| --- | --- |
+|  r | The directory to move files and folders from. |
+
+
+
 ## mergePathsForTranslatedFiles 
 `[function]`
  
