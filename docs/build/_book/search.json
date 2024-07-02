@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Open Innovation Platform Documentation",
+    "title": "JSQuarto Documentation",
     "section": "",
     "text": "Welcome to JSQuarto Documentation",
     "crumbs": [
@@ -12,7 +12,7 @@
   {
     "objectID": "index.html#about",
     "href": "index.html#about",
-    "title": "Open Innovation Platform Documentation",
+    "title": "JSQuarto Documentation",
     "section": "About",
     "text": "About\nJSQuarto is a tool designed to generate JavaScript package API reference documentation using Markdown and Quarto. It serves as an alternative to JSDoc, providing a simpler and more flexible approach for documenting JavaScript code.",
     "crumbs": [
@@ -22,7 +22,7 @@
   {
     "objectID": "index.html#purpose",
     "href": "index.html#purpose",
-    "title": "Open Innovation Platform Documentation",
+    "title": "JSQuarto Documentation",
     "section": "Purpose",
     "text": "Purpose\nThe purpose of JSQuarto is to streamline the process of generating API reference documentation for JavaScript packages. By leveraging Markdown and Quarto, developers can easily create and maintain comprehensive documentation for their JavaScript projects.",
     "crumbs": [
@@ -32,7 +32,7 @@
   {
     "objectID": "index.html#inspiration",
     "href": "index.html#inspiration",
-    "title": "Open Innovation Platform Documentation",
+    "title": "JSQuarto Documentation",
     "section": "Inspiration",
     "text": "Inspiration\nJSQuarto draws inspiration from various documentation tools and methodologies, including: \n\nJSDoc: JSDoc is a popular tool for generating API documentation from JavaScript source code. \nQuarto: Quarto is a versatile document authoring and publishing tool that supports Markdown, LaTeX, and R Markdown formats. \nSphinx: Sphinx is a documentation generation tool widely used in the Python community.",
     "crumbs": [
@@ -42,7 +42,7 @@
   {
     "objectID": "index.html#localization-and-translation",
     "href": "index.html#localization-and-translation",
-    "title": "Open Innovation Platform Documentation",
+    "title": "JSQuarto Documentation",
     "section": "Localization and Translation",
     "text": "Localization and Translation\nJSQuarto is committed to supporting localization and translation of generated documentation. We are planning to integrate Crowdin, a localization management platform, to facilitate translation efforts. This will enable users to present the generated QMD files in multiple languages, making documentation accessible to a wider audience.",
     "crumbs": [
@@ -52,7 +52,7 @@
   {
     "objectID": "index.html#getting-started",
     "href": "index.html#getting-started",
-    "title": "Open Innovation Platform Documentation",
+    "title": "JSQuarto Documentation",
     "section": "Getting Started",
     "text": "Getting Started\n\nPrerequisites\nBefore testing the tool locally, ensure you have the following prerequisites installed on your system:\n\nQuarto\nBabel Quarto\nNode.js and npm (Node Package Manager)\n\n\n\nInstallation\nTo test the tool locally, follow these steps:\n\nInstall the tool by running the command below\nnpm install -g @oscsa/jsquarto  \n\n\n\nUsage\nOnce the dependencies are installed, you can navigate to the root directory of your project and follow the steps below:\n\nTo generate the documentation run the following command\njsq doc:generate source=&lt;path to source files&gt; \nThis will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.\nIf the source flag is not provided, the tool will set /source_files as default.\nThe generated .qmd files can be found in the /docs folder, you can change the output directory by providing the output flag.\nTo preview the generated documentation run\njsq doc:preview\nThis will generate the documentation, preview with quarto and open a link to preview the docs\nThe generated .qmd files can be found in the /docs folder, you can change the output directory by providing the output flag.\njsq doc:generate source=&lt;path to source files&gt; output=&lt;path to output dir&gt;\nTo include tutorials in the generated documentation, provide the tutorials flag.\njsq doc:generate source=&lt;path to source files&gt; tutorials=&lt;path to tutorials directory&gt;\n\nFor more information on how to integrate translation tools like Crowdin with JSquarto, refer to the Crowding workflow guide.\nFor more details on using JSquarto and to see an example of the generated documentation, visit the JSQuarto documentation",
     "crumbs": [
@@ -62,7 +62,7 @@
   {
     "objectID": "index.html#contributing-organization",
     "href": "index.html#contributing-organization",
-    "title": "Open Innovation Platform Documentation",
+    "title": "JSQuarto Documentation",
     "section": "Contributing Organization",
     "text": "Contributing Organization\nJSQuarto is developed and maintained by the Open Science Community Saudi Arabia. Our mission is to promote open science practices and foster collaboration among researchers and developers in Saudi Arabia.",
     "crumbs": [
@@ -72,7 +72,7 @@
   {
     "objectID": "index.html#feedback-and-support",
     "href": "index.html#feedback-and-support",
-    "title": "Open Innovation Platform Documentation",
+    "title": "JSQuarto Documentation",
     "section": "Feedback and Support",
     "text": "Feedback and Support\nIf you have any questions, feedback, or need support, please open an issue on GitHub or join our community for assistance.",
     "crumbs": [
