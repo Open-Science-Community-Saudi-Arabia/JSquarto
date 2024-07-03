@@ -9,9 +9,9 @@ export default class Fixes {
     static async run() {
         ConfigMgr.updateConfigStore();
 
-        await fixLocalizedIndexFiles();
-        await fixDuplicateLanguageReferences();
-        await fixWrongLanguageReferences();
+        // await fixLocalizedIndexFiles();
+        // await fixDuplicateLanguageReferences();
+        // await fixWrongLanguageReferences();
         await fixAndStyleArabicHtmlFiles();
     }
 

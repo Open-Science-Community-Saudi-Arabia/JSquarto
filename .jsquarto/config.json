@@ -4,6 +4,8 @@
     "tutorialDirectory": "./docs/tutorials",
     "translationsDirectory": "./docs/_translations",
     "includeLocalizedVersions": false,
-    "languages": ["en", "ar"]
+    "languages": [
+        "en",
+        "ar"
+    ]
 }
-
