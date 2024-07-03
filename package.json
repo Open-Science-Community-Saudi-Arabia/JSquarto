@@ -1,6 +1,6 @@
 {
     "name": "@oscsa/jsquarto",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Generate JS package API reference documentation using Markdown and Quarto. JSquarto is designed as an alternative to JSDoc",
     "repository": {
         "type": "git",

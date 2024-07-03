@@ -1,19 +1,22 @@
-# Changelog
+## 1.0.6 (2024-07-03)
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [1.0.6](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/compare/v1.0.5...v1.0.6) (2024-06-18)
+### Chores
+* **release:**
+  *  1.0.7 ([29f2999f](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/29f2999f719b53bdfeb31f49a82d84e698175ab6))
+  *  1.0.6 ([a1c55165](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/a1c55165fe4941f1f9752138b76858467c56d89a))
+  *  1.0.5 ([d324f029](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/d324f02999b3efb0f7daf9cd4f6d52359e95bb4b))
 
 ### Bug Fixes
+*  index.<lang>.html files not showing translated version ([622441db](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/622441dbb8e44d27170e340152cc693f173eb527))
+*  index.<lang>.html files not showing translated version ([55634c5a](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/55634c5aac77cff0556c37c7ab172ade7bfe8b03))
 
+### [1.0.6](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/compare/v1.0.5...v1.0.6) (2024-06-18)
+### Bug Fixes
 * **gh_workflow:** output directory not referenced while building with babelquarto ([729bab5](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/729bab55b709a66e1faf9c9c5b122cb5100aad82))
 * relative dir config variables not resolved from working directory ([b179ef5](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/b179ef5ef411e092c14552c749291a75e753a251))
 
 ### [1.0.5](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/compare/v1.1.0...v1.0.5) (2024-06-12)
-
-
 ### Bug Fixes
-
 * incorrect file paths while merging crowdin translations ([0196156](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/01961566ef87639cb120d6704b401473d7a7c969))
 * incorrect translations directory in default config ([cfa81fc](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/cfa81fc650b0d52ee2e1b830fa0a0d131fd7b43f))
 
