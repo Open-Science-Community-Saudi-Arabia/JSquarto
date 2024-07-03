@@ -3,7 +3,7 @@
     "sourceDirectory": "./dist",
     "tutorialDirectory": "./docs/tutorials",
     "translationsDirectory": "./docs/_translations",
-    "includeLocalizedVersions": true,
+    "includeLocalizedVersions": false,
     "languages": [
         "en",
         "ar"
