@@ -85,9 +85,9 @@ export default class Writer {
      */
     private generateQuartoYAML(chapters: Chapter[]): void {
         try {
-            // Check if there is a index.md file in the root of the docs folder
+            // Check if there is a index.qmd file in the root of the docs folder
             // If not, create one
-            const indexFilePath = CONFIG.outputDirectory + "/index.md";
+            const indexFilePath = CONFIG.outputDirectory + "/index.qmd";
             if (!fs.existsSync(indexFilePath)) {
                 fs.writeFileSync(indexFilePath, INDEX_QMD_CONTENT, "utf8");
             }
@@ -97,7 +97,7 @@ export default class Writer {
                 book: {
                     ...DEFAULT_QUARTO_YAML_CONTENT.book,
                     chapters: [
-                        "index.md",
+                        "index.qmd",
                         ...chapters.map((chapter) => ({
                             ...chapter,
                             part: StringUtil.capitalizeFirstLetter(
