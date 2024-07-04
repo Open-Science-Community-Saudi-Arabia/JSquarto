@@ -8,7 +8,7 @@ website:
 book:
   title: JSQuarto Documentation
   chapters:
-    - index.md
+    - index.qmd
     - part: Globals
       chapters:
         - chapters/globals/globals.qmd
