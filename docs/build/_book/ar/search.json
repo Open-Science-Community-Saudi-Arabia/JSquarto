@@ -1,0 +1,1050 @@
+[
+  {
+    "objectID": "index.ar.html",
+    "href": "index.ar.html",
+    "title": "Title in ar",
+    "section": "",
+    "text": "مرحبا بكم في وثائق JSQuarto",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>مرحبا بكم في وثائق JSQuarto</span>"
+    ]
+  },
+  {
+    "objectID": "index.ar.html#حول",
+    "href": "index.ar.html#حول",
+    "title": "Title in ar",
+    "section": "حول",
+    "text": "حول\nJSQuarto هي أداة مصممة لتوليد وثائق مرجعية لحزمة API جافا سكريبت باستخدام Markdown و Quarto. يعمل كبديل لـ JSDoc، ويوفر نهجا أبسط وأكثر مرونة لتوثيق شفرة جافا سكريبت.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>مرحبا بكم في وثائق JSQuarto</span>"
+    ]
+  },
+  {
+    "objectID": "index.ar.html#الغرض",
+    "href": "index.ar.html#الغرض",
+    "title": "Title in ar",
+    "section": "الغرض",
+    "text": "الغرض\nالغرض من JSQuarto هو تبسيط عملية إنشاء وثائق API المرجعية لحزم جافا سكريبت. من خلال الاستفادة من Markdown و Quarto، يمكن للمطورين إنشاء وحفظ وثائق شاملة لمشاريع جافا سكريبت الخاصة بهم.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>مرحبا بكم في وثائق JSQuarto</span>"
+    ]
+  },
+  {
+    "objectID": "index.ar.html#إلهام",
+    "href": "index.ar.html#إلهام",
+    "title": "Title in ar",
+    "section": "إلهام",
+    "text": "إلهام\nJSQuarto يستلهم من أدوات ومنهجيات التوثيق المختلفة، بما في ذلك: \n\nJSDoc: JSDoc هو أداة شائعة لتوليد وثائق API من كود مصدر جافا سكريبت. \nQuarto: Quarto هي أداة مؤلفة ونشر وثيقة متنوعة تدعم تنسيقات Markdown, LaTeX, and R Markdown. \nSphinx: Sphinx هو أداة لتوليد الوثائق تستخدم على نطاق واسع في مجتمع Python.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>مرحبا بكم في وثائق JSQuarto</span>"
+    ]
+  },
+  {
+    "objectID": "index.ar.html#التعريب-والترجمة",
+    "href": "index.ar.html#التعريب-والترجمة",
+    "title": "Title in ar",
+    "section": "التعريب والترجمة",
+    "text": "التعريب والترجمة\nوشركة JSQuarto ملتزمة بدعم توطين وترجمة الوثائق التي تم إنشاؤها. نحن نخطط لدمج كراودن، وهي منصة لإدارة التعريب ، لتسهيل جهود الترجمة. وهذا سيمكن المستخدمين من تقديم ملفات QMD التي تم إنشاؤها بلغات متعددة، مما يجعل الوثائق متاحة لجمهور أوسع.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>مرحبا بكم في وثائق JSQuarto</span>"
+    ]
+  },
+  {
+    "objectID": "index.ar.html#بدء-العمل",
+    "href": "index.ar.html#بدء-العمل",
+    "title": "Title in ar",
+    "section": "بدء العمل",
+    "text": "بدء العمل\n\nPrerequisites\nقبل اختبار الأداة محلياً، تأكد من وجود الشروط المسبقة التالية مثبتة على النظام الخاص بك:\n\nQuarto\nBabel Quarto\nNode.js and npm (Node Package Manager)\n\n\n\nInstallation\nلاختبار الأداة محلياً، قم باتباع الخطوات التالية:\n\nInstall the tool by running the command below\nnpm install -g @oscsa/jsquarto  \n\n\n\nUsage\nOnce the dependencies are installed, you can navigate to the root directory of your project and follow the steps below:\n\nلإنشاء الوثائق قم بتشغيل الأمر التالي\njsq doc:generate source=&lt;path to source files&gt; \nهذا سوف يستخرج تعليقات JSDoc من ملفات js و يكتبها إلى ملفات Quarto Markdown المقابلة.\nIf the source flag is not provided, the tool will set /source_files as default.\nThe generated .qmd files can be found in the /docs folder, you can change the output directory by providing the output flag.\nلمعاينة الوثائق التي تم إنشاؤها قيد التشغيل\njsq doc:preview\nسيؤدي هذا إلى إنشاء الوثائق، ومعاينة مع quarto وفتح رابط لمعاينة المستندات\nThe generated .qmd files can be found in the /docs folder, you can change the output directory by providing the output flag.\njsq doc:generate source=&lt;path to source files&gt; output=&lt;path to output dir&gt;\nTo include tutorials in the generated documentation, provide the tutorials flag.\njsq doc:generate source=&lt;path to source files&gt; tutorials=&lt;path to tutorials directory&gt;\n\nFor more information on how to integrate translation tools like Crowdin with JSquarto, refer to the Crowding workflow guide.\nFor more details on using JSquarto and to see an example of the generated documentation, visit the JSQuarto documentation",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>مرحبا بكم في وثائق JSQuarto</span>"
+    ]
+  },
+  {
+    "objectID": "index.ar.html#المنظمة-المساهمة",
+    "href": "index.ar.html#المنظمة-المساهمة",
+    "title": "Title in ar",
+    "section": "المنظمة المساهمة",
+    "text": "المنظمة المساهمة\nتم تطوير وصيانة JSQuarto من قبل [المجتمع العلمي المفتوح في المملكة العربية السعودية] (https://github.com/Open-Science-Community-Saudi-Arabia). وتتمثل مهمتنا في تعزيز الممارسات العلمية المفتوحة وتعزيز التعاون بين الباحثين والمطورين في المملكة العربية السعودية.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>مرحبا بكم في وثائق JSQuarto</span>"
+    ]
+  },
+  {
+    "objectID": "index.ar.html#الملاحظات-والدعم",
+    "href": "index.ar.html#الملاحظات-والدعم",
+    "title": "Title in ar",
+    "section": "الملاحظات والدعم",
+    "text": "الملاحظات والدعم\nإذا كان لديك أي أسئلة، أو ردود فعل، أو تحتاج إلى دعم، يرجى [فتح مشكلة] (https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues) على GitHub أو الانضمام إلى مجتمعنا للحصول على المساعدة.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>مرحبا بكم في وثائق JSQuarto</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html",
+    "href": "chapters/globals/globals.ar.html",
+    "title": "Globals",
+    "section": "",
+    "text": "path_1\n[متغير]",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#movetranslatedfilestooutputdir",
+    "href": "chapters/globals/globals.ar.html#movetranslatedfilestooutputdir",
+    "title": "Globals",
+    "section": "moveTranslatedFilesToOutputDir",
+    "text": "moveTranslatedFilesToOutputDir\n[function]",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#fixtranslatedfilesstructureinoutputdir",
+    "href": "chapters/globals/globals.ar.html#fixtranslatedfilesstructureinoutputdir",
+    "title": "Globals",
+    "section": "fixTranslatedFilesStructureInOutputDir",
+    "text": "fixTranslatedFilesStructureInOutputDir\n[function]",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#findsubfolderwithmatchingname",
+    "href": "chapters/globals/globals.ar.html#findsubfolderwithmatchingname",
+    "title": "Globals",
+    "section": "findSubFolderWithMatchingName",
+    "text": "findSubFolderWithMatchingName\n[function]\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\nh\nThe path to the folder to search for the subfolder in.",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#movedircontents",
+    "href": "chapters/globals/globals.ar.html#movedircontents",
+    "title": "Globals",
+    "section": "moveDirContents",
+    "text": "moveDirContents\n[function]\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\nr\nThe directory to move files and folders from.",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#mergepathsfortranslatedfiles",
+    "href": "chapters/globals/globals.ar.html#mergepathsfortranslatedfiles",
+    "title": "Globals",
+    "section": "mergePathsForTranslatedFiles",
+    "text": "mergePathsForTranslatedFiles\n[function]\nالوصف: This is necessary because the Crowdin CLI creates a folder for each language and places the translated files within that folder. This function will move the files from the language folder to the same level as the original files.",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#fixfileextensionsfortranslatedfiles",
+    "href": "chapters/globals/globals.ar.html#fixfileextensionsfortranslatedfiles",
+    "title": "Globals",
+    "section": "fixFileExtensionsForTranslatedFiles",
+    "text": "fixFileExtensionsForTranslatedFiles\n[function]\nالوصف: The generated crowdin files have this file extension pattern: .. The problem here is that the  can be &lt;index.md&gt; instead of ‘index’. This will make the generated file to be &lt;index.md&gt;.. This function will fix the file name to be .. so it’ll be &lt;index..&gt;",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#getjsfilesfromdirectory",
+    "href": "chapters/globals/globals.ar.html#getjsfilesfromdirectory",
+    "title": "Globals",
+    "section": "getJSFilesFromDirectory",
+    "text": "getJSFilesFromDirectory\n[function]\nالوصف: هذه الوظيفة تتعقب بشكل متكرر الدليل المحدد ودلائله الفرعية للعثور على ملفات جافا سكريبت (.js). يبدأ بالتحقق من كل عنصر في الدليل. إذا كان البند دليل ، فإنه يتكرر الاتصال بنفسه للبحث عن ملفات جافا سكريبت داخل ذلك الدليل. إذا كان العنصر ملف جافا سكريبت ، فإنه يضيف مسار الملف إلى مجموعة من ملفات جافا سكريبت التي تم العثور عليها.",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#generatedoc",
+    "href": "chapters/globals/globals.ar.html#generatedoc",
+    "title": "Globals",
+    "section": "generateDoc",
+    "text": "generateDoc\n[function]\nالوصف: يبدأ عملية توليد الوثائق.\nوتبدأ هذه الوظيفة عملية توليد الوثائق عن طريق القيام بالخطوات التالية:\n\nيبحث عن ملفات جافا سكريبت في الدليل المحدد والدلائل الفرعية الخاصة به.\nيقارن التعليقات من كل ملف من ملفات JavaScript باستخدام CommentsUtil.getCommentsFromFile().\nوهو يجهز التعليقات لاستخراج المعلومات النموذجية ويستكمل هياكل بيانات الوحدة وفئاتها وفقا لذلك.\nإذا تم تعريف الوحدة الافتراضية، فإنها تضيف الوحدة ومستنداتها إلى الفئة المناسبة أو الفئة الافتراضية.\nيقوم بإنشاء دليل الوثائق والملفات باستخدام أداة “الكتاب”.\nوأخيرا، يسجل التقرير رسالة تشير إلى أن عملية توليد الوثائق قد اكتملت.\n\nتعمل هذه الوظيفة كنقطة دخول لتوليد الوثائق لملفات جافا سكريبت.",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#غير-معروف",
+    "href": "chapters/globals/globals.ar.html#غير-معروف",
+    "title": "Globals",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#غير-معروف-1",
+    "href": "chapters/globals/globals.ar.html#غير-معروف-1",
+    "title": "Globals",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: هذه الطريقة ستقوم بتحويل سلسلة إلى جمال toUpperCase\n\nأمثلة: **\n\nجافا سكريبت StringUtil.convertToCamelCase('hello world') =&gt; 'helloWorld'       StringUtil.convertToCamelCase('hello-world') =&gt; 'helloWorld'       StringUtil.convertToCamelCase('hello_world') =&gt; 'helloWorld'       StringUtil.convertToCamelCase('helloWorld') =&gt; 'helloWorld'       StringUtil.convertToCamelCase('hello') =&gt; 'hello'",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/globals/globals.ar.html#غير-معروف-2",
+    "href": "chapters/globals/globals.ar.html#غير-معروف-2",
+    "title": "Globals",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: هذه الطريقة ستقوم بتحويل سلسلة إلى جمال toUpperCase\n\nأمثلة: **\n\nجافا سكريبت StringUtil.convertToCamelCase('hello world') =&gt; 'helloWorld'       StringUtil.convertToCamelCase('hello-world') =&gt; 'helloWorld'       StringUtil.convertToCamelCase('hello_world') =&gt; 'helloWorld'       StringUtil.convertToCamelCase('helloWorld') =&gt; 'helloWorld'       StringUtil.convertToCamelCase('hello') =&gt; 'hello'",
+    "crumbs": [
+      "Globals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Globals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/constructidentifier.ar.html",
+    "href": "chapters/functional doc/utilities/constructidentifier.ar.html",
+    "title": "معرف البناء",
+    "section": "",
+    "text": "معرف البناء\n[class]",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>معرف البناء</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/constructidentifier.ar.html#غير-معروف",
+    "href": "chapters/functional doc/utilities/constructidentifier.ar.html#غير-معروف",
+    "title": "معرف البناء",
+    "section": "غير معروف",
+    "text": "غير معروف\n[function]\nالوصف: يسترد اسم بناء الوحدة من سطر معين من التعليمات البرمجية.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n السطر  سطر من التعليمات البرمجية إلى التحليل.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>معرف البناء</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/constructidentifier.ar.html#variablex",
+    "href": "chapters/functional doc/utilities/constructidentifier.ar.html#variablex",
+    "title": "معرف البناء",
+    "section": "variableX",
+    "text": "variableX\n[function]\nالوصف: يسترد اسم بناء الوحدة من سطر معين من التعليمات البرمجية.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n السطر  سطر من التعليمات البرمجية إلى التحليل.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>معرف البناء</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/constructidentifier.ar.html#متغير-ريجكس",
+    "href": "chapters/functional doc/utilities/constructidentifier.ar.html#متغير-ريجكس",
+    "title": "معرف البناء",
+    "section": "متغير ريجكس",
+    "text": "متغير ريجكس\n[متغير]\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n السطر  سطر من التعليمات البرمجية إلى التحليل.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>معرف البناء</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/constructidentifier.ar.html#classregex",
+    "href": "chapters/functional doc/utilities/constructidentifier.ar.html#classregex",
+    "title": "معرف البناء",
+    "section": "classRegex",
+    "text": "classRegex\n[متغير]\nالوصف: يسترد اسم بناء الوحدة من سطر معين من التعليمات البرمجية.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n السطر  سطر من التعليمات البرمجية إلى التحليل.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>معرف البناء</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/constructidentifier.ar.html#إعلان",
+    "href": "chapters/functional doc/utilities/constructidentifier.ar.html#إعلان",
+    "title": "معرف البناء",
+    "section": "إعلان",
+    "text": "إعلان\n[function]\nالوصف: يحدد نوع البناء (الدالة، المتغير، الصف، الوحدة، أخرى) من نص الكود المعين.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n النص  نص التعليمات البرمجية لتحليله.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>معرف البناء</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/constructidentifier.ar.html#غير-معروف-1",
+    "href": "chapters/functional doc/utilities/constructidentifier.ar.html#غير-معروف-1",
+    "title": "معرف البناء",
+    "section": "غير معروف",
+    "text": "غير معروف\n[function]\nالوصف: يسترد اسم بناء الوحدة من سطر معين من التعليمات البرمجية.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n النص  نص التعليمات البرمجية لتحليله.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>معرف البناء</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/commentsutil.ar.html",
+    "href": "chapters/functional doc/utilities/commentsutil.ar.html",
+    "title": "ملف Commentsutil",
+    "section": "",
+    "text": "مسمى الوحدة moduleName\n[متغير]\nالوصف: هذه الطريقة تستخرج معلومات كتلة الوحدة النمطية من التعليقات، بما في ذلك اسم الوحدة، والوصف، والفئة، والفئة الفرعية، والربط، والمراجع.\n** المعلمات (Params):**",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ملف Commentsutil</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/commentsutil.ar.html#مسمى-الوحدة-modulename",
+    "href": "chapters/functional doc/utilities/commentsutil.ar.html#مسمى-الوحدة-modulename",
+    "title": "ملف Commentsutil",
+    "section": "",
+    "text": "الاسم\nالوصف\n\n\n\n\nتعليقات\nالتعليقات لاستخراج معلومات كتلة الوحدة منها.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ملف Commentsutil</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/commentsutil.ar.html#الوصف",
+    "href": "chapters/functional doc/utilities/commentsutil.ar.html#الوصف",
+    "title": "ملف Commentsutil",
+    "section": "الوصف",
+    "text": "الوصف\n[متغير]\nالوصف: تستخرج هذه الطريقة معلومات كتلة أخرى من التعليقات، بما في ذلك الوصف، والمشارجات، والربط، والأمثلة، والإرجاعات، والأخطاء التي ألقيت والمراجع.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\nتعليقات\nالتعليقات لاستخراج معلومات كتلة الوحدة منها.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ملف Commentsutil</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/commentsutil.ar.html#محتوى-الملف",
+    "href": "chapters/functional doc/utilities/commentsutil.ar.html#محتوى-الملف",
+    "title": "ملف Commentsutil",
+    "section": "محتوى الملف",
+    "text": "محتوى الملف\n[متغير]\nالوصف: تسترجع هذه الطريقة التعليقات من ملف المصدر باستخدام Acorn parser.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n مصدر الملف  مصدر الملف لاسترداد التعليقات منه.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ملف Commentsutil</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/commentsutil.ar.html#غير-معروف",
+    "href": "chapters/functional doc/utilities/commentsutil.ar.html#غير-معروف",
+    "title": "ملف Commentsutil",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: يمثل هذا الفصل تعليقا مستخرجا من ملف مصدر.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n النص  المحتوى النصي للتعليق.\n\n\n\n الموقع النهائي  الموقع الأخير للتعليق.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ملف Commentsutil</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/commentsutil.ar.html#غير-معروف-1",
+    "href": "chapters/functional doc/utilities/commentsutil.ar.html#غير-معروف-1",
+    "title": "ملف Commentsutil",
+    "section": "غير معروف",
+    "text": "غير معروف\n[function]\nالوصف: وتحدد هذه الطريقة المعلومات التجميعية للتعليق، بما في ذلك نوع البناء واسمه.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n معلومات  المعلومات الأساسية التي يجب تعيينها.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ملف Commentsutil</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/commentsutil.ar.html#غير-معروف-2",
+    "href": "chapters/functional doc/utilities/commentsutil.ar.html#غير-معروف-2",
+    "title": "ملف Commentsutil",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: هذه الطريقة تسترجع معلومات الوحدة النمطية من التعليق باستخدام فئة التعليقات.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ملف Commentsutil</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/commentsutil.ar.html#غير-معروف-3",
+    "href": "chapters/functional doc/utilities/commentsutil.ar.html#غير-معروف-3",
+    "title": "ملف Commentsutil",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: هذه الطريقة تسترجع معلومات الوحدة النمطية من التعليق باستخدام فئة التعليقات.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ملف Commentsutil</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html",
+    "href": "chapters/functional doc/utilities/components.ar.html",
+    "title": "المكونات",
+    "section": "",
+    "text": "متكررًا\n[function]\nالوصف: تحويل جميع قيم السلسلة بشكل متكرر في الكائن إلى أحرف صغيرة\nجافا سكريبت const obj = {     name: 'Hello World',     description: 'This is a description',     blockInfo: {     name: 'Hello World',     description: 'This is a description',     },     };     recursivelyConvertAllStringValuesInObjectToLowerCase(obj);     // =&gt; {     //   name: 'hello world',     //   description: 'this is a description',     //   blockInfo: {     //   name: 'hello world',     //   description: 'this is a description',     //   },     //   }",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#متكررا",
+    "href": "chapters/functional doc/utilities/components.ar.html#متكررا",
+    "title": "المكونات",
+    "section": "",
+    "text": "أمثلة: **",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: إضافة مستند إلى الوحدة النمطية\n\nأمثلة: **\n\n```جافا سكريبت const module = new Module({ name: ‘StringUtil’ }); const moduleDoc = new ModuleDoc({ originalFilePath: ‘string.ts’, data: {\n       blockInfo: {\n       name: 'StringUtil',\n       description: 'This class contains methods for manipulating strings',\n       },\n       constructInfo: {\n       type: 'class',\n       name: 'StringUtil',\n       },\n       },\n       });\n       module.addDoc(moduleDoc);\n\n\n\n## غير معروف \n`[other]`\n \n**الوصف:**\nإضافة مستند إلى الوحدة النمطية\n      \n\n* أمثلة: **\n\n```جافا سكريبت\nconst module = new Module({ name: 'StringUtil' });\n      const moduleDoc = new ModuleDoc({\n       originalFilePath: 'string.ts',\n       data: {\n       blockInfo: {\n       name: 'StringUtil',\n       description: 'This class contains methods for manipulating strings',\n       },\n       constructInfo: {\n       type: 'class',\n       name: 'StringUtil',\n       },\n       },\n       });\n       module.addDoc(moduleDoc);\n       module.getDocs();\n       // =&gt; [ModuleDoc]",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-1",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-1",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-2",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-2",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: تعيين مسار ملف المصدر",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-3",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-3",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: إضافة وحدة نمطية إلى الفئة الفرعية",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-4",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-4",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: إضافة وحدة نمطية إلى الفئة الفرعية",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-5",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-5",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: إضافة وحدة نمطية إلى الفئة الفرعية",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#فئات",
+    "href": "chapters/functional doc/utilities/components.ar.html#فئات",
+    "title": "المكونات",
+    "section": "فئات",
+    "text": "فئات\n[class]",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-6",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-6",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: هذا الصف يمثل فئةً.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\nإضافة وحدة نمطية إلى الفئة الفرعية.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-7",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-7",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: يضيف فئة فرعية إلى التصنيف.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\n الفئة الفرعية  الفئة الفرعية التي يراد إضافتها.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-8",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-8",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: يسترد الفئات الفرعية في الفئة.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-9",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-9",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: يسترد الفئات الفرعية في الفئة.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-10",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-10",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: إضافة وحدة نمطية إلى الفئة الفرعية.\n** المعلمات (Params):**\n\n\n\nالاسم\nالوصف\n\n\n\n\nإضافة وحدة نمطية إلى الفئة الفرعية.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/components.ar.html#غير-معروف-11",
+    "href": "chapters/functional doc/utilities/components.ar.html#غير-معروف-11",
+    "title": "المكونات",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: إضافة وحدة نمطية إلى الفئة الفرعية.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>المكونات</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/file.ar.html",
+    "href": "chapters/functional doc/utilities/file.ar.html",
+    "title": "ملفّ",
+    "section": "",
+    "text": "غير معروف\n[other]\nالوصف: تقوم هذه الطريقة بإرجاع نوع واسم بناء التعليمات البرمجية المرتبط بالتعليق\n```جافا سكريبت ملف جديد = SourceFile (‘file.ts’)؛\n```",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ملفّ</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/file.ar.html#غير-معروف",
+    "href": "chapters/functional doc/utilities/file.ar.html#غير-معروف",
+    "title": "ملفّ",
+    "section": "",
+    "text": "أمثلة: **\n\n\n  التعليق = تعليق جديد ({ )\n     موقع البداية: { line: 1, column: 1 }،\n     الموقع الطرفي: { line: 1, column: 1 },\n     المحتوى: \"هذا تعليق\"\n     });\n     file.getLinkedCodeConstructInfo(تعليق)؛\n     // =&gt; { type: 'class', name: 'StringUtil' }",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ملفّ</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/logger.ar.html",
+    "href": "chapters/functional doc/utilities/logger.ar.html",
+    "title": "Logger",
+    "section": "",
+    "text": "يتم استخدام هذه الوحدة لتسجيل الرسائل إلى وحدة التحكم",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Logger</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html",
+    "href": "chapters/functional doc/utilities/parser.ar.html",
+    "title": "Parser",
+    "section": "",
+    "text": "وصف المطابقة\n[متغير]\nالوصف: هذه الطريقة سوف تستخرج الوصف من كتلة التعليقات\nجافا سكريبت Parser.getDescription(تعليق) =&gt; 'هذه الطريقة سوف تستخرج الوصف من كتلة التعليقات'",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#وصف-المطابقة",
+    "href": "chapters/functional doc/utilities/parser.ar.html#وصف-المطابقة",
+    "title": "Parser",
+    "section": "",
+    "text": "أمثلة: **",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#فئة-المطابقات",
+    "href": "chapters/functional doc/utilities/parser.ar.html#فئة-المطابقات",
+    "title": "Parser",
+    "section": "فئة المطابقات",
+    "text": "فئة المطابقات\n[متغير]\nالوصف: سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات\n\nأمثلة: **\n\nجافا سكريبت Parser.getCategory(تعليق) =&gt; 'StringUtil'",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#subcategoryregex",
+    "href": "chapters/functional doc/utilities/parser.ar.html#subcategoryregex",
+    "title": "Parser",
+    "section": "subCategoryRegex",
+    "text": "subCategoryRegex\n[متغير]\nالوصف: سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات\n\nأمثلة: **\n\nجافا سكريبت Parser.getSubcategorory(تعليق) =&gt; 'StringUtil'",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#رابط-regex",
+    "href": "chapters/functional doc/utilities/parser.ar.html#رابط-regex",
+    "title": "Parser",
+    "section": "رابط Regex",
+    "text": "رابط Regex\n[متغير]\nالوصف: سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات\n\nأمثلة: **\n\nجافا سكريبت Parser.getLink(تعليق) =&gt; 'StringUtil'",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#paramsregex",
+    "href": "chapters/functional doc/utilities/parser.ar.html#paramsregex",
+    "title": "Parser",
+    "section": "paramsRegex",
+    "text": "paramsRegex\n[متغير]\nالوصف: سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات\n\nأمثلة: **\n\nجافا سكريبت Parser.getParams(comment) =&gt; [{name: 'str', type: 'string', description: 'The string to convert to camel case'}]",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#moduleregex",
+    "href": "chapters/functional doc/utilities/parser.ar.html#moduleregex",
+    "title": "Parser",
+    "section": "moduleRegex",
+    "text": "moduleRegex\n[متغير]\nالوصف: هذه الطريقة سوف تستخرج اسم الوحدة من كتلة التعليقات\n\nأمثلة: **\n\nجافا سكريبت Parser.getModuleName(تعليق) =&gt; 'StringUtil'",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#عمليات-الإرجاع",
+    "href": "chapters/functional doc/utilities/parser.ar.html#عمليات-الإرجاع",
+    "title": "Parser",
+    "section": "عمليات الإرجاع",
+    "text": "عمليات الإرجاع\n[متغير]\nالوصف: هذه الطريقة سوف تستخرج المردود من كتلة التعليقات\n\nأمثلة: **\n\nجافا سكريبت Parser.getReturnsValues(تعليق) =&gt; [{type: 'string', description: 'The string to convert to camel case'}]",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#exampleregex",
+    "href": "chapters/functional doc/utilities/parser.ar.html#exampleregex",
+    "title": "Parser",
+    "section": "exampleRegex",
+    "text": "exampleRegex\n[متغير]\nالوصف: هذه الطريقة سوف تستخرج الأمثلة من كتلة التعليقات\n\nأمثلة: **\n\nجافا سكريبت Parser.getExamples(comment) =&gt; ['StringUtil.convertToCamelCase(\\'hello world\\') =&gt; \\'helloWorld\\'']",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#الرماة",
+    "href": "chapters/functional doc/utilities/parser.ar.html#الرماة",
+    "title": "Parser",
+    "section": "الرماة",
+    "text": "الرماة\n[متغير]\nالوصف: سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات\n\nأمثلة: **\n\nجافا سكريبت Parser.getThrownErrors(comment) =&gt; [{type: 'Error', description: 'The string to convert to camel case'}]",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/parser.ar.html#مراجع-regex",
+    "href": "chapters/functional doc/utilities/parser.ar.html#مراجع-regex",
+    "title": "Parser",
+    "section": "مراجع Regex",
+    "text": "مراجع Regex\n[متغير]\nالوصف: سوف تستخرج هذه الطريقة الفئة من كتلة التعليقات\n\nأمثلة: **\n\nجافا سكريبت Parser.getReferences(comment) =&gt; [{text: 'StringUtil', type: 'localModule'}]",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html",
+    "href": "chapters/functional doc/utilities/writer.ar.html",
+    "title": "الكاتب",
+    "section": "",
+    "text": "_أ\n[متغير]",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#غير-معروف",
+    "href": "chapters/functional doc/utilities/writer.ar.html#غير-معروف",
+    "title": "الكاتب",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: تنسيقات أسماء الملفات عن طريق إزالة جميع الشرطات السفلية (_)",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-1",
+    "href": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-1",
+    "title": "الكاتب",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: هذه الطريقة تولد ملف تكوين Quarto YAML استنادًا إلى الفصول المقدمة.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#أ-1",
+    "href": "chapters/functional doc/utilities/writer.ar.html#أ-1",
+    "title": "الكاتب",
+    "section": "_أ",
+    "text": "_أ\n[متغير]\nالوصف: إنشاء وحدات وتصنيفات من تكوين الدروس, هذه ستكون مطلوبة لكتابتها كفصول في ملف Quarto.yml",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-2",
+    "href": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-2",
+    "title": "الكاتب",
+    "section": "غير معروف",
+    "text": "غير معروف\n[function]\nالوصف: ينسخ محتوى الدروس في /tutorials إلى /docs/chapters/tutorials",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#وحدة",
+    "href": "chapters/functional doc/utilities/writer.ar.html#وحدة",
+    "title": "الكاتب",
+    "section": "وحدة",
+    "text": "وحدة\n[متغير]\nالوصف: تكتب هذه الطريقة محتوى التوثيق للوحدة النمطية على مسار ملف محدد.\n** المعلمات (Params):**\n\n\n\n\n\n\n\nالاسم\nالوصف\n\n\n\n\n خيارات  كائن يحتوي على الوحدة ومسار الوجهة.\n\n\n\n خيارات.destinationPath  مسار الوجهة حيث سيتم كتابة الوثائق.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#فئات",
+    "href": "chapters/functional doc/utilities/writer.ar.html#فئات",
+    "title": "الكاتب",
+    "section": "فئات",
+    "text": "فئات\n[متغير]\nالوصف: وتعد هذه الطريقة هيكل الدليل للوثائق من خلال إنشاء المجلدات والملفات اللازمة.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#فئات-1",
+    "href": "chapters/functional doc/utilities/writer.ar.html#فئات-1",
+    "title": "الكاتب",
+    "section": "فئات",
+    "text": "فئات\n[متغير]\nالوصف: هذه الطريقة تكتب الوثائق لكل فئة في ملف مناظر داخل دليل الوثائق.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-3",
+    "href": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-3",
+    "title": "الكاتب",
+    "section": "غير معروف",
+    "text": "غير معروف\n[function]\nالوصف: هذه الطريقة تقرأ من خلال مجلد الدروس وتنسخها إلى مجلد الوجهة /docs أيضًا تتبع بنية الدروس التي تم تعيينها من قبل `config.json’ في مجلد الدروس إن وجدت.",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-4",
+    "href": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-4",
+    "title": "الكاتب",
+    "section": "غير معروف",
+    "text": "غير معروف\n[function]\nالوصف: تضيف هذه الطريقة الدروس كفصول في ملف _quarto.yml",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#configtoadd",
+    "href": "chapters/functional doc/utilities/writer.ar.html#configtoadd",
+    "title": "الكاتب",
+    "section": "configToAdd",
+    "text": "configToAdd\n[متغير]\nالوصف: تضيف هذه الطريقة الدروس كفصول في ملف _quarto.yml",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-5",
+    "href": "chapters/functional doc/utilities/writer.ar.html#غير-معروف-5",
+    "title": "الكاتب",
+    "section": "غير معروف",
+    "text": "غير معروف\n[other]\nالوصف: هذه الطريقة تنشئ نسخة من كل ملف qmd في مجلد مستندات لكل لغة",
+    "crumbs": [
+      "Utilities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>الكاتب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/contributing/improving_documentation.ar.html",
+    "href": "chapters/tutorials/contributing/improving_documentation.ar.html",
+    "title": "Improving documentation",
+    "section": "",
+    "text": "يعد التوثيق الفعال أمرًا بالغ الأهمية للحفاظ على قاعدة تعليمات برمجية واضحة ومفهومة. واحدة من الأدوات القوية لتعزيز التوثيق في الكود الخاص بك هي JSDoc. JSDoc هي لغة ترميز تسمح لك بالتعليق على التعليمات البرمجية الخاصة بك مع تعليقات منظمة، مما يمكن من التوليد التلقائي للوثائق. في هذا الدليل، سوف نستكشف استخدامات JSDoc وكيف يمكن أن يحسن توثيق مشروعك.\n\nUsing JSDoc for Generated Documentation\n\nأحد الاستخدامات الأساسية لـ JSDoc هو توليد الوثائق مباشرة من الكود الخاص بك. من خلال إضافة تعليقات JSDoc إلى الدوال والصفوف والمتغيرات الخاصة بك، يمكنك تقديم معلومات أساسية يتم استخراجها تلقائياً وتحويلها إلى وثائق شاملة.\nلاستخدام JSDoc لتوليد الوثائق، اتبع الخطوات التالية:\n\nتعليقات الترميز: إضافة تعليقات JSDoc مباشرة فوق عناصر التعليمات البرمجية التي تريد توثيقها. استخدام /*_ … _/ بناء الجملة للإشارة إلى كتلة تعليقات JSDoc .\nوظائف التوثيق: استخدام علامات JSDoc لوصف معلمات الدالة، قيم الإرجاع، ومعلومات إضافية. العلامات مثل @param و @returs و @description شائعة الاستخدام لهذا الغرض.  Other important custom tags are @category and @subcategory, these tags help to structure the generated documentation into chapters.\n\n@category: This tag is used to group modules under a common chapter. All modules under a category will be under one chapter, the chapter name will correspond to the name assigned to the category.\n@subcategory: This tag is used to group modules under a common chapter. وستكون جميع الوحدات تحت فئة فرعية تحت فصل واحد، وسيتطابق اسم الفصل مع الاسم المعين لـ الفئة الفرعية.\n\n\n\n\n\n\n\n\nفئات التوثيق: بالنسبة للصفوف الدراسية، استخدم تعليقات JSDoc لتوفير الأوصاف، وخصائص الصف المستندي، وطرائق فصل المستند. العلامات مثل @clas, @property و @method تستخدم عادة في هذا السياق.\nتشغيل توليد JSDoc : استخدام أداة مولد JSDoc ، مثل JSDoc نفسه أو أدوات شعبية أخرى مثل TypeDoc أو JSDoc3, لتحليل الكود الخاص بك وإنشاء إخراج الوثائق. تكوين المولد لاستهداف تنسيق المخرج المطلوب، مثل HTML أو Markdown.\nالمراجعة والتحديث: مراجعة الوثائق التي تم إنشاؤها والتأكد من أنها تمثل الرمز الخاص بك بدقة. تحديث تعليقات JSDoc حسب الحاجة لتقديم تفسيرات أو معلومات إضافية أكثر وضوحا.\n\nللمزيد من المعلومات حول استخدام JSDoc لتوليد الوثائق، انظر وثائق JSDoc أو Getting بدأ باستخدام JSDoc.\n\n\nاستخدام JSDoc للتوثيق الوراثي\n\nيمكن أيضًا استخدام JSDoc خارج نطاق إنشاء وثائق التعليمات البرمجية. نظام بناء الجملة والعلامة المرن لديه يجعله أداة قيمة لكتابة الجوانب الأخرى من وثائق مشروعك، مثل البرامج التعليمية والإرشادية والمواد المرجعية.\nلاستخدام JSDoc لكتابة الوثائق، ضع في الاعتبار النهج التالية:\n\nالدروس والإرشاد: استخدام تعليقات JSDoc لكتابة الدروس والدلائل خطوة بخطوة في داخل الكود الخاص بك. عن طريق تضمين المحتوى التعليمي في تعليقات JSDoc ، يمكنك الحفاظ على ارتباط الوثائق بشكل وثيق مع الكود ذي الصلة، يجعل من الأسهل على المطورين متابعة المفاهيم وفهمها.\nأمثلة مضمنة: استخدم تعليقات JSDoc لتضمينها أمثلة على الرموز المضمنة التي توضح استخدام الدوال أو الصفوف الدراسية أو الوحدات. ويمكن استخدام هذه الأمثلة كمادة تعليمية وكمرجع سريع للمطورين على حد سواء.\nالمواد المرجعية: يمكن استخدام تعليقات JSDoc لتقديم معلومات إضافية في المواد المرجعية. وسوم Leverage JSDoc مثل @example أو @see لربط الموارد ذات الصلة أو أمثلة التعليمات البرمجية.\nالتكامل مع Markdown: JSDoc يدعم Markdown ضمن التعليقات، مما يسمح لك بإدماج النصوص المنسقة والعناوين والقوائم وغيرها من ميزات Markdown في وثائقك. هذا يمكّنك من إنشاء محتوى أكثر جاذبية بصرياً وتنظيماً في تعليقات JSDoc الخاصة بك.\n\n\n\n\n\n\nتحسين وثائق JSQuarto باستخدام JSDoc\n\nلم تكتمل بعد وثائق JSQuarto. وهناك عدة مجالات يمكن تحسينها، منها:\n\nإيضاحات أكثر تفصيلا لهيكل مشروع JSQuarto ومشروع الترميز\nمعلومات إضافية عن كيفية المساهمة في هذا المشروع\nمعلومات إضافية عن كيفية الحفاظ على مشروع JSQuarto\nمعلومات إضافية عن كيفية المساهمة في هذا المشروع\nخريطة الطريق للمشروع والخطط المستقبلية\n\nلتحسين وثائق JSQuarto ، يمكنك استخدام JSDoc لإضافة وثائق إضافية مباشرة داخل المركز البرمجي. سيسمح لك هذا بتقديم تفسيرات أكثر تفصيلاً للكود وبنية المشروع، بالإضافة إلى معلومات إضافية حول كيفية المساهمة في المشروع، وكيفية استخدام JSQuarto API، وكيفية صيانة المشروع ونشره. في وقت كتابة هذا، تم بناء الوثائق مع حزم أخرى لتحسين واجهة المستخدم، أحدها Better-docs.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Improving documentation</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/contributing/raising_issues.ar.html",
+    "href": "chapters/tutorials/contributing/raising_issues.ar.html",
+    "title": "Raising issues",
+    "section": "",
+    "text": "وإثارة المسائل جزء أساسي من المساهمة في مشروع مفتوح المصدر. قبل البدء، من المستحسن أن يكون لديك فهم أساسي لـ Markdown و GitHub، اللذين يشيع استخدامهما في تدفق العمل هذا. Markdown هي لغة علامة خفيفة الوزن تستخدم لتنسيق النص وأسلوبه على الويب. يمكنك العثور على دليل شامل ل Markdown على موقع GitHub\nإذا كنت غير مألوف مع GitHub، فهي منصة على الإنترنت توفر أدوات للتحكم في الإصدار، وإدارة التعليمات البرمجية، والتعاون. GitHub يوفر دليل خطوة خطوة للبدء مع منصتهم على website\nمن المهم التحقق مما إذا كانت فكرتك أو مشكلتك قد أثيرت بالفعل من قبل شخص آخر. يمكنك القيام بذلك عن طريق البحث من خلال المشكلات الموجودة في المشروع على GitHub. إذا وجدت مشكلة مشابهة لمشكلتك، يرجى التعليق عليها لإعلام الآخرين بأنك أيضا مهتم بالعمل عليها.\nإذا كانت المشكلة قد أغلقت بالفعل، أو إذا كانت تحل مشكلتك جزئيا فقط، من المستحسن أن تفتح مشكلة جديدة مع الإشارة إلى المشكلة القديمة. ومن شأن ذلك أن يساعد على إبقاء المناقشة منظمة وأن يكفل سهولة الوصول إلى جميع المعلومات ذات الصلة.\nويُذكر أن إثارة مسألة ما هي فرصة لتحسين المشروع والإسهام في مجتمع المصادر المفتوحة. مع القليل من الجهد والاهتمام للتفاصيل، يمكنك المساعدة في إحداث فرق حقيقي\n\nقالب المشكلة\nلدينا نماذج لأنواع مختلفة من المشاكل. الرجاء استخدام القالب المناسب للمشكلة الخاصة بك. إذا كنت لست متأكدا من أي قالب يمكن استخدامه، فيرجى استخدام قالب “جنرال”.\n\nقالب عام (preview) : هذا هو النموذج الافتراضي لإثارة المشكلة. استخدم هذا القالب إذا كنت لست متأكدا من أي قالب يمكن استخدامه.\nقالب تقرير الأخطاء (preview) : استخدم هذا القالب للإبلاغ عن خلل أو مشكلة مع المشروع.\nقالب طلب ميزة جديدة (preview) : استخدم هذا القالب لطلب إذن لإضافة دورة جديدة إلى القائمة.\n\n\n\nكتابة عنوان ووصف واضح\nعند فتح مشكلة ما، من المهم كتابة عنوان واضح وموجز يعكس بدقة المشكلة أو الاقتراح الذي تريد إثارته. وينبغي أن يكون العنوان وصفيا بما فيه الكفاية لكي يتمكن الآخرون من فهم المسألة بسرعة، ولكن ليس طويلا أو معقدا.\nوفي وصف القضايا، قدم أكبر قدر ممكن من التفاصيل بشأن المسألة أو الاقتراح. قم بإدراج خطوات لتكرار المشكلة إذا كان ذلك منطبقاً، وأي معلومات ذات صلة أو سياق يمكن أن يساعد الآخرين على فهم المسألة بشكل أفضل.\n\n\nاستخدام تسميات المشكلة\nيتم استخدام تسميات الإصدار لتصنيف وتنظيم المشكلات في مشروع مفتوح المصدر. ويمكن أيضا أن يساعد المشرفين على تحديد أولويات القضايا المتراكمة في المشروع وإدارتها.\nعند إثارة مشكلة، تأكد من اختيار التسمية المناسبة التي تصف المشكلة على أفضل وجه. على سبيل المثال، إذا كنت تبلغ عن خطأ، قد تستخدم علامة “الخطأ”. إذا كنت تقترح ميزة جديدة أو تحسين، قد تستخدم تسمية “التحسينات”.\nبعض تسميات المشكلات الشائعة التي قد تراها في مشروع GitHub تشمل:\n\nخطأ: تستخدم للإبلاغ عن خطأ أو مشكلة في كود المشروع أو وظيفته.\nتحسين: يستخدم لاقتراح سمة جديدة أو تحسين للمشروع.\nالوثائق: تستخدم لاقتراح تغييرات أو تحسينات في وثائق المشروع.\nالمساعدة المطلوبة: استخدمت للإشارة إلى أن القائمين على المشروع يسعون بنشاط إلى الحصول على مساهمات للمساعدة في حل هذه المسألة.\nالمشكلة الأولى جيدة: تستخدم للإشارة إلى أن المشكلة مناسبة للمساهمين الجدد الذين بدأوا للتو بالمشروع.\n\n\n\nالمساهمة في إصدار المناقشات\nإذا كنت مهتما بالعمل على حل مشكلة، يرجى ترك تعليق لإبلاغ الآخرين. وسيساعد ذلك على تفادي الازدواجية في العمل وكفالة إسناد المسألة إلى الشخص المناسب. بمجرد أن تفتحوا قضية أو تعلقوا على قضية قائمة، من المهم المشاركة بنشاط في المناقشة. وهذا يعني الرد على التعليقات والأسئلة الواردة من جهات أخرى، وتوفير معلومات أو إيضاحات إضافية عند الاقتضاء، والانفتاح على التعليقات والاقتراحات.\n\n\nاستنتاج\nوتشكل إثارة المسائل جزءا هاما من المساهمة في مشاريع المصادر المفتوحة. ومن خلال اتباع هذه المبادئ التوجيهية، يمكنكم المساعدة على ضمان أن تكون قضيتكم واضحة وموثقة توثيقاً جيداً وسهلة الفهم بالنسبة للآخرين. تذكر أن تشارك بنشاط في المناقشات، ومتابعة المشكلات، والمساهمة في التعليمات البرمجية إذا كنت قادرا على ذلك. مع القليل من الجهد والتعاون، يمكننا جميعا أن نساعد على جعل مشاريع المصدر المفتوح أفضل للجميع.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Raising issues</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/contributing/raising_pr.ar.html",
+    "href": "chapters/tutorials/contributing/raising_pr.ar.html",
+    "title": "Raising pr",
+    "section": "",
+    "text": "خطوات\nتهانينا! لقد قمت للتو بتقديم طلب سحب إلى مستودع Open-Science-Community-Sou-Arabia/JSquarto",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Raising pr</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/contributing/raising_pr.ar.html#خطوات",
+    "href": "chapters/tutorials/contributing/raising_pr.ar.html#خطوات",
+    "title": "Raising pr",
+    "section": "",
+    "text": "ابحث عن ميزة أو خطأ تريد العمل عليه.\nفورك مستودع Open-Science-Community-Sou-Arabia/JSquarto إلى حساب GitHub الخاص بك.\nاستنساخ المستودع المتشابك على جهازك المحلي.\n“`باش نسخة git https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto ```\nمزامنة الشوك، لتجنب دمج الصراعات.\n“`باش git بعد إضافة أعلى مسار https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto Git يجلب أعلى مجرى Git سحب الرئيسية دفعة git ```\nإنشاء فرع جديد مع اسم المستخدم الخاص بك GitHub كاسم له.\n“`باش Git الدفع -b  ``` ليس إلزامياً تسمية الفرع الجديد باسم مستخدم GitHub الخاص بك، ولكن من الممارسات الجيدة القيام بذلك.\nقم بإجراء التغييرات الخاصة بك على هذا الفرع الجديد.\nقم بإجراء التغييرات الخاصة بك مع رسالة التزام واضحة.\n“`باش git يضاف git الالتزام -m”رسالة التزام واضحة وموجزة” ```\nقم بدفع التغييرات الخاصة بك إلى مستودع الشوكات الخاص بك.\n“`باش دفعة منشأ git  ```\nانتقل إلى مستودع Open-Science-Community-Saudi-Arabia/JSquarto على GitHub، ويجب أن ترى رسالة تقترح إنشاء طلب سحب جديد. انقر عليها.\nلإثارة كلمة المرور ، اختر قالب “PR” وملأه بالمعلومات المطلوبة. قالب PR هو مجموعة من الأسئلة التي تحتاج إلى الإجابة عليها لجعل من الأسهل على المشرفين مراجعة طلب السحب الخاص بك. يمكنك العثور على قالب PR here\nإضافة عنوان ووصف واضحين وموجزين لطلب السحب الخاص بك، وشرح التغييرات التي أجريتها.\nقم بتقديم طلب السحب الخاص بك، وانتظر المشرفين لمراجعة التغييرات الخاصة بك.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Raising pr</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/contributing/tutorial_overview.ar.html",
+    "href": "chapters/tutorials/contributing/tutorial_overview.ar.html",
+    "title": "Tutorial overview",
+    "section": "",
+    "text": "Tutorials guide\n\nThis section provides an overview of the config.json files used in the JSQuarto documentation, specifically focusing on the tutorials folder. The config.json file serve as configuration files that help structure and organize the documentation, while the tutorials folder contains the Markdown files for various tutorials.\n\n\nThe tutorials Folder\n\nThe tutorials folder within the documentation directory is dedicated to hosting tutorials on various topics related to the JSQuarto platform. This folder contains a collection of Markdown files, each representing an individual tutorial.\nMarkdown is a lightweight markup language that allows for easy formatting and structuring of text, making it ideal for creating tutorials. Markdown files provide a simple yet powerful way to document step-by-step instructions, code examples, explanations, and other relevant information.\nThe tutorials folder can be organized into subfolders to further categorize and group related tutorials. This helps users easily locate and access the tutorials they need based on their specific interests or requirements.\nBy structuring tutorials within the tutorials folder using Markdown, contributors can contribute new tutorials, update existing ones, and ensure that the documentation remains comprehensive and user-friendly.\nOverall, the combination of .json files and the tutorials folder enables a well-organized and accessible documentation structure, allowing users to navigate and explore the JSQuarto platform documentation with ease.\n\n\nOverview of config.json Files\n\nThe config.json file in the JSQuarto documentation play a crucial role in organizing and categorizing the content. This file define the structure of the documentation and provide metadata for each section, tutorial, or topic. They allow maintainers and contributors to easily navigate and manage the documentation by specifying titles, creating nested structures, and linking related topics.\nBy using config.json file, the documentation can be dynamically generated and updated based on the defined structure. This makes it easier to maintain consistency, track changes, and add new content.\n\n\nThe .json configuration\n\nLet’s explain how this structure works by looking at the config.json file in the tutorials / folder. This file defines the structure of the tutorials section of the documentation, including the titles, descriptions links for each tutorial.\n{\n  \"changelog\": {\n    \"title\": \"Changelog\"\n  },\n  \"environment_setup\": {\n    \"title\": \"Environment Setup\"\n  },\n  \"contributing\": {\n    \"title\": \"Contributing\"\n  }\n}\nIn this example, the .json file defines the titles and relationships of the main sections within your documentation. The sections are represented as objects, with each object having a unique key and a \"title\" key-value pair.\n\nchangelog represents the “Changelog” section. The \"title\" key-value pair specifies the title of this section as “Changelog.”\nenvironment_setup represents the “Environment Setup” section. The \"title\" key-value pair specifies the title of this section as “Environment Setup.”\ncontributing represents the “Contributing” section. The \"title\" key-value pair specifies the title of this section as “Contributing.”\n\nWith this structure, your documentation folder will contain separate Markdown files for each section, named according to the keys in the .json file. For example:\n- `documentation /`\n    - `docs /`\n        - `changelog.md`\n        - `environment_setup.md`\n        - `contributing.md`\n        - `tutorials.json`\nEach Markdown file will correspond to a section in your documentation and should contain the relevant content for that section.\nRemember to update the .json file whenever you add or modify sections to ensure that the documentation structure accurately reflects the content of your documentation.\n\n\nNested .json configuration for tutorials\n\nTo structure tutorials and create nested tutorials within your documentation, you can use the .json file to define the hierarchy and relationships between tutorials. Here’s an example of how you can structure tutorials using a .json file:\n{\n    \"maintainers\": {\n        \"title\": \"Technical guide for Maintainers\",\n        \"children\": {\n            \"reviewing_pr\": {\n                \"title\": \"Reviewing pull requests\"\n            },\n            \"ci_workflow\": {\n                \"title\": \"CI Workflow\"\n            },\n            \"secrets_and_security\": {\n                \"title\": \"Secret Access/Management\"\n            },\n            \"deployment_guide\": {\n                \"title\": \"Deployment Guide\"\n            }\n        }\n    },\n    \"contributing\": {\n        \"title\": \"Contributing to the project\",\n        \"children\": {\n            \"adding_a_course\": {\n                \"title\": \"Adding a course\"\n            },\n            \"api_project_structure\": {\n                \"title\": \"API project structure\"\n            },\n            \"improving_documentation\": {\n                \"title\": \"Improving documentation\"\n            },\n            \"project_structure\": {\n                \"title\": \"Project structure\"\n            },\n            \"raising_issues\": {\n                \"title\": \"Raising issues\"\n            },\n            \"raising_pr\": {\n                \"title\": \"Raising pull requests\"\n            }\n        }\n    },\n    \"review\": {\n        \"title\": \"Reviewing the project\"\n    }\n}\nIn this example, the .json file represents a documentation structure with two main sections: “Technical guide for Maintainers” and “Technical guide for API developers”. Each section has its own set of tutorials represented as nested objects.\n\nDefine the main sections or categories as top-level objects within the .json file, such as “maintainers” and “contributing”.\nWithin each main section, provide a \"title\" key to specify the title or heading for that section. For example, “Technical guide for Maintainers” and “Technical guide for API developers”.\nAdd a \"children\" key within each main section to define the nested tutorials. Each tutorial is represented as a child object within the \"children\" object. Not all tutorials may have children tutorials, an example of this is the review tutorial. Since it has no children the program will only look for a review.qmd file and not a review folder\nFor each tutorial, provide a unique key as the object’s key, such as “reviewing_pr” and “ci_workflow”.\nWithin each tutorial object, include a \"title\" key to specify the title or heading for that specific tutorial.\n\nFor this example here is what the folder structure would look like assuming the root folder is tutorials /:\n        - tutorials/\n            - maintainers/\n                - maintainers.qmd\n                - reviewing_pr.qmd\n                - ci_workflow.qmd\n                - secrets_and_security.qmd\n                - deployment_guide.qmd\n\n            - contributing/\n                - api.md\n                - api_structure.md\n                - api_authentication_flow.qmd\n                - jwt_token_management.qmd\n                - rbac_handler_flow.qmd\n            \n            - review.qmd\n              \n            - config.json\nIn this structure:\n\nThe .json configuration file is located in the tutorials/ folder\nThe tutorials folder contains subfolders representing different sections or categories of tutorials.\nEach section or category folder, such as maintainers and contributing, contains the .qmd files for individual tutorials. \n\nThe nested structure allows you to organize tutorials hierarchically, making it easier to navigate and find specific tutorials based on their topic or category.\nIt’s important to note that the tutorial structure allows only one level of nesting. This means you can have main sections and their respective tutorials, but you cannot create further nested folders within the tutorials.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Tutorial overview</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/how_to/adding_tutorials.ar.html",
+    "href": "chapters/tutorials/how_to/adding_tutorials.ar.html",
+    "title": "Adding tutorials",
+    "section": "",
+    "text": "الدروس هي طريقة رائعة لتعليم الناس كيفية استخدام مشروعك. وهي دليل تدريجي يمشي المستخدم من خلال مهمة أو مفهوم محدد. الدروس هي طريقة رائعة لجعل الناس يستكملون مشروعك، ولمساعدتهم على فهم كيفية استخدامه.\n\nكيفية كتابة الدروس\nيتم كتابة الدروس في علامة كوارتو. كوارتو هي لغة الدرج المصممة لتكون سهلة الكتابة والقراءة، وسهلة التحويل إلى صيغ أخرى. كوارتو عبارة عن مجموعة متميزة من الـ markdown، لذا فإن أي ملف markdown هو ملف ربع ساري المفعول. يضيف كونارتو بعض الميزات إلى المميزات لأسفل لجعلها أسهل لكتابة الدروس. وتشمل بعض المعالم ما يلي:\n\nالقدرة على تضمين الكود و الإخراج في نفس الملف\nالقدرة على تضمين التعليمات البرمجية من الملفات الأخرى\nإضافة بيانات التعريف / الصور وغيرها من المحتوى إلى الملف\n\n\n\nمجلد لكتابة البرنامج التعليمي\nBy default, tutorials are written in the docs/tutorials folder. هذا هو المجلد حيث يتم تخزين جميع الدروس. يتم تخزين كل برنامج تعليمي في مجلد منفصل، واسم المجلد هو اسم البرنامج التعليمي. داخل المجلد، هناك ملفات ser .qmd التي تحتوي على محتويات البرنامج التعليمي.\n\n\nتكوين البرنامج التعليمي\nهناك أيضا ملف ‘config.json’ الذي يحتوي على تكوين البرنامج التعليمي. ملف son` يستخدم لهيكلة كيفية عرض البرنامج التعليمي من حيث ترتيب البرنامج التعليمي، العنوان والوصف وتجميع البرنامج التعليمي.\nفيما يلي مثال لملف `config.json’:\n{\n    \"المساهمة\": {\n        \"title\": \"المساهمة في المشروع\"،\n        \"الأطفال\": {\n            \"Improving_documentation\": {\n                العنوان : \"تحسين التوثيق\"\n            },\n            \"raising_issues\": {\n                العنوان: \"إثارة المشاكل\"\n            },\n            \"raising_pr\": {\n                \"عنوان\": \"رفع طلبات الجذب\"\n            }\n        }\n    },\n    \"project_structure\": {\n        \"عنوان\": \"بنية المشروع\"\n    },\n    \"environment_setup\": {\n        \"العنوان\": \"إعداد البيئة\"\n    },\n    \"سجل التغييرات\": {\n        \"title\": \"سجل التغيير\"\n    },\n    \"التوطين\": {\n        \"عنوان\": \"التعريب \"\n    },\n    \"How_to \": {\n        \"title\": \"كيف يمكن\"،\n        \"الأطفال\": {\n            \"setting_default_readme\": {\n                العنوان \"title\": \"ضبط الرحلة الافتراضية\"\n            },\n            \"adding_tutorials\": {\n                \"title\": \"إضافة دروس\"\n            },\n            \"specifying_source_files\": {\n                \"title\": \"تحديد الملفات المصدرة\"\n            },\n            \"starting_a_new_build\": {\n                \"title\": \"بدء بناء جديد\"\n            }\n        }\n    }\n}\nفي المثال الوارد أعلاه، يحتوي ملف config.json على قائمة من الدروس التعليمية والترتيب الذي ينبغي عرضها فيه. يحتوي ملف config.json أيضًا على عنوان البرنامج التعليمي ووصف البرنامج التعليمي.\nيحتوي ملف config.json أيضًا على قائمة للأطفال لكل برنامج تعليمي. يستخدم هذا لتجميع الدروس معا. فعلى سبيل المثال، في المثال الوارد أعلاه، فإن البرنامج التعليمي ”المساهم“ له ثلاثة أطفال: ’تحسين الوثائق، و 'raising_issues، و ’raising_pr`. هذا يجمع الدروس الثلاثة معاً تحت دروس “المساهمة”.\n\n\nدروس التجميع\nيمكن تجميع الدروس معا باستخدام ملف `config.json’. هذا مفيد لتنظيم الدروس في فئات. على سبيل المثال، قد ترغب في تجميع جميع الدروس المتعلقة بالمساهمة في المشروع معا، أو جميع الدروس المتعلقة بتهيئة البيئة معاً. هذا يجعل من الأسهل للمستخدمين العثور على الدروس التي يهتمون بها.\nفي المثال الوارد أعلاه، الملف config.json يجمع الدروس في فئات مثل contributing وproject_structure وenvironment_setup وchangelog وlocalization وhow_to. ويحتوي كل من هذه الفئات على قائمة بالدروس، ويحتوي كل درس على قائمة بالأطفال. هذا يسمح لك بتنظيم الدروس بطريقة منطقية لمشروعك.\nفي هذا البرنامج التعليمي، تعلمنا كيفية كتابة الدروس في Quarto markdown، وكيفية تكوين config. تعلمنا أيضا كيفية تجميع الدروس معا باستخدام ملفconfig.json’. هذا يسمح لك بتنظيم الدروس بطريقة منطقية لمشروعك، ويجعل من الأسهل للمستخدمين العثور على الدروس التي يهتمون بها.\nSummary - كيفية كتابة الدروس - تنسيق لكتابة الدروس - كيفية كتابة برنامج تعليمي - مجلد لكتابة البرنامج التعليمي",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Adding tutorials</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/how_to/usage.ar.html",
+    "href": "chapters/tutorials/how_to/usage.ar.html",
+    "title": "Usage",
+    "section": "",
+    "text": "This section provides an overview of the JSquarto tool and its usage, including the custom CLI arguments and configuration settings that can be leveraged to customize the documentation generation process.\n\nCLI arguments\n\nيتم استخدام حجج CLI لتخصيص سلوك أداة JSquarto هذه الحجج المفصلة تمكنك من تصميم عملية توليد الوثائق بما يناسب متطلباتك المحددة. “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش وبالاستفادة من هذه الحجج، يمكنك تعزيز كفاءة وفعالية عملية توليد الوثائق، مما يؤدي إلى تبسيط سير العمل الخاص بك وتحسين إنتاج الوثائق الخاصة بك. “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش “باش “`باش وبالاستفادة من هذه الحجج، يمكنك تعزيز كفاءة وفعالية عملية توليد الوثائق، مما يؤدي إلى تبسيط سير العمل الخاص بك وتحسين إنتاج الوثائق الخاصة بك.\nبعض حجج CLI المخصصة المدعومة من JSquarto تشمل:\n\nsource: Specifies the directory containing the source files to be documented. يمكن كتابة هذه الملفات بلغات مختلفة مدعومة من JSquarto، مثل JavaScript و TypeScript و JSX. By default, JSquarto will check for the docs/source directory within your project structure to locate these the source file. However, you possess the flexibility to specify an alternative directory through the source option.\ntutorial: Specifies the directory containing the tutorial files to be included in the documentation. هذه الحجة تسمح لك بإدماج المحتوى التعليمي في وثائقك، وتوفير سياق إضافي وإرشادات للمستخدمين.\noutput: Specifies the output directory where the generated documentation will be stored. By default, JSquarto will save the documentation in the docs directory within your project structure. However, you can customize the output location by specifying an alternative directory through the output option.\n‘اللغات: يحدد اللغات التي ينبغي دعمها في الوثائق. هذه الحجة تمكنك من توليد الوثائق بلغات متعددة، وتغذي قاعدة متنوعة من المستخدمين. فعلى سبيل المثال، تحددlanguages=en,fr,es’ اللغات الانكليزية والفرنسية والإسبانية بوصفها اللغات المدعومة.\ninclude_localized_versions: يحدد ما إذا كان ينبغي إدراج إصدارات موضعية من الوثائق التي تم إنشاؤها. على سبيل المثال، إذا تم تحديدها، سيقوم JSquarto بإنشاء ملفات منفصلة لكل لغة محددة.\n\n\n\nتكوين\n\nملف `config.json’ في الدليل الجذر للمشروع يستخدم لتخزين إعدادات التكوين لأداة JSquarto . يحتوي هذا الملف على الإعدادات الافتراضية لعملية توليد الوثائق، مثل دليل الملفات المصدر، ودليل الملفات التعليمية، ودليل الإخراج، واللغات المعتمدة. This config file can come in handy when you want to persist your settings for a particular project. يمكنك تعديل هذه الإعدادات لتخصيص عملية توليد الوثائق وفقا لتفضيلاتك.\nBelow is an example of the config.json file:\n{\n    \"includeLocalizedVersions\": false,\n    \"outputDirectory\": \"docs/output\",\n    \"sourceDirectory\": \"docs/source\",\n    \"tutorialDirectory\": \"docs/tutorials\",\n    \"languages\": [\"en\", \"ar\"],\n    \"translationsDirectory\": \"dosc/translations\"\n}\nIt contains the following fields:\n\nالمصدر: يحدد الدليل الذي يحتوي على الملفات المصدرية التي يتعين توثيقها. By default, this field is set to docs/source within the project structure. This is the same as the source CLI argument.\nدليل الدروس: يحدد الدليل الذي يحتوي على ملفات الدرس التعليمي التي ستدرج في الوثائق. By default, this field is set to docs/tutorials within the project structure. This is the same as the tutorial CLI argument.\n’دليل النواتج: يحدد دليل المخرجات حيث سيتم تخزين الوثائق التي تم إنشاؤها. By default, this field is set todocs/outputwithin the project structure. This is the same as theoutput` CLI argument.\n\n\n\nBasic Usage\n\nلاستخدام حجج CLI المخصصة هذه، ببساطة قم بإلحاقها بأمر JSquarto عند تنفيذ الأداة. على سبيل المثال:\nلتحديد دليل ملفات المصدر: “`باش jsq doc:generate source=/path/to/your/source/files\n\nلتحديد دليل ملفات البرنامج التدريبي:\n“`باش\njsq doc:generate tutorial=/path/to/your/tutorial/files\nلتحديد دليل الإخراج: “`باش jsq doc:generate output=/path/to/your/output/directory\n\nلتحديد اللغات المعتمدة:\n“`باش\njsq doc:generate languages=en,fr,es\nسيؤدي هذا فقط إلى إضافة اللغات إلى ملف التكوين (_quarto.yml) وعدم إنشاء الوثائق باللغات المحددة. هذا مهم للحالات التي تستخدم فيها أداة خارجية مثل كراودِن لترجمة الوثائق وإنشاء الملفات باللغات المحددة.\nلإدراج النسخ المترجمة للوثائق التي تم إنشاؤها: “`باش jsq doc:generate include_localized_versions=true languages=en,fr,es\nسيؤدي هذا إلى توليد الوثائق باللغات المحددة وأيضاً إضافة اللغات إلى ملف التكوين (_quarto.yml).\n\nملاحظة: إذا كنت تنوي 'include_localized_versions`، فيجب عليك أيضا تحديد حجة 'اللغات` للإشارة إلى اللغات المؤيدة للوثائق.\n\n### Usage with Configuration File {#sec-config-usage}\n&lt;hr&gt;\nAlternatively, you can leverage the `config.json` file to store your custom settings and avoid specifying them each time you run the JSquarto tool. By modifying the fields in the `config.json` file, you can customize the documentation generation process according to your requirements.\n\nTo use a configuration file follow the steps below:\n\n1. Initialize the configuration file using the command below:\n\n   “`باش\n   jsq config:init  \nThis will create a `config.json` file in the `.jsquarto` directory within your project structure. You might have an already existing config file, for this case you can tell jsq to use this file instead by running;\n“`باش jsq config:set config=/path/to/your/directory ```\n\nSet the desired configuration settings in the config.json file according to your preferences. To set the source files directory run “`باش jsq config:set source=/path/to/your/source/files\n\nTo set the tutorial files directory run\n“`باش\njsq config:set tutorial=/path/to/your/tutorial/files\nTo set the output directory run “باش jsq config:set output=/path/to/your/output/directory ``` To set the supported languages run “باش jsq config:set languages=en,fr,es\n\nTo include localized versions of the generated documentation run\n“`باش\njsq config:set include_localized_versions=true\n\nThis will update the config.json file with the specified settings, which will be used by the JSquarto tool during the documentation generation process.\nYou can also manually edit the config.json file to modify the configuration settings according to your requirements.\n\n\n\nNote: - After initializing a config file the default configuration will be added to the file. You can then modify the settings in the file to suit your needs.\n\nYour config.json file location will be stored by jsquarto in cache, so you don’t have to specify the file location each time you run jsquarto. It is stored together with your project directory (the directory where jsq command is run).\nEven when you have multiple projects, jsquarto will store the config file location for each project separately. This means that you can have different config files for different projects.\nIf you already initialized a config file for project, and you want to use a different config file for the same project, you can run the command below:\n“`باش jsq config:set config=/path/to/your/directory force ``` This will update the config file location for the project.\n\n\n\n\n\nالاستفادة من TypeScript في ملفات المصدر\n\nعند استخدام TypeScript ضمن مشروعك، من المستصوب تحويل ملفات مصدر TypeScript إلى JavaScript قبل بدء عملية JSquarto . تنبع هذه التوصية من حقيقة أن JSquarto تفتقر إلى الدعم الجوهري لجملة TypeScript. بمجرد أن تقوم بنقل ملفات TypeScript الخاصة بك إلى JavaScript، يمكنك تنفيذ JSquarto بسلاسة على ملفات JavaScript الناتجة لإنشاء وثائق شاملة.\nدمج نقل TypeScript قبل تنفيذ JSquarto، تأكد من تحويل ملفات مصدر TypeScript إلى JavaScript باستخدام المحول المفضل، مثل TypeScript Compiler (tsc). وتكفل هذه الخطوة التواؤم مع عملية توليد الوثائق في JSquarto، مما ييسر سلاسة وكفاءة",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Usage</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/how_to/workflows.ar.html",
+    "href": "chapters/tutorials/how_to/workflows.ar.html",
+    "title": "Workflows",
+    "section": "",
+    "text": "هناك مختلف سير العمل التي يمكن اعتمادها لتحسين عملية توليد الوثائق باستخدام JSquarto.\n\nتوليد دوك\nتوليد دوك مع نقل يدوي\nتوليد Doc مع ترجمة crowdin\n\n\nDoc generation\nوينطوي سير العمل هذا على توليد الوثائق بلغة واحدة. وهذه العملية مباشرة وتنطوي على تنفيذ JSquarto على ملفات المصدر لتوليد وثائق شاملة باللغة المحددة. ويعد تدفق العمل هذا مثاليا بالنسبة للمشاريع التي تستهدف جمهورا لغويا محددا وتسعى إلى تبسيط عملية إعداد الوثائق.\n\nستابس\n\nTo do this, simply execute the JSquarto command with the desired custom CLI arguments, such as source and languages, to specify the source files directory and supported languages, respectively. على سبيل المثال:\n“`باش jsq doc:generate source=/path/to/your/source/files ```\n\n\n\n\nتوليد دوك مع ترجمة يدوية\nمن أجل الترجمة اليدوية للوثائق، يمكنك إنتاج الوثائق بلغات متعددة ثم ترجمة المحتوى يدوياً إلى اللغات المرغوبة. لسير العمل هذا، نستخدم babelquarto الذي يساعد على معاينة الوثائق بلغات متعددة. على الرغم من أن هذا لا يترجم المحتوى، فإنه يوفر معاينة للوثائق باللغات المحددة، مما يتيح لك ترجمة المحتوى يدوياً.\n\nالخطوات\n\nتوليد الوثائق بلغات متعددة باستخدام JSquarto مع حجة “اللغات” لتحديد اللغات المعتمدة. على سبيل المثال:\n“باش      jsq doc:generate languages=en,fr,es include_localized_versions source=/path/to/your/source/files  ``` ملاحظة: تأكد من إدراج حجة 'include_localized_versions لإنتاج نسخ من الوثائق باللغات المحددة. إذا لم تكن مشمولة، سيتم إنشاء وثائق اللغة الافتراضية فقط. ولكن سيتم إضافة تكوين اللغات إلى ملف التكوين (_quarto.yml) فقط.\nترجمة المحتوى يدويا في ملفات الوثائق التي تم إنشاؤها لكل لغة. يمكنك استخدام أدوات مثل ترجمة جوجل أو خدمات الترجمة المهنية لتسهيل عملية الترجمة.\nقم بتحميل RStudio وتثبيت حزمة ‘babelquarto’ من CRAN. يتم استخدام هذه الحزمة لمعاينة الوثائق بلغات متعددة. يمكنك تثبيت الحزمة باستخدام الأمر التالي:\n“`R install.packages(‘babelquarto’, repos = c(‘https://ropensci.r-universe.dev’, ‘https://cloud.r-project.org’)) ```\nافتح مجلد دوك الذي تم إنشاؤه في RStudio، انتقل إلى وحدة التحكم وتعيين دليل العمل إلى مجلد doc\n“`R project_dir &lt;-”/home/richie/Desktop/repos/oscsa/JSquarto/docs” ```\nمعاينة الوثائق بلغات متعددة باستخدام حزمة ‘babelquarto’. وعلى سبيل المثال، لتنفيذ الأمر التالي من أجل معاينة الوثائق باللغات الانكليزية والفرنسية والإسبانية:\n“`R babelquarto::render_book(file.path(parent_dir, project_dir)) ```\nوحتى وقت كتابة هذا التقرير، كانت هناك مسائل طفيفة تتعلق بالتنقل في الوثائق المعاد النظر فيها بلغات مختلفة. لإصلاح هذا مؤقتاً، قم بتشغيل\n“`باش jsq fix:all languages=en,fr,es ```\nملاحظة: البرنامج النصي “إصلاح:all” هو برنامج نصي مخصص يصلح مشاكل التنقل في الوثائق المعاينة. يستخدم هذا البرنامج النصي لتحديث روابط التنقل في الوثائق المعاينة لتمكين التنقل السلس بين اللغات المختلفة. واللغات المحددة في النص ينبغي أن تتطابق مع اللغات المحددة في حجة “اللغات” أثناء عملية إعداد الوثائق.\nYou can navigate to the docs/output/_book directory to view the previewed documentation in multiple languages. يمكنك من التحقق من الترجمات وضمان دقة وجودة الوثائق.\n\n\n\n\nتوليد دوك مع ترجمة الحشود\nللترجمة الآلية للوثائق، يمكنك الاستفادة من منصة كرودن لتسهيل عملية الترجمة. كراودِن هو منصة إدارة الترجمة القائمة على السحابة والتي تمكنك من أتمتة ترجمة المحتوى إلى لغات متعددة. من خلال دمج كراودِن مع JSquarto، يمكنك تبسيط عملية الترجمة وإنشاء وثائق شاملة بلغات مختلفة بكفاءة.\n\nالخطوات\n\nتوليد الوثائق بلغات متعددة باستخدام JSquarto مع حجة “اللغات” لتحديد اللغات المعتمدة. على سبيل المثال:\n“`باش jsq doc:generate languages=en,fr,es source=/path/to/your/source/files ```\nلاحظ أن حجة “include_localized_versions” ليست مطلوبة لسير العمل هذا، لأن كراودِن سوف يتعامل مع عملية الترجمة. وإنشاء ملفات مختلفة لكل لغة.\nدمج كراودِن مع JSquarto لأتمتة عملية الترجمة. لدمج كراودن، تحتاج إلى إنشاء مشروع كراودِن وتكوين إعدادات المشروع لتمكين الترجمة التلقائية للوثائق. om/github-integration/#:~:text=فتح%20الخاص بك%20project%20and%20go%20to%20%20INtegrt، قرص أسفل%20list%20to%20integrate%20عن طريق%20الخاص بك%20GitHub%20a) للحصول على تعليمات مفصلة بشأن إعداد مشروع وتكوين إعدادات الترجمة. في كراودين، يمكنك إعداد كيفية تسمية الملفات المترجمة، والتأكد من أنها تتبع تنسيق original_file_name.locale.extension على سبيل المثال index.en.qmd، index.fr.qmd، index.es.qmd\nبمجرد تكوين إعدادات مشروع Crowdin ، يمكنك المضي قدما في تقديم الوثائق بلغات متعددة باستخدام حزمة ‘babelquarto’. هذه الخطوة تمكنك من معاينة الوثائق بلغات مختلفة قبل بدء عملية الترجمة. يمكنك استخدام حزمة ‘babelquarto’ لمعاينة الوثائق بلغات متعددة، كما هو مبين في تدفق العمل السابق. للقيام بهذا فتح مجلد doc الذي تم إنشاؤه في RStudio، انتقل إلى وحدة التحكم وتعيين دليل العمل إلى مجلد doc\n“`R project_dir &lt;-”path/to/your/project/output/folder” ```\nمعاينة الوثائق بلغات متعددة باستخدام حزمة ‘babelquarto’. وعلى سبيل المثال، لتنفيذ الأمر التالي من أجل معاينة الوثائق باللغات الانكليزية والفرنسية والإسبانية:\n“`R babelquarto::render_book(file.path(parent_dir, project_dir)) ```\nAfter rendering the book, the html files will be generated and set in the docs/output/_book directory. يمكنك بعد ذلك خدمة الكتاب باستخدام أي خادم ثابت مثل ‘http-server’ أو ‘live-server’ لمعاينة الوثائق بلغات متعددة. بدلاً من ذلك، يمكنك تشغيل الأمر التالي لخدمة الكتاب:\n“`باش jsq serve ```\nبعد تقديم الكتاب، يمكنك الانتقال إلى عنوان URL المحدد لعرض الوثائق بلغات متعددة. في بعض الحالات قد تلاحظ أن روابط التنقل لا تعمل كما هو متوقع. لإصلاح هذا، قم بتشغيل الأمر التالي:\n“`باش jsq fix:all languages=en,fr,es ```\n\nيستخدم سير العمل هذا JSquarto لتوليد الوثائق، و Crowdin لبدء عملية الترجمة التي تنشئ الملفات المترجمة باللغات المحددة، أخيرا حزمة ‘babelquarto’ لمعاينة الوثائق بلغات متعددة.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Workflows</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/how_to/crowdin_integration.ar.html",
+    "href": "chapters/tutorials/how_to/crowdin_integration.ar.html",
+    "title": "Crowdin integration",
+    "section": "",
+    "text": "This section will go over the necessary steps for integrating crowdin for translations.\n\nPrerequisites\n\nYou need to have a crowdin account. If you don’t have one, you can create one here.\nYou need to have a crowdin project. If you don’t have one, you can create one here\nYou need to host your project on github. If you don’t have one, you can create one here\n\n\n\nخطوات\n\nInitialize a new config file if you dont have one already. To do this run the following command: “`باش jsq config:init\n   The file should look like this:\n   ```json\n     {\n         \"outputDirectory\": \"docs\",\n         \"languages\": [\"en\", \"ar\"],\n         \"translationsDirectory\": \"translations\"\n     }\n\noutputDirectory: The directory where the generated documentation will be stored.\nlanguages: An array of the languages you want to support.\ntranslationsDirectory: The directory where the translations will be stored. This directory will be used by crowdin to store the translations.\n\nMake sure the outputDirectory and translationsDirectory exists within your project\nGenerate the documentation using JSquarto. You can follow the steps @usage-basic\nCommit all necessary changes, including the config.json file and push to your github repository.\nOn your crowdin project, go to the settings page and click on the Integrations tab. \nSearch for Github integration and click on the Install button. \nGo back to the integrations tab and select find the Github integration then click Set Up Integration \nClick the dropdown menu for Set Up Integration and select the Source and translation files mode \nFill the repository details, specify the branch for translations and translation mode. \nNow go back to the Integrations tab and select Github Integration.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Crowdin integration</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/project_structure.ar.html",
+    "href": "chapters/tutorials/project_structure.ar.html",
+    "title": "بنية المشروع",
+    "section": "",
+    "text": "بنية ملف المشروع\nوفيما يلي هيكل الرابطة اليابانية للتعاون التقني:\n“`باش ├── src   - وصية          - فهارس │ ├── utils │ │ ├── codeconstruct.ts │ │ ├── component.ts │ │ ├── file.ts │ │ ├── logger.ts │ │ ├── parser.ts │ │ ├── string.ts        - كتاب   - دروس         – مساهمة/        -how_to /        environment_setup.qmd        -localization.qmd      ‘, project_structure.qmd      )-config.json │ │       - فهارس │ │   ’, package.json    ’, package-lock.json       .prettierrc\n```\nيحتوي دليل “API” على رمز المصدر لـ JSQuarto. وينظم دليل “API” على النحو التالي:\n\n‘src/interfaces’ - يحتوي على جميع تعاريف النوع/العناوين للمشروع.\n‘src/utils’ - يحتوي على جميع وظائف المنفعة للمشروع. وتستخدم هذه الوظائف المفيدة لأداء مهام مختلفة مثل الوقوف والكتابة وقطع الأخشاب.\n‘src/tutorials’ - يحتوي على جميع الدروس للمشروع. هذه الدروس مكتوبة بتنسيق Quarto Markdown. لاحظ أن ملف config.json يستخدم لتحديد كيفية هيكلة الدروس.\n‘src/index.ts’ - المدخل الرئيسي للمشروع.\n‘src/package.json’ - ملف حزمة المشروع؛\n‘src/.prettierrc’ - ملف التكوين المسبق للمشروع.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>بنية المشروع</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/environment_setup.ar.html",
+    "href": "chapters/tutorials/environment_setup.ar.html",
+    "title": "Environment_setup",
+    "section": "",
+    "text": "Prerequisites\n\nقبل اختبار الأداة محلياً، تأكد من وجود الشروط المسبقة التالية مثبتة على النظام الخاص بك: - Node.js و npm (مدير الحزمة العقدية) - Git (اختياري، إذا استنساخ المستودع) - Babel Quarto (optional, if previewing the generated documentation)\n\n\nInstallation\n\nلاختبار الأداة محلياً، قم باتباع الخطوات التالية:\n\nInstall the cli package from NPM:\n“`باش npm i -g @oscsa/jsquarto ```\nInstall Quarto, to do this refer to the official Quarto installation guide\nInstall Babel quarto, refer to the official Babel Quarto installation guide\n\n\n\nتشغيل الأداة\n\n\nلإنشاء الوثائق قم بتشغيل الأمر التالي\n“`باش jsq doc:generate\n\nهذا سوف يستخرج تعليقات JSDoc من ملفات js و يكتبها إلى ملفات Quarto Markdown المقابلة.\n\nيمكنك اختيار تحديد الدليل حيث 'source_files' ، للقيام بهذا التشغيل \n\n“`باش\njsq doc:generate source=&lt;path to source files&gt;\nكما أنه يدعم إضافة دروس مخصصة، للقيام بذلك إضافة ملفات .qmd للدروس في دليل /tutorials\nThe generated .qmd files can be found in the docs/build folder\nقد يختلف هذا الأمر تبعاً لسير العمل الذي تختاره، قد ترغب في إنشاء ملفات المستندات بلغات أخرى أيضاً. للقيام بذلك يمكنك تشغيل الأمر أدناه\n“`باش jsq doc:generate languages=en,ar,es include_localized_versions source= ```\nوسيصدر هذا التقرير الوثائق باللغات الإسبانية والإنكليزية والعربية. يمكنك إضافة المزيد من اللغات عن طريق فصلها بفاصلة. (هذا لا يترجم الوثائق في الواقع، بل يقوم فقط بإنشاء نسخة من الوثائق ويعاد تسميتها إلى اللغة المحددة). للتكامل مع خدمة الترجمة، يمكنك استخدام خدمة Crowdin.\nوللحصول على مزيد من المعلومات عن سير العمل المتاح، انظر الدليل هنا ?sec-workflow\nلمعاينة الوثائق التي تم إنشاؤها قيد التشغيل\n“`باش jsq doc:preview ```\nيتم معاينة المستندات مع quarto، لذا تأكد من تثبيت quarto مسبقاً",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Environment_setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/changelog.ar.html",
+    "href": "chapters/tutorials/changelog.ar.html",
+    "title": "سجل التغيير",
+    "section": "",
+    "text": "1.0.5 (2024-06-12)",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>سجل التغيير</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/changelog.ar.html#section",
+    "href": "chapters/tutorials/changelog.ar.html#section",
+    "title": "سجل التغيير",
+    "section": "",
+    "text": "Bug Fixes\n\nincorrect file paths while merging crowdin translations (0196156)\nincorrect translations directory in default config (cfa81fc)",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>سجل التغيير</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/changelog.ar.html#section-1",
+    "href": "chapters/tutorials/changelog.ar.html#section-1",
+    "title": "سجل التغيير",
+    "section": "1.0.4 (2024-06-11)",
+    "text": "1.0.4 (2024-06-11)\n\nFeatures\n\nfix:all to run all custom fixes in order (5a52490)\nAdd right-to-left styling for arabic docs (99f74ef)\nInitialize config file in any directory (b4b9055)\nprepareDirectoryForDocs (93a8698)\nRemove duplicate references to language in dropdown menu (7074ea9)\nScript to fix localized files (cfa8c8d)\nScript to fix localized files (c20baf5)\nScript to fix structure crowdin files after new update (14ec202)\nScript to fix structure crowdin files after new update (0a0ebec)\nSet config in file from cli (346866f)\nSet project config path from cli (3c75d04)\nUpate config path record for project (a4b80d9)\n\n\n\nBug Fixes\n\nfix:all for bug with language menu working in built book (37f9f4f)\nfix:all for bug with language menu working in built book (7fc0adb)\nall modules being categorized under default (ef33600)\ncomment util returning ‘other’ for all types of comments (19b0d49)\ndir not found error when writing doc for global variables (cdef7ff)\nduplicate headings in tutorials (e50bfaa)\ngetConstructName returning other (c5b2176)\nglobals section appearing twice (5ace1d9)\nbroken image ref in tutorial (39044dd)\nissue with generating language files (77ff687)\ntutorials not taking title from tutorial config (104c294)\nmodules without categories not linked to globals (38c51cf)\nnpm scripts throwing error when extra args are passed (c91f59f)\ntutorials without chapter not included in quarto.yaml (71452ce)\nwrong code construct name in generated doc (c939628)",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>سجل التغيير</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/changelog.ar.html#لم-يفرج-2024-03-05",
+    "href": "chapters/tutorials/changelog.ar.html#لم-يفرج-2024-03-05",
+    "title": "سجل التغيير",
+    "section": "لم يفرج (2024-03-05)",
+    "text": "لم يفرج (2024-03-05)\n\nFeatures:\n\nExtract docstrings from javascript files (#13)\nGenerate documentation structure in quarto.yml file (#9)\nLink unmatched documents to Globals category (#21)\nReferences for doc snippets and external resources (#22)\nAdd documentation for JSQuarto (#25)\nAdd tutorials for JSQuarto (#26)\nAdd How to guides and custom command line args (#30)\n\n\n\nBugs fixed:\n\nImprove formatting for params, thrown errors and returns (#14)\nRemove code constructs from function documentation (#15)\nFix inconsistent header titles from extracted documents (#17)",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>سجل التغيير</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/changelog.ar.html#contributors",
+    "href": "chapters/tutorials/changelog.ar.html#contributors",
+    "title": "سجل التغيير",
+    "section": "Contributors ✨",
+    "text": "Contributors ✨\n\nشكرا لهؤلاء الناس الرائعين (مفتاح emoji):\n\n\n\n\n\n\n\nRichie🚇 🤔 👀\n\n\n\n\n\n\n\nهذا المشروع يتبع مواصفات all-contributors. المساهمات من أي نوع!",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>سجل التغيير</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/localization.ar.html",
+    "href": "chapters/tutorials/localization.ar.html",
+    "title": "التعريب",
+    "section": "",
+    "text": "ما هو التعريب ؟\nوالتوطين هو عملية تكييف منتج أو خدمة لتلبية الاحتياجات اللغوية والثقافية وغيرها من المتطلبات لبلد أو منطقة بعينها. هذا يتضمن ترجمة محتوى المنتج، مثل النصوص، والصور، والصوت، والصوت، • استخدام اللغة المحلية وتكييفها لتلبية المتطلبات الثقافية للسوق المستهدفة.\nوالتوطين مهم في تطوير البرمجيات لأنه يساعد على جعل المنتج أيسر منالا للجمهور العالمي وتحسين تجربة المستخدم. من خلال ترجمة المحتوى إلى اللغة المحلية، يمكن للمطورين الوصول إلى جمهور أوسع وجعل من الأسهل على المستخدمين فهم المنتج واستخدامه.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>التعريب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/localization.ar.html#ما-هي-الترجمة",
+    "href": "chapters/tutorials/localization.ar.html#ما-هي-الترجمة",
+    "title": "التعريب",
+    "section": "ما هي الترجمة؟",
+    "text": "ما هي الترجمة؟\nالترجمة هي عملية تحويل المحتوى المكتوب أو المنطوق من لغة إلى أخرى. وتنطوي هذه العملية على فهم المحتوى الأصلي واستنساخه باللغة المستهدفة، مع مراعاة أي اختلافات ثقافية أو لغوية.\nوالترجمة مهمة في تطوير البرمجيات لأنها تسمح للمطورين بجعل منتجاتهم متاحة للجمهور العالمي. من خلال ترجمة المحتوى إلى اللغة المحلية، يمكن للمطورين الوصول إلى جمهور أوسع وجعل من الأسهل على المستخدمين فهم المنتج واستخدامه.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>التعريب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/localization.ar.html#كراودن-كمنصة-للتعريب",
+    "href": "chapters/tutorials/localization.ar.html#كراودن-كمنصة-للتعريب",
+    "title": "التعريب",
+    "section": "كراودِن كمنصة للتعريب",
+    "text": "كراودِن كمنصة للتعريب\nكراودِن هو منصة توطين تساعد المطورين على إدارة عملية توطين منتجاتهم. يوفر مجموعة من الميزات التي تجعل من الأسهل على المطورين ترجمة منتجاتهم والتعاون مع المترجمين.\nتشمل ميزات كراودِن:\n\nإدارة الترجمة\nأدوات التعاون\nضمان الجودة\nالتكامل مع أدوات التنمية\nCrowdsourcing\nالترجمات في السياق\nالترجمة الآلية\n\nاستخدام كراودِن للتعريب له عدة مزايا، بما في ذلك:\n\nإدارة أسهل لمشاريع الترجمة\nأوقات دوران أسرع للترجمة\nتحسين جودة الترجمة\nالتعاون مع المترجمين من جميع أنحاء العالم\nالتكامل مع أدوات التنمية، مثل GitHub و Bitbucket\nالقدرة على استخدام الترجمة الآلية لترجمات أسرع",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>التعريب</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/localization.ar.html#استنتاج",
+    "href": "chapters/tutorials/localization.ar.html#استنتاج",
+    "title": "التعريب",
+    "section": "استنتاج",
+    "text": "استنتاج\nالتعريب هو جانب هام من تطوير البرمجيات، واستخدام منصة مثل كراودِن يمكن أن يساعد على جعل العملية أسهل وأكثر كفاءة. مع كراودن، يمكن للمطورين إدارة مشاريع الترجمة، والتعاون مع المترجمين، وتحسين جودة الترجمات. باستخدام مزيج من التعريب والترجمة، يمكن للمطورين جعل منتجاتهم أيسر منالا للجمهور العالمي وتحسين تجربة المستخدم.",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>التعريب</span>"
+    ]
+  }
+]
