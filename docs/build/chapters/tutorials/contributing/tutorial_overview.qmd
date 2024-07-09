@@ -1,0 +1,167 @@
+--- 
+title: Tutorial overview 
+---
+### Tutorials guide
+<hr>
+
+This section provides an overview of the `config.json` files used in the JSQuarto documentation, specifically focusing on the `tutorials` folder. The `config.json` file serve as configuration files that help structure and organize the documentation, while the `tutorials` folder contains the Markdown files for various tutorials.
+
+### The `tutorials` Folder
+<hr>
+
+The `tutorials` folder within the documentation directory is dedicated to hosting tutorials on various topics related to the JSQuarto platform. This folder contains a collection of Markdown files, each representing an individual tutorial.
+
+Markdown is a lightweight markup language that allows for easy formatting and structuring of text, making it ideal for creating tutorials. Markdown files provide a simple yet powerful way to document step-by-step instructions, code examples, explanations, and other relevant information.
+
+The `tutorials` folder can be organized into subfolders to further categorize and group related tutorials. This helps users easily locate and access the tutorials they need based on their specific interests or requirements.
+
+By structuring tutorials within the `tutorials` folder using Markdown, contributors can contribute new tutorials, update existing ones, and ensure that the documentation remains comprehensive and user-friendly.
+
+Overall, the combination of `.json` files and the `tutorials` folder enables a well-organized and accessible documentation structure, allowing users to navigate and explore the JSQuarto platform documentation with ease.
+
+### Overview of `config.json` Files
+<hr>
+The `config.json` file in the JSQuarto documentation play a crucial role in organizing and categorizing the content. This file define the structure of the documentation and provide metadata for each section, tutorial, or topic. They allow maintainers and contributors to easily navigate and manage the documentation by specifying titles, creating nested structures, and linking related topics.
+
+By using `config.json` file, the documentation can be dynamically generated and updated based on the defined structure. This makes it easier to maintain consistency, track changes, and add new content.
+
+
+### The `.json` configuration
+<hr>
+Let's explain how this structure works by looking at the `config.json` file in the `tutorials /` folder. This file defines the structure of the tutorials section of the documentation, including the titles, descriptions links for each tutorial.
+
+```json
+{
+  "changelog": {
+    "title": "Changelog"
+  },
+  "environment_setup": {
+    "title": "Environment Setup"
+  },
+  "contributing": {
+    "title": "Contributing"
+  }
+}
+```
+
+In this example, the `.json` file defines the titles and relationships of the main sections within your documentation. The sections are represented as objects, with each object having a unique key and a `"title"` key-value pair.
+
+1. `changelog` represents the "Changelog" section. The `"title"` key-value pair specifies the title of this section as "Changelog."
+
+2. `environment_setup` represents the "Environment Setup" section. The `"title"` key-value pair specifies the title of this section as "Environment Setup."
+
+3. `contributing` represents the "Contributing" section. The `"title"` key-value pair specifies the title of this section as "Contributing."
+
+With this structure, your documentation folder will contain separate Markdown files for each section, named according to the keys in the `.json` file. For example:
+
+```yaml
+- `documentation /`
+    - `docs /`
+        - `changelog.md`
+        - `environment_setup.md`
+        - `contributing.md`
+        - `tutorials.json`
+```
+
+Each Markdown file will correspond to a section in your documentation and should contain the relevant content for that section.
+
+Remember to update the `.json` file whenever you add or modify sections to ensure that the documentation structure accurately reflects the content of your documentation.
+
+
+### Nested `.json` configuration for tutorials
+<hr>
+To structure tutorials and create nested tutorials within your documentation, you can use the `.json` file to define the hierarchy and relationships between tutorials. Here's an example of how you can structure tutorials using a `.json` file:
+
+```yaml
+{
+    "maintainers": {
+        "title": "Technical guide for Maintainers",
+        "children": {
+            "reviewing_pr": {
+                "title": "Reviewing pull requests"
+            },
+            "ci_workflow": {
+                "title": "CI Workflow"
+            },
+            "secrets_and_security": {
+                "title": "Secret Access/Management"
+            },
+            "deployment_guide": {
+                "title": "Deployment Guide"
+            }
+        }
+    },
+    "contributing": {
+        "title": "Contributing to the project",
+        "children": {
+            "adding_a_course": {
+                "title": "Adding a course"
+            },
+            "api_project_structure": {
+                "title": "API project structure"
+            },
+            "improving_documentation": {
+                "title": "Improving documentation"
+            },
+            "project_structure": {
+                "title": "Project structure"
+            },
+            "raising_issues": {
+                "title": "Raising issues"
+            },
+            "raising_pr": {
+                "title": "Raising pull requests"
+            }
+        }
+    },
+    "review": {
+        "title": "Reviewing the project"
+    }
+}
+ ```
+
+In this example, the `.json` file represents a documentation structure with two main sections: "Technical guide for Maintainers" and "Technical guide for API developers". Each section has its own set of tutorials represented as nested objects.
+
+1. Define the main sections or categories as top-level objects within the `.json` file, such as "maintainers" and "contributing".
+
+2. Within each main section, provide a `"title"` key to specify the title or heading for that section. For example, "Technical guide for Maintainers" and "Technical guide for API developers".
+
+3. Add a `"children"` key within each main section to define the nested tutorials. Each tutorial is represented as a child object within the `"children"` object. Not all tutorials may have children tutorials, an example of this is the `review` tutorial. Since it has no children the program will only look for a `review.qmd` file and not a `review` folder 
+
+4. For each tutorial, provide a unique key as the object's key, such as "reviewing_pr" and "ci_workflow".
+
+5. Within each tutorial object, include a `"title"` key to specify the title or heading for that specific tutorial.
+
+For this example here is what the folder structure would look like assuming the root folder is `tutorials /`:
+
+```yaml
+        - tutorials/
+            - maintainers/
+                - maintainers.qmd
+                - reviewing_pr.qmd
+                - ci_workflow.qmd
+                - secrets_and_security.qmd
+                - deployment_guide.qmd
+
+            - contributing/
+                - api.md
+                - api_structure.md
+                - api_authentication_flow.qmd
+                - jwt_token_management.qmd
+                - rbac_handler_flow.qmd
+            
+            - review.qmd
+              
+            - config.json
+```
+
+In this structure:
+
+- The `.json` configuration file is located in the `tutorials/` folder
+- The `tutorials` folder contains subfolders representing different sections or categories of tutorials.
+- Each section or category folder, such as `maintainers` and `contributing`, contains the `.qmd` files for individual tutorials.
+<!-- - Additionally, for each section or category folder, there should be an accompanying `*.md` file that serves as the entry overview, providing an overview of the tutorials within that section. For example, `maintainers.md` provides an overview of the tutorials in the "Technical guide for Maintainers" section. -->
+
+The nested structure allows you to organize tutorials hierarchically, making it easier to navigate and find specific tutorials based on their topic or category.
+
+It's important to note that the tutorial structure allows only one level of nesting. This means you can have main sections and their respective tutorials, but you cannot create further nested folders within the tutorials.
