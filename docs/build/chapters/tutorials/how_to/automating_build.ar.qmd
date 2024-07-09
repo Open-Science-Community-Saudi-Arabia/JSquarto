@@ -2,6 +2,8 @@
 title: Automating build 
 ---
 
+##  {#automating_build}
+
 This section will go over the steps necessary to automate the process of building the book, integrating crowdin translations, and deploying the book to the web. This process is automated using GitHub Actions, which is a CI/CD tool that is integrated with GitHub. 
 
 ### Prerequisites
@@ -9,12 +11,12 @@ This section will go over the steps necessary to automate the process of buildin
 2. You need to have a GitHub account.
 
 
-### Steps
+### خطوات
 1. Navigate to `/.github/workflows/` folder in your github repository (you can create the folder if it doesn't exist).
 
 2. Create a new file called `build-book.yml` and paste the following code into the file:
 
-   ```yaml
+   “يامل
         name: Build Book with Babel Quarto
 
         on:
@@ -113,7 +115,7 @@ This section will go over the steps necessary to automate the process of buildin
                   git config --global user.name $PR_AUTHOR_NAME
                   git checkout -b $NEW_BRANCH
                   git status
-                  git add .
+                  git يضاف
                   git commit -m "Build book with babelquarto"
                   git push origin $NEW_BRANCH
 
@@ -154,7 +156,7 @@ This section will go over the steps necessary to automate the process of buildin
 
 3.  The branch specified in the dispacth block should match the value used in your crowdin project setup
 
-    ```yaml
+    “يامل
        on:
           pull_request:
             branches:

@@ -1,0 +1,65 @@
+--- 
+title: Environment_setup 
+---
+
+### Prerequisites {#environment-setup}
+<hr>
+قبل اختبار الأداة محلياً، تأكد من وجود الشروط المسبقة التالية مثبتة على النظام الخاص بك:
+- Node.js و npm (مدير الحزمة العقدية)
+- Git (اختياري، إذا استنساخ المستودع)
+- Babel Quarto (optional, if previewing the generated documentation)
+
+### Installation
+<hr>
+لاختبار الأداة محلياً، قم باتباع الخطوات التالية:
+
+1. Install the cli package from NPM:
+   
+   “`باش
+   npm i -g @oscsa/jsquarto 
+   ```
+
+2. Install Quarto, to do this refer to the official [Quarto installation guide](https://quarto.org/docs/get-started/) 
+
+3. Install Babel quarto, refer to the official [Babel Quarto installation guide](https://docs.ropensci.org/babelquarto/)
+
+
+### تشغيل الأداة
+<hr>
+1. لإنشاء الوثائق قم بتشغيل الأمر التالي
+   
+   “`باش
+   jsq doc:generate
+   ```
+
+   هذا سوف يستخرج تعليقات JSDoc من ملفات js و يكتبها إلى ملفات Quarto Markdown المقابلة.
+
+   يمكنك اختيار تحديد الدليل حيث 'source_files' ، للقيام بهذا التشغيل 
+   
+   “`باش
+   jsq doc:generate source=<path to source files>
+   ```
+
+   كما أنه يدعم إضافة دروس مخصصة، للقيام بذلك إضافة ملفات .qmd للدروس في دليل `/tutorials`
+
+   The generated `.qmd` files can be found in the `docs/build` folder
+
+   قد يختلف هذا الأمر تبعاً لسير العمل الذي تختاره، قد ترغب في إنشاء ملفات المستندات بلغات أخرى أيضاً. للقيام بذلك يمكنك تشغيل الأمر أدناه
+
+   “`باش
+   jsq doc:generate languages=en,ar,es include_localized_versions source=<path to source files>
+   ```
+
+   وسيصدر هذا التقرير الوثائق باللغات الإسبانية والإنكليزية والعربية. يمكنك إضافة المزيد من اللغات عن طريق فصلها بفاصلة. (هذا لا يترجم الوثائق في الواقع، بل يقوم فقط بإنشاء نسخة من الوثائق ويعاد تسميتها إلى اللغة المحددة). للتكامل مع خدمة الترجمة، يمكنك استخدام خدمة [Crowdin](https://crowdin.com/).
+
+   وللحصول على مزيد من المعلومات عن سير العمل المتاح، انظر الدليل هنا @sec-workflow
+
+
+2. لمعاينة الوثائق التي تم إنشاؤها قيد التشغيل 
+    
+   “`باش
+   jsq doc:preview
+   ```
+   
+   يتم معاينة المستندات مع quarto، لذا تأكد من تثبيت quarto مسبقاً
+

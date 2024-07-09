@@ -1,6 +1,7 @@
 --- 
 title: Crowdin integration 
 ---
+
 This section will go over the necessary steps for integrating crowdin for translations.
 
 ### Prerequisites {#crowdin-integration-guide}
@@ -8,10 +9,10 @@ This section will go over the necessary steps for integrating crowdin for transl
 2. You need to have a crowdin project. If you don't have one, you can create one [here](https://crowdin.com/project/create)
 3. You need to host your project on github. If you don't have one, you can create one [here](https://github.com)
 
-### Steps
+### خطوات
 1. Initialize a new config file if you dont have one already. 
    To do this run the following command:
-   ```bash
+   “`باش
    jsq config:init
    ```
    The file should look like this:
@@ -51,6 +52,7 @@ This section will go over the necessary steps for integrating crowdin for transl
    - Source files: `/docs/build/**/*.qmd` </br> 
    - Translated files path: `/docs/_translations/%two_letters_code%/**/%file_name%.%two_letters_code%.qmd`. </br>
    -  `**/*.qmd` tells crowdin to match all files in subdirectories with the `.qmd` extension. </br>
+
 
    Note that `/docs/build`  and `/docs/_translations/` correspond with the values we set for `outputDirectory` and `translationsDirectory`  in the `config.json` file.
 
