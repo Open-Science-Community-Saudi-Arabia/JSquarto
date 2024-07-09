@@ -1,7 +1,6 @@
-
 This section will go over the necessary steps for integrating crowdin for translations.
 
-### Prerequisites
+### Prerequisites {#crowdin-integration-guide}
 1. You need to have a crowdin account. If you don't have one, you can create one [here](https://crowdin.com/).
 2. You need to have a crowdin project. If you don't have one, you can create one [here](https://crowdin.com/project/create)
 3. You need to host your project on github. If you don't have one, you can create one [here](https://github.com)
@@ -45,15 +44,15 @@ This section will go over the necessary steps for integrating crowdin for transl
 11. Add Filters for the files you want to translate. You can add filters for the files in the `translationsDirectory` specified in the `config.json` file.
    ![Add Filters](../images/add_filters.png){fig-align='center'}
    The filters tell crowdin which files to watch for and where to add the translations for each of them
-   These are the configuration used;
-   Source files: `/docs/build/**/*.qmd`. 
-   Translated files path: `/docs/_translations/%two_letters_code%/**/%file_name%.%two_letters_code%.qmd`.
+   These are the configuration used are; </br> 
+   - Source files: `/docs/build/**/*.qmd` </br> 
+   - Translated files path: `/docs/_translations/%two_letters_code%/**/%file_name%.%two_letters_code%.qmd`. </br>
+   -  `**/*.qmd` tells crowdin to match all files in subdirectories with the `.qmd` extension. </br>
 
-   Note that `/docs/build`  and `/docs/_translations/` are correspond with the values we set for `outputDirectory` and `translationsDirectory`  in the `config.json` file.
-   -  `**/*.qmd` tells crowdin to match all files in subdirectories with the `.qmd` extension.
+   Note that `/docs/build`  and `/docs/_translations/` correspond with the values we set for `outputDirectory` and `translationsDirectory`  in the `config.json` file.
 
 Using this configuration will ensure that the translations maintain the same structure as the source files.
 And each translation will be stored in a directory with the language code as the name.
 
-12. Save
+12. Save and proceed to setup the automated build using Github actions. Follow the guide [here](#automating_build)
 
