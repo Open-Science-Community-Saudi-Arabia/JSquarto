@@ -19,6 +19,31 @@
  
 
 
+<<<<<<< HEAD
+## findSubFolderWithMatchingName 
+`[function]`
+ 
+** المعلمات (Params):**
+
+| الاسم | الوصف |
+| --- | --- |
+|  h | The path to the folder to search for the subfolder in. |
+
+
+
+## moveDirContents 
+`[function]`
+ 
+** المعلمات (Params):**
+
+| الاسم | الوصف |
+| --- | --- |
+|  r | The directory to move files and folders from. |
+
+
+
+=======
+>>>>>>> book
 ## mergePathsForTranslatedFiles 
 `[function]`
  

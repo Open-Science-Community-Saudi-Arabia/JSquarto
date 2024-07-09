@@ -4,10 +4,12 @@ title: Usage
 This section provides an overview of the JSquarto tool and its usage, including the custom CLI arguments and configuration settings that can be leveraged to customize the documentation generation process.
 
 ### CLI arguments {#sec-usage}
+<hr>
 يتم استخدام حجج CLI لتخصيص سلوك أداة JSquarto هذه الحجج المفصلة تمكنك من تصميم عملية توليد الوثائق بما يناسب متطلباتك المحددة. “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش وبالاستفادة من هذه الحجج، يمكنك تعزيز كفاءة وفعالية عملية توليد الوثائق، مما يؤدي إلى تبسيط سير العمل الخاص بك وتحسين إنتاج الوثائق الخاصة بك. “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش “`باش وبالاستفادة من هذه الحجج، يمكنك تعزيز كفاءة وفعالية عملية توليد الوثائق، مما يؤدي إلى تبسيط سير العمل الخاص بك وتحسين إنتاج الوثائق الخاصة بك.
 
 بعض حجج CLI المخصصة المدعومة من JSquarto تشمل:
-1. `source`:  Source files are pivotal components containing the comments that JSquarto utilizes to generate comprehensive documentation. يحدد الدليل الذي يحتوي على الملفات المصدر التي سيتم توثيقها. يمكن كتابة هذه الملفات بلغات مختلفة مدعومة من JSquarto، مثل JavaScript و TypeScript و JSX. By default, JSquarto will check for the `docs/source` directory within your project structure to locate these the source file. However, you possess the flexibility to designate an alternative directory through the `source` option.
+
+1. `source`: Specifies the directory containing the source files to be documented. يمكن كتابة هذه الملفات بلغات مختلفة مدعومة من JSquarto، مثل JavaScript و TypeScript و JSX. By default, JSquarto will check for the `docs/source` directory within your project structure to locate these the source file. However, you possess the flexibility to specify an alternative directory through the `source` option.
 
 2. `tutorial`: Specifies the directory containing the tutorial files to be included in the documentation. هذه الحجة تسمح لك بإدماج المحتوى التعليمي في وثائقك، وتوفير سياق إضافي وإرشادات للمستخدمين. 
 
@@ -73,40 +75,44 @@ jsq doc:generate include_localized_versions=true languages=en,fr,es
 ملاحظة: إذا كنت تنوي 'include_localized_versions`، فيجب عليك أيضا تحديد حجة 'اللغات` للإشارة إلى اللغات المؤيدة للوثائق.
 
 ### Usage with Configuration File {#sec-config-usage}
+<hr>
 Alternatively, you can leverage the `config.json` file to store your custom settings and avoid specifying them each time you run the JSquarto tool. By modifying the fields in the `config.json` file, you can customize the documentation generation process according to your requirements.
 
 To use a configuration file follow the steps below:
-1. Initialize the configuration file using the command below:
-    “`باش
-    jsq config:init  
-    ```
-    This will create a `config.json` file in the `.jsquarto` directory within your project structure. You might have an already existing config file, for this case you can tell jsq to use this file instead by running;
-    “`باش
-    jsq config:set config=/path/to/your/directory
-    ```
 
-2. Set the desired configuration settings in the `config.json` file according to your preferences.
+1. Initialize the configuration file using the command below:
+
+   ```bash
+   jsq config:init  
+   ```
+    This will create a `config.json` file in the `.jsquarto` directory within your project structure. You might have an already existing config file, for this case you can tell jsq to use this file instead by running;
+    
+   ```bash   
+   jsq config:set config=/path/to/your/directory
+   ```
+
+2. Set the desired configuration settings in the `config.json` file according to your preferences.</br>
    To set the source files directory run
-   “`باش
+   ```bash
    jsq config:set source=/path/to/your/source/files
    ```
 
-   To set the tutorial files directory run
-   “`باش
-   jsq config:set tutorial=/path/to/your/tutorial/files
+   To set the tutorial files directory running
+   ```bash
+    jsq config:set tutorial=/path/to/your/tutorial/files
    ```
 
    To set the output directory run
-   “`باش
+   ```bash
    jsq config:set output=/path/to/your/output/directory
    ```
    To set the supported languages run
-   “`باش
+   ```bash
    jsq config:set languages=en,fr,es
    ```
 
    To include localized versions of the generated documentation run
-   “`باش
+   ```bash
    jsq config:set include_localized_versions=true
    ```
 
@@ -123,7 +129,7 @@ You can also manually edit the `config.json` file to modify the configuration se
 - Even when you have multiple projects, jsquarto will store the config file location for each project separately. This means that you can have different config files for different projects.
 
 - If you already initialized a config file for project, and you want to use a different config file for the same project, you can run the command below:
-    “`باش
+   ```bash
     jsq config:set config=/path/to/your/directory force
     ```
     This will update the config file location for the project.
