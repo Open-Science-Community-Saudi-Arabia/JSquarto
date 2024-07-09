@@ -1,30 +1,4 @@
-import path from "path";
 
-export const DEFAULT_QUARTO_YAML_CONTENT = {
-    project: {
-        type: "book",
-        ["output-dir"]: "_book",
-    },
-    website: {
-        title: "JSQuarto Documentation",
-        description:
-            "Documentation for JSQuarto, a tool for generating JavaScript package API reference documentation using Markdown and Quarto.",
-    },
-    book: {
-        title: "JSQuarto Documentation",
-    },
-    // bibliography: "references.bib",
-    format: {
-        html: {
-            theme: "cosmo",
-            highlight: "github",
-            toc: true,
-            ["number-sections"]: false,
-        },
-    },
-};
-
-export const INDEX_QMD_CONTENT = `
 # Welcome to JSQuarto Documentation
 
 ## About
@@ -58,44 +32,44 @@ To test the tool locally, follow these steps:
 
 1. Install the tool by running the command below
 
-    \`\`\`bash
+    ```bash
     npm install -g @oscsa/jsquarto  
-    \`\`\`
+    ```
 
 ### Usage
 Once the dependencies are installed, you can navigate to the root directory of your project and follow the steps below:
 
 1. To generate the documentation run the following command
 
-    \`\`\`bash
+    ```bash
     jsq doc:generate source=<path to source files> 
-    \`\`\`
+    ```
 
     This will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.
 
-    If the \`source\` flag is not provided, the tool will set \`/source_files\` as default.
+    If the `source` flag is not provided, the tool will set `/source_files` as default.
 
-    The generated \`.qmd\` files can be found in the \`/docs\` folder, you can change the output directory by providing the \`output\` flag.
+    The generated `.qmd` files can be found in the `/docs` folder, you can change the output directory by providing the `output` flag.
 
 2. To preview the generated documentation run
 
-    \`\`\`bash
+    ```bash
     jsq doc:preview
-    \`\`\`
+    ```
 
     This will generate the documentation, preview with quarto and open a link to preview the docs
 
-3. The generated \`.qmd\` files can be found in the \`/docs\` folder, you can change the output directory by providing the \`output\` flag.
+3. The generated `.qmd` files can be found in the `/docs` folder, you can change the output directory by providing the `output` flag.
 
-    \`\`\`bash
+    ```bash
     jsq doc:generate source=<path to source files> output=<path to output dir>
-    \`\`\`
+    ```
     
-4. To include tutorials in the generated documentation, provide the \`tutorials\` flag.
+4. To include tutorials in the generated documentation, provide the `tutorials` flag.
 
-    \`\`\`bash
+    ```bash
     jsq doc:generate source=<path to source files> tutorials=<path to tutorials directory>
-    \`\`\`
+    ```
 
 For more information on how to integrate translation tools like Crowdin with JSquarto, refer to the [Crowding workflow guide](https://jsquarto.netlify.app/chapters/tutorials/how_to/workflows#doc-generation-with-crowdin-translation).
 
@@ -105,9 +79,4 @@ For more details on using JSquarto and to see an example of the generated docume
 JSQuarto is developed and maintained by the [Open Science Community Saudi Arabia](https://github.com/Open-Science-Community-Saudi-Arabia). Our mission is to promote open science practices and foster collaboration among researchers and developers in Saudi Arabia.
 
 ## Feedback and Support
-If you have any questions, feedback, or need support, please [open an issue](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues) on GitHub or [join our community](https://github.com/Open-Science-Community-Saudi-Arabia) for assistance.`;
-
-export const PROJECTS_CONFIG_STORE_PATH = path.join(
-    __dirname,
-    "./store/paths.json",
-);
+If you have any questions, feedback, or need support, please [open an issue](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/issues) on GitHub or [join our community](https://github.com/Open-Science-Community-Saudi-Arabia) for assistance.

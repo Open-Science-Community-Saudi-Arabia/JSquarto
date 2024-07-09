@@ -4,71 +4,10 @@
 
 
 
-## path_1 
-`[متغير]`
- 
-
-
-## moveTranslatedFilesToOutputDir 
-`[function]`
- 
-
-
-## fixTranslatedFilesStructureInOutputDir 
-`[function]`
- 
-
-
-<<<<<<< HEAD
-## findSubFolderWithMatchingName 
-`[function]`
- 
-** المعلمات (Params):**
-
-| الاسم | الوصف |
-| --- | --- |
-|  h | The path to the folder to search for the subfolder in. |
-
-
-
-## moveDirContents 
-`[function]`
- 
-** المعلمات (Params):**
-
-| الاسم | الوصف |
-| --- | --- |
-|  r | The directory to move files and folders from. |
-
-
-
-=======
->>>>>>> book
-## mergePathsForTranslatedFiles 
-`[function]`
- 
-**الوصف:**
-This is necessary because the Crowdin CLI creates a folder for each language
-  and places the translated files within that folder. This function will move the files from the language folder
-  to the same level as the original files.
-
-
-
-## fixFileExtensionsForTranslatedFiles 
-`[function]`
- 
-**الوصف:**
-The generated crowdin files have this file extension pattern: <filename>.<language>.<ext>
-  The problem here is that the <filename> can be <index.md> instead of 'index'.
-  This will make the generated file to be <index.md>.<language>.<ext>
-  This function will fix the file name to be <plain_file_name>.<language>.<ext> so it'll be <index.<language>.<ext>>
-
-
-
 ## getJSFilesFromDirectory 
 `[function]`
  
-**الوصف:**
+**وصف:**
 هذه الوظيفة تتعقب بشكل متكرر الدليل المحدد ودلائله الفرعية للعثور على ملفات جافا سكريبت (.js).
   يبدأ بالتحقق من كل عنصر في الدليل. إذا كان البند دليل ، فإنه يتكرر الاتصال بنفسه
   للبحث عن ملفات جافا سكريبت داخل ذلك الدليل. إذا كان العنصر ملف جافا سكريبت ، فإنه يضيف مسار الملف
@@ -78,10 +17,10 @@ The generated crowdin files have this file extension pattern: <filename>.<langua
 
 
 
-## generateDoc 
+## بداية 
 `[function]`
  
-**الوصف:**
+**وصف:**
 يبدأ عملية توليد الوثائق.
  
   وتبدأ هذه الوظيفة عملية توليد الوثائق عن طريق القيام بالخطوات التالية:
@@ -102,16 +41,11 @@ The generated crowdin files have this file extension pattern: <filename>.<langua
 ## غير معروف 
 `[other]`
  
-
-
-## غير معروف 
-`[other]`
- 
-**الوصف:**
+**وصف:**
 هذه الطريقة ستقوم بتحويل سلسلة إلى جمال toUpperCase
       
 
-* أمثلة: **
+**أمثلة:**
 
 ```جافا سكريبت
 StringUtil.convertToCamelCase('hello world') => 'helloWorld'
@@ -126,11 +60,11 @@ StringUtil.convertToCamelCase('hello world') => 'helloWorld'
 ## غير معروف 
 `[other]`
  
-**الوصف:**
+**وصف:**
 هذه الطريقة ستقوم بتحويل سلسلة إلى جمال toUpperCase
       
 
-* أمثلة: **
+**أمثلة:**
 
 ```جافا سكريبت
 StringUtil.convertToCamelCase('hello world') => 'helloWorld'

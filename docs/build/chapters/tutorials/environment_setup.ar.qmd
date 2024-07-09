@@ -1,16 +1,28 @@
 --- 
 title: Environment_setup 
 ---
+<<<<<<< HEAD
 
 ### Prerequisites {#environment-setup}
 <hr>
+=======
+-
+title: 'إعداد البيئة'
+-
+
+#### Prerequisites {#environment-setup}
+>>>>>>> book
 قبل اختبار الأداة محلياً، تأكد من وجود الشروط المسبقة التالية مثبتة على النظام الخاص بك:
 - Node.js و npm (مدير الحزمة العقدية)
 - Git (اختياري، إذا استنساخ المستودع)
 - Babel Quarto (optional, if previewing the generated documentation)
 
+<<<<<<< HEAD
 ### Installation
 <hr>
+=======
+#### التثبيت
+>>>>>>> book
 لاختبار الأداة محلياً، قم باتباع الخطوات التالية:
 
 1. Install the cli package from NPM:
@@ -25,7 +37,10 @@ title: Environment_setup
 
 
 ### تشغيل الأداة
+<<<<<<< HEAD
 <hr>
+=======
+>>>>>>> book
 1. لإنشاء الوثائق قم بتشغيل الأمر التالي
    
    “`باش

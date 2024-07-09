@@ -20,7 +20,6 @@ This section provides an overview of the JSquarto tool and its usage, including 
 5. `include_localized_versions`: يحدد ما إذا كان ينبغي إدراج إصدارات موضعية من الوثائق التي تم إنشاؤها. على سبيل المثال، إذا تم تحديدها، سيقوم JSquarto بإنشاء ملفات منفصلة لكل لغة محددة. 
 
 ### تكوين
-<hr>
 ملف `config.json' في الدليل الجذر للمشروع يستخدم لتخزين إعدادات التكوين لأداة JSquarto . يحتوي هذا الملف على الإعدادات الافتراضية لعملية توليد الوثائق، مثل دليل الملفات المصدر، ودليل الملفات التعليمية، ودليل الإخراج، واللغات المعتمدة. This config file can come in handy when you want to persist your settings for a particular project. يمكنك تعديل هذه الإعدادات لتخصيص عملية توليد الوثائق وفقا لتفضيلاتك. 
 
 Below is an example of the `config.json` file:
@@ -36,7 +35,6 @@ Below is an example of the `config.json` file:
 ```
 
 It contains the following fields:
-
 1. `المصدر`: يحدد الدليل الذي يحتوي على الملفات المصدرية التي يتعين توثيقها. By default, this field is set to `docs/source` within the project structure. This is the same as the `source` CLI argument.
 
 2. `دليل الدروس`: يحدد الدليل الذي يحتوي على ملفات الدرس التعليمي التي ستدرج في الوثائق. By default, this field is set to `docs/tutorials` within the project structure. This is the same as the `tutorial` CLI argument.
@@ -45,7 +43,6 @@ It contains the following fields:
 
 
 ### Basic Usage {#sec-basic-usage}
-<hr>
 لاستخدام حجج CLI المخصصة هذه، ببساطة قم بإلحاقها بأمر JSquarto عند تنفيذ الأداة. على سبيل المثال:
 
 لتحديد دليل ملفات المصدر:
@@ -85,37 +82,37 @@ To use a configuration file follow the steps below:
 
 1. Initialize the configuration file using the command below:
 
-   “`باش
+   ```bash
    jsq config:init  
    ```
     This will create a `config.json` file in the `.jsquarto` directory within your project structure. You might have an already existing config file, for this case you can tell jsq to use this file instead by running;
     
-   “`باش
+   ```bash   
    jsq config:set config=/path/to/your/directory
    ```
 
 2. Set the desired configuration settings in the `config.json` file according to your preferences.</br>
    To set the source files directory run
-   “`باش
+   ```bash
    jsq config:set source=/path/to/your/source/files
    ```
 
-   To set the tutorial files directory run
-   “`باش
-   jsq config:set tutorial=/path/to/your/tutorial/files
+   To set the tutorial files directory running
+   ```bash
+    jsq config:set tutorial=/path/to/your/tutorial/files
    ```
 
    To set the output directory run
-   “`باش
+   ```bash
    jsq config:set output=/path/to/your/output/directory
    ```
    To set the supported languages run
-   “`باش
+   ```bash
    jsq config:set languages=en,fr,es
    ```
 
    To include localized versions of the generated documentation run
-   “`باش
+   ```bash
    jsq config:set include_localized_versions=true
    ```
 
@@ -123,8 +120,7 @@ This will update the `config.json` file with the specified settings, which will 
 
 You can also manually edit the `config.json` file to modify the configuration settings according to your requirements.
 
-#### 
-::: {.notes}
+#### ::: {.notes}
 **Note:**
 - After initializing a config file the default configuration will be added to the file. You can then modify the settings in the file to suit your needs.
 
@@ -133,15 +129,13 @@ You can also manually edit the `config.json` file to modify the configuration se
 - Even when you have multiple projects, jsquarto will store the config file location for each project separately. This means that you can have different config files for different projects.
 
 - If you already initialized a config file for project, and you want to use a different config file for the same project, you can run the command below:
-
-    “`باش
+   ```bash
     jsq config:set config=/path/to/your/directory force
     ```
     This will update the config file location for the project.
 :::
 
 ### الاستفادة من TypeScript في ملفات المصدر
-<hr>
 عند استخدام TypeScript ضمن مشروعك، من المستصوب تحويل ملفات مصدر TypeScript إلى JavaScript قبل بدء عملية JSquarto . تنبع هذه التوصية من حقيقة أن JSquarto تفتقر إلى الدعم الجوهري لجملة TypeScript. بمجرد أن تقوم بنقل ملفات TypeScript الخاصة بك إلى JavaScript، يمكنك تنفيذ JSquarto بسلاسة على ملفات JavaScript الناتجة لإنشاء وثائق شاملة.
 
 دمج نقل TypeScript

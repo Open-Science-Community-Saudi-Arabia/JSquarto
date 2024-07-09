@@ -6,7 +6,11 @@ title: سجل التغيير
 ---
 
 
-وسيتم توثيق جميع التغييرات الملحوظة في هذا المشروع في هذا الملف. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+وسيتم توثيق جميع التغييرات الملحوظة في هذا المشروع في هذا الملف.
+
+التنسيق مبني على [الحفاظ على تغيير](https://keepachangelog.com/en/1.0.0/)
+ويلتزم هذا المشروع بـ [النسخة السامية](https://semver.org/spec/v2.0.0.html).
 
 ## 1.0.5 (2024-06-12)
 #### Bug Fixes
@@ -49,23 +53,25 @@ title: سجل التغيير
 -   wrong code construct name in generated doc ([c939628](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/commit/c939628b69f2c575beb2e41eb3e9272ed0405ef4))
 
 ## لم يفرج (2024-03-05)
-#### Features:
--   Extract docstrings from javascript files ([#13](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/3))
--   Generate documentation structure in `quarto.yml` file ([#9](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/7))
--   Link unmatched documents to `Globals` category ([#21](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/21))
--   References for doc snippets and external resources ([#22](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/22))
--   Add documentation for JSQuarto ([#25](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/25))
--   Add tutorials for JSQuarto ([#26](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/26))
--   Add `How to guides` and custom command line args ([#30](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/30))
 
-#### Bugs fixed:
+### الميزات:
 
--   Improve formatting for `params`, `thrown errors` and `returns` ([#14](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/14))
--   Remove code constructs from function documentation ([#15](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/15))
--   Fix inconsistent header titles from extracted documents ([#17](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/17))
+- استخراج مستخرجات من ملفات جافا سكريبت ([`#13`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/3)) 
+- إنشاء هيكل التوثيق في ملف `quarto.yml` ([`#9`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/7))
+- ربط الوثائق غير المطابقة بفئة 'Globals' ([`#21'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/21))
+- المراجع المتعلقة بكتل الكتل الكتل والموارد الخارجية ([`#22`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/22))
+- إضافة وثائق لـ JSQuarto ([`#25`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/25))
+- إضافة دروس لـ JSQuarto ([`#26`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/26))
+- إضافة 'كيفية الإرشادات' وخطوط الأوامر المخصصة ([`#30'](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/30))
 
-## Contributors ✨
-<hr>
+
+### تم إصلاح الأخطاء:
+- تحسين التنسيق لـ `params' و `thrown errors' و `returns' ([#14`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/14))
+- إزالة التركيبات البرمجية من وثائق الدالة ([`#15`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/15))
+- إصلاح عناوين الترويسة غير المتسقة من الوثائق المستخرجة ([`#17`](https://github.com/Open-Science-Community-Saudi-Arabia/JSquarto/pull/17))
+
+
+#### المساهمون ✨
 
 شكرا لهؤلاء الناس الرائعين (مفتاح [emoji](https://allcontributors.org/docs/en/emoji-key)):
 
