@@ -31,6 +31,7 @@ book:
         - chapters/tutorials/how_to/usage.qmd
         - chapters/tutorials/how_to/workflows.qmd
         - chapters/tutorials/how_to/crowdin_integration.qmd
+        - chapters/tutorials/how_to/automating_build.qmd
         - chapters/tutorials/project_structure.qmd
         - chapters/tutorials/environment_setup.qmd
         - chapters/tutorials/changelog.qmd

@@ -1,7 +1,6 @@
-
 This section will go over the necessary steps for integrating crowdin for translations.
 
-### Prerequisites
+### Prerequisites {#crowdin-integration-guide}
 1. You need to have a crowdin account. If you don't have one, you can create one [here](https://crowdin.com/).
 2. You need to have a crowdin project. If you don't have one, you can create one [here](https://crowdin.com/project/create)
 3. You need to host your project on github. If you don't have one, you can create one [here](https://github.com)
@@ -55,5 +54,5 @@ This section will go over the necessary steps for integrating crowdin for transl
 Using this configuration will ensure that the translations maintain the same structure as the source files.
 And each translation will be stored in a directory with the language code as the name.
 
-12. Save
+12. Save and proceed to setup the automated build using Github actions. Follow the guide [here](#automating_build)
 

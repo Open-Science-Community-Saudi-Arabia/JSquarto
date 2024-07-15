@@ -931,10 +931,21 @@
     "href": "chapters/tutorials/how_to/crowdin_integration.html",
     "title": "Crowdin integration",
     "section": "",
-    "text": "This section will go over the necessary steps for integrating crowdin for translations.\n\nPrerequisites\n\nYou need to have a crowdin account. If you don’t have one, you can create one here.\nYou need to have a crowdin project. If you don’t have one, you can create one here\nYou need to host your project on github. If you don’t have one, you can create one here\n\n\n\nSteps\n\nInitialize a new config file if you dont have one already. To do this run the following command:\njsq config:init\nThe file should look like this:\n     {\n         \"outputDirectory\": \"docs\",\n         \"languages\": [\"en\", \"ar\"],\n         \"translationsDirectory\": \"translations\"\n     }\n\noutputDirectory: The directory where the generated documentation will be stored.\nlanguages: An array of the languages you want to support.\ntranslationsDirectory: The directory where the translations will be stored. This directory will be used by crowdin to store the translations.\n\nMake sure the outputDirectory and translationsDirectory exists within your project\nGenerate the documentation using JSquarto. You can follow the steps @usage-basic\nCommit all necessary changes, including the config.json file and push to your github repository.\nOn your crowdin project, go to the settings page and click on the Integrations tab. \nSearch for Github integration and click on the Install button. \nGo back to the integrations tab and select find the Github integration then click Set Up Integration \nClick the dropdown menu for Set Up Integration and select the Source and translation files mode \nFill the repository details, specify the branch for translations and translation mode. \nNow go back to the Integrations tab and select Github Integration.",
+    "text": "This section will go over the necessary steps for integrating crowdin for translations.\n\nPrerequisites\n\nYou need to have a crowdin account. If you don’t have one, you can create one here.\nYou need to have a crowdin project. If you don’t have one, you can create one here\nYou need to host your project on github. If you don’t have one, you can create one here\n\n\n\nSteps\n\nInitialize a new config file if you dont have one already. To do this run the following command:\njsq config:init\nThe file should look like this:\n     {\n         \"outputDirectory\": \"./docs/build\",\n         \"sourceDirectory\": \"./dist\",\n         \"translationsDirectory\": \"./docs/_translations\",\n     }\n\noutputDirectory: The directory where the generated documentation will be stored.\nlanguages: An array of the languages you want to support.\ntranslationsDirectory: The directory where the translations will be stored. This directory will be used by crowdin to store the translations.\n\nMake sure the outputDirectory and translationsDirectory exists within your project\nGenerate the documentation using JSquarto. You can follow the steps @usage-basic\nCommit all necessary changes, including the config.json file and push to your github repository.\nOn your crowdin project, go to the settings page and click on the Integrations tab. \nSearch for Github integration and click on the Install button. \nGo back to the integrations tab and select find the Github integration then click Set Up Integration \nClick the dropdown menu for Set Up Integration and select the Source and translation files mode \nFill the repository details, specify the branch for translations and translation mode. \nNow go back to the Integrations tab and select Github Integration. \nOn the integrations page, you’ll see your newlty created project. Open the branch configuration \nAdd Filters for the files you want to translate. You can add filters for the files in the translationsDirectory specified in the config.json file.  The filters tell crowdin which files to watch for and where to add the translations for each of them These are the configuration used are; \n\n\nSource files: /docs/build/**/*.qmd \nTranslated files path: /docs/_translations/%two_letters_code%/**/%file_name%.%two_letters_code%.qmd. \n**/*.qmd tells crowdin to match all files in subdirectories with the .qmd extension. \n\nNote that /docs/build and /docs/_translations/ correspond with the values we set for outputDirectory and translationsDirectory in the config.json file.\nUsing this configuration will ensure that the translations maintain the same structure as the source files. And each translation will be stored in a directory with the language code as the name.\n\nSave and proceed to setup the automated build using Github actions. Follow the guide here",
     "crumbs": [
       "Tutorials",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>Crowdin integration</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/tutorials/how_to/automating_build.html",
+    "href": "chapters/tutorials/how_to/automating_build.html",
+    "title": "Automating build",
+    "section": "",
+    "text": "This section will go over the steps necessary to automate the process of building the book, integrating crowdin translations, and deploying the book to the web. This process is automated using GitHub Actions, which is a CI/CD tool that is integrated with GitHub.\n\nPrerequisites\n\nYou need to review the crowdin integration guide here @crowdin-integration-guide to setup your crowdin project.\nYou need to have a GitHub account.\n\n\n\nSteps\n\nNavigate to /.github/workflows/ folder in your github repository (you can create the folder if it doesn’t exist).\nCreate a new file called build-book.yml and paste the following code into the file:\n     name: Build Book with Babel Quarto\n\n     on:\n       pull_request:\n         branches:\n           - crowdin_integration\n\n       workflow_dispatch:\n\n     env:\n       PR_AUTHOR_EMAIL: molunorichie@gmail.com\n       PR_AUTHOR_NAME: Richie\n       NEW_BRANCH: build_book-\n       DESTINATION_BRANCH: book\n       CONFIG_FILE: ./.jsquarto/config.json\n\n     jobs:\n       build_book:\n         runs-on: ubuntu-latest\n\n         strategy:\n           matrix:\n             node-version: [16.x]\n\n         steps:\n           - name: Checkout\n             uses: actions/checkout@v3\n             with:\n               persist-credentials: true\n\n           - name: Set New Branch Name\n             id: set_branch\n             run: echo \"NEW_BRANCH=${NEW_BRANCH}$(date +'%Y-%m-%d-%H-%M-%S')\" &gt;&gt; $GITHUB_ENV\n\n           - name: Setup R\n             run: |\n               sudo apt-get update\n               sudo apt-get install r-base\n               sudo apt-get install r-base-core\n               sudo apt-get install libssl-dev libcurl4-openssl-dev libxml2-dev\n\n           # Writeable directory is needed for R packages installation, installing to the default library path is not allowed\n           - name: Create writable directory for R packages\n             run: |\n               mkdir ./my_R_library\n               chmod u+w ./my_R_library\n\n           - name: Setup quarto\n             uses: quarto-dev/quarto-actions/setup@v2\n\n           - name: Setup Node.js\n             uses: actions/setup-node@v2\n             with:\n               node-version: 16.x\n\n           - name: Install dependencies\n             run: npm i --save &&  npm install @oscsa/jsquarto -g\n\n           - name: Set jsquarto config\n             run: jsq config:set config=$CONFIG_FILE --force\n\n             ## Optional\n           - name: Remove content of the _book\n             run: jsq doc:clean\n\n           - name: Build book (jsquarto) \n             run:  tsc -b && jsq doc:generate\n\n           - name: Prepare crowdin translations\n             run: jsq fix:crowdin_files \n\n           - name: Install PAK\n             run: Rscript -e \"install.packages('pak', lib='./my_R_library')\"\n\n           - name: Install Babel quarto\n             run: Rscript -e \".libPaths(c('./my_R_library', .libPaths())); library(pak); pak::pak('ropensci-review-tools/babelquarto', lib='./my_R_library')\"\n\n           - name: Build book (babelquarto) \n             run: |\n               config_output=$(jsq config:get | tail -n 10)\n               echo \"$config_output\"\n               OUTPUT_DIRECTORY=$(echo \"$config_output\" | grep -oP '(?&lt;=outputDirectory: ).*' | tr -d \"',\")\n               echo \"outputDirectory: $OUTPUT_DIRECTORY\"\n\n               OUTPUT_DIRECTORY=$OUTPUT_DIRECTORY\n\n               Rscript -e \".libPaths(c('./my_R_library', .libPaths())); library(babelquarto); project_dir &lt;- '$OUTPUT_DIRECTORY'; babelquarto::render_book(project_path = project_dir)\"\n\n           - name: Fix built book\n             run: |\n               jsq fix:all\n\n           - name: Commit changes\n             run: |\n               git config --global user.email $PR_AUTHOR_EMAIL\n               git config --global user.name $PR_AUTHOR_NAME\n               git checkout -b $NEW_BRANCH\n               git status\n               git add .\n               git commit -m \"Build book with babelquarto\"\n               git push origin $NEW_BRANCH\n\n           - name: Create Pull Request\n             id: create_pr\n             uses: repo-sync/pull-request@v2\n             with:\n               source_branch: ${{ env.NEW_BRANCH }}\n               destination_branch: ${{ env.DESTINATION_BRANCH }} \n               pr_title: New book build with babelquarto\n               pr_body: |\n                 :crown: *An automated PR*\n\n                 Automated PR build book with babel-quarto\n\n                 _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_\n               pr_label: \"auto-pr\"\n               pr_draft: false\n               pr_allow_empty: true\n               token: ${{ secrets.PAT_TOKEN }}\n\n           - name: Approve pull Request\n             if: steps.create_pr.outputs.pull_request_number\n             uses: hmarr/auto-approve-action@v2\n             with:\n               github-token: ${{ secrets.GITHUB_TOKEN }}\n               pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}\nNow you only need to modify a few lines in the above code to suit your project.\n\nChange the PR_AUTHOR_EMAIL and PR_AUTHOR_NAME to your email and name respectively.\nChange the DESTINATION_BRANCH to the branch you want to deploy the book to.\nChange the CONFIG_FILE to the path of your jsquarto config file.\nChange the pr_title and pr_body to suit your project.\nChange the pr_label to the label you want to add to the PR.\nChange the token to your personal access token. You can create a personal access token by following the steps here.\n\nThe branch specified in the dispacth block should match the value used in your crowdin project setup\n   on:\n      pull_request:\n        branches:\n          - crowdin_integration",
+    "crumbs": [
+      "Tutorials",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Automating build</span>"
     ]
   },
   {
@@ -945,7 +956,7 @@
     "text": "Project file structure\nJSQuarto is structured as follows:\n├── src\n│   ├── intefaces\n│   │   ├── index.ts\n│   ├── utils\n│   │   ├── codeconstruct.ts\n│   │   ├── component.ts\n│   │   ├── file.ts\n│   │   ├── logger.ts\n│   │   ├── parser.ts\n│   │   ├── string.ts\n│   │   ├── writer.ts\n│   ├── tutorials\n│   │   ├── contributing/\n│   │   ├── how_to/\n│   │   ├── environment_setup.qmd\n│   │   ├── localization.qmd\n│   │   ├── project_structure.qmd\n│   │   ├── config.json\n│   │\n│   ├── index.ts\n│   │\n│   ├── package.json\n│   ├── package-lock.json\n│   ├── .prettierrc\nThe API directory contains the source code for JSQuarto. The API directory is structured as follows:\n\nsrc/interfaces - Contains the all type/intefaces definitions for the project.\nsrc/utils - Contains the all utility functions for the project. These utility functions are used to perform various tasks such as parsing, writing, and logging.\nsrc/tutorials - Contains the all tutorials for the project. These tutorials are written in Quarto Markdown format. Note that the config.json file is used to define how the tutorials are structured.\nsrc/index.ts - The main entry point for the project.\nsrc/package.json - The project’s package.json file.\nsrc/.prettierrc - The project’s prettier configuration file.",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Project structure</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Project structure</span>"
     ]
   },
   {
@@ -956,7 +967,7 @@
     "text": "Prerequisites\n\nBefore testing the tool locally, ensure you have the following prerequisites installed on your system: - Node.js and npm (Node Package Manager) - Git (optional, if cloning the repository) - Babel Quarto (optional, if previewing the generated documentation)\n\n\nInstallation\n\nTo test the tool locally, follow these steps:\n\nInstall the cli package from NPM:\nnpm i -g @oscsa/jsquarto \nInstall Quarto, to do this refer to the official Quarto installation guide\nInstall Babel quarto, refer to the official Babel Quarto installation guide\n\n\n\nRunning the Tool\n\n\nTo generate the documentation run the following command\njsq doc:generate\nThis will extract the JSDoc comments from the js files and write them to their corresponding Quarto Markdown files.\nYou can choose to specify the directory where the source_files are, to do this run\njsq doc:generate source=&lt;path to source files&gt;\nIt also supports addition of custom tutorials, to do this add the .qmd files for the tutorials in the /tutorials directory\nThe generated .qmd files can be found in the docs/build folder\nThis command may vary depending on the workflow you choose, you may want to create the docs files in other languages too. To do this you can run the command below\njsq doc:generate languages=en,ar,es include_localized_versions source=&lt;path to source files&gt;\nThis will generate the documentation in English, Arabic and Spanish. You can add more languages by separating them with a comma. (This doesn’t actually translate the documentation, it just creates a copy of the documentation and renames it to the specified language). To integrate with a translation service, you can use the Crowdin service.\nFor more information on the available workflows see the guide here Doc generation\nTo preview the generated documentation run\njsq doc:preview\nThe docs are previewed with quarto, so make sure to have quarto already installed",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Environment_setup</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Environment_setup</span>"
     ]
   },
   {
@@ -967,7 +978,7 @@
     "text": "1.0.5 (2024-06-12)",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Change log</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Change log</span>"
     ]
   },
   {
@@ -978,7 +989,7 @@
     "text": "Bug Fixes\n\nincorrect file paths while merging crowdin translations (0196156)\nincorrect translations directory in default config (cfa81fc)",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Change log</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Change log</span>"
     ]
   },
   {
@@ -989,7 +1000,7 @@
     "text": "1.0.4 (2024-06-11)\n\nFeatures\n\nfix:all to run all custom fixes in order (5a52490)\nAdd right-to-left styling for arabic docs (99f74ef)\nInitialize config file in any directory (b4b9055)\nprepareDirectoryForDocs (93a8698)\nRemove duplicate references to language in dropdown menu (7074ea9)\nScript to fix localized files (cfa8c8d)\nScript to fix localized files (c20baf5)\nScript to fix structure crowdin files after new update (14ec202)\nScript to fix structure crowdin files after new update (0a0ebec)\nSet config in file from cli (346866f)\nSet project config path from cli (3c75d04)\nUpate config path record for project (a4b80d9)\n\n\n\nBug Fixes\n\nfix:all for bug with language menu working in built book (37f9f4f)\nfix:all for bug with language menu working in built book (7fc0adb)\nall modules being categorized under default (ef33600)\ncomment util returning ‘other’ for all types of comments (19b0d49)\ndir not found error when writing doc for global variables (cdef7ff)\nduplicate headings in tutorials (e50bfaa)\ngetConstructName returning other (c5b2176)\nglobals section appearing twice (5ace1d9)\nbroken image ref in tutorial (39044dd)\nissue with generating language files (77ff687)\ntutorials not taking title from tutorial config (104c294)\nmodules without categories not linked to globals (38c51cf)\nnpm scripts throwing error when extra args are passed (c91f59f)\ntutorials without chapter not included in quarto.yaml (71452ce)\nwrong code construct name in generated doc (c939628)",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Change log</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Change log</span>"
     ]
   },
   {
@@ -1000,7 +1011,7 @@
     "text": "Unreleased (2024-03-05)\n\nFeatures:\n\nExtract docstrings from javascript files (#13)\nGenerate documentation structure in quarto.yml file (#9)\nLink unmatched documents to Globals category (#21)\nReferences for doc snippets and external resources (#22)\nAdd documentation for JSQuarto (#25)\nAdd tutorials for JSQuarto (#26)\nAdd How to guides and custom command line args (#30)\n\n\n\nBugs fixed:\n\nImprove formatting for params, thrown errors and returns (#14)\nRemove code constructs from function documentation (#15)\nFix inconsistent header titles from extracted documents (#17)",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Change log</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Change log</span>"
     ]
   },
   {
@@ -1011,7 +1022,7 @@
     "text": "Contributors ✨\n\nThanks goes to these wonderful people (emoji key):\n\n\n\n\n\n\n\nRichie🚇 🤔 👀\n\n\n\n\n\n\n\nThis project follows the all-contributors specification. Contributions of any kind welcome!",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Change log</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Change log</span>"
     ]
   },
   {
@@ -1022,7 +1033,7 @@
     "text": "What is Localization?\nLocalization is the process of adapting a product or service to meet the language, cultural, and other requirements of a specific country or region. This involves translating the content of the product, such as text, images, and audio, into the local language and adapting it to meet the cultural requirements of the target market.\nLocalization is important in software development because it helps to make the product more accessible to a global audience and improve user experience. By translating the content into the local language, developers can reach a wider audience and make it easier for users to understand and use the product.",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Localization</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Localization</span>"
     ]
   },
   {
@@ -1033,7 +1044,7 @@
     "text": "What is Translation?\nTranslation is the process of converting written or spoken content from one language to another. This process involves understanding the original content and reproducing it in the target language, while taking into account any cultural or linguistic differences.\nTranslation is important in software development because it allows developers to make their products accessible to a global audience. By translating the content into the local language, developers can reach a wider audience and make it easier for users to understand and use the product.",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Localization</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Localization</span>"
     ]
   },
   {
@@ -1044,7 +1055,7 @@
     "text": "Crowdin as a Localization Platform\nCrowdin is a localization platform that helps developers to manage the localization process for their products. It provides a range of features that make it easier for developers to translate their products and collaborate with translators.\nCrowdin features include:\n\nTranslation management\nCollaboration tools\nQuality assurance\nIntegration with development tools\nCrowdsourcing\nIn-context translations\nMachine translation\n\nUsing Crowdin for localization has several advantages, including:\n\nEasier management of translation projects\nFaster turnaround times for translations\nImproved translation quality\nCollaboration with translators from around the world\nIntegration with development tools, such as GitHub and Bitbucket\nAbility to use machine translation for faster translations",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Localization</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Localization</span>"
     ]
   },
   {
@@ -1055,7 +1066,6 @@
     "text": "Conclusion\nLocalization is an important aspect of software development, and using a platform like Crowdin can help make the process easier and more efficient. With Crowdin, developers can manage translation projects, collaborate with translators, and improve the quality of translations. By using a combination of localization and translation, developers can make their products more accessible to a global audience and improve user experience.",
     "crumbs": [
       "Tutorials",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Localization</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Localization</span>"
     ]
   }
-]

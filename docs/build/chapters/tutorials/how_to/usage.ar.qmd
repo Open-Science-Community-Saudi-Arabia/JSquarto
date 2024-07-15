@@ -20,6 +20,7 @@ This section provides an overview of the JSquarto tool and its usage, including 
 5. `include_localized_versions`: يحدد ما إذا كان ينبغي إدراج إصدارات موضعية من الوثائق التي تم إنشاؤها. على سبيل المثال، إذا تم تحديدها، سيقوم JSquarto بإنشاء ملفات منفصلة لكل لغة محددة. 
 
 ### تكوين
+<hr>
 ملف `config.json' في الدليل الجذر للمشروع يستخدم لتخزين إعدادات التكوين لأداة JSquarto . يحتوي هذا الملف على الإعدادات الافتراضية لعملية توليد الوثائق، مثل دليل الملفات المصدر، ودليل الملفات التعليمية، ودليل الإخراج، واللغات المعتمدة. This config file can come in handy when you want to persist your settings for a particular project. يمكنك تعديل هذه الإعدادات لتخصيص عملية توليد الوثائق وفقا لتفضيلاتك. 
 
 Below is an example of the `config.json` file:
@@ -35,6 +36,7 @@ Below is an example of the `config.json` file:
 ```
 
 It contains the following fields:
+
 1. `المصدر`: يحدد الدليل الذي يحتوي على الملفات المصدرية التي يتعين توثيقها. By default, this field is set to `docs/source` within the project structure. This is the same as the `source` CLI argument.
 
 2. `دليل الدروس`: يحدد الدليل الذي يحتوي على ملفات الدرس التعليمي التي ستدرج في الوثائق. By default, this field is set to `docs/tutorials` within the project structure. This is the same as the `tutorial` CLI argument.
@@ -43,6 +45,7 @@ It contains the following fields:
 
 
 ### Basic Usage {#sec-basic-usage}
+<hr>
 لاستخدام حجج CLI المخصصة هذه، ببساطة قم بإلحاقها بأمر JSquarto عند تنفيذ الأداة. على سبيل المثال:
 
 لتحديد دليل ملفات المصدر:
@@ -120,7 +123,8 @@ This will update the `config.json` file with the specified settings, which will 
 
 You can also manually edit the `config.json` file to modify the configuration settings according to your requirements.
 
-#### ::: {.notes}
+#### 
+::: {.notes}
 **Note:**
 - After initializing a config file the default configuration will be added to the file. You can then modify the settings in the file to suit your needs.
 
@@ -136,6 +140,7 @@ You can also manually edit the `config.json` file to modify the configuration se
 :::
 
 ### الاستفادة من TypeScript في ملفات المصدر
+<hr>
 عند استخدام TypeScript ضمن مشروعك، من المستصوب تحويل ملفات مصدر TypeScript إلى JavaScript قبل بدء عملية JSquarto . تنبع هذه التوصية من حقيقة أن JSquarto تفتقر إلى الدعم الجوهري لجملة TypeScript. بمجرد أن تقوم بنقل ملفات TypeScript الخاصة بك إلى JavaScript، يمكنك تنفيذ JSquarto بسلاسة على ملفات JavaScript الناتجة لإنشاء وثائق شاملة.
 
 دمج نقل TypeScript

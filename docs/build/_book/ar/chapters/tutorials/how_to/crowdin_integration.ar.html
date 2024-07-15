@@ -1,7 +1,7 @@
 <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.53">
+<meta name="generator" content="quarto-1.5.54">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Description in ar">
 <title>Crowdin integration – Title in ar</title>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script><script src="../../../site_libs/quarto-nav/headroom.min.js"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script><script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script><script src="../../../site_libs/quarto-search/fuse.min.js"></script><script src="../../../site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="../../../">
-<link href="../../../chapters/tutorials/project_structure.ar.html" rel="next">
+<link href="../../../chapters/tutorials/how_to/automating_build.ar.html" rel="next">
 <link href="../../../chapters/tutorials/how_to/workflows.ar.html" rel="prev">
 <script src="../../../site_libs/quarto-html/quarto.js"></script><script src="../../../site_libs/quarto-html/popper.min.js"></script><script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script><script src="../../../site_libs/quarto-html/anchor.min.js"></script><link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
@@ -359,6 +359,11 @@ body {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/how_to/automating_build.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating build</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../chapters/tutorials/project_structure.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">بنية المشروع</span></a>
   </div>
 </li>
@@ -379,6 +384,10 @@ body {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Appendices</span></span>
+  </li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -387,7 +396,7 @@ body {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
+<li><a href="#crowdin-integration-guide" id="toc-crowdin-integration-guide" class="nav-link active" data-scroll-target="#crowdin-integration-guide">Prerequisites</a></li>
   <li><a href="#%D8%AE%D8%B7%D9%88%D8%A7%D8%AA" id="toc-خطوات" class="nav-link" data-scroll-target="#خطوات">خطوات</a></li>
   </ul></nav>
 </div>
@@ -411,7 +420,7 @@ body {
 
 
 </header><p>This section will go over the necessary steps for integrating crowdin for translations.</p>
-<section id="prerequisites" class="level3"><h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+<section id="crowdin-integration-guide" class="level3"><h3 class="anchored" data-anchor-id="crowdin-integration-guide">Prerequisites</h3>
 <ol type="1">
 <li>You need to have a crowdin account. If you don’t have one, you can create one <a href="https://crowdin.com/">here</a>.</li>
 <li>You need to have a crowdin project. If you don’t have one, you can create one <a href="https://crowdin.com/project/create">here</a>
@@ -425,9 +434,9 @@ body {
 <pre><code>   The file should look like this:
    ```json
      {
-         "outputDirectory": "docs",
-         "languages": ["en", "ar"],
-         "translationsDirectory": "translations"
+         "outputDirectory": "./docs/build",
+         "sourceDirectory": "./dist",
+         "translationsDirectory": "./docs/_translations",
      }</code></pre>
 <ul>
 <li>
@@ -446,7 +455,24 @@ body {
 <li><p>Go back to the integrations tab and select find the Github integration then click <code>Set Up Integration</code> <img src="../images/open_integrations_tab.png" class="img-fluid quarto-figure quarto-figure-center" alt="Set Up Integration"></p></li>
 <li><p>Click the dropdown menu for <code>Set Up Integration</code> and select the <code>Source and translation files mode</code> <img src="../images/source_translation_mode.png" class="img-fluid quarto-figure quarto-figure-center" alt="Source and translation files mode"></p></li>
 <li><p>Fill the repository details, specify the branch for translations and translation mode. <img src="../images/select_github_repo.png" class="img-fluid quarto-figure quarto-figure-center" alt="Repository Details"></p></li>
-<li><p>Now go back to the Integrations tab and select Github Integration.</p></li>
+<li><p>Now go back to the Integrations tab and select Github Integration. <img src="../images/goto_github_integration.png" class="img-fluid quarto-figure quarto-figure-center" alt="Select Github Integration"></p></li>
+<li><p>On the integrations page, you’ll see your newlty created project. Open the <code>branch configuration</code> <img src="../images/branch_configuration.png" class="img-fluid quarto-figure quarto-figure-center" alt="Branch Configuration"></p></li>
+<li><p>Add Filters for the files you want to translate. You can add filters for the files in the <code>translationsDirectory</code> specified in the <code>config.json</code> file. <img src="../images/add_filters.png" class="img-fluid quarto-figure quarto-figure-center" alt="Add Filters"> The filters tell crowdin which files to watch for and where to add the translations for each of them These are the configuration used are; <br></p></li>
+</ol>
+<ul>
+<li>Source files: <code>/docs/build/**/*.qmd</code> <br>
+</li>
+<li>Translated files path: <code>/docs/_translations/%two_letters_code%/**/%file_name%.%two_letters_code%.qmd</code>. <br>
+</li>
+<li>
+<code>**/*.qmd</code> tells crowdin to match all files in subdirectories with the <code>.qmd</code> extension. <br>
+</li>
+</ul>
+<p>Note that <code>/docs/build</code> and <code>/docs/_translations/</code> correspond with the values we set for <code>outputDirectory</code> and <code>translationsDirectory</code> in the <code>config.json</code> file.</p>
+<p>Using this configuration will ensure that the translations maintain the same structure as the source files. And each translation will be stored in a directory with the language code as the name.</p>
+<ol start="12" type="1">
+<li>Save and proceed to setup the automated build using Github actions. Follow the guide <a href="automating_build.ar.html#automating_build">here</a>
+</li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -872,8 +898,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../chapters/tutorials/project_structure.ar.html" class="pagination-link" aria-label="بنية المشروع">
-        <span class="nav-page-text"><span class="chapter-title">بنية المشروع</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../chapters/tutorials/how_to/automating_build.ar.html" class="pagination-link" aria-label="Automating build">
+        <span class="nav-page-text"><span class="chapter-title">Automating build</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -884,4 +910,3 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>

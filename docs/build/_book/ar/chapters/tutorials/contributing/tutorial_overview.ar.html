@@ -1,7 +1,7 @@
 <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.53">
+<meta name="generator" content="quarto-1.5.54">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Description in ar">
 <title>Tutorial overview – Title in ar</title>
@@ -393,6 +393,11 @@ body {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/how_to/automating_build.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating build</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../chapters/tutorials/project_structure.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">بنية المشروع</span></a>
   </div>
 </li>
@@ -413,6 +418,10 @@ body {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Appendices</span></span>
+  </li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -421,11 +430,10 @@ body {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#tutorials-guide" id="toc-tutorials-guide" class="nav-link active" data-scroll-target="#tutorials-guide">Tutorials guide</a></li>
+<li><a href="#%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D8%AF%D8%B1%D9%88%D8%B3" id="toc-دليل-الدروس" class="nav-link active" data-scroll-target="#دليل-الدروس">دليل الدروس</a></li>
   <li><a href="#the-tutorials-folder" id="toc-the-tutorials-folder" class="nav-link" data-scroll-target="#the-tutorials-folder">The <code>tutorials</code> Folder</a></li>
   <li><a href="#overview-of-config.json-files" id="toc-overview-of-config.json-files" class="nav-link" data-scroll-target="#overview-of-config.json-files">Overview of <code>config.json</code> Files</a></li>
   <li><a href="#the-.json-configuration" id="toc-the-.json-configuration" class="nav-link" data-scroll-target="#the-.json-configuration">The <code>.json</code> configuration</a></li>
-  <li><a href="#nested-.json-configuration-for-tutorials" id="toc-nested-.json-configuration-for-tutorials" class="nav-link" data-scroll-target="#nested-.json-configuration-for-tutorials">Nested <code>.json</code> configuration for tutorials</a></li>
   </ul></nav>
 </div>
 <!-- main -->
@@ -447,133 +455,128 @@ body {
   
 
 
-</header><section id="tutorials-guide" class="level3"><h3 class="anchored" data-anchor-id="tutorials-guide">Tutorials guide</h3>
+</header><section id="دليل-الدروس" class="level3"><h3 class="anchored" data-anchor-id="دليل-الدروس">دليل الدروس</h3>
 <hr>
-<p>This section provides an overview of the <code>config.json</code> files used in the JSQuarto documentation, specifically focusing on the <code>tutorials</code> folder. The <code>config.json</code> file serve as configuration files that help structure and organize the documentation, while the <code>tutorials</code> folder contains the Markdown files for various tutorials.</p>
+<p>يقدم هذا القسم لمحة عامة عن ملفات <code>config.json</code> المستخدمة في وثائق JSQuarto، مع التركيز تحديداً على مجلد <code>tutorials</code>. ملف <code>config.json' يعمل كملفات تكوين تساعد على هيكلة وتنظيم الوثائق، في حين يحتوي مجلد</code>الدروس` على ملفات Markdown لمختلف الدروس.</p>
 </section><section id="the-tutorials-folder" class="level3"><h3 class="anchored" data-anchor-id="the-tutorials-folder">The <code>tutorials</code> Folder</h3>
 <hr>
-<p>The <code>tutorials</code> folder within the documentation directory is dedicated to hosting tutorials on various topics related to the JSQuarto platform. This folder contains a collection of Markdown files, each representing an individual tutorial.</p>
-<p>Markdown is a lightweight markup language that allows for easy formatting and structuring of text, making it ideal for creating tutorials. Markdown files provide a simple yet powerful way to document step-by-step instructions, code examples, explanations, and other relevant information.</p>
-<p>The <code>tutorials</code> folder can be organized into subfolders to further categorize and group related tutorials. This helps users easily locate and access the tutorials they need based on their specific interests or requirements.</p>
-<p>By structuring tutorials within the <code>tutorials</code> folder using Markdown, contributors can contribute new tutorials, update existing ones, and ensure that the documentation remains comprehensive and user-friendly.</p>
-<p>Overall, the combination of <code>.json</code> files and the <code>tutorials</code> folder enables a well-organized and accessible documentation structure, allowing users to navigate and explore the JSQuarto platform documentation with ease.</p>
+<p>مجلد “الدروس” داخل دليل التوثيق مكرس لاستضافة دروس حول مختلف المواضيع ذات الصلة بمنصة JSQuarto. يحتوي هذا المجلد على مجموعة من ملفات Markdown، يمثل كل منها درسا فرديا.</p>
+<p>Markdown هي لغة علامة خفيفة الوزن تسمح بسهولة تنسيق وبنية النص، مما يجعلها مثالية لإنشاء دروس. توفر ملفات Markdown طريقة بسيطة ولكنها قوية لتوثيق التعليمات خطوة بخطوة، والأمثلة البرمجية، والتفسيرات وغيرها من المعلومات ذات الصلة.</p>
+<p>يمكن تنظيم مجلد “الدروس” في مجلدات فرعية لزيادة تصنيف ودروس ذات صلة بالمجموعة. وهذا يساعد المستخدمين على تحديد مواقع الدروس التي يحتاجونها بسهولة والوصول إليها بناء على اهتماماتهم أو متطلباتهم المحددة.</p>
+<p>من خلال هيكلة الدروس داخل مجلد “الدروس” باستخدام Markdown، يمكن للمساهمين المساهمة بدروس جديدة، تحديث الوثائق الموجودة، وضمان أن تظل الوثائق شاملة وسهلة الاستعمال.</p>
+<p>ملفات son` ومجلد “الدروس التعليمية” يمكنان من بنية وثائق منظمة تنظيماً جيداً ويمكن الوصول إليها، مما يسمح للمستخدمين بالتنقل واستكشاف وثائق منصة JSQuarto بسهولة.</p>
 </section><section id="overview-of-config.json-files" class="level3"><h3 class="anchored" data-anchor-id="overview-of-config.json-files">Overview of <code>config.json</code> Files</h3>
 <hr>
-<p>The <code>config.json</code> file in the JSQuarto documentation play a crucial role in organizing and categorizing the content. This file define the structure of the documentation and provide metadata for each section, tutorial, or topic. They allow maintainers and contributors to easily navigate and manage the documentation by specifying titles, creating nested structures, and linking related topics.</p>
-<p>By using <code>config.json</code> file, the documentation can be dynamically generated and updated based on the defined structure. This makes it easier to maintain consistency, track changes, and add new content.</p>
+<p>يؤدي ملف `config.json’ في وثائق JSQuarto دورا حاسما في تنظيم وتصنيف المحتوى. يحدد هذا الملف هيكل الوثائق ويوفر بيانات فوقية لكل قسم أو برنامج تعليمي أو موضوع. فهي تسمح للقائمين على الصيانة والمساهمين بالتنقل في الوثائق وإدارتها بسهولة عن طريق تحديد العناوين وإنشاء هياكل متداخلة وربط المواضيع ذات الصلة.</p>
+<p>باستخدام ملف `config.json’ ، يمكن إنشاء الوثائق وتحديثها ديناميكيا استنادا إلى الهيكل المحدد. وهذا يجعل من الأسهل المحافظة على الاتساق، وتتبع التغييرات، وإضافة محتوى جديد.</p>
 </section><section id="the-.json-configuration" class="level3"><h3 class="anchored" data-anchor-id="the-.json-configuration">The <code>.json</code> configuration</h3>
 <hr>
-<p>Let’s explain how this structure works by looking at the <code>config.json</code> file in the <code>tutorials /</code> folder. This file defines the structure of the tutorials section of the documentation, including the titles, descriptions links for each tutorial.</p>
+<p>لنشرح كيف تعمل هذه البنية من خلال النظر إلى ملف <code>config.json' في مجلد</code>tutorials /’. يحدد هذا الملف هيكل قسم الدروس في الوثائق، بما في ذلك العناوين، وصلات الوصف لكل درس تعليمي.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"changelog"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"title"</span><span class="fu">:</span> <span class="st">"Changelog"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"environment_setup"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"title"</span><span class="fu">:</span> <span class="st">"Environment Setup"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"contributing"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"title"</span><span class="fu">:</span> <span class="st">"Contributing"</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this example, the <code>.json</code> file defines the titles and relationships of the main sections within your documentation. The sections are represented as objects, with each object having a unique key and a <code>"title"</code> key-value pair.</p>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"سجل التغييرات"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"العنوان: "</span><span class="er">التغيير</span><span class="dt">"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">  },</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">  "</span><span class="er">environment_setup</span><span class="dt">": {</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">    "</span><span class="er">العنوان</span><span class="dt">": "</span><span class="er">إعداد</span> <span class="er">البيئة</span><span class="dt">"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="dt">  },</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="dt">  "</span><span class="er">المساهمة</span><span class="dt">": {</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dt">    "</span><span class="er">العنوان</span><span class="dt">": "</span><span class="er">المساهمة</span><span class="dt">"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="dt">  }</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>في هذا المثال ، يحدد ملف ‘json’ عناوين وعلاقات الأقسام الرئيسية داخل وثائقك. الأقسام ممثلة ككائنات، مع كل كائن له مفتاح فريد و ’title”` في زوج القيمة الرئيسية.</p>
 <ol type="1">
-<li><p><code>changelog</code> represents the “Changelog” section. The <code>"title"</code> key-value pair specifies the title of this section as “Changelog.”</p></li>
-<li><p><code>environment_setup</code> represents the “Environment Setup” section. The <code>"title"</code> key-value pair specifies the title of this section as “Environment Setup.”</p></li>
-<li><p><code>contributing</code> represents the “Contributing” section. The <code>"title"</code> key-value pair specifies the title of this section as “Contributing.”</p></li>
+<li><p><code>changelog</code> represents the “Changelog” section. يحدد زوج القيمة الرئيسية “title” عنوان هذا القسم كـ “التغيير”.</p></li>
+<li><p><code>environment_setup</code> represents the “Environment Setup” section. يحدد زوج القيمة الرئيسية “title” عنوان هذا القسم بأنه “إعداد البيئة”.</p></li>
+<li><p><code>contributing</code> represents the “Contributing” section. يحدد زوج القيمة الرئيسية “title” عنوان هذا القسم كـ “التغيير”.</p></li>
 </ol>
-<p>With this structure, your documentation folder will contain separate Markdown files for each section, named according to the keys in the <code>.json</code> file. For example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> `documentation /`</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> `docs /`</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> `changelog.md`</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> `environment_setup.md`</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> `contributing.md`</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> `tutorials.json`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Each Markdown file will correspond to a section in your documentation and should contain the relevant content for that section.</p>
-<p>Remember to update the <code>.json</code> file whenever you add or modify sections to ensure that the documentation structure accurately reflects the content of your documentation.</p>
-</section><section id="nested-.json-configuration-for-tutorials" class="level3"><h3 class="anchored" data-anchor-id="nested-.json-configuration-for-tutorials">Nested <code>.json</code> configuration for tutorials</h3>
-<hr>
-<p>To structure tutorials and create nested tutorials within your documentation, you can use the <code>.json</code> file to define the hierarchy and relationships between tutorials. Here’s an example of how you can structure tutorials using a <code>.json</code> file:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">"maintainers"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Technical guide for Maintainers"</span><span class="kw">,</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"children"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"reviewing_pr"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Reviewing pull requests"</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"ci_workflow"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"CI Workflow"</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"secrets_and_security"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Secret Access/Management"</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"deployment_guide"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Deployment Guide"</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">}</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">}</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">},</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">"contributing"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Contributing to the project"</span><span class="kw">,</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"children"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"adding_a_course"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Adding a course"</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"api_project_structure"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"API project structure"</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"improving_documentation"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Improving documentation"</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"project_structure"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Project structure"</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"raising_issues"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Raising issues"</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">},</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">"raising_pr"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Raising pull requests"</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">}</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">}</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">},</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">"review"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">"title"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Reviewing the project"</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">}</span></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this example, the <code>.json</code> file represents a documentation structure with two main sections: “Technical guide for Maintainers” and “Technical guide for API developers”. Each section has its own set of tutorials represented as nested objects.</p>
+<p>بهذه البنية، سيحتوي مجلد الوثائق الخاص بك على ملفات Markdown منفصلة لكل قسم، يتم تسميتها وفقًا للمفاتيح الموجودة في ملف <code>.json</code>. على سبيل المثال:</p>
+<p>“يامل - <code>الوثائق/</code> - <code>docs /</code> - <code>changelog.md</code> - <code>environment_setup.md</code> - <code>contributing.md</code> - <code>tutorials.json</code></p>
+<pre><code>
+كل ملف Markdown سيتطابق مع قسم في وثائقك ويجب أن يحتوي على المحتوى ذي الصلة لذلك القسم.
+
+تذكر أن تقوم بتحديث ملف '.json' كلما قمت بإضافة أو تعديل الأقسام للتأكد من أن هيكل التوثيق يعكس بدقة محتوى وثائقك.
+
+
+### Nested `.json` configuration for tutorials
+&lt;hr&gt;
+لهيكلة الدروس وإنشاء دروس متداخلة داخل وثائقك، يمكنك استخدام ملف '.json' لتحديد التسلسل الهرمي والعلاقات بين الدروس. إليك مثال على كيفية هيكلة الدروس باستخدام ملف `.json`:
+
+“يامل
+{
+    "المشرفين": {
+        "العنوان": "دليل تقني للقائمين"،
+        "الأطفال": {
+            "reviewing_pr": {
+                "title": "استعراض طلبات السحب"
+            },
+            "ci_workflow": {
+                "title": "CI Workflow "
+            },
+            "الأسرار_and_security": {
+                العنوان : "الوصول السري/الإدارة السرية"
+            },
+            "نشر الدليل": {
+                "عنوان": "دليل النشر"
+            }
+        }
+    },
+    "المساهمة": {
+        "title": "المساهمة في المشروع"،
+        "الأطفال": {
+            "adding_a_course": {
+                "title": "إضافة دورة"
+            },
+            "api_project_structure": {
+                "title": "بنية مشروع API
+            },
+            "Improving_documentation": {
+                العنوان : "تحسين التوثيق"
+            },
+            "project_structure": {
+                "عنوان": "بنية المشروع"
+            },
+            "raising_issues": {
+                العنوان: "إثارة المشاكل"
+            },
+            "raising_pr": {
+                "عنوان": "رفع طلبات الجذب"
+            }
+        }
+    },
+    "عرض": {
+        "title": "استعراض المشروع"
+    }
+}</code></pre>
+<p>وفي هذا المثال، يمثل ملف <code>json</code> هيكلا للتوثيق يتألف من قسمين رئيسيين: “الدليل التقني للمتعينين” و”الدليل التقني لمطوري API”. لكل قسم مجموعته الخاصة من الدروس التي تمثل ككائنات متداخلة.</p>
 <ol type="1">
-<li><p>Define the main sections or categories as top-level objects within the <code>.json</code> file, such as “maintainers” and “contributing”.</p></li>
-<li><p>Within each main section, provide a <code>"title"</code> key to specify the title or heading for that section. For example, “Technical guide for Maintainers” and “Technical guide for API developers”.</p></li>
-<li><p>Add a <code>"children"</code> key within each main section to define the nested tutorials. Each tutorial is represented as a child object within the <code>"children"</code> object. Not all tutorials may have children tutorials, an example of this is the <code>review</code> tutorial. Since it has no children the program will only look for a <code>review.qmd</code> file and not a <code>review</code> folder</p></li>
-<li><p>For each tutorial, provide a unique key as the object’s key, such as “reviewing_pr” and “ci_workflow”.</p></li>
-<li><p>Within each tutorial object, include a <code>"title"</code> key to specify the title or heading for that specific tutorial.</p></li>
+<li><p>تعريف الأقسام أو الفئات الرئيسية على أنها الكائنات ذات المستوى الأعلى داخل ملف `json’، مثل “المشرفين” و “المساهمة”.</p></li>
+<li><p>ضمن كل قسم رئيسي، قدم مفتاح “عنوان” لتحديد عنوان أو عنوان ذلك القسم. () على سبيل المثال، “الدليل التقني للقائمين” و”الدليل التقني لمطوري API”.</p></li>
+<li><p>إضافة مفتاح ‘الأطفال’ داخل كل قسم رئيسي لتحديد الدروس المتداخلة. يتم تمثيل كل برنامج تعليمي ككائن ثانوي داخل كائن <code>الأطفال</code>. وقد لا تحتوي جميع الدروس على دروس للأطفال، ومن الأمثلة على ذلك دروس “مراجعة”. بما أنه ليس لديه أطفال فإن البرنامج سيبحث فقط عن ملف “review.qmd” وليس مجلد “عرض”</p></li>
+<li><p>لكل برنامج تعليمي، قم بتوفير مفتاح فريد كمفتاح الكائن، مثل “reviewing_pr” و “ci_workflow”.</p></li>
+<li><p>ضمن كل كائن تعليمي، قم بإدراج مفتاح “title” لتحديد العنوان أو العنوان لذلك البرنامج التعليمي المحدد.</p></li>
 </ol>
-<p>For this example here is what the folder structure would look like assuming the root folder is <code>tutorials /</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> tutorials/</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> maintainers/</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> maintainers.qmd</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> reviewing_pr.qmd</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> ci_workflow.qmd</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> secrets_and_security.qmd</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> deployment_guide.qmd</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> contributing/</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> api.md</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> api_structure.md</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> api_authentication_flow.qmd</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> jwt_token_management.qmd</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> rbac_handler_flow.qmd</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="at">            </span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> review.qmd</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="at">              </span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> config.json</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this structure:</p>
+<p>على هذا المثال هنا ما سيبدو عليه هيكل المجلد بافتراض أن المجلد الجذري هو <code>دروس/</code>:</p>
+<p>“يامل - دروس/دروس - المشرفون/ - المشرفون - الاستعراض_pr.qmd - ci_workflow.qmd - الأسرار_and_security.qmd - نشر_guide.qmd</p>
+<pre><code>        - المساهمة/
+            - api.md
+            - api_structure.md
+            - api_authentication_flow.qmd
+            - jwt_token_management.qmd
+            - rbac_handler_flow.qmd
+        
+        - review.qmd
+          
+        - config.json</code></pre>
+<p>```</p>
+<p>وفي هذا الهيكل:</p>
 <ul>
-<li>The <code>.json</code> configuration file is located in the <code>tutorials/</code> folder</li>
-<li>The <code>tutorials</code> folder contains subfolders representing different sections or categories of tutorials.</li>
-<li>Each section or category folder, such as <code>maintainers</code> and <code>contributing</code>, contains the <code>.qmd</code> files for individual tutorials. <!-- - Additionally, for each section or category folder, there should be an accompanying `*.md` file that serves as the entry overview, providing an overview of the tutorials within that section. For example, `maintainers.md` provides an overview of the tutorials in the "Technical guide for Maintainers" section. -->
+<li>ملف التكوين ‘json’ موجود في المجلد ‘دروس التعليمية’</li>
+<li>يحتوي مجلد “الدروس” على مجلدات فرعية تمثل أقسام أو فئات مختلفة من الدروس.</li>
+<li>كل قسم أو مجلد فئة، مثل ‘المشرفين<code>و 'المساهمة</code>، يحتوي على ملفات’.qmd’ لدروس فردية. <!-- - بالإضافة إلى ذلك، لكل قسم أو مجلد فئة، ينبغي أن يكون هناك `*. فعلى سبيل المثال، يقدم `Mainers.md` لمحة عامة عن الدروس في قسم "الدليل التقني للقائمين". -->
 </li>
 </ul>
-<p>The nested structure allows you to organize tutorials hierarchically, making it easier to navigate and find specific tutorials based on their topic or category.</p>
-<p>It’s important to note that the tutorial structure allows only one level of nesting. This means you can have main sections and their respective tutorials, but you cannot create further nested folders within the tutorials.</p>
+<p>الهيكل المتداخل يسمح لك بتنظيم الدروس هرمياً ، مما يجعل من الأسهل التنقل والبحث عن دروس محددة استناداً إلى موضوعها أو فئتها.</p>
+<p>من المهم ملاحظة أن بنية البرنامج التعليمي لا تسمح إلا بمستوى واحد من التعش. هذا يعني أنه يمكنك الحصول على الأقسام الرئيسية ودروسها، ولكن لا يمكنك إنشاء المزيد من المجلدات المتداخلة داخل الدروس.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1013,4 +1016,3 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.53">
+<meta name="generator" content="quarto-1.5.54">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Description in ar">
 <title>Workflows – Title in ar</title>
@@ -359,6 +359,11 @@ body {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../chapters/tutorials/how_to/automating_build.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating build</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../chapters/tutorials/project_structure.ar.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">بنية المشروع</span></a>
   </div>
 </li>
@@ -379,6 +384,10 @@ body {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Appendices</span></span>
+  </li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -388,7 +397,9 @@ body {
    
   <ul>
 <li><a href="#sec-workflows" id="toc-sec-workflows" class="nav-link active" data-scroll-target="#sec-workflows">Doc generation</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#%D8%AA%D9%88%D9%84%D9%8A%D8%AF-%D8%AF%D9%88%D9%83-%D9%85%D8%B9-%D8%AA%D8%B1%D8%AC%D9%85%D8%A9-%D9%8A%D8%AF%D9%88%D9%8A%D8%A9" id="toc-توليد-دوك-مع-ترجمة-يدوية" class="nav-link" data-scroll-target="#توليد-دوك-مع-ترجمة-يدوية">توليد دوك مع ترجمة يدوية</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
   <li><a href="#%D8%AA%D9%88%D9%84%D9%8A%D8%AF-%D8%AF%D9%88%D9%83-%D9%85%D8%B9-%D8%AA%D8%B1%D8%AC%D9%85%D8%A9-%D8%A7%D9%84%D8%AD%D8%B4%D9%88%D8%AF" id="toc-توليد-دوك-مع-ترجمة-الحشود" class="nav-link" data-scroll-target="#توليد-دوك-مع-ترجمة-الحشود">توليد دوك مع ترجمة الحشود</a></li>
   </ul></nav>
 </div>
@@ -418,6 +429,7 @@ body {
 <li>توليد Doc مع ترجمة crowdin</li>
 </ol>
 <section id="sec-workflows" class="level3"><h3 class="anchored" data-anchor-id="sec-workflows">Doc generation</h3>
+<hr>
 <p>وينطوي سير العمل هذا على توليد الوثائق بلغة واحدة. وهذه العملية مباشرة وتنطوي على تنفيذ JSquarto على ملفات المصدر لتوليد وثائق شاملة باللغة المحددة. ويعد تدفق العمل هذا مثاليا بالنسبة للمشاريع التي تستهدف جمهورا لغويا محددا وتسعى إلى تبسيط عملية إعداد الوثائق.</p>
 <section id="ستابس" class="level4"><h4 class="anchored" data-anchor-id="ستابس">ستابس</h4>
 <ol type="1">
@@ -425,13 +437,15 @@ body {
 <p>To do this, simply execute the JSquarto command with the desired custom CLI arguments, such as <code>source</code> and <code>languages</code>, to specify the source files directory and supported languages, respectively. على سبيل المثال:</p>
 <p>“`باش jsq doc:generate source=/path/to/your/source/files ```</p>
 </li>
-</ol></section></section><section id="توليد-دوك-مع-ترجمة-يدوية" class="level3"><h3 class="anchored" data-anchor-id="توليد-دوك-مع-ترجمة-يدوية">توليد دوك مع ترجمة يدوية</h3>
+</ol></section></section><section id="section" class="level3"><h3 class="anchored" data-anchor-id="section"></h3>
+</section><section id="توليد-دوك-مع-ترجمة-يدوية" class="level3"><h3 class="anchored" data-anchor-id="توليد-دوك-مع-ترجمة-يدوية">توليد دوك مع ترجمة يدوية</h3>
+<hr>
 <p>من أجل الترجمة اليدوية للوثائق، يمكنك إنتاج الوثائق بلغات متعددة ثم ترجمة المحتوى يدوياً إلى اللغات المرغوبة. لسير العمل هذا، نستخدم <a href="https://docs.ropensci.org/babelquarto/">babelquarto</a> الذي يساعد على معاينة الوثائق بلغات متعددة. على الرغم من أن هذا لا يترجم المحتوى، فإنه يوفر معاينة للوثائق باللغات المحددة، مما يتيح لك ترجمة المحتوى يدوياً.</p>
-<section id="الخطوات" class="level4"><h4 class="anchored" data-anchor-id="الخطوات">الخطوات</h4>
+<section id="ستابس-1" class="level4"><h4 class="anchored" data-anchor-id="ستابس-1">ستابس</h4>
 <ol type="1">
 <li>
 <p>توليد الوثائق بلغات متعددة باستخدام JSquarto مع حجة “اللغات” لتحديد اللغات المعتمدة. على سبيل المثال:</p>
-<p>“<code>باش      jsq doc:generate languages=en,fr,es include_localized_versions source=/path/to/your/source/files  ``` ملاحظة: تأكد من إدراج حجة 'include_localized_versions</code> لإنتاج نسخ من الوثائق باللغات المحددة. إذا لم تكن مشمولة، سيتم إنشاء وثائق اللغة الافتراضية فقط. ولكن سيتم إضافة تكوين اللغات إلى ملف التكوين (_quarto.yml) فقط.</p>
+<p>“<code>باش jsq doc:generate languages=en,fr,es include_localized_versions source=/path/to/your/source/files ``` ملاحظة: تأكد من إدراج حجة 'include_localized_versions</code> لإنتاج نسخ من الوثائق باللغات المحددة. إذا لم تكن مشمولة، سيتم إنشاء وثائق اللغة الافتراضية فقط. ولكن سيتم إضافة تكوين اللغات إلى ملف التكوين (_quarto.yml) فقط.</p>
 </li>
 <li><p>ترجمة المحتوى يدويا في ملفات الوثائق التي تم إنشاؤها لكل لغة. يمكنك استخدام أدوات مثل ترجمة جوجل أو خدمات الترجمة المهنية لتسهيل عملية الترجمة.</p></li>
 <li>
@@ -452,16 +466,18 @@ body {
 <p>ملاحظة: البرنامج النصي “إصلاح:all” هو برنامج نصي مخصص يصلح مشاكل التنقل في الوثائق المعاينة. يستخدم هذا البرنامج النصي لتحديث روابط التنقل في الوثائق المعاينة لتمكين التنقل السلس بين اللغات المختلفة. واللغات المحددة في النص ينبغي أن تتطابق مع اللغات المحددة في حجة “اللغات” أثناء عملية إعداد الوثائق.</p>
 </li>
 <li><p>You can navigate to the <code>docs/output/_book</code> directory to view the previewed documentation in multiple languages. يمكنك من التحقق من الترجمات وضمان دقة وجودة الوثائق.</p></li>
-</ol></section></section><section id="توليد-دوك-مع-ترجمة-الحشود" class="level3"><h3 class="anchored" data-anchor-id="توليد-دوك-مع-ترجمة-الحشود">توليد دوك مع ترجمة الحشود</h3>
+</ol></section></section><section id="section-1" class="level3"><h3 class="anchored" data-anchor-id="section-1"></h3>
+</section><section id="توليد-دوك-مع-ترجمة-الحشود" class="level3"><h3 class="anchored" data-anchor-id="توليد-دوك-مع-ترجمة-الحشود">توليد دوك مع ترجمة الحشود</h3>
+<hr>
 <p>للترجمة الآلية للوثائق، يمكنك الاستفادة من منصة كرودن لتسهيل عملية الترجمة. كراودِن هو منصة إدارة الترجمة القائمة على السحابة والتي تمكنك من أتمتة ترجمة المحتوى إلى لغات متعددة. من خلال دمج كراودِن مع JSquarto، يمكنك تبسيط عملية الترجمة وإنشاء وثائق شاملة بلغات مختلفة بكفاءة.</p>
-<section id="الخطوات-1" class="level4"><h4 class="anchored" data-anchor-id="الخطوات-1">الخطوات</h4>
+<section id="ستابس-2" class="level4"><h4 class="anchored" data-anchor-id="ستابس-2">ستابس</h4>
 <ol type="1">
 <li>
 <p>توليد الوثائق بلغات متعددة باستخدام JSquarto مع حجة “اللغات” لتحديد اللغات المعتمدة. على سبيل المثال:</p>
 <p>“`باش jsq doc:generate languages=en,fr,es source=/path/to/your/source/files ```</p>
 <p>لاحظ أن حجة “include_localized_versions” ليست مطلوبة لسير العمل هذا، لأن كراودِن سوف يتعامل مع عملية الترجمة. وإنشاء ملفات مختلفة لكل لغة.</p>
 </li>
-<li><p>دمج كراودِن مع JSquarto لأتمتة عملية الترجمة. لدمج كراودن، تحتاج إلى إنشاء مشروع كراودِن وتكوين إعدادات المشروع لتمكين الترجمة التلقائية للوثائق. om/github-integration/#:~:text=فتح%20الخاص بك%20project%20and%20go%20to%20%20INtegrt، قرص أسفل%20list%20to%20integrate%20عن طريق%20الخاص بك%20GitHub%20a) للحصول على تعليمات مفصلة بشأن إعداد مشروع وتكوين إعدادات الترجمة. في كراودين، يمكنك إعداد كيفية تسمية الملفات المترجمة، والتأكد من أنها تتبع تنسيق <code>original_file_name.locale.extension</code> على سبيل المثال <code>index.en.qmd</code>، <code>index.fr.qmd</code>، <code>index.es.qmd</code></p></li>
+<li><p>دمج كراودِن مع JSquarto لأتمتة عملية الترجمة. لدمج كراودن، تحتاج إلى إنشاء مشروع كراودِن وتكوين إعدادات المشروع لتمكين الترجمة التلقائية للوثائق. You can refer to the <a href="https://support.crowdin.com/github-integration/#:~:text=Open%20your%20project%20and%20go%20to%20the%20Integrations,drop-down%20list%20to%20integrate%20via%20your%20GitHub%20account">Crowdin Github integration documentation</a> for detailed instructions on setting up a project and configuring the translation settings<br> في كراودين، يمكنك إعداد كيفية تسمية الملفات المترجمة، والتأكد من أنها تتبع تنسيق <code>original_file_name.locale.extension</code> على سبيل المثال <code>index.en.qmd</code>، <code>index.fr.qmd</code>، <code>index.es.qmd</code></p></li>
 <li>
 <p>بمجرد تكوين إعدادات مشروع Crowdin ، يمكنك المضي قدما في تقديم الوثائق بلغات متعددة باستخدام حزمة ‘babelquarto’. هذه الخطوة تمكنك من معاينة الوثائق بلغات مختلفة قبل بدء عملية الترجمة. يمكنك استخدام حزمة ‘babelquarto’ لمعاينة الوثائق بلغات متعددة، كما هو مبين في تدفق العمل السابق. للقيام بهذا فتح مجلد doc الذي تم إنشاؤه في RStudio، انتقل إلى وحدة التحكم وتعيين دليل العمل إلى مجلد doc</p>
 <p>“`R project_dir &lt;-”path/to/your/project/output/folder” ```</p>
@@ -915,4 +931,3 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>

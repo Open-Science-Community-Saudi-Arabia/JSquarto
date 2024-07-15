@@ -4,7 +4,7 @@ title: Crowdin integration
 
 This section will go over the necessary steps for integrating crowdin for translations.
 
-### Prerequisites
+### Prerequisites {#crowdin-integration-guide}
 1. You need to have a crowdin account. If you don't have one, you can create one [here](https://crowdin.com/).
 2. You need to have a crowdin project. If you don't have one, you can create one [here](https://crowdin.com/project/create)
 3. You need to host your project on github. If you don't have one, you can create one [here](https://github.com)
@@ -18,9 +18,9 @@ This section will go over the necessary steps for integrating crowdin for transl
    The file should look like this:
    ```json
         {
-            "outputDirectory": "docs",
-            "languages": ["en", "ar"],
-            "translationsDirectory": "translations"
+            "outputDirectory": "./docs/build",
+            "sourceDirectory": "./dist",
+            "translationsDirectory": "./docs/_translations",
         }
     ```
     
