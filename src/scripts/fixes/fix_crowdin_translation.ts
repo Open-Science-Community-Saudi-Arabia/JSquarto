@@ -120,6 +120,7 @@ function findSubFolderWithMatchingName(
  * @param destDir - The directory to move files and folders to.
  */
 function moveDirContents(sourceDir: string, destDir: string) {
+    console.log({ sourceDir, destDir})
     // Ensure the destination directory exists
     fs.mkdirSync(destDir, { recursive: true });
 
@@ -227,8 +228,8 @@ async function deleteEmptyFoldersInOutDir() {
 
 export default async function fixCrowdinTranslations() {
     await moveTranslatedFilesToOutputDir();
-    await fixTranslatedFilesStructureInOutputDir();
-    await fixFileExtensionsForTranslatedFiles();
+    // await fixTranslatedFilesStructureInOutputDir();
+    // await fixFileExtensionsForTranslatedFiles();
     await mergePathsForTranslatedFiles();
     await deleteEmptyFoldersInOutDir();
 }

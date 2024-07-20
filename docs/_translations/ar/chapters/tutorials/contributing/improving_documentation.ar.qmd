@@ -1,0 +1,62 @@
+--- 
+title: Improving documentation 
+---
+يعد التوثيق الفعال أمرًا بالغ الأهمية للحفاظ على قاعدة تعليمات برمجية واضحة ومفهومة. واحدة من الأدوات القوية لتعزيز التوثيق في الكود الخاص بك هي JSDoc. JSDoc هي لغة ترميز تسمح لك بالتعليق على التعليمات البرمجية الخاصة بك مع تعليقات منظمة، مما يمكن من التوليد التلقائي للوثائق. في هذا الدليل، سوف نستكشف استخدامات JSDoc وكيف يمكن أن يحسن توثيق مشروعك.
+
+### Using JSDoc for Generated Documentation
+<hr>
+أحد الاستخدامات الأساسية لـ JSDoc هو توليد الوثائق مباشرة من الكود الخاص بك. من خلال إضافة تعليقات JSDoc إلى الدوال والصفوف والمتغيرات الخاصة بك، يمكنك تقديم معلومات أساسية يتم استخراجها تلقائياً وتحويلها إلى وثائق شاملة.
+
+لاستخدام JSDoc لتوليد الوثائق، اتبع الخطوات التالية:
+
+1. تعليقات الترميز: إضافة تعليقات JSDoc مباشرة فوق عناصر التعليمات البرمجية التي تريد توثيقها. استخدام /\*_ ... _/ بناء الجملة للإشارة إلى كتلة تعليقات JSDoc .
+
+2. وظائف التوثيق: استخدام علامات JSDoc لوصف معلمات الدالة، قيم الإرجاع، ومعلومات إضافية. العلامات مثل @param و @returs و @description شائعة الاستخدام لهذا الغرض. </br>
+ Other important custom tags are  @category and @subcategory, these tags help to structure the generated documentation into chapters.</br>
+   - @category: This tag is used to group modules under a common chapter. All modules under a `category` will be under one chapter, the chapter name will correspond to the name assigned to the `category`. 
+   - @subcategory: This tag is used to group modules under a common chapter. 
+وستكون جميع الوحدات تحت `فئة فرعية` تحت فصل واحد، وسيتطابق اسم الفصل مع الاسم المعين لـ `الفئة الفرعية`. 
+
+<!-- ::: {.notes} -->
+<!---->
+<!--    The main idea around @category and @subcategory is to allow nested chapters for example one parent chapter A can have other subchapters (Chapter Aa, Chapter Ab, Chapter Ac) with each of these subchapters having their individual modules.  -->
+<!--    Note that this is only two levels of nesting, with Chapter A being the @category and the @subcategory will be the  other chapters. Initially we intended to implement 2 levels of nested chapters but this as at the time of writing this quarto only allows 1 levels of nesting (i.e, you can only have 1 parent chapter with no subChapters, as a result, only the @subcategories will be displayed as chapters in the rendered document. -->
+<!-- ::: -->
+
+3. فئات التوثيق: بالنسبة للصفوف الدراسية، استخدم تعليقات JSDoc لتوفير الأوصاف، وخصائص الصف المستندي، وطرائق فصل المستند. العلامات مثل @clas, @property و @method تستخدم عادة في هذا السياق.
+
+4. تشغيل توليد JSDoc : استخدام أداة مولد JSDoc ، مثل JSDoc نفسه أو أدوات شعبية أخرى مثل TypeDoc أو JSDoc3, لتحليل الكود الخاص بك وإنشاء إخراج الوثائق. تكوين المولد لاستهداف تنسيق المخرج المطلوب، مثل HTML أو Markdown.
+
+5. المراجعة والتحديث: مراجعة الوثائق التي تم إنشاؤها والتأكد من أنها تمثل الرمز الخاص بك بدقة. تحديث تعليقات JSDoc حسب الحاجة لتقديم تفسيرات أو معلومات إضافية أكثر وضوحا.
+
+للمزيد من المعلومات حول استخدام JSDoc لتوليد الوثائق، انظر [وثائق JSDoc](https://jsdoc.app/) أو [Getting بدأ باستخدام JSDoc](https://jsdoc.app/about-getting-started.html).
+
+
+### استخدام JSDoc للتوثيق الوراثي
+<hr>
+يمكن أيضًا استخدام JSDoc خارج نطاق إنشاء وثائق التعليمات البرمجية. نظام بناء الجملة والعلامة المرن لديه يجعله أداة قيمة لكتابة الجوانب الأخرى من وثائق مشروعك، مثل البرامج التعليمية والإرشادية والمواد المرجعية.
+
+لاستخدام JSDoc لكتابة الوثائق، ضع في الاعتبار النهج التالية:
+
+1. الدروس والإرشاد: استخدام تعليقات JSDoc لكتابة الدروس والدلائل خطوة بخطوة في داخل الكود الخاص بك. عن طريق تضمين المحتوى التعليمي في تعليقات JSDoc ، يمكنك الحفاظ على ارتباط الوثائق بشكل وثيق مع الكود ذي الصلة، يجعل من الأسهل على المطورين متابعة المفاهيم وفهمها.
+
+2. أمثلة مضمنة: استخدم تعليقات JSDoc لتضمينها أمثلة على الرموز المضمنة التي توضح استخدام الدوال أو الصفوف الدراسية أو الوحدات. ويمكن استخدام هذه الأمثلة كمادة تعليمية وكمرجع سريع للمطورين على حد سواء.
+
+3. المواد المرجعية: يمكن استخدام تعليقات JSDoc لتقديم معلومات إضافية في المواد المرجعية. وسوم Leverage JSDoc مثل @example أو @see لربط الموارد ذات الصلة أو أمثلة التعليمات البرمجية.
+
+4. التكامل مع Markdown: JSDoc يدعم Markdown ضمن التعليقات، مما يسمح لك بإدماج النصوص المنسقة والعناوين والقوائم وغيرها من ميزات Markdown في وثائقك. هذا يمكّنك من إنشاء محتوى أكثر جاذبية بصرياً وتنظيماً في تعليقات JSDoc الخاصة بك.
+
+###
+### تحسين وثائق JSQuarto باستخدام JSDoc
+<hr>
+
+لم تكتمل بعد وثائق JSQuarto. وهناك عدة مجالات يمكن تحسينها، منها:
+
+- إيضاحات أكثر تفصيلا لهيكل مشروع JSQuarto ومشروع الترميز
+- معلومات إضافية عن كيفية المساهمة في هذا المشروع
+- معلومات إضافية عن كيفية الحفاظ على مشروع JSQuarto
+- معلومات إضافية عن كيفية المساهمة في هذا المشروع
+- خريطة الطريق للمشروع والخطط المستقبلية
+
+لتحسين وثائق JSQuarto ، يمكنك استخدام JSDoc لإضافة وثائق إضافية مباشرة داخل المركز البرمجي. سيسمح لك هذا بتقديم تفسيرات أكثر تفصيلاً للكود وبنية المشروع، بالإضافة إلى معلومات إضافية حول كيفية المساهمة في المشروع، وكيفية استخدام JSQuarto API، وكيفية صيانة المشروع ونشره. في وقت كتابة هذا، تم بناء الوثائق مع حزم أخرى لتحسين واجهة المستخدم، أحدها [Better-docs](https://github.com/SoftwareBrothers/better-docs).
+

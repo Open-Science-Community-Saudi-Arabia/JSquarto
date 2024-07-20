@@ -11,7 +11,7 @@ export const DEFAULT_QUARTO_YAML_CONTENT = {
             "Documentation for JSQuarto, a tool for generating JavaScript package API reference documentation using Markdown and Quarto.",
     },
     book: {
-        title: "Open Innovation Platform Documentation",
+        title: "JSQuarto Documentation",
     },
     // bibliography: "references.bib",
     format: {

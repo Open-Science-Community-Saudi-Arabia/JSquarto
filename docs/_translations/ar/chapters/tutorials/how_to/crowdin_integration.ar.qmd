@@ -1,0 +1,63 @@
+--- 
+title: Crowdin integration 
+---
+
+This section will go over the necessary steps for integrating crowdin for translations.
+
+### Prerequisites {#crowdin-integration-guide}
+1. You need to have a crowdin account. If you don't have one, you can create one [here](https://crowdin.com/).
+2. You need to have a crowdin project. If you don't have one, you can create one [here](https://crowdin.com/project/create)
+3. You need to host your project on github. If you don't have one, you can create one [here](https://github.com)
+
+### خطوات
+1. Initialize a new config file if you dont have one already. 
+   To do this run the following command:
+   “`باش
+   jsq config:init
+   ```
+   The file should look like this:
+   ```json
+        {
+            "outputDirectory": "./docs/build",
+            "sourceDirectory": "./dist",
+            "translationsDirectory": "./docs/_translations",
+        }
+    ```
+    
+    - `outputDirectory`: The directory where the generated documentation will be stored.
+    - `languages`: An array of the languages you want to support.
+    - `translationsDirectory`: The directory where the translations will be stored. This directory will be used by crowdin to store the translations.
+    
+    Make sure the `outputDirectory` and `translationsDirectory` exists within your project
+2. Generate the documentation using JSquarto. You can follow the steps @usage-basic
+3. Commit all necessary changes, including the `config.json` file and push to your github repository.
+4. On your crowdin project, go to the settings page and click on the `Integrations` tab.
+   ![Integrations](../images/open_integrations_tab.png){fig-align='center'}
+5. Search for Github integration and click on the `Install` button.
+   ![Github Integration](../images/search_github_integration.png){fig-align='center'}
+6. Go back to the integrations tab and select find the Github integration then click `Set Up Integration`
+   ![Set Up Integration](../images/open_integrations_tab.png){fig-align='center'}
+7. Click the dropdown menu for `Set Up Integration` and select the `Source and translation files mode`
+   ![Source and translation files mode](../images/source_translation_mode.png){fig-align='center'}
+8. Fill the repository details, specify the branch for translations and translation mode.
+   ![Repository Details](../images/select_github_repo.png){fig-align='center'}
+9. Now go back to the Integrations tab and select Github Integration.
+   ![Select Github Integration](../images/goto_github_integration.png){fig-align='center'}
+10. On the integrations page, you'll see your newlty created project. Open the `branch configuration`
+   ![Branch Configuration](../images/branch_configuration.png){fig-align='center'}
+11. Add Filters for the files you want to translate. You can add filters for the files in the `translationsDirectory` specified in the `config.json` file.
+   ![Add Filters](../images/add_filters.png){fig-align='center'}
+   The filters tell crowdin which files to watch for and where to add the translations for each of them
+   These are the configuration used are; </br> 
+   - Source files: `/docs/build/**/*.qmd` </br> 
+   - Translated files path: `/docs/_translations/%two_letters_code%/**/%file_name%.%two_letters_code%.qmd`. </br>
+   -  `**/*.qmd` tells crowdin to match all files in subdirectories with the `.qmd` extension. </br>
+
+
+   Note that `/docs/build`  and `/docs/_translations/` correspond with the values we set for `outputDirectory` and `translationsDirectory`  in the `config.json` file.
+
+Using this configuration will ensure that the translations maintain the same structure as the source files.
+And each translation will be stored in a directory with the language code as the name.
+
+12. Save and proceed to setup the automated build using Github actions. Follow the guide [here](#automating_build)
+

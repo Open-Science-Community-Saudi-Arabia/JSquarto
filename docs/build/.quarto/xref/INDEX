@@ -1,0 +1,68 @@
+{
+  "index.qmd": {
+    "index.html": "cfd70724"
+  },
+  "chapters/globals/globals.qmd": {
+    "globals.html": "d22960c1"
+  },
+  "chapters/functional doc/utilities/constructidentifier.qmd": {
+    "constructidentifier.html": "d506d39f"
+  },
+  "chapters/functional doc/utilities/commentsutil.qmd": {
+    "commentsutil.html": "5685c297"
+  },
+  "chapters/functional doc/utilities/components.qmd": {
+    "components.html": "4211799d"
+  },
+  "chapters/functional doc/utilities/file.qmd": {
+    "file.html": "b0ecce30"
+  },
+  "chapters/functional doc/utilities/logger.qmd": {
+    "logger.html": "e18a4649"
+  },
+  "chapters/functional doc/utilities/parser.qmd": {
+    "parser.html": "991f617d"
+  },
+  "chapters/functional doc/utilities/writer.qmd": {
+    "writer.html": "6ff42dc8"
+  },
+  "chapters/tutorials/contributing/improving_documentation.qmd": {
+    "improving_documentation.html": "94cf75d7"
+  },
+  "chapters/tutorials/contributing/raising_issues.qmd": {
+    "raising_issues.html": "ea26c87a"
+  },
+  "chapters/tutorials/contributing/raising_pr.qmd": {
+    "raising_pr.html": "9b5e1219"
+  },
+  "chapters/tutorials/contributing/tutorial_overview.qmd": {
+    "tutorial_overview.html": "49b766b1"
+  },
+  "chapters/tutorials/how_to/adding_tutorials.qmd": {
+    "adding_tutorials.html": "055c8b0e"
+  },
+  "chapters/tutorials/how_to/usage.qmd": {
+    "usage.html": "ce421c69"
+  },
+  "chapters/tutorials/how_to/workflows.qmd": {
+    "workflows.html": "6f7b1b3c"
+  },
+  "chapters/tutorials/how_to/crowdin_integration.qmd": {
+    "crowdin_integration.html": "36f1cee7"
+  },
+  "chapters/tutorials/project_structure.qmd": {
+    "project_structure.html": "f2f23923"
+  },
+  "chapters/tutorials/environment_setup.qmd": {
+    "environment_setup.html": "22eda7ca"
+  },
+  "chapters/tutorials/changelog.qmd": {
+    "changelog.html": "fa14aa1f"
+  },
+  "chapters/tutorials/localization.qmd": {
+    "localization.html": "9b7ea9fa"
+  },
+  "chapters/tutorials/how_to/automating_build.qmd": {
+    "automating_build.html": "3e9f3b33"
+  }
+}

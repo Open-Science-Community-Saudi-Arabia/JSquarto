@@ -1,17 +1,16 @@
 --- 
 title: Environment_setup 
 ---
--
-title: 'Environment Setup'
--
 
-#### Prerequisites {#environment-setup}
+### Prerequisites {#environment-setup}
+<hr>
 Before testing the tool locally, ensure you have the following prerequisites installed on your system:
 - Node.js and npm (Node Package Manager)
 - Git (optional, if cloning the repository)
 - Babel Quarto (optional, if previewing the generated documentation)
 
-#### Installation
+### Installation
+<hr>
 To test the tool locally, follow these steps:
 
 1. Install the cli package from NPM:
@@ -26,6 +25,7 @@ To test the tool locally, follow these steps:
 
 
 ### Running the Tool
+<hr>
 1. To generate the documentation run the following command
    
    ```bash

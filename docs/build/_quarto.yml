@@ -8,7 +8,7 @@ website:
 book:
   title: JSQuarto Documentation
   chapters:
-    - index.md
+    - index.qmd
     - part: Globals
       chapters:
         - chapters/globals/globals.qmd
@@ -26,10 +26,12 @@ book:
         - chapters/tutorials/contributing/improving_documentation.qmd
         - chapters/tutorials/contributing/raising_issues.qmd
         - chapters/tutorials/contributing/raising_pr.qmd
+        - chapters/tutorials/contributing/tutorial_overview.qmd
         - chapters/tutorials/how_to/adding_tutorials.qmd
         - chapters/tutorials/how_to/usage.qmd
         - chapters/tutorials/how_to/workflows.qmd
         - chapters/tutorials/how_to/crowdin_integration.qmd
+        - chapters/tutorials/how_to/automating_build.qmd
         - chapters/tutorials/project_structure.qmd
         - chapters/tutorials/environment_setup.qmd
         - chapters/tutorials/changelog.qmd
