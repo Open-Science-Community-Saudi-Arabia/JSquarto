@@ -62,7 +62,7 @@ jobs:
       - name: Remove content of the _book
         run: jsq doc:clean
 
-      - name: Transpile TypeScript project
+      - name: Build book 
         run: |
           config_output=$(jsq config:get | tail -n 10)
           echo "$config_output"
@@ -71,9 +71,11 @@ jobs:
           SOURCE_DIRECTORY=$SOURCE_DIRECTORY
 
           if [ -f "$SOURCE_DIRECTORY/tsconfig.json" ]; then
+            echo "tsconfig.json found in the current directory. Proceeding to transpile before generating doc."
             tsc -b && jsq doc:generate
           else
             echo "No tsconfig.json found in the current directory. Skipping TypeScript transpilation."
+            jsq doc:generate
           fi
 
       - name: Prepare crowdin translations
