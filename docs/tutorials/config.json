@@ -42,6 +42,9 @@
             },
             "crowdin_integration": {
                 "title": "Crowdin Integration"
+            },
+            "automating_build": {
+                "title": "Automating build"
             }
         }
     }
