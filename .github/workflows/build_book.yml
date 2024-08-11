@@ -47,7 +47,6 @@ jobs:
 
       - name: Setup quarto
         uses: quarto-dev/quarto-actions/setup@v2
-      
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -63,8 +62,19 @@ jobs:
       - name: Remove content of the _book
         run: jsq doc:clean
 
-      - name: Build book (jsquarto) 
-        run:  tsc -b && jsq doc:generate
+      - name: Transpile TypeScript project
+        run: |
+          config_output=$(jsq config:get | tail -n 10)
+          echo "$config_output"
+          SOURCE_DIRECTORY=$(echo "$config_output" | grep -oP '(?<=sourceDirectory: ).*' | tr -d "',")
+          echo "sourceDirectory: $SOURCE_DIRECTORY"
+          SOURCE_DIRECTORY=$SOURCE_DIRECTORY
+
+          if [ -f "$SOURCE_DIRECTORY/tsconfig.json" ]; then
+            tsc -b && jsq doc:generate
+          else
+            echo "No tsconfig.json found in the current directory. Skipping TypeScript transpilation."
+          fi
 
       - name: Prepare crowdin translations
         run: jsq fix:crowdin_files 
