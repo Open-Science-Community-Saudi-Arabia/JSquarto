@@ -70,7 +70,7 @@ jobs:
           echo "sourceDirectory: $SOURCE_DIRECTORY"
           SOURCE_DIRECTORY=$SOURCE_DIRECTORY
 
-          if [ -f "$SOURCE_DIRECTORY/tsconfig.json" ]; then
+          if [ -f "./tsconfig.json" ]; then
             echo "tsconfig.json found in the current directory. Proceeding to transpile before generating doc."
             tsc -b && jsq doc:generate
           else
