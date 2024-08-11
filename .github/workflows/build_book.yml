@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
    
     steps:
       - name: Checkout
@@ -47,12 +47,11 @@ jobs:
 
       - name: Setup quarto
         uses: quarto-dev/quarto-actions/setup@v2
-      
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: 18.x
 
       - name: Install dependencies
         run: npm i --save &&  npm install @oscsa/jsquarto -g
@@ -63,8 +62,21 @@ jobs:
       - name: Remove content of the _book
         run: jsq doc:clean
 
-      - name: Build book (jsquarto) 
-        run:  tsc -b && jsq doc:generate
+      - name: Build book 
+        run: |
+          config_output=$(jsq config:get | tail -n 10)
+          echo "$config_output"
+          SOURCE_DIRECTORY=$(echo "$config_output" | grep -oP '(?<=sourceDirectory: ).*' | tr -d "',")
+          echo "sourceDirectory: $SOURCE_DIRECTORY"
+          SOURCE_DIRECTORY=$SOURCE_DIRECTORY
+
+          if [ -f "./tsconfig.json" ]; then
+            echo "tsconfig.json found in the current directory. Proceeding to transpile before generating doc."
+            tsc -b && jsq doc:generate
+          else
+            echo "No tsconfig.json found in the current directory. Skipping TypeScript transpilation."
+            jsq doc:generate
+          fi
 
       - name: Prepare crowdin translations
         run: jsq fix:crowdin_files 
