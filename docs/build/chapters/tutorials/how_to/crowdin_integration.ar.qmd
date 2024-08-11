@@ -1,0 +1,44 @@
+--- 
+title: Crowdin integration 
+---
+
+This section will go over the necessary steps for integrating crowdin for translations.
+
+### Prerequisites
+1. You need to have a crowdin account. If you don't have one, you can create one [here](https://crowdin.com/).
+2. You need to have a crowdin project. If you don't have one, you can create one [here](https://crowdin.com/project/create)
+3. You need to host your project on github. If you don't have one, you can create one [here](https://github.com)
+
+### خطوات
+1. Initialize a new config file if you dont have one already. 
+   To do this run the following command:
+   “`باش
+   jsq config:init
+   ```
+   The file should look like this:
+   ```json
+        {
+            "outputDirectory": "docs",
+            "languages": ["en", "ar"],
+            "translationsDirectory": "translations"
+        }
+    ```
+    
+    - `outputDirectory`: The directory where the generated documentation will be stored.
+    - `languages`: An array of the languages you want to support.
+    - `translationsDirectory`: The directory where the translations will be stored. This directory will be used by crowdin to store the translations.
+    
+    Make sure the `outputDirectory` and `translationsDirectory` exists within your project
+2. Generate the documentation using JSquarto. You can follow the steps @usage-basic
+3. Commit all necessary changes, including the `config.json` file and push to your github repository.
+4. On your crowdin project, go to the settings page and click on the `Integrations` tab.
+   ![Integrations](../images/open_integrations_tab.png){fig-align='center'}
+5. Search for Github integration and click on the `Install` button.
+   ![Github Integration](../images/search_github_integration.png){fig-align='center'}
+6. Go back to the integrations tab and select find the Github integration then click `Set Up Integration`
+   ![Set Up Integration](../images/open_integrations_tab.png){fig-align='center'}
+7. Click the dropdown menu for `Set Up Integration` and select the `Source and translation files mode`
+   ![Source and translation files mode](../images/source_translation_mode.png){fig-align='center'}
+8. Fill the repository details, specify the branch for translations and translation mode.
+   ![Repository Details](../images/select_github_repo.png){fig-align='center'}
+9. Now go back to the Integrations tab and select Github Integration.
